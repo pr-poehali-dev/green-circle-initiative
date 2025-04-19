@@ -1,15 +1,27 @@
-import GreenCircle from "@/components/GreenCircle";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/components/home/Hero";
+import Features from "@/components/home/Features";
+import CardSelection from "@/components/home/CardSelection";
+import HowItWorks from "@/components/home/HowItWorks";
+import Testimonials from "@/components/home/Testimonials";
+import FAQ from "@/components/home/FAQ";
+import CTA from "@/components/home/CTA";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <div className="flex flex-col items-center">
-        <GreenCircle size="large" className="shadow-lg" />
-        <div className="mt-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Зелёный круг</h1>
-          <p className="text-xl text-gray-600">Простой компонент зелёного круга</p>
-        </div>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-grow">
+        <Hero />
+        <Features />
+        <CardSelection />
+        <HowItWorks />
+        <Testimonials />
+        <FAQ />
+        <CTA />
+      </main>
+      <Footer />
     </div>
   );
 };

@@ -19,6 +19,15 @@ const config = {
     },
     extend: {
       colors: {
+        // Apple design colors
+        apple: {
+          black: "#000000",
+          white: "#ffffff",
+          gray: "#f5f5f7",
+          darkgray: "#86868b",
+          blue: "#0071e3",
+          red: "#fa243c",
+        },
         green: {
           500: "#22c55e", // Яркий зеленый цвет для круга
         },
