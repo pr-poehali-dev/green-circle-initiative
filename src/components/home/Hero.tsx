@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Placeholder from "@/components/ui/placeholder";
 
 const Hero = () => {
   return (
@@ -18,9 +19,11 @@ const Hero = () => {
         </Link>
         
         <div className="mt-12 md:mt-20 relative max-w-4xl mx-auto">
-          <img 
-            src="/placeholder.svg" 
-            alt="Apple Gift Cards" 
+          <Placeholder 
+            height={300}
+            bgColor="bg-gray-800" 
+            textColor="text-gray-400"
+            text="Подарочная карта Apple Gift Card" 
             className="w-full rounded-2xl shadow-lg"
           />
           <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-apple-gray text-black py-3 px-6 rounded-full text-sm font-medium">

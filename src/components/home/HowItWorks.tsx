@@ -1,20 +1,24 @@
 import { Link } from "react-router-dom";
+import Placeholder from "@/components/ui/placeholder";
 
 const steps = [
   {
     number: "01",
     title: "Выберите номинал",
-    description: "Выберите нужный номинал Apple Gift Card из доступных вариантов."
+    description: "Выберите нужный номинал Apple Gift Card из доступных вариантов.",
+    bgColor: "bg-blue-50"
   },
   {
     number: "02",
     title: "Оплатите удобным способом",
-    description: "Оплатите картой, электронным кошельком или через систему быстрых платежей."
+    description: "Оплатите картой, электронным кошельком или через систему быстрых платежей.",
+    bgColor: "bg-green-50"
   },
   {
     number: "03",
     title: "Получите код активации",
-    description: "Сразу после оплаты вы получите код активации на ваш email."
+    description: "Сразу после оплаты вы получите код активации на ваш email.",
+    bgColor: "bg-amber-50"
   }
 ];
 
@@ -34,6 +38,13 @@ const HowItWorks = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <div key={index} className="relative">
+              <Placeholder 
+                className="rounded-lg mb-4"
+                height={160}
+                bgColor={step.bgColor}
+                textColor="text-gray-600"
+                text={`Шаг ${step.number}`}
+              />
               <div className="text-7xl font-bold text-black/5 absolute -top-6 left-0">
                 {step.number}
               </div>

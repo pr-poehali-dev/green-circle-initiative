@@ -2,20 +2,21 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import Placeholder from "@/components/ui/placeholder";
 
 type GiftCard = {
   id: string;
   name: string;
   amount: number;
-  image: string;
+  bgColor: string;
 };
 
 const giftCards: GiftCard[] = [
-  { id: "card-1", name: "Apple Gift Card", amount: 1000, image: "/placeholder.svg" },
-  { id: "card-2", name: "Apple Gift Card", amount: 2000, image: "/placeholder.svg" },
-  { id: "card-3", name: "Apple Gift Card", amount: 3000, image: "/placeholder.svg" },
-  { id: "card-4", name: "Apple Gift Card", amount: 5000, image: "/placeholder.svg" },
-  { id: "card-5", name: "Apple Gift Card", amount: 10000, image: "/placeholder.svg" },
+  { id: "card-1", name: "Apple Gift Card", amount: 1000, bgColor: "bg-rose-100" },
+  { id: "card-2", name: "Apple Gift Card", amount: 2000, bgColor: "bg-blue-100" },
+  { id: "card-3", name: "Apple Gift Card", amount: 3000, bgColor: "bg-green-100" },
+  { id: "card-4", name: "Apple Gift Card", amount: 5000, bgColor: "bg-yellow-100" },
+  { id: "card-5", name: "Apple Gift Card", amount: 10000, bgColor: "bg-purple-100" },
 ];
 
 const CardSelection = () => {
@@ -43,10 +44,11 @@ const CardSelection = () => {
               onClick={() => setSelectedCard(card.id)}
             >
               <CardContent className="p-0">
-                <img
-                  src={card.image}
-                  alt={`${card.name} ${card.amount} ₽`}
-                  className="w-full aspect-[4/3] object-cover"
+                <Placeholder
+                  bgColor={card.bgColor}
+                  text={`${card.amount} ₽`}
+                  height={180}
+                  className="w-full" 
                 />
                 <div className="p-6">
                   <h3 className="text-lg font-medium mb-2">{card.name}</h3>
