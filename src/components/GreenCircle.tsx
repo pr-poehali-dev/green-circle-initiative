@@ -17,9 +17,11 @@ const GreenCircle: React.FC<GreenCircleProps> = ({
 
   return (
     <div 
-      className={`rounded-full bg-green-500 ${sizeClasses[size]} ${className}`}
+      className={`rounded-full bg-green-500 flex items-center justify-center ${sizeClasses[size]} ${className}`}
       aria-label="Зеленый круг"
-    />
+    >
+      <span className="sr-only">Зеленый круг</span>
+    </div>
   );
 };
 
