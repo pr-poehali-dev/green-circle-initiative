@@ -1,4 +1,3 @@
-
 import {
   Accordion,
   AccordionContent,
@@ -32,9 +31,9 @@ const faqItems = [
 
 export const FAQ = () => {
   return (
-    <section id="faq" className="py-16 px-4 bg-white">
+    <section id="faq" className="py-16 px-4 bg-background">
       <div className="container mx-auto max-w-3xl">
-        <h2 className="text-3xl font-bold text-center mb-12 text-[#222]">
+        <h2 className="text-3xl font-bold text-center mb-12 text-foreground">
           Часто задаваемые вопросы
         </h2>
 
@@ -43,12 +42,12 @@ export const FAQ = () => {
             <AccordionItem 
               key={index} 
               value={`item-${index}`}
-              className="border border-gray-200 rounded-lg overflow-hidden"
+              className="border border-border rounded-lg overflow-hidden"
             >
-              <AccordionTrigger className="px-4 py-4 hover:bg-gray-50 text-left font-medium">
+              <AccordionTrigger className="px-4 py-4 hover:bg-muted text-left font-medium">
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="px-4 pb-4 pt-2 text-gray-600">
+              <AccordionContent className="px-4 pb-4 pt-2 text-muted-foreground">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>
@@ -56,12 +55,12 @@ export const FAQ = () => {
         </Accordion>
 
         <div className="mt-10 text-center">
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Не нашли ответ на свой вопрос?
           </p>
           <a 
             href="mailto:support@applegiftcards.ru" 
-            className="text-[#8B5CF6] font-medium hover:underline"
+            className="text-primary font-medium hover:underline"
           >
             Напишите нам
           </a>
