@@ -75,11 +75,15 @@ export const GiftCardGrid = () => {
                 <div className="text-sm text-gray-600 mb-4">
                   <p>{card.description}</p>
                 </div>
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-[#8B5CF6] font-medium">Цена: {card.price} ₽</span>
-                  <span className="text-green-600 font-medium">
-                    Экономия: {card.amount - card.price} ₽
-                  </span>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#8B5CF6] font-medium">Цена:</span>
+                    <span className="font-medium">{card.price} ₽</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-green-600 font-medium">Экономия:</span>
+                    <span className="text-green-600 font-medium">{card.amount - card.price} ₽</span>
+                  </div>
                 </div>
               </CardContent>
               <CardFooter>
