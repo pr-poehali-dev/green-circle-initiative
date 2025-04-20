@@ -59,7 +59,7 @@ export const GiftCardGrid = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {giftCards.map((card) => (
-            <Card key={card.id} className={`border overflow-hidden hover:shadow-lg transition-all ${card.isPopular ? 'ring-2 ring-[#8B5CF6]' : ''}`}>
+            <Card key={card.id} className={`border overflow-hidden hover:shadow-lg transition-all ${card.isPopular ? 'ring-2 ring-[#8B5CF6]' : ''} flex flex-col h-full`}>
               {card.isPopular && (
                 <div className="bg-[#8B5CF6] text-white py-1 px-3 absolute right-0 top-4 text-sm font-medium">
                   Популярный
@@ -71,22 +71,22 @@ export const GiftCardGrid = () => {
                   <span className="text-3xl font-bold text-[#222]">{card.amount} ₽</span>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-grow">
                 <div className="text-sm text-gray-600 mb-4">
                   <p>{card.description}</p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-row justify-between">
                     <span className="text-[#8B5CF6] font-medium">Цена:</span>
                     <span className="font-medium">{card.price} ₽</span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-row justify-between">
                     <span className="text-green-600 font-medium">Экономия:</span>
                     <span className="text-green-600 font-medium">{card.amount - card.price} ₽</span>
                   </div>
                 </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="mt-auto">
                 <Button className="w-full bg-[#8B5CF6] hover:bg-[#7E69AB]">
                   <ShoppingCart className="mr-2 h-4 w-4" /> Купить
                 </Button>
