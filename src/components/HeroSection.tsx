@@ -16,7 +16,7 @@ const HeroSection = () => {
       
       <div className="container px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center z-10">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
-          Привет, я <span className="text-primary">Разработчик</span>
+          Привет, я <span className="text-primary">Программист</span>
         </h1>
         
         <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-10 animate-fade-in" style={{animationDelay: "0.2s"}}>
