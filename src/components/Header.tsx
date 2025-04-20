@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -20,22 +19,6 @@ export const Header = () => {
             <GiftIcon className="h-8 w-8 text-primary mr-2" />
             <span className="text-xl font-bold text-foreground">Apple Cards</span>
           </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-foreground/80 hover:text-primary font-medium">
-              Главная
-            </Link>
-            <Link to="#cards" className="text-foreground/80 hover:text-primary font-medium">
-              Карты
-            </Link>
-            <Link to="#faq" className="text-foreground/80 hover:text-primary font-medium">
-              FAQ
-            </Link>
-            <Link to="#contact" className="text-foreground/80 hover:text-primary font-medium">
-              Контакты
-            </Link>
-          </nav>
 
           <div className="hidden md:flex items-center space-x-3">
             <ThemeToggle />
@@ -64,34 +47,6 @@ export const Header = () => {
         {isMenuOpen && (
           <div className="mt-4 md:hidden animate-fade-in">
             <nav className="flex flex-col space-y-4 py-4">
-              <Link
-                to="/"
-                className="text-foreground/80 hover:text-primary font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Главная
-              </Link>
-              <Link
-                to="#cards"
-                className="text-foreground/80 hover:text-primary font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Карты
-              </Link>
-              <Link
-                to="#faq"
-                className="text-foreground/80 hover:text-primary font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                FAQ
-              </Link>
-              <Link
-                to="#contact"
-                className="text-foreground/80 hover:text-primary font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Контакты
-              </Link>
               <Button className="w-full">
                 Войти
               </Button>
