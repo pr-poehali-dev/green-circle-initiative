@@ -24,7 +24,7 @@ const Index = () => {
               Подарите близким возможность выбрать любимые приложения, игры, музыку, фильмы и многое другое в экосистеме Apple
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Button size="lg" className="bg-pink hover:bg-pink/90 text-pink-foreground">
                 <ShoppingCart className="mr-2 h-5 w-5" /> Купить сейчас
               </Button>
               <Link to="#cards">
@@ -54,7 +54,7 @@ const Index = () => {
             <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex justify-center mb-4">
-                  <CheckCircle className="h-12 w-12 text-primary" />
+                  <CheckCircle className="h-12 w-12 text-pink" />
                 </div>
                 <CardTitle className="text-center">Официальная гарантия</CardTitle>
               </CardHeader>
@@ -68,7 +68,7 @@ const Index = () => {
             <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex justify-center mb-4">
-                  <CreditCard className="h-12 w-12 text-primary" />
+                  <CreditCard className="h-12 w-12 text-pink" />
                 </div>
                 <CardTitle className="text-center">Мгновенная доставка</CardTitle>
               </CardHeader>
@@ -82,7 +82,7 @@ const Index = () => {
             <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex justify-center mb-4">
-                  <HelpCircle className="h-12 w-12 text-primary" />
+                  <HelpCircle className="h-12 w-12 text-pink" />
                 </div>
                 <CardTitle className="text-center">Поддержка 24/7</CardTitle>
               </CardHeader>
