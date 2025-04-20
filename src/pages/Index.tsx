@@ -1,108 +1,68 @@
-
-import { Link } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { GiftIcon, CreditCard, ShoppingCart, HelpCircle, CheckCircle } from "lucide-react";
-import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { GiftCardGrid } from "@/components/GiftCardGrid";
 import { FAQ } from "@/components/FAQ";
+import { AppleDock } from "@/components/AppleDock";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="py-16 px-4 md:py-24 bg-gradient-to-r from-background to-accent">
-        <div className="container mx-auto flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-10 md:mb-0">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              Apple Gift Cards - идеальный подарок для всех
+    <div className="min-h-screen flex flex-col pb-24">
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative bg-background py-20 md:py-28">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Подарочные Карты Apple
             </h1>
-            <p className="text-xl mb-6 text-muted-foreground">
-              Подарите близким возможность выбрать любимые приложения, игры, музыку, фильмы и многое другое в экосистеме Apple
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Мгновенная доставка. Гарантированная активация.
+              Официальный партнер Apple в России.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-pink hover:bg-pink/90 text-pink-foreground">
-                <ShoppingCart className="mr-2 h-5 w-5" /> Купить сейчас
-              </Button>
-              <Link to="#cards">
-                <Button size="lg" variant="outline">
-                  Выбрать номинал
-                </Button>
-              </Link>
+            <button className="bg-pink hover:bg-pink/90 text-pink-foreground px-8 py-3 rounded-lg text-lg font-medium shadow-lg transition-all">
+              Купить сейчас
+            </button>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-16 bg-muted/50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-background p-6 rounded-lg shadow-sm text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-pink/10 text-pink mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Мгновенная доставка</h3>
+                <p className="text-muted-foreground">Получите код активации на email в течение минуты после оплаты</p>
+              </div>
+              
+              <div className="bg-background p-6 rounded-lg shadow-sm text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-pink/10 text-pink mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">100% гарантия</h3>
+                <p className="text-muted-foreground">Все карты официальные с подтвержденной активацией</p>
+              </div>
+              
+              <div className="bg-background p-6 rounded-lg shadow-sm text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-pink/10 text-pink mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-headphones"><path d="M3 14h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z"/><path d="M21 14h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/><path d="M12 2a7 7 0 0 0-7 7v5h14V9a7 7 0 0 0-7-7z"/></svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">24/7 поддержка</h3>
+                <p className="text-muted-foreground">Наша команда всегда готова помочь с любыми вопросами</p>
+              </div>
             </div>
           </div>
-          <div className="md:w-1/2 flex justify-center">
-            <img 
-              src="https://h.uguu.se/pWytRAmK.png" 
-              alt="Apple Gift Card" 
-              className="rounded-lg shadow-xl max-w-md w-full"
-            />
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Benefits */}
-      <section className="py-16 px-4 bg-card">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-card-foreground">
-            Почему выбирают наши Apple Gift Cards?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex justify-center mb-4">
-                  <CheckCircle className="h-12 w-12 text-pink" />
-                </div>
-                <CardTitle className="text-center">Официальная гарантия</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-center text-muted-foreground">
-                  Все карты получены напрямую от Apple и имеют полную гарантию активации
-                </p>
-              </CardContent>
-            </Card>
+        {/* Gift Card Grid */}
+        <GiftCardGrid />
 
-            <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex justify-center mb-4">
-                  <CreditCard className="h-12 w-12 text-pink" />
-                </div>
-                <CardTitle className="text-center">Мгновенная доставка</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-center text-muted-foreground">
-                  Получите код активации карты на email в течение нескольких минут после оплаты
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex justify-center mb-4">
-                  <HelpCircle className="h-12 w-12 text-pink" />
-                </div>
-                <CardTitle className="text-center">Поддержка 24/7</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-center text-muted-foreground">
-                  Наша служба поддержки всегда готова помочь вам с любыми вопросами
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Gift Cards Grid */}
-      <GiftCardGrid />
-
-      {/* FAQ Section */}
-      <FAQ />
+        {/* FAQ Section */}
+        <FAQ />
+      </main>
 
       <Footer />
+      <AppleDock />
     </div>
   );
 };
