@@ -36,7 +36,7 @@ const Index = () => {
           </div>
           <div className="md:w-1/2 flex justify-center">
             <img 
-              src="https://image.pollinations.ai/prompt/apple-gift-cards" 
+              src="https://h.uguu.se/pWytRAmK.png" 
               alt="Apple Gift Card" 
               className="rounded-lg shadow-xl max-w-md w-full"
             />
