@@ -1,62 +1,34 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
+export const Navbar = () => {
   return (
-    <nav className="fixed w-full bg-background border-b border-border z-50">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold text-primary">ТехЛид</Link>
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-zinc-900/80 border-b border-zinc-800/50">
+      <div className="container mx-auto flex items-center justify-between h-16 px-4">
+        <Link to="/" className="flex items-center">
+          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">БетонМастер</span>
+        </Link>
         
-        {/* Mobile Menu Button */}
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="md:hidden" 
-          onClick={toggleMenu}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        <nav className="hidden md:flex items-center space-x-6">
+          <Link to="/" className="text-zinc-200 hover:text-white transition-colors">Главная</Link>
+          <Link to="#products" className="text-zinc-200 hover:text-white transition-colors">Продукция</Link>
+          <Link to="#calculator" className="text-zinc-200 hover:text-white transition-colors">Калькулятор</Link>
+          <Link to="#contact" className="text-zinc-200 hover:text-white transition-colors">Контакты</Link>
+        </nav>
+        
+        <Button className="hidden md:flex backdrop-blur-sm bg-zinc-800/70 text-white border border-zinc-700/50 hover:bg-zinc-700/80">
+          <Phone className="mr-2 h-4 w-4" />
+          +7 (999) 123-45-67
         </Button>
         
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
-          <NavLink to="/#about">Обо мне</NavLink>
-          <NavLink to="/#skills">Навыки</NavLink>
-          <NavLink to="/#projects">Проекты</NavLink>
-          <NavLink to="/#experience">Опыт</NavLink>
-          <NavLink to="/#contact">Контакты</NavLink>
-        </div>
+        <Button variant="ghost" className="md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </Button>
       </div>
-      
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-background border-b border-border animate-fade-in">
-          <div className="container mx-auto px-4 py-3 flex flex-col space-y-3">
-            <NavLink to="/#about" onClick={toggleMenu}>Обо мне</NavLink>
-            <NavLink to="/#skills" onClick={toggleMenu}>Навыки</NavLink>
-            <NavLink to="/#projects" onClick={toggleMenu}>Проекты</NavLink>
-            <NavLink to="/#experience" onClick={toggleMenu}>Опыт</NavLink>
-            <NavLink to="/#contact" onClick={toggleMenu}>Контакты</NavLink>
-          </div>
-        </div>
-      )}
-    </nav>
+    </header>
   );
 };
-
-const NavLink = ({ to, children, onClick }: { to: string, children: React.ReactNode, onClick?: () => void }) => (
-  <Link 
-    to={to} 
-    className="text-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
-    onClick={onClick}
-  >
-    {children}
-  </Link>
-);
-
-export default Navbar;

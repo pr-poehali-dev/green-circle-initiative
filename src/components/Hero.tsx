@@ -1,46 +1,36 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Download } from "lucide-react";
 
-const Hero = () => {
+import { Button } from "@/components/ui/button";
+
+export const Hero = () => {
   return (
-    <section className="pt-24 pb-16 md:pt-32 md:pb-24">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="animate-slide-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Привет, я <span className="text-primary">Технический Лидер</span>
+    <section className="py-16 md:py-24">
+      <div className="backdrop-blur-lg bg-zinc-800/30 rounded-3xl border border-zinc-700/50 p-8 md:p-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 z-0"></div>
+        
+        <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
+          <div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+              Качественный бетон для вашего строительства
             </h1>
-            <p className="text-xl text-muted-foreground mb-6">
-              5 лет опыта в FullStack разработке и 
-              Deep Learning. Помогаю командам создавать 
-              инновационные решения.
+            <p className="text-zinc-300 text-lg md:text-xl mb-8">
+              Надежные решения для любых строительных задач. Производство, доставка и укладка бетона любой марки.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild className="hover-scale">
-                <a href="#contact">
-                  Связаться <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button className="backdrop-blur-sm bg-blue-500/80 hover:bg-blue-600/80 text-white border border-blue-400/50 py-6 px-8 text-lg">
+                Рассчитать стоимость
               </Button>
-              <Button variant="outline" asChild className="hover-scale">
-                <a href="#" download>
-                  Резюме <Download className="ml-2 h-4 w-4" />
-                </a>
+              <Button variant="outline" className="backdrop-blur-sm bg-zinc-800/30 text-white border border-zinc-700/50 hover:bg-zinc-700/50 py-6 px-8 text-lg">
+                Наша продукция
               </Button>
             </div>
           </div>
-          
-          <div className="relative flex justify-center animate-fade-in">
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-primary to-secondary p-1">
-              <div className="w-full h-full rounded-full bg-background flex items-center justify-center overflow-hidden">
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Фото профиля" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="absolute -bottom-4 -right-4 md:bottom-0 md:right-12 bg-accent px-4 py-2 rounded-lg shadow-md animate-fade-in">
-              <span className="text-lg font-medium">5+ лет опыта</span>
+          <div className="relative h-64 md:h-full">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl overflow-hidden flex items-center justify-center">
+              <img 
+                src="/placeholder.svg" 
+                alt="Бетонный завод" 
+                className="w-full h-full object-cover object-center opacity-80 mix-blend-overlay"
+              />
             </div>
           </div>
         </div>
@@ -48,5 +38,3 @@ const Hero = () => {
     </section>
   );
 };
-
-export default Hero;
