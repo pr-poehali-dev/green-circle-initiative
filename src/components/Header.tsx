@@ -1,59 +1,92 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { GiftIcon, Menu, X } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Menu } from "lucide-react";
 
-export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="bg-background border-b border-border sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <GiftIcon className="h-8 w-8 text-primary mr-2" />
-            <span className="text-xl font-bold text-foreground">Apple Cards</span>
-          </Link>
-
-          <div className="hidden md:flex items-center space-x-3">
-            <ThemeToggle />
-            <Button>
-              Войти
-            </Button>
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-shrink-0">
+            <a href="#" className="font-bold text-xl text-primary">
+              Portfolio
+            </a>
           </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-3">
-            <ThemeToggle />
-            <button
-              className="text-foreground focus:outline-none"
-              onClick={toggleMenu}
-            >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
-          </div>
+          
+          {/* Desktop navigation */}
+          <nav className="hidden md:block">
+            <ul className="flex space-x-8">
+              {["Главная", "Обо мне", "Навыки", "Проекты", "Контакты"].map((item) => (
+                <li key={item}>
+                  <a 
+                    href={`#${item.toLowerCase().replace(" ", "-")}`}
+                    className="text-foreground/80 hover:text-primary transition-colors"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          
+          <Button 
+            variant="default" 
+            size="sm" 
+            className="hidden md:inline-flex"
+            onClick={() => window.location.href = "#контакты"}
+          >
+            Связаться
+          </Button>
+          
+          {/* Mobile menu button */}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <Menu />
+          </Button>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="mt-4 md:hidden animate-fade-in">
-            <nav className="flex flex-col space-y-4 py-4">
-              <Button className="w-full">
-                Войти
-              </Button>
-            </nav>
-          </div>
+        
+        {/* Mobile navigation */}
+        {isMobileMenuOpen && (
+          <nav className="md:hidden py-4">
+            <ul className="flex flex-col space-y-3">
+              {["Главная", "Обо мне", "Навыки", "Проекты", "Контакты"].map((item) => (
+                <li key={item}>
+                  <a 
+                    href={`#${item.toLowerCase().replace(" ", "-")}`}
+                    className="block py-2 text-foreground/80 hover:text-primary transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         )}
       </div>
     </header>
   );
 };
+
+export default Header;
