@@ -1,73 +1,89 @@
 
 import { Link } from "react-router-dom";
+import { GiftIcon, Mail, Phone, MapPin } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="backdrop-blur-xl bg-zinc-900/80 border-t border-zinc-800/50 py-10">
-      <div className="container mx-auto px-4">
+    <footer id="contact" className="bg-[#1A1F2C] text-white">
+      <div className="container mx-auto py-12 px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-4">БетонМастер</h3>
-            <p className="text-zinc-400 mb-4">Производство и доставка качественного бетона для всех видов строительных работ.</p>
+          {/* Логотип и описание */}
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-center mb-4">
+              <GiftIcon className="h-8 w-8 text-[#9b87f5] mr-2" />
+              <span className="text-xl font-bold">Apple Cards</span>
+            </div>
+            <p className="text-gray-400 mb-4 max-w-md">
+              Официальный партнер по продаже подарочных карт для экосистемы Apple. 
+              Мы предлагаем карты различных номиналов с мгновенной доставкой 
+              по всей России и странам СНГ.
+            </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-zinc-400 hover:text-blue-400">
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+              <a 
+                href="#" 
+                className="text-white hover:text-[#9b87f5] transition-colors"
+                aria-label="VK"
+              >
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93V15.07C2 20.67 3.33 22 8.93 22H15.07C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2ZM18.15 16.27H16.69C16.14 16.27 15.97 15.82 14.86 14.72C13.86 13.77 13.49 13.64 13.25 13.64C12.93 13.64 12.84 13.73 12.84 14.17V15.62C12.84 16.01 12.72 16.27 11.59 16.27C9.5 16.27 7.18 15.06 5.53 12.69C3.12 9.28 2.51 6.57 2.51 6.12C2.51 5.86 2.6 5.62 3.11 5.62H4.57C4.99 5.62 5.15 5.83 5.31 6.27C6.21 9.05 7.85 11.45 8.55 11.45C8.75 11.45 8.84 11.36 8.84 10.83V8.37C8.77 7.24 8.18 7.15 8.18 6.76C8.18 6.57 8.34 6.37 8.59 6.37H10.93C11.29 6.37 11.42 6.57 11.42 6.99V10.23C11.42 10.59 11.59 10.72 11.7 10.72C11.9 10.72 12.07 10.59 12.44 10.23C13.76 8.77 14.72 6.54 14.72 6.54C14.83 6.3 15.03 6.08 15.45 6.08H16.91C17.44 6.08 17.54 6.36 17.44 6.76C17.23 7.78 14.86 11.19 14.86 11.19C14.7 11.44 14.65 11.56 14.86 11.84C15.03 12.05 15.57 12.53 15.94 12.96C16.69 13.78 17.27 14.46 17.41 14.97C17.56 15.46 17.33 15.27 18.15 16.27Z"></path>
                 </svg>
               </a>
-              <a href="#" className="text-zinc-400 hover:text-blue-400">
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a href="#" className="text-zinc-400 hover:text-blue-400">
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+              <a 
+                href="#" 
+                className="text-white hover:text-[#9b87f5] transition-colors"
+                aria-label="Telegram"
+              >
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.19 15.89 14.17 15.59 15.94C15.46 16.67 15.19 16.92 14.93 16.95C14.36 17.02 13.93 16.6 13.38 16.24C12.52 15.67 12.03 15.32 11.2 14.77C10.26 14.13 10.88 13.79 11.43 13.21C11.56 13.07 14.2 10.7 14.25 10.49C14.26 10.45 14.26 10.31 14.17 10.24C14.08 10.17 13.96 10.19 13.87 10.21C13.74 10.24 12.13 11.34 9.03 13.5C8.6 13.8 8.22 13.94 7.87 13.93C7.49 13.92 6.76 13.73 6.21 13.57C5.55 13.37 5.03 13.26 5.07 12.89C5.09 12.7 5.35 12.5 5.84 12.31C9.17 10.85 11.36 9.9 12.42 9.45C15.43 8.16 16.07 7.94 16.5 7.94C16.59 7.94 16.79 7.96 16.92 8.07C17.03 8.17 17.06 8.29 17.07 8.39C17.06 8.5 17.08 8.69 16.64 8.8Z"></path>
                 </svg>
               </a>
             </div>
           </div>
-          
+
+          {/* Навигация */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Продукция</h4>
+            <h3 className="text-lg font-semibold mb-4">Навигация</h3>
             <ul className="space-y-2">
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">М100 B7.5</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">М200 B15</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">М300 B22.5</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">М350 B25</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Специальные марки</Link></li>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors">Главная</Link>
+              </li>
+              <li>
+                <Link to="#cards" className="text-gray-400 hover:text-white transition-colors">Карты</Link>
+              </li>
+              <li>
+                <Link to="#faq" className="text-gray-400 hover:text-white transition-colors">FAQ</Link>
+              </li>
+              <li>
+                <Link to="#contact" className="text-gray-400 hover:text-white transition-colors">Контакты</Link>
+              </li>
             </ul>
           </div>
-          
+
+          {/* Контакты */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Услуги</h4>
-            <ul className="space-y-2">
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Производство бетона</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Доставка</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Укладка бетона</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Аренда спецтехники</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Лабораторные испытания</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-white font-semibold mb-4">Информация</h4>
-            <ul className="space-y-2">
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">О компании</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Сертификаты</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Портфолио</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Отзывы</Link></li>
-              <li><Link to="#" className="text-zinc-400 hover:text-blue-400">Контакты</Link></li>
+            <h3 className="text-lg font-semibold mb-4">Контакты</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <Mail className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5" />
+                <span className="text-gray-400">support@applegiftcards.ru</span>
+              </li>
+              <li className="flex items-start">
+                <Phone className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5" />
+                <span className="text-gray-400">+7 (800) 555-35-35</span>
+              </li>
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5" />
+                <span className="text-gray-400">Москва, ул. Цифровая, д. 42</span>
+              </li>
             </ul>
           </div>
         </div>
-        
-        <div className="border-t border-zinc-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-zinc-500 text-sm">© 2024 БетонМастер. Все права защищены.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="#" className="text-zinc-500 hover:text-zinc-300 text-sm">Политика конфиденциальности</Link>
-            <Link to="#" className="text-zinc-500 hover:text-zinc-300 text-sm">Условия использования</Link>
-          </div>
+
+        <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-500 text-sm">
+          <p>© {new Date().getFullYear()} Apple Cards. Все права защищены.</p>
+          <p className="mt-2">
+            Apple, the Apple logo, and Apple Gift Card are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.
+          </p>
         </div>
       </div>
     </footer>
