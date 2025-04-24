@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import MinecraftCube from "./MinecraftCube";
 
 const HeroSection = () => {
   const scrollToNext = () => {
@@ -14,8 +15,8 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
       
       <div className="container px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center z-10">
-        <div className="minecraft-float">
-          <div className="w-16 h-16 mb-6 mx-auto bg-minecraft-grass pixel-corners"></div>
+        <div className="minecraft-float mb-6">
+          <MinecraftCube size={120} rotationSpeed={15} />
         </div>
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-minecraft mb-6 animate-fade-in">
