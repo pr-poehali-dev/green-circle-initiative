@@ -18,9 +18,6 @@ export default {
 			}
 		},
 		extend: {
-			fontFamily: {
-				'minecraft': ['VT323', 'monospace'],
-			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -64,14 +61,7 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// Minecraft цвета
-				'minecraft-green': '#5cb85c',
-				'minecraft-brown': '#8B4513',
-				'minecraft-stone': '#7F7F7F',
-				'minecraft-dirt': '#8B6914',
-				'minecraft-grass': '#567D46',
-				'minecraft-wood': '#9B7653'
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

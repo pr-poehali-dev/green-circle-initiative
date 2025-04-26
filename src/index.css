@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,282 +9,93 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
+
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
+
     --radius: 0.5rem;
-    
-    /* Minecraft Colors */
-    --minecraft-green: 135 50% 40%;
-    --minecraft-dirt: 30 30% 35%;
-    --minecraft-stone: 0 0% 50%;
-    --minecraft-wood: 30 50% 35%;
-    --minecraft-leaves: 120 30% 40%;
-    --minecraft-grass-top: 120 40% 45%;
-    --minecraft-grass-side-top: 120 35% 40%;
-    --minecraft-grass-side-bottom: 35 40% 40%;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
+
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
+
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
+
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
+
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-  }
-
-  /* Minecraft Font */
-  @font-face {
-    font-family: 'Minecraft';
-    src: url('https://fonts.cdnfonts.com/css/minecraft-4') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-/* Minecraft styles */
-.font-minecraft {
-  font-family: 'Minecraft', 'VT323', monospace;
-  letter-spacing: 1px;
-}
-
-.pixel-corners {
-  clip-path: polygon(
-    0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px,
-    100% calc(100% - 4px), calc(100% - 4px) 100%,
-    4px 100%, 0 calc(100% - 4px)
-  );
-}
-
-.minecraft-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #747474;
-  color: white;
-  font-family: 'Minecraft', 'VT323', monospace;
-  border: 2px solid #000;
-  box-shadow: inset -2px -4px 0 0 rgba(0,0,0,0.2),
-              inset 2px 2px 0 0 rgba(255,255,255,0.5);
-  text-decoration: none;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.1s;
-}
-
-.minecraft-btn:hover {
-  background-color: #8B8B8B;
-}
-
-.minecraft-btn:active {
-  box-shadow: inset 2px 4px 0 0 rgba(0,0,0,0.2),
-              inset -2px -2px 0 0 rgba(255,255,255,0.5);
-  transform: translateY(2px);
-}
-
-.stone-bg {
-  background-color: #8B8B8B;
-  background-image: 
-    linear-gradient(135deg, #777 25%, transparent 25%),
-    linear-gradient(225deg, #777 25%, transparent 25%),
-    linear-gradient(315deg, #777 25%, transparent 25%),
-    linear-gradient(45deg, #777 25%, transparent 25%);
-  background-size: 20px 20px;
-}
-
-.bg-minecraft-grass {
-  background: linear-gradient(to bottom, #5b9925 0%, #5b9925 70%, #8b6914 70%, #8b6914 100%);
-}
-
-.minecraft-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-.crafting-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  background-color: #8B6914;
-  padding: 8px;
-  border: 4px solid #3A3A3A;
-}
-
-.crafting-cell {
-  width: 50px;
-  height: 50px;
-  background-color: #C6C6C6;
-  border: 2px solid #3A3A3A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.inventory-item {
-  width: 40px;
-  height: 40px;
-  margin: 4px;
-  cursor: pointer;
-  border: 2px solid transparent;
-}
-
-.inventory-item:hover {
-  border-color: yellow;
-}
-
-.inventory-item.selected {
-  border-color: #FFD700;
-  background-color: rgba(255, 215, 0, 0.3);
-}
-
-.crafting-result {
-  width: 60px;
-  height: 60px;
-  background-color: #C6C6C6;
-  border: 2px solid #3A3A3A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 3D Minecraft Cube */
-.minecraft-cube-container {
-  perspective: 800px;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-}
-
-.minecraft-cube {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: rotate 10s infinite linear;
-}
-
-.minecraft-cube-face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  border: 2px solid #000;
-}
-
-.minecraft-cube-face.front {
-  transform: translateZ(50px);
-  background-color: #8b6914;
-  background-image: url('https://images.unsplash.com/photo-1641236785883-951defd2206e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80');
-}
-
-.minecraft-cube-face.back {
-  transform: rotateY(180deg) translateZ(50px);
-  background-color: #8b6914;
-  background-image: url('https://images.unsplash.com/photo-1641236785883-951defd2206e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80');
-}
-
-.minecraft-cube-face.right {
-  transform: rotateY(90deg) translateZ(50px);
-  background-color: #8b6914;
-  background-image: url('https://images.unsplash.com/photo-1641236785883-951defd2206e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80');
-}
-
-.minecraft-cube-face.left {
-  transform: rotateY(-90deg) translateZ(50px);
-  background-color: #8b6914;
-  background-image: url('https://images.unsplash.com/photo-1641236785883-951defd2206e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80');
-}
-
-.minecraft-cube-face.top {
-  transform: rotateX(90deg) translateZ(50px);
-  background-color: #5b9925;
-  background-image: url('https://images.unsplash.com/photo-1628494391268-824167857212?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3Jhc3MlMjBibG9ja3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=200&q=80');
-}
-
-.minecraft-cube-face.bottom {
-  transform: rotateX(-90deg) translateZ(50px);
-  background-color: #3A3A3A;
-  background-image: url('https://images.unsplash.com/photo-1616455266831-9c63b30b68bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80');
-}
-
-@keyframes rotate {
-  0% { transform: rotateY(0) rotateX(0); }
-  100% { transform: rotateY(360deg) rotateX(360deg); }
-}
-
-/* Поправим анимацию, чтобы она была более плавной и красивой */
-@keyframes rotate {
-  0% { 
-    transform: rotateY(0) rotateX(15deg); 
-  }
-  25% {
-    transform: rotateY(90deg) rotateX(15deg);
-  }
-  50% {
-    transform: rotateY(180deg) rotateX(15deg);
-  }
-  75% {
-    transform: rotateY(270deg) rotateX(15deg);
-  }
-  100% { 
-    transform: rotateY(360deg) rotateX(15deg); 
   }
 }
