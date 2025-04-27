@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(6);
 
   const increment = () => {
     setCount(prevCount => prevCount + 1);
