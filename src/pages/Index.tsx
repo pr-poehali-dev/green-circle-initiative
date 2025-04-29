@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dog } from "lucide-react";
+import { Dog, AlertTriangle } from "lucide-react";
 
 const Index = () => {
   const [count, setCount] = useState(52);
 
   const increment = () => {
     setCount(prevCount => prevCount + 1);
+  };
+
+  const triggerError = () => {
+    // Намеренно вызываем ошибку JavaScript
+    const nonExistentObject = undefined;
+    nonExistentObject.someProperty = "This will cause an error";
   };
 
   return (
@@ -19,12 +25,22 @@ const Index = () => {
         
         <h1 className="text-4xl font-bold mb-4 text-black mt-8">Число + 1</h1>
         <div className="text-6xl font-bold my-8 text-purple-600">{count}</div>
-        <Button 
-          onClick={increment}
-          className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md text-lg"
-        >
-          Прибавить 1
-        </Button>
+        <div className="flex gap-4 justify-center">
+          <Button 
+            onClick={increment}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md text-lg"
+          >
+            Прибавить 1
+          </Button>
+          <Button 
+            onClick={triggerError}
+            variant="destructive"
+            className="flex items-center gap-2"
+          >
+            <AlertTriangle size={16} />
+            <span>Вызвать ошибку</span>
+          </Button>
+        </div>
       </div>
     </div>
   );
