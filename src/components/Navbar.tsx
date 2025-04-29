@@ -1,52 +1,56 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsOpen(!isOpen);
   };
 
   return (
-    <nav className="bg-green-700 text-white py-4 px-6 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold flex items-center gap-2">
-          <span className="text-3xl">🦁</span> Зоопарк "Баба Фрося"
-        </Link>
-        
-        {/* Desktop Menu */}
-        <div className="hidden md:flex gap-6 items-center">
-          <Link to="/" className="hover:text-yellow-300 transition-colors font-medium">Главная</Link>
-          <Link to="/about" className="hover:text-yellow-300 transition-colors font-medium">О нас</Link>
-          <Link to="/adoption" className="hover:text-yellow-300 transition-colors font-medium">Опека над животными</Link>
-          <Link to="/events" className="hover:text-yellow-300 transition-colors font-medium">Мероприятия</Link>
-          <Link to="/contacts" className="hover:text-yellow-300 transition-colors font-medium">Контакты</Link>
-          <Button variant="outline" size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-green-900 border-0">
-            Купить билет
-          </Button>
+    <nav className="bg-primary shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex">
+            <div className="flex-shrink-0 flex items-center">
+              <Link to="/" className="text-white font-bold text-xl">Зоопарк «Баба Фрося»</Link>
+            </div>
+          </div>
+          
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link to="/" className="text-white hover:text-green-200 px-3 py-2 rounded-md font-medium">Главная</Link>
+            <Link to="/about" className="text-white hover:text-green-200 px-3 py-2 rounded-md font-medium">О нас</Link>
+            <Link to="/animals" className="text-white hover:text-green-200 px-3 py-2 rounded-md font-medium">Опека над животными</Link>
+            <Link to="/events" className="text-white hover:text-green-200 px-3 py-2 rounded-md font-medium">Мероприятия</Link>
+            <Link to="/contacts" className="text-white hover:text-green-200 px-3 py-2 rounded-md font-medium">Контакты</Link>
+          </div>
+          
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button 
+              onClick={toggleMenu}
+              className="text-white hover:text-green-200 focus:outline-none"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
-        
-        {/* Mobile Menu Button */}
-        <button className="md:hidden text-white" onClick={toggleMenu}>
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </div>
       
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden container mx-auto mt-4 pb-4 flex flex-col gap-4">
-          <Link to="/" className="hover:text-yellow-300 transition-colors" onClick={toggleMenu}>Главная</Link>
-          <Link to="/about" className="hover:text-yellow-300 transition-colors" onClick={toggleMenu}>О нас</Link>
-          <Link to="/adoption" className="hover:text-yellow-300 transition-colors" onClick={toggleMenu}>Опека над животными</Link>
-          <Link to="/events" className="hover:text-yellow-300 transition-colors" onClick={toggleMenu}>Мероприятия</Link>
-          <Link to="/contacts" className="hover:text-yellow-300 transition-colors" onClick={toggleMenu}>Контакты</Link>
-          <Button variant="outline" size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-green-900 border-0 w-full">
-            Купить билет
-          </Button>
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-primary">
+            <Link to="/" className="text-white hover:text-green-200 block px-3 py-2 rounded-md font-medium">Главная</Link>
+            <Link to="/about" className="text-white hover:text-green-200 block px-3 py-2 rounded-md font-medium">О нас</Link>
+            <Link to="/animals" className="text-white hover:text-green-200 block px-3 py-2 rounded-md font-medium">Опека над животными</Link>
+            <Link to="/events" className="text-white hover:text-green-200 block px-3 py-2 rounded-md font-medium">Мероприятия</Link>
+            <Link to="/contacts" className="text-white hover:text-green-200 block px-3 py-2 rounded-md font-medium">Контакты</Link>
+          </div>
         </div>
       )}
     </nav>

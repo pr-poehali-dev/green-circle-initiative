@@ -1,26 +1,24 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import "./App.css";
+import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import AdoptionPage from './pages/AdoptionPage';
-import ContactsPage from './pages/ContactsPage';
-import EventsPage from './pages/EventsPage';
 import NotFound from './pages/NotFound';
 import { Toaster } from './components/ui/toaster';
+import './App.css';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/adoption" element={<AdoptionPage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="/events" element={<EventsPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Toaster />
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Toaster />
+      </div>
     </Router>
   );
 }
