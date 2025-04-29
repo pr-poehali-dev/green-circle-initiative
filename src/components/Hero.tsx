@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Calendar, MapPin, Ticket } from "lucide-react";
+import { Calendar, MapPin, PawPrint } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -19,19 +18,19 @@ const Hero = () => {
           Мы заботимся о природе и приглашаем вас присоединиться к нам!
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg">
+          <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700 rounded-full px-8 transition-all transform hover:-translate-y-1 shadow-lg border-2 border-purple-300">
             <Link to="/tickets" className="flex items-center gap-2">
-              <Ticket className="h-5 w-5" />
+              <PawPrint className="h-5 w-5" />
               <span>Купить билеты</span>
             </Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/20 transition-all transform hover:scale-105 shadow-md">
+          <Button asChild size="lg" variant="outline" className="bg-transparent text-white border-2 border-pink-400 hover:bg-pink-500/20 rounded-full px-8 transition-all transform hover:-translate-y-1 shadow-md">
             <Link to="/events" className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
               <span>Наши мероприятия</span>
             </Link>
           </Button>
-          <Button asChild size="lg" variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600 transition-all transform hover:scale-105 shadow-lg">
+          <Button asChild size="lg" variant="secondary" className="bg-teal-600 text-white hover:bg-teal-700 rounded-full px-8 transition-all transform hover:-translate-y-1 shadow-lg border-2 border-teal-300">
             <Link to="/map" className="flex items-center gap-2">
               <MapPin className="h-5 w-5" />
               <span>Как добраться</span>
