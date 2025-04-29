@@ -21,6 +21,42 @@ const animals = [
     name: "Пингвин Ковальски",
     description: "Очаровательный и умный пингвин, который нуждается в специальном уходе и свежей рыбе.",
     image: "https://images.unsplash.com/photo-1598439210625-358bf2febfce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 4,
+    name: "Слон Дамбо",
+    description: "Дружелюбный гигант, которому требуется много пищи и регулярный уход за кожей и бивнями.",
+    image: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 5,
+    name: "Тигр Шерхан",
+    description: "Могучий хищник с ярким окрасом, требующий особого внимания и специализированного рациона.",
+    image: "https://images.unsplash.com/photo-1549366021-9f761d450615?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 6,
+    name: "Медведь Балу",
+    description: "Забавный косолапый друг, который обожает мёд и нуждается в просторном вольере.",
+    image: "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 7,
+    name: "Обезьяна Чита",
+    description: "Умная и подвижная обезьянка, которая требует постоянных развлечений и общения.",
+    image: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 8,
+    name: "Зебра Марти",
+    description: "Энергичная зебра с яркими полосками, которая любит галопировать по своему вольеру.",
+    image: "https://images.unsplash.com/photo-1501706362039-c06b2d715385?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    id: 9,
+    name: "Волк Акела",
+    description: "Благородный вожак стаи, нуждающийся в особом уходе и сбалансированном питании.",
+    image: "https://images.unsplash.com/photo-1564466809058-bf4114d55352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   }
 ];
 
@@ -37,9 +73,9 @@ const AnimalsSection = () => {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {animals.map((animal) => (
-            <Card key={animal.id} className="overflow-hidden">
+            <Card key={animal.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
               <div className="h-48 overflow-hidden">
                 <img
                   src={animal.image}
