@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Podcast } from "lucide-react"; // Импортируем иконку единорога (стилизованная как единорог)
+import { Dog } from "lucide-react"; // Импортируем иконку собаки
 
 const Index = () => {
   const [count, setCount] = useState(52);
@@ -14,7 +14,7 @@ const Index = () => {
       <div className="text-center p-8 bg-white rounded-lg shadow-md relative">
         {/* Градиентный круг */}
         <div className="w-24 h-24 rounded-full absolute -top-12 left-1/2 transform -translate-x-1/2 shadow-lg bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 flex items-center justify-center">
-          <Podcast size={40} className="text-white" /> {/* Добавляем иконку единорога в круг */}
+          <Dog size={40} className="text-white" /> {/* Добавляем иконку собаки в круг */}
         </div>
         
         <h1 className="text-4xl font-bold mb-4 text-black mt-8">Число + 1</h1>
