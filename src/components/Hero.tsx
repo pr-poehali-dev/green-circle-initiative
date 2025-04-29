@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Calendar, MapPin, Ticket } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -18,11 +19,23 @@ const Hero = () => {
           Мы заботимся о природе и приглашаем вас присоединиться к нам!
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
-            <Link to="/tickets">Купить билеты</Link>
+          <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg">
+            <Link to="/tickets" className="flex items-center gap-2">
+              <Ticket className="h-5 w-5" />
+              <span>Купить билеты</span>
+            </Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-            <Link to="/events">Узнать о мероприятиях</Link>
+          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/20 transition-all transform hover:scale-105 shadow-md">
+            <Link to="/events" className="flex items-center gap-2">
+              <Calendar className="h-5 w-5" />
+              <span>Наши мероприятия</span>
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600 transition-all transform hover:scale-105 shadow-lg">
+            <Link to="/map" className="flex items-center gap-2">
+              <MapPin className="h-5 w-5" />
+              <span>Как добраться</span>
+            </Link>
           </Button>
         </div>
       </div>
