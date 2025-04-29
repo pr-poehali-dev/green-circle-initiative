@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dog } from "lucide-react"; // Исправил с Dogg на Dog
+import { Dog } from "lucide-react";
 
 const Index = () => {
   const [count, setCount] = useState(52);
@@ -10,11 +10,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center p-8 bg-white rounded-lg shadow-md relative">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+      <div className="text-center p-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-xl relative">
         {/* Градиентный круг */}
         <div className="w-24 h-24 rounded-full absolute -top-12 left-1/2 transform -translate-x-1/2 shadow-lg bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 flex items-center justify-center">
-          <Dog size={40} className="text-white" /> {/* Исправил с Dogg на Dog */}
+          <Dog size={40} className="text-white" />
         </div>
         
         <h1 className="text-4xl font-bold mb-4 text-black mt-8">Число + 1</h1>
