@@ -25,16 +25,7 @@ const Hero = () => {
           Легендарный спорткар с более чем 50-летней историей. Неподвластный времени дизайн и экстраординарная производительность.
         </p>
         
-
-        <div className="mt-10 flex flex-wrap gap-4">
-          <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white border-none px-8 py-6 text-lg transition-colors">
-            Конфигуратор
-          </Button>
-          <Button size="lg" variant="outline" className="border-white border-opacity-20 text-white px-8 py-6 text-lg hover:bg-white/10 transition-colors">
-            <span>Тест-драйв</span>
-            <ChevronRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
+HERE WAS REAL CODE BUT IT HIDDEN TO SAVE TOKENS USAGE, DONT USE IT AS EXAMPLE        </div>
         
         <div className="mt-16 grid grid-cols-3 gap-4 max-w-lg">
           <div>
