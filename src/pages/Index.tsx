@@ -6,12 +6,14 @@ import Events from '@/components/Events';
 import Contacts from '@/components/Contacts';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import Fireworks from '@/components/Fireworks';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-16"> {/* Add padding top to account for fixed header */}
+      <div className="pt-16 relative"> {/* Add padding top to account for fixed header */}
+        <Fireworks />
         <Hero />
         <AboutSection />
         <AnimalCare />
@@ -22,5 +24,8 @@ const Index = () => {
     </div>
   );
 };
+
+export default Index;
+
 
 export default Index;
