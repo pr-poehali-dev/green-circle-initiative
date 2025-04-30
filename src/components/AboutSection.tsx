@@ -28,30 +28,30 @@ const AboutSection = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 h-full">
             <img 
-              src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1740&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1534567110243-8875d64c0cb4?q=80&w=1740&auto=format&fit=crop" 
               alt="Животные в зоопарке" 
-              className="rounded-lg shadow-md object-cover w-full h-full aspect-square"
+              className="rounded-lg shadow-md object-cover w-full h-full"
             />
             <img 
               src="https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=1470&auto=format&fit=crop" 
               alt="Сотрудники зоопарка" 
-              className="rounded-lg shadow-md object-cover w-full h-full aspect-square"
+              className="rounded-lg shadow-md object-cover w-full h-full"
             />
             <img 
-              src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=1974&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1607274134639-043342705e6f?q=80&w=1974&auto=format&fit=crop" 
               alt="Территория зоопарка" 
-              className="rounded-lg shadow-md object-cover w-full h-full aspect-square"
+              className="rounded-lg shadow-md object-cover w-full h-full"
             />
             <img 
               src="https://images.unsplash.com/photo-1559253664-ca249d4608c6?q=80&w=1374&auto=format&fit=crop" 
               alt="Посетители зоопарка" 
-              className="rounded-lg shadow-md object-cover w-full h-full aspect-square"
+              className="rounded-lg shadow-md object-cover w-full h-full"
             />
           </div>
+
 
           </div>
         </div>
