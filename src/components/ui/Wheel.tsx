@@ -65,6 +65,9 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
     }
   }, [spinning, rotation, segments, onSpinEnd]);
 
+  // Вычисляем угол для каждого сегмента
+  const segmentAngle = 360 / segments.length;
+
   return (
     <div className={cn("flex flex-col items-center gap-6", className)}>
       <div className="relative w-64 h-64 md:w-80 md:h-80">
@@ -82,33 +85,58 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
           className="w-full h-full rounded-full overflow-hidden border-4 border-gray-800 shadow-xl relative transition-transform duration-[5000ms] ease-out"
           style={{ transform: `rotate(${rotation}deg)` }}
         >
+          {/* Создаем секторы с помощью conic-gradient */}
+          <div 
+            className="w-full h-full rounded-full"
+            style={{ 
+              background: `conic-gradient(${
+                segments.map((segment, index) => 
+                  `${segment.color} ${index * segmentAngle}deg ${(index + 1) * segmentAngle}deg`
+                ).join(', ')
+              })` 
+            }}
+          />
 
+          {/* Текст на секторах */}
           {segments.map((segment, index) => {
-            const angle = 360 / segments.length;
-            const rotate = index * angle;
+            // Вычисляем средний угол для данного сегмента
+            const middleAngle = ((index * segmentAngle) + (index + 1) * segmentAngle) / 2;
+            // Преобразуем в радианы
+            const angleInRadians = (middleAngle - 90) * Math.PI / 180;
+            
+            // Рассчитываем положение текста (ближе к внешнему краю)
+            const radius = 40; // % от размера колеса
+            const x = 50 + radius * Math.cos(angleInRadians);
+            const y = 50 + radius * Math.sin(angleInRadians);
             
             return (
               <div 
                 key={segment.id}
-                className="absolute top-0 left-0 w-full h-full origin-center"
+                className="absolute text-white font-bold text-sm text-center"
                 style={{ 
-                  clip: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.cos((rotate + angle) * Math.PI / 180)}% ${50 + 50 * Math.sin((rotate + angle) * Math.PI / 180)}%, 50% 0%)`,
-                  transform: `rotate(${rotate}deg)`,
-                  backgroundColor: segment.color 
+                  left: `${x}%`, 
+                  top: `${y}%`,
+                  transform: `translate(-50%, -50%) rotate(${middleAngle}deg)`,
+                  textShadow: '1px 1px 3px rgba(0,0,0,0.8), -1px -1px 3px rgba(0,0,0,0.8)',
+                  maxWidth: '80px'
                 }}
               >
-                <div 
-                  className="absolute top-[15%] left-[50%] -translate-x-1/2 text-sm font-bold whitespace-nowrap"
-                  style={{ 
-                    transform: `rotate(${angle / 2}deg)`,
-                    textShadow: '1px 1px 3px rgba(0,0,0,0.7)'
-                  }}
-                >
-                  {segment.text}
-                </div>
+                {segment.text}
               </div>
             );
           })}
+
+          {/* Разделительные линии между секторами */}
+          {segments.map((_, index) => (
+            <div 
+              key={`line-${index}`}
+              className="absolute top-1/2 left-1/2 w-1/2 h-0.5 bg-gray-800 origin-left"
+              style={{ transform: `rotate(${index * segmentAngle}deg)` }}
+            />
+          ))}
+
+          {/* Центральная точка */}
+          <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-gray-800 rounded-full -translate-x-1/2 -translate-y-1/2" />
         </div>
       </div>
       
