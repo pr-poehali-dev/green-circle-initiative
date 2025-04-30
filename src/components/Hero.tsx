@@ -7,7 +7,7 @@ const Hero = () => {
       {/* Фоновое изображение */}
       <div>
         <img 
-          src="https://images.unsplash.com/photo-1503919275948-1f118d8ecf0b?q=80&w=1770&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1569003339405-ea396a5a8a90?q=80&w=1770&auto=format&fit=crop" 
           alt="Зоопарк Баба Фрося" 
           className="w-full h-full object-cover"
         />
