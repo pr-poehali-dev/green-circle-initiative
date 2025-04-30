@@ -83,18 +83,8 @@ const Fireworks = () => {
       const fireworkContainer = document.getElementById('fireworks-container');
       if (!fireworkContainer) return;
 
-      // Случайный цвет для взрыва
-      const colors = [
-        '#FF5252', // красный
-        '#FFD740', // желтый
-        '#69F0AE', // зеленый
-        '#40C4FF', // голубой
-        '#FF4081', // розовый
-        '#7C4DFF', // фиолетовый
-        '#FFAB40'  // оранжевый
-      ];
-      
-      const color = colors[Math.floor(Math.random() * colors.length)];
+      // Используем только белый цвет для всех частиц
+      const color = '#FFFFFF';
       
       // Создаем множество частиц
       const particleCount = 60 + Math.floor(Math.random() * 40);
