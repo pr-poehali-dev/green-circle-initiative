@@ -68,7 +68,6 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-
 			keyframes: {
 				'accordion-down': {
 					from: {
@@ -84,14 +83,6 @@ export default {
 					},
 					to: {
 						height: '0'
-					}
-				},
-				'neon-flicker': {
-					'0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': {
-						opacity: '1'
-					},
-					'20%, 24%, 55%': {
-						opacity: '0.5'
 					}
 				}
 			},
