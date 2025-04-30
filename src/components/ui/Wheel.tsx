@@ -82,25 +82,29 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
           className="w-full h-full rounded-full overflow-hidden border-4 border-gray-800 shadow-xl relative transition-transform duration-[5000ms] ease-out"
           style={{ transform: `rotate(${rotation}deg)` }}
         >
+
           {segments.map((segment, index) => {
-            const rotate = `rotate(${(index * 360) / segments.length}deg)`;
-            const skew = `skew(${90 - 360 / segments.length}deg)`;
+            const angle = 360 / segments.length;
+            const rotate = index * angle;
             
             return (
               <div 
                 key={segment.id}
-                className="absolute top-0 right-0 w-1/2 h-1/2 origin-bottom-left text-white flex justify-center"
+                className="absolute top-0 right-0 w-1/2 h-1/2 origin-bottom-left text-white"
                 style={{ 
-                  transform: `${rotate} ${skew}`,
+                  transform: `rotate(${rotate}deg) skew(${90 - angle}deg)`,
                   backgroundColor: segment.color 
                 }}
               >
-                <span 
-                  className="absolute bottom-8 right-10 transform rotate-90 text-sm font-bold"
-                  style={{ transform: `skew(${-(90 - 360 / segments.length)}deg) rotate(${60}deg)` }}
+                <div 
+                  className="absolute bottom-[40%] right-[25%] text-sm font-bold whitespace-nowrap"
+                  style={{ 
+                    transform: `skew(${-(90 - angle)}deg) rotate(${angle / 2}deg)`,
+                    textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+                  }}
                 >
                   {segment.text}
-                </span>
+                </div>
               </div>
             );
           })}
