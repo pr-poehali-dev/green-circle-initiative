@@ -3,9 +3,10 @@ import { Button } from '@/components/ui/button';
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-[80vh] overflow-hidden">
+
+    <div className="relative w-full h-[85vh] overflow-hidden mt-2">
       {/* Фоновое изображение */}
-      <div className="absolute inset-0 z-0">
+
         <img 
           src="https://images.unsplash.com/photo-1503919275948-1f118d8ecf0b?q=80&w=1770&auto=format&fit=crop" 
           alt="Зоопарк Баба Фрося" 
