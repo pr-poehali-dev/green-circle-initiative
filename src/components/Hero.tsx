@@ -16,9 +16,11 @@ const Hero = () => {
       
       {/* Контент героя */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-center p-4 md:p-8">
+
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
-          Добро пожаловать в зоопарк «Баба Фрося»
+          Баба Фрося
         </h1>
+
         <p className="text-xl md:text-2xl text-white/90 max-w-2xl mb-8">
           Место, где природа и человек встречаются в гармонии.
           Познакомьтесь с удивительным миром животных!
