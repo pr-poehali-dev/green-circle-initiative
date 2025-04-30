@@ -90,17 +90,18 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
             return (
               <div 
                 key={segment.id}
-                className="absolute top-0 right-0 w-1/2 h-1/2 origin-bottom-left text-white"
+                className="absolute top-0 left-0 w-full h-full origin-center"
                 style={{ 
-                  transform: `rotate(${rotate}deg) skew(${90 - angle}deg)`,
+                  clip: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.cos((rotate + angle) * Math.PI / 180)}% ${50 + 50 * Math.sin((rotate + angle) * Math.PI / 180)}%, 50% 0%)`,
+                  transform: `rotate(${rotate}deg)`,
                   backgroundColor: segment.color 
                 }}
               >
                 <div 
-                  className="absolute bottom-[40%] right-[25%] text-sm font-bold whitespace-nowrap"
+                  className="absolute top-[15%] left-[50%] -translate-x-1/2 text-sm font-bold whitespace-nowrap"
                   style={{ 
-                    transform: `skew(${-(90 - angle)}deg) rotate(${angle / 2}deg)`,
-                    textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+                    transform: `rotate(${angle / 2}deg)`,
+                    textShadow: '1px 1px 3px rgba(0,0,0,0.7)'
                   }}
                 >
                   {segment.text}
