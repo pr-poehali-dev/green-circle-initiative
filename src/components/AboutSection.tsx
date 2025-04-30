@@ -1,21 +1,130 @@
 
 import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+type Circle = {
+  id: number;
+  x: number;
+  y: number;
+  velocityX: number;
+  velocityY: number;
+  size: number;
+  image: string;
+  alt: string;
+};
 
 const AboutSection = () => {
-  const [animate, setAnimate] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const [circles, setCircles] = useState<Circle[]>([]);
+  const initializedRef = useRef(false);
 
+  // Инициализация кружков при монтировании компонента
   useEffect(() => {
-    // Activate animation after component mounts
-    setAnimate(true);
-    
-    // Create animation loop for continuous bouncing effect
-    const interval = setInterval(() => {
-      setAnimate(prev => !prev);
-    }, 4000);
-    
-    return () => clearInterval(interval);
+    if (containerRef.current && !initializedRef.current) {
+      const container = containerRef.current;
+      const { width, height } = container.getBoundingClientRect();
+      
+      const initialCircles: Circle[] = [
+        {
+          id: 1,
+          x: 50,
+          y: 50,
+          velocityX: 1.5,
+          velocityY: 1.2,
+          size: 120,
+          image: "https://images.unsplash.com/photo-1534567110243-8875d64c2cb3?q=80&w=1740&auto=format&fit=crop",
+          alt: "Животные в зоопарке"
+        },
+        {
+          id: 2,
+          x: width - 150,
+          y: 80,
+          velocityX: -1.3,
+          velocityY: 1.5,
+          size: 120,
+          image: "https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=1470&auto=format&fit=crop",
+          alt: "Сотрудники зоопарка"
+        },
+        {
+          id: 3,
+          x: 100,
+          y: height - 150,
+          velocityX: 1.2,
+          velocityY: -1.4,
+          size: 120,
+          image: "https://images.unsplash.com/photo-1584122250444-1704e669d707?q=80&w=1374&auto=format&fit=crop",
+          alt: "Территория зоопарка"
+        },
+        {
+          id: 4,
+          x: width - 130,
+          y: height - 170,
+          velocityX: -1.6,
+          velocityY: -1.1,
+          size: 120,
+          image: "https://images.unsplash.com/photo-1559253664-ca249d4608c6?q=80&w=1374&auto=format&fit=crop",
+          alt: "Посетители зоопарка"
+        },
+        {
+          id: 5,
+          x: width / 2 - 80,
+          y: height / 2 - 80,
+          velocityX: 1.7,
+          velocityY: 1.3,
+          size: 160,
+          image: "https://images.unsplash.com/photo-1591824438708-ce405f36ba3d?q=80&w=1587&auto=format&fit=crop",
+          alt: "Главное фото зоопарка"
+        }
+      ];
+      
+      setCircles(initialCircles);
+      initializedRef.current = true;
+    }
   }, []);
+
+  // Анимация движения кружков
+  useEffect(() => {
+    if (circles.length > 0 && containerRef.current) {
+      const container = containerRef.current;
+      const { width, height } = container.getBoundingClientRect();
+      
+      const animate = () => {
+        setCircles(prevCircles => {
+          return prevCircles.map(circle => {
+            let { x, y, velocityX, velocityY, size } = circle;
+            
+            // Обновление позиции
+            x += velocityX;
+            y += velocityY;
+            
+            // Проверка столкновения со стенками контейнера
+            if (x <= 0 || x + size >= width) {
+              velocityX = -velocityX;
+              x = x <= 0 ? 0 : width - size;
+            }
+            
+            if (y <= 0 || y + size >= height) {
+              velocityY = -velocityY;
+              y = y <= 0 ? 0 : height - size;
+            }
+            
+            return { ...circle, x, y, velocityX, velocityY };
+          });
+        });
+        
+        animationRef.current = requestAnimationFrame(animate);
+      };
+      
+      animationRef.current = requestAnimationFrame(animate);
+      
+      return () => {
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+      };
+    }
+  }, [circles.length]);
 
   return (
     <section className="py-16 px-4 md:px-8 bg-white">
@@ -43,61 +152,25 @@ const AboutSection = () => {
             </div>
           </div>
           
-          <div className="relative h-[400px]">
-            {/* Верхний левый круг */}
-            <div 
-              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden top-0 left-0 z-10 transition-all duration-1000 transform ${animate ? 'translate-x-[30px] translate-y-[30px]' : 'translate-x-0 translate-y-0'}`}
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1534567110243-8875d64c2cb3?q=80&w=1740&auto=format&fit=crop" 
-                alt="Животные в зоопарке" 
-                className="object-cover w-full h-full"
-              />
-            </div>
-            
-            {/* Верхний правый круг */}
-            <div 
-              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden top-0 right-0 z-20 transition-all duration-1000 transform ${animate ? 'translate-x-[-30px] translate-y-[30px]' : 'translate-x-0 translate-y-0'}`}
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=1470&auto=format&fit=crop" 
-                alt="Сотрудники зоопарка" 
-                className="object-cover w-full h-full"
-              />
-            </div>
-            
-            {/* Нижний левый круг */}
-            <div 
-              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden bottom-0 left-0 z-30 transition-all duration-1000 transform ${animate ? 'translate-x-[30px] translate-y-[-30px]' : 'translate-x-0 translate-y-0'}`}
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1584122250444-1704e669d707?q=80&w=1374&auto=format&fit=crop" 
-                alt="Территория зоопарка" 
-                className="object-cover w-full h-full"
-              />
-            </div>
-            
-            {/* Нижний правый круг */}
-            <div 
-              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden bottom-0 right-0 z-40 transition-all duration-1000 transform ${animate ? 'translate-x-[-30px] translate-y-[-30px]' : 'translate-x-0 translate-y-0'}`}
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1559253664-ca249d4608c6?q=80&w=1374&auto=format&fit=crop" 
-                alt="Посетители зоопарка" 
-                className="object-cover w-full h-full"
-              />
-            </div>
-            
-            {/* Центральный круг */}
-            <div 
-              className={`absolute w-[180px] h-[180px] rounded-full overflow-hidden left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-all duration-1000 ${animate ? 'scale-110' : 'scale-100'}`}
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1591824438708-ce405f36ba3d?q=80&w=1587&auto=format&fit=crop" 
-                alt="Главное фото зоопарка" 
-                className="object-cover w-full h-full"
-              />
-            </div>
+          <div ref={containerRef} className="relative h-[400px] overflow-hidden bg-gray-50 rounded-lg shadow-inner">
+            {circles.map(circle => (
+              <div 
+                key={circle.id}
+                style={{
+                  width: `${circle.size}px`,
+                  height: `${circle.size}px`,
+                  transform: `translate(${circle.x}px, ${circle.y}px)`,
+                  transition: 'transform 0.05s linear',
+                }}
+                className="absolute rounded-full overflow-hidden shadow-lg"
+              >
+                <img 
+                  src={circle.image} 
+                  alt={circle.alt} 
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
