@@ -18,7 +18,6 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
   const [rotation, setRotation] = useState(0);
   const [selectedSegment, setSelectedSegment] = useState<string | null>(null);
   const wheelRef = useRef<HTMLDivElement>(null);
-  const spinDuration = 10000; // Увеличенное время вращения до 10 секунд
 
   const spinWheel = () => {
     if (spinning) return;
@@ -26,15 +25,18 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
     setSpinning(true);
     setSelectedSegment(null);
     
-    // Случайное количество оборотов (между 5 и 10) плюс случайное дополнительное вращение
-    const spins = 5 + Math.random() * 5;
+    // Случайное количество оборотов (между 3 и 5) плюс случайное дополнительное вращение
+    const spins = 3 + Math.random() * 2;
     const degrees = spins * 360 + Math.random() * 360;
     
     // Устанавливаем новый угол вращения
     setRotation(rotation + degrees);
+  };
 
-    // Настраиваем таймер окончания вращения вместо использования transitionend
-    setTimeout(() => {
+  useEffect(() => {
+    if (!spinning) return;
+
+    const handleTransitionEnd = () => {
       setSpinning(false);
       
       // Вычисляем, какой сегмент выбран после остановки рулетки
@@ -42,17 +44,26 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
       const segmentSize = 360 / segments.length;
       
       // Рассчитываем индекс выбранного сегмента
+      // Индикатор указывает на верх колеса, поэтому мы делаем коррекцию
       const segmentIndex = Math.floor(((360 - normalizedRotation) % 360) / segmentSize);
       
       // Получаем выбранный сегмент
-      const selected = segments[segmentIndex % segments.length].text;
+      const selected = segments[segmentIndex].text;
       setSelectedSegment(selected);
       
       if (onSpinEnd) {
         onSpinEnd(selected);
       }
-    }, spinDuration);
-  };
+    };
+
+    const wheel = wheelRef.current;
+    if (wheel) {
+      wheel.addEventListener('transitionend', handleTransitionEnd);
+      return () => {
+        wheel.removeEventListener('transitionend', handleTransitionEnd);
+      };
+    }
+  }, [spinning, rotation, segments, onSpinEnd]);
 
   // Вычисляем угол для каждого сегмента
   const segmentAngle = 360 / segments.length;
@@ -71,11 +82,11 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
         {/* Колесо рулетки */}
         <div 
           ref={wheelRef}
-          className="w-full h-full rounded-full overflow-hidden border-4 border-gray-800 shadow-xl relative"
-          style={{ 
-            transform: `rotate(${rotation}deg)`,
-            transition: `transform ${spinDuration}ms cubic-bezier(0.2, 0.8, 0.2, 1)` // Используем плавное замедление
-          }}
+
+          ref={wheelRef}
+
+          className="w-full h-full rounded-full overflow-hidden border-4 border-gray-800 shadow-xl relative transition-transform duration-[8000ms] ease-out"
+          style={{ transform: `rotate(${rotation}deg)` }}
         >
           {/* Создаем секторы с помощью conic-gradient */}
           <div 
@@ -92,7 +103,7 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
           {/* Текст на секторах */}
           {segments.map((segment, index) => {
             // Вычисляем средний угол для данного сегмента
-            const middleAngle = ((index * segmentAngle) + ((index + 1) * segmentAngle)) / 2;
+            const middleAngle = ((index * segmentAngle) + (index + 1) * segmentAngle) / 2;
             // Преобразуем в радианы
             const angleInRadians = (middleAngle - 90) * Math.PI / 180;
             
