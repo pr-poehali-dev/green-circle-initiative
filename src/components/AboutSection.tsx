@@ -25,13 +25,14 @@ const AboutSection = () => {
       const container = containerRef.current;
       const { width, height } = container.getBoundingClientRect();
       
+
       const initialCircles: Circle[] = [
         {
           id: 1,
           x: 50,
           y: 50,
-          velocityX: 1.5,
-          velocityY: 1.2,
+          velocityX: 0.5,
+          velocityY: 0.4,
           size: 120,
           image: "https://images.unsplash.com/photo-1534567110243-8875d64c2cb3?q=80&w=1740&auto=format&fit=crop",
           alt: "Животные в зоопарке"
@@ -40,8 +41,8 @@ const AboutSection = () => {
           id: 2,
           x: width - 150,
           y: 80,
-          velocityX: -1.3,
-          velocityY: 1.5,
+          velocityX: -0.4,
+          velocityY: 0.6,
           size: 120,
           image: "https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=1470&auto=format&fit=crop",
           alt: "Сотрудники зоопарка"
@@ -50,8 +51,8 @@ const AboutSection = () => {
           id: 3,
           x: 100,
           y: height - 150,
-          velocityX: 1.2,
-          velocityY: -1.4,
+          velocityX: 0.4,
+          velocityY: -0.5,
           size: 120,
           image: "https://images.unsplash.com/photo-1584122250444-1704e669d707?q=80&w=1374&auto=format&fit=crop",
           alt: "Территория зоопарка"
@@ -60,8 +61,8 @@ const AboutSection = () => {
           id: 4,
           x: width - 130,
           y: height - 170,
-          velocityX: -1.6,
-          velocityY: -1.1,
+          velocityX: -0.6,
+          velocityY: -0.4,
           size: 120,
           image: "https://images.unsplash.com/photo-1559253664-ca249d4608c6?q=80&w=1374&auto=format&fit=crop",
           alt: "Посетители зоопарка"
@@ -70,13 +71,14 @@ const AboutSection = () => {
           id: 5,
           x: width / 2 - 80,
           y: height / 2 - 80,
-          velocityX: 1.7,
-          velocityY: 1.3,
+          velocityX: 0.7,
+          velocityY: 0.5,
           size: 160,
           image: "https://images.unsplash.com/photo-1591824438708-ce405f36ba3d?q=80&w=1587&auto=format&fit=crop",
           alt: "Главное фото зоопарка"
         }
       ];
+
       
       setCircles(initialCircles);
       initializedRef.current = true;
