@@ -43,32 +43,58 @@ const AboutSection = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-6 h-full">
-            <div className={`relative rounded-full overflow-hidden aspect-square transition-all duration-700 transform ${animate ? 'translate-y-2' : '-translate-y-2'}`} style={{animationDelay: '0ms'}}>
+          <div className="relative h-[400px]">
+            {/* Верхний левый круг */}
+            <div 
+              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden top-0 left-0 z-10 transition-all duration-1000 transform ${animate ? 'translate-x-[30px] translate-y-[30px]' : 'translate-x-0 translate-y-0'}`}
+            >
               <img 
-                src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1740&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1534567110243-8875d64c2cb3?q=80&w=1740&auto=format&fit=crop" 
                 alt="Животные в зоопарке" 
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className={`relative rounded-full overflow-hidden aspect-square transition-all duration-700 transform ${animate ? '-translate-y-2' : 'translate-y-2'}`} style={{animationDelay: '400ms'}}>
+            
+            {/* Верхний правый круг */}
+            <div 
+              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden top-0 right-0 z-20 transition-all duration-1000 transform ${animate ? 'translate-x-[-30px] translate-y-[30px]' : 'translate-x-0 translate-y-0'}`}
+            >
               <img 
                 src="https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=1470&auto=format&fit=crop" 
                 alt="Сотрудники зоопарка" 
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className={`relative rounded-full overflow-hidden aspect-square transition-all duration-700 transform ${animate ? 'translate-y-2' : '-translate-y-2'}`} style={{animationDelay: '800ms'}}>
+            
+            {/* Нижний левый круг */}
+            <div 
+              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden bottom-0 left-0 z-30 transition-all duration-1000 transform ${animate ? 'translate-x-[30px] translate-y-[-30px]' : 'translate-x-0 translate-y-0'}`}
+            >
               <img 
-                src="https://images.unsplash.com/photo-1504173010664-32509aeebb62?q=80&w=1374&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1584122250444-1704e669d707?q=80&w=1374&auto=format&fit=crop" 
                 alt="Территория зоопарка" 
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className={`relative rounded-full overflow-hidden aspect-square transition-all duration-700 transform ${animate ? '-translate-y-2' : 'translate-y-2'}`} style={{animationDelay: '1200ms'}}>
+            
+            {/* Нижний правый круг */}
+            <div 
+              className={`absolute w-[150px] h-[150px] rounded-full overflow-hidden bottom-0 right-0 z-40 transition-all duration-1000 transform ${animate ? 'translate-x-[-30px] translate-y-[-30px]' : 'translate-x-0 translate-y-0'}`}
+            >
               <img 
                 src="https://images.unsplash.com/photo-1559253664-ca249d4608c6?q=80&w=1374&auto=format&fit=crop" 
                 alt="Посетители зоопарка" 
+                className="object-cover w-full h-full"
+              />
+            </div>
+            
+            {/* Центральный круг */}
+            <div 
+              className={`absolute w-[180px] h-[180px] rounded-full overflow-hidden left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-all duration-1000 ${animate ? 'scale-110' : 'scale-100'}`}
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1591824438708-ce405f36ba3d?q=80&w=1587&auto=format&fit=crop" 
+                alt="Главное фото зоопарка" 
                 className="object-cover w-full h-full"
               />
             </div>
