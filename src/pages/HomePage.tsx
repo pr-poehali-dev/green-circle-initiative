@@ -7,6 +7,7 @@ import EventsSection from "@/components/EventsSection";
 import ContactsSection from "@/components/ContactsSection";
 import Footer from "@/components/Footer";
 import AnimatedAnimal from "@/components/AnimatedAnimal";
+import Fireworks from "@/components/Fireworks";
 
 const HomePage = () => {
   useEffect(() => {
@@ -58,6 +59,9 @@ const HomePage = () => {
 
   return (
     <div className="pt-16">
+      {/* Фейерверки */}
+      <Fireworks />
+      
       {/* Контейнер для конфетти */}
       <div id="confetti-container" className="fixed inset-0 overflow-hidden pointer-events-none"></div>
       
