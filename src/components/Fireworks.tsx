@@ -117,11 +117,13 @@ const Fireworks = () => {
       // Рисуем частицу как светящийся круг с градиентом
       ctx.globalAlpha = particle.alpha;
       
+
       // Создаем градиент для частицы
       const gradient = ctx.createRadialGradient(
         particle.x, particle.y, 0,
-        particle.x, particle.y, currentSize * 2
+        particle.x, particle.y, Math.max(currentSize * 2, 0.1) // Гарантируем, что радиус не будет меньше 0.1
       );
+
       
       // Яркий центр частицы
       gradient.addColorStop(0, `hsla(${particle.hue}, ${particle.saturation}%, ${particle.brightness}%, ${particle.alpha})`);
