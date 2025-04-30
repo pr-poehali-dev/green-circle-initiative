@@ -28,10 +28,9 @@ const AboutSection = () => {
             </div>
           </div>
           
-
           <div className="grid grid-cols-2 gap-4 h-full">
             <img 
-              src="https://images.unsplash.com/photo-1534567110243-8875d64c0cb4?q=80&w=1740&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1740&auto=format&fit=crop" 
               alt="Животные в зоопарке" 
               className="rounded-lg shadow-md object-cover w-full h-full"
             />
@@ -41,7 +40,7 @@ const AboutSection = () => {
               className="rounded-lg shadow-md object-cover w-full h-full"
             />
             <img 
-              src="https://images.unsplash.com/photo-1607274134639-043342705e6f?q=80&w=1974&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1552474705-dd8183e00901?q=80&w=1974&auto=format&fit=crop" 
               alt="Территория зоопарка" 
               className="rounded-lg shadow-md object-cover w-full h-full"
             />
@@ -50,9 +49,6 @@ const AboutSection = () => {
               alt="Посетители зоопарка" 
               className="rounded-lg shadow-md object-cover w-full h-full"
             />
-          </div>
-
-
           </div>
         </div>
       </div>
