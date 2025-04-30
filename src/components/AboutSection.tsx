@@ -91,26 +91,80 @@ const AboutSection = () => {
       
       const animate = () => {
         setCircles(prevCircles => {
-          return prevCircles.map(circle => {
-            let { x, y, velocityX, velocityY, size } = circle;
+          // Создаем копию для дальнейших изменений
+          const updatedCircles = [...prevCircles];
+          
+          // Сначала обновляем позиции всех кружков
+          for (let i = 0; i < updatedCircles.length; i++) {
+            let circle = updatedCircles[i];
             
             // Обновление позиции
-            x += velocityX;
-            y += velocityY;
+            circle.x += circle.velocityX;
+            circle.y += circle.velocityY;
             
             // Проверка столкновения со стенками контейнера
-            if (x <= 0 || x + size >= width) {
-              velocityX = -velocityX;
-              x = x <= 0 ? 0 : width - size;
+            if (circle.x <= 0 || circle.x + circle.size >= width) {
+              circle.velocityX = -circle.velocityX;
+              circle.x = circle.x <= 0 ? 0 : width - circle.size;
             }
             
-            if (y <= 0 || y + size >= height) {
-              velocityY = -velocityY;
-              y = y <= 0 ? 0 : height - size;
+            if (circle.y <= 0 || circle.y + circle.size >= height) {
+              circle.velocityY = -circle.velocityY;
+              circle.y = circle.y <= 0 ? 0 : height - circle.size;
             }
-            
-            return { ...circle, x, y, velocityX, velocityY };
-          });
+          }
+          
+          // Затем проверяем столкновения между кружками
+          for (let i = 0; i < updatedCircles.length; i++) {
+            for (let j = i + 1; j < updatedCircles.length; j++) {
+              const circle1 = updatedCircles[i];
+              const circle2 = updatedCircles[j];
+              
+              // Центры кружков
+              const c1x = circle1.x + circle1.size / 2;
+              const c1y = circle1.y + circle1.size / 2;
+              const c2x = circle2.x + circle2.size / 2;
+              const c2y = circle2.y + circle2.size / 2;
+              
+              // Расстояние между центрами
+              const dx = c2x - c1x;
+              const dy = c2y - c1y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              
+              // Минимальное расстояние для столкновения (сумма радиусов)
+              const minDistance = (circle1.size + circle2.size) / 2;
+              
+              // Если кружки столкнулись
+              if (distance < minDistance) {
+                // Вычисляем нормализованный вектор направления между центрами
+                const nx = dx / distance;
+                const ny = dy / distance;
+                
+                // Глубина перекрытия
+                const overlap = minDistance - distance;
+                
+                // Отталкиваем кружки друг от друга, чтобы избежать залипания
+                circle1.x -= nx * overlap / 2;
+                circle1.y -= ny * overlap / 2;
+                circle2.x += nx * overlap / 2;
+                circle2.y += ny * overlap / 2;
+                
+                // Меняем направления движения (отражение векторов скорости)
+                // Упрощенная версия эластичного столкновения
+                const v1x = circle1.velocityX;
+                const v1y = circle1.velocityY;
+                const v2x = circle2.velocityX;
+                const v2y = circle2.velocityY;
+                
+                circle1.velocityX = v1x - 2 * nx * (nx * v1x + ny * v1y);
+                circle1.velocityY = v1y - 2 * ny * (nx * v1x + ny * v1y);
+                circle2.velocityX = v2x - 2 * nx * (nx * v2x + ny * v2y);
+                circle2.velocityY = v2y - 2 * ny * (nx * v2x + ny * v2y);
+              }
+            }
+          }
+          
+          return updatedCircles;
         });
         
         animationRef.current = requestAnimationFrame(animate);
