@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -7,7 +6,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <img 
-            src="/logo-b.svg" 
+            src="/favicon.svg" 
             alt="Баба Фрося" 
             className="h-12 w-auto" 
           />
