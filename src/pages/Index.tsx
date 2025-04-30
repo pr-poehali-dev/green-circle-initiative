@@ -73,14 +73,15 @@ const Index = () => {
             </div>
           )}
           
+
           <div className="mt-8 grid grid-cols-2 gap-4">
-            <Button variant="neon" className="text-lg group">
-              <Icon name="Gift" className="mr-2 group-hover:animate-bounce-slow" />
-              Призы
+            <Button variant="neon" size="lg" className="text-lg group font-bold shadow-lg shadow-primary/40 border-2 hover:scale-105 transition-transform">
+              <Icon name="Gift" className="mr-2 group-hover:animate-bounce-slow" size={24} />
+              Призы 🎁
             </Button>
-            <Button variant="neon-accent" className="text-lg group">
-              <Icon name="Trophy" className="mr-2 group-hover:animate-bounce-slow" />
-              Рейтинг
+            <Button variant="neon-accent" size="lg" className="text-lg group font-bold shadow-lg shadow-accent/40 border-2 hover:scale-105 transition-transform">
+              <Icon name="Trophy" className="mr-2 group-hover:animate-bounce-slow" size={24} />
+              Рейтинг 🏆
             </Button>
           </div>
         </div>
