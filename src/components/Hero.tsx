@@ -1,13 +1,25 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import TicketForm from './TicketForm';
 
 const Hero = () => {
+  const [isTicketFormOpen, setIsTicketFormOpen] = useState(false);
+
+  const openTicketForm = () => {
+    setIsTicketFormOpen(true);
+  };
+
+  const closeTicketForm = () => {
+    setIsTicketFormOpen(false);
+  };
+
   return (
     <div className="relative w-full h-[85vh] overflow-hidden mt-2">
       {/* Фоновое изображение */}
       <div>
         <img 
-          src="https://images.unsplash.com/photo-1535083783855-76ae62b2914e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" 
+          src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" 
           alt="Зоопарк Баба Фрося" 
           className="w-full h-full object-cover"
         />
@@ -25,14 +37,25 @@ const Hero = () => {
           Познакомьтесь с удивительным миром животных!
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+          <Button 
+            size="lg" 
+            className="bg-green-600 hover:bg-green-700 text-white"
+            onClick={openTicketForm}
+          >
             Купить билеты
           </Button>
-          <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/50 hover:bg-white/20">
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="bg-white/10 text-white border-white/50 hover:bg-white/20"
+          >
             Стать опекуном
           </Button>
         </div>
       </div>
+
+      {/* Форма для покупки билетов */}
+      <TicketForm isOpen={isTicketFormOpen} onClose={closeTicketForm} />
     </div>
   );
 };
