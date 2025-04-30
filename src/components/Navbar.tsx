@@ -24,13 +24,15 @@ const Navbar = () => {
       scrolled ? "bg-black/80 backdrop-blur-md py-2" : "bg-transparent py-4"
     }`}>
       <div className="container mx-auto flex items-center justify-between px-4">
-        <Link to="/" className="flex items-center">
-          <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Porsche_logo.svg/2000px-Porsche_logo.svg.png" 
-            alt="Porsche Logo" 
-            className="h-10"
-          />
-        </Link>
+
+        <div className="flex items-center space-x-4">
+          <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 transition-colors">
+            Контакты
+          </Button>
+          <Button className="bg-red-600 hover:bg-red-700 text-white transition-colors">
+            Заказать
+          </Button>
+        </div>
         
         <div className="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
           <a href="#models" className="hover:text-red-500 transition-colors">Модели</a>
