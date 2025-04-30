@@ -3,185 +3,281 @@ import { useEffect, useRef } from 'react';
 interface Particle {
   x: number;
   y: number;
-  color: string;
-  velocity: {
-    x: number;
-    y: number;
-  };
-  alpha: number;
-  life: number;
+  vx: number;
+  vy: number;
   size: number;
-  hue: number;
-  brightness: number;
-  saturation: number;
+  color: string;
+  alpha: number;
+  gravity: number;
+  resistance: number;
+  shrink: number;
+  fade: number;
+  shimmer: boolean;
 }
 
-// Современная цветовая палитра
-const colorPalettes = [
-  // Пастельные цвета
-  ['hsla(0, 100%, 70%, 0.8)', 'hsla(60, 100%, 70%, 0.8)', 'hsla(120, 100%, 70%, 0.8)', 'hsla(180, 100%, 70%, 0.8)', 'hsla(240, 100%, 70%, 0.8)', 'hsla(300, 100%, 70%, 0.8)'],
-  // Неоновые цвета
-  ['hsla(0, 100%, 50%, 0.8)', 'hsla(120, 100%, 50%, 0.8)', 'hsla(240, 100%, 50%, 0.8)', 'hsla(300, 100%, 50%, 0.8)'],
-  // Голографические цвета
-  ['hsla(180, 100%, 80%, 0.8)', 'hsla(300, 100%, 80%, 0.8)', 'hsla(60, 100%, 80%, 0.8)'],
-  // Монохромные (белый/серый/серебристый)
-  ['hsla(0, 0%, 100%, 0.9)', 'hsla(0, 0%, 90%, 0.9)', 'hsla(0, 0%, 80%, 0.9)']
-];
+interface Rocket {
+  x: number;
+  y: number;
+  targetY: number;
+  vx: number;
+  vy: number;
+  color: string;
+  size: number;
+  trailParticles: Particle[];
+}
 
 const Fireworks = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const animFrameRef = useRef<number>(0);
+  const rocketRef = useRef<Rocket[]>([]);
   const particlesRef = useRef<Particle[]>([]);
-  const lastTimeRef = useRef<number>(0);
+  const lastFireTimeRef = useRef<number>(0);
+  const frameTimeRef = useRef<number>(0);
 
-  const createFirework = (x: number, y: number) => {
-    // Случайно выбираем палитру для этого салюта
-    const palette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
-    const baseHue = Math.random() * 360; // Случайный базовый оттенок для гармоничных цветов
+  // Современные цвета
+  const colors = [
+    '#FF3366', // Розовый неон
+    '#33CCFF', // Яркий голубой
+    '#FF9933', // Оранжевый
+    '#33FF99', // Мятный
+    '#CC33FF', // Фиолетовый
+    '#FFCC33', // Золотой
+    '#FF6666', // Коралловый
+    '#6666FF', // Лаванда
+    '#66FFFF', // Бирюзовый
+    '#FFFFFF', // Белый
+  ];
+
+  // Создаем ракету
+  const createRocket = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const x = Math.random() * canvas.width;
+    const targetY = canvas.height * (Math.random() * 0.2 + 0.1); // Высота взрыва
     
-    // Параметры этого взрыва
-    const particleCount = Math.floor(Math.random() * 80) + 50; // Больше частиц
-    const explosionSize = Math.random() * 0.5 + 0.5; // Масштаб взрыва
+    const rocket: Rocket = {
+      x,
+      y: canvas.height,
+      targetY,
+      vx: Math.random() * 1 - 0.5,
+      vy: -Math.random() * 5 - 8, // Быстрее вверх
+      color: colors[Math.floor(Math.random() * colors.length)],
+      size: 3,
+      trailParticles: []
+    };
     
-    // Создаем частицы
+    rocketRef.current.push(rocket);
+  };
+
+  // Создаем частицы для взрыва
+  const createExplosion = (x: number, y: number, color: string) => {
+    const particleCount = Math.floor(Math.random() * 80) + 60;
+    const baseHue = Math.random() * 30 - 15; // Небольшая вариация цвета
+    
     for (let i = 0; i < particleCount; i++) {
-      // Используем золотое сечение для более естественного распределения
       const angle = Math.random() * Math.PI * 2;
-      // Скорость с вариацией для более реалистичного эффекта
-      const speed = (Math.random() * 4 + 2) * explosionSize;
-      // Размер частицы варьируется
+      const speed = Math.random() * 6 + 1;
       const size = Math.random() * 3 + 1;
-      // Основной цвет из палитры или случайный оттенок от базового
-      const useHue = Math.random() > 0.5 
-        ? baseHue + Math.random() * 60 - 30 // Вариация вокруг базового оттенка
-        : parseInt(Math.random() * 360 + ''); // Гарантированно числовое значение оттенка
-      // Расширенные свойства для современных эффектов
+
+      // Случайно выбираем между основным цветом и случайным из палитры
+      const particleColor = Math.random() > 0.7 
+        ? colors[Math.floor(Math.random() * colors.length)]
+        : color;
+
       particlesRef.current.push({
         x,
         y,
-        color: palette[Math.floor(Math.random() * palette.length)],
-        velocity: {
-          x: Math.cos(angle) * speed,
-          y: Math.sin(angle) * speed
-        },
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        size,
+        color: particleColor,
         alpha: 1,
-        life: Math.random() * 60 + 80, // Дольше живут
-        size, // Разные размеры для реализма
-        hue: useHue,
-        brightness: Math.random() * 20 + 80, // 80-100%
-        saturation: Math.random() * 20 + 80, // 80-100%
+        gravity: 0.06 + (Math.random() * 0.02),
+        resistance: 0.92 + (Math.random() * 0.05),
+        shrink: 0.97 + (Math.random() * 0.02),
+        fade: 0.015 + (Math.random() * 0.015),
+        shimmer: Math.random() > 0.5
       });
     }
   };
 
-  const animate = (time: number) => {
-    if (!canvasRef.current) return;
-    
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+  // Анимируем ракеты
+  const updateRockets = (deltaTime: number) => {
+    const ctx = contextRef.current;
     if (!ctx) return;
     
-    // Вычисляем delta для плавной анимации независимо от FPS
-    const delta = (time - (lastTimeRef.current || time)) / 16.67; // Нормализуем к 60 FPS
-    lastTimeRef.current = time;
-    
-    // Очищаем canvas с прозрачностью для создания эффекта светящегося следа
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Применяем эффект размытия для свечения
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
-    ctx.globalCompositeOperation = 'lighter'; // Для яркого сложения цветов
-    
-    // Обновляем и рисуем частицы
-    particlesRef.current.forEach((particle, index) => {
-      // Обновляем положение частицы с учетом delta
-      particle.x += particle.velocity.x * delta;
-      particle.y += particle.velocity.y * delta;
+    rocketRef.current.forEach((rocket, index) => {
+      // Обновляем позицию ракеты
+      rocket.x += rocket.vx * deltaTime;
+      rocket.y += rocket.vy * deltaTime;
       
-      // Добавляем реалистичную гравитацию
-      particle.velocity.y += 0.02 * delta;
+      // Добавляем эффект дрожания для реализма
+      rocket.vx += (Math.random() * 0.4 - 0.2) * deltaTime;
       
-      // Случайное отклонение для эффекта мерцания
-      particle.velocity.x += (Math.random() - 0.5) * 0.2 * delta;
+      // Добавляем частицы следа
+      if (Math.random() > 0.5) {
+        rocket.trailParticles.push({
+          x: rocket.x,
+          y: rocket.y,
+          vx: (Math.random() * 0.6 - 0.3) * deltaTime,
+          vy: (Math.random() * 0.6 + 0.5) * deltaTime,
+          size: Math.random() * 2 + 1,
+          color: rocket.color,
+          alpha: 0.8,
+          gravity: 0.05,
+          resistance: 0.92,
+          shrink: 0.96,
+          fade: 0.035,
+          shimmer: false
+        });
+      }
       
-      // Уменьшаем жизнь и прозрачность
-      particle.life -= 1 * delta;
-      particle.alpha = particle.life / 100;
-      
-      // Меняем размер для имитации угасания
-      const lifeRatio = particle.life / 100;
-      const currentSize = particle.size * (lifeRatio > 0.5 ? 1 : lifeRatio * 2);
-      
-      // Рисуем частицу как светящийся круг с градиентом
-      ctx.globalAlpha = particle.alpha;
-      
-
-      // Создаем градиент для частицы
-      const gradient = ctx.createRadialGradient(
-        particle.x, particle.y, 0,
-        particle.x, particle.y, Math.max(currentSize * 2, 0.1) // Гарантируем, что радиус не будет меньше 0.1
-      );
-
-      
-      // Яркий центр частицы
-      gradient.addColorStop(0, `hsla(${particle.hue}, ${particle.saturation}%, ${particle.brightness}%, ${particle.alpha})`);
-      // Прозрачный край для эффекта свечения
-      gradient.addColorStop(1, `hsla(${particle.hue}, ${particle.saturation}%, ${particle.brightness}%, 0)`);
-      
-      ctx.fillStyle = gradient;
+      // Рисуем ракету
       ctx.beginPath();
-      ctx.arc(particle.x, particle.y, currentSize * 2, 0, Math.PI * 2);
+      ctx.arc(rocket.x, rocket.y, rocket.size, 0, Math.PI * 2);
+      ctx.fillStyle = rocket.color;
       ctx.fill();
       
-      // Удаляем частицы с истекшим временем жизни
-      if (particle.life <= 0) {
-        particlesRef.current.splice(index, 1);
+      // Рисуем частицы следа
+      rocket.trailParticles.forEach((particle, pIndex) => {
+        particle.alpha -= particle.fade * deltaTime;
+        particle.size *= particle.shrink;
+        
+        if (particle.alpha <= 0 || particle.size <= 0.5) {
+          rocket.trailParticles.splice(pIndex, 1);
+          return;
+        }
+        
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${parseInt(particle.color.slice(1, 3), 16)}, ${parseInt(particle.color.slice(3, 5), 16)}, ${parseInt(particle.color.slice(5, 7), 16)}, ${particle.alpha})`;
+        ctx.fill();
+      });
+      
+      // Проверяем, достигла ли ракета высоты взрыва
+      if (rocket.y <= rocket.targetY) {
+        // Создаем взрыв
+        createExplosion(rocket.x, rocket.y, rocket.color);
+        // Удаляем ракету
+        rocketRef.current.splice(index, 1);
       }
     });
+  };
+
+  // Анимируем частицы взрыва
+  const updateParticles = (deltaTime: number) => {
+    const ctx = contextRef.current;
+    if (!ctx) return;
     
-    // Сбрасываем композитный режим для следующего кадра
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.shadowBlur = 0;
-    ctx.globalAlpha = 1;
+    particlesRef.current.forEach((particle, index) => {
+      // Обновляем скорость с учетом гравитации и сопротивления
+      particle.vy += particle.gravity * deltaTime;
+      particle.vx *= particle.resistance;
+      particle.vy *= particle.resistance;
+      
+      // Обновляем позицию
+      particle.x += particle.vx * deltaTime;
+      particle.y += particle.vy * deltaTime;
+      
+      // Уменьшаем размер и прозрачность
+      particle.size *= particle.shrink;
+      particle.alpha -= particle.fade * deltaTime;
+      
+      // Эффект мерцания для части частиц
+      let alpha = particle.alpha;
+      if (particle.shimmer) {
+        alpha = particle.alpha * (0.8 + Math.random() * 0.4);
+      }
+      
+      // Если частица исчезла или слишком маленькая, удаляем её
+      if (particle.alpha <= 0 || particle.size <= 0.5) {
+        particlesRef.current.splice(index, 1);
+        return;
+      }
+      
+      // Рисуем частицу
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.globalCompositeOperation = 'lighter';
+      
+      // Добавляем размытие для более красивого эффекта свечения
+      ctx.shadowBlur = particle.size * 2;
+      ctx.shadowColor = particle.color;
+      
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      ctx.fillStyle = particle.color;
+      ctx.fill();
+      
+      ctx.restore();
+    });
+  };
+
+  const animate = (time: number) => {
+    const ctx = contextRef.current;
+    const canvas = canvasRef.current;
+    if (!ctx || !canvas) return;
     
-    // Случайно создаем новые салюты с меньшей вероятностью для более редких, но эффектных взрывов
-    if (Math.random() < 0.015) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height * 0.3; // Только в верхней трети экрана
-      createFirework(x, y);
+    // Вычисляем deltaTime для плавной анимации
+    const deltaTime = (time - frameTimeRef.current) / 16;
+    frameTimeRef.current = time;
+    
+    // Накладываем слой с прозрачностью для создания эффекта угасания
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Запускаем новые ракеты
+    if (time - lastFireTimeRef.current > (Math.random() * 1500 + 500)) {
+      createRocket();
+      lastFireTimeRef.current = time;
     }
     
+    // Обновляем и рисуем все объекты
+    updateRockets(deltaTime);
+    updateParticles(deltaTime);
+    
+    // Следующий кадр
     animFrameRef.current = requestAnimationFrame(animate);
   };
 
   useEffect(() => {
-    if (!canvasRef.current) return;
-    
     const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    contextRef.current = ctx;
+    
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
     };
     
     window.addEventListener('resize', handleResize);
     handleResize();
     
-    // Начинаем анимацию с первым салютом
-    createFirework(canvas.width / 2, canvas.height * 0.2);
+    // Запускаем анимацию
+    lastFireTimeRef.current = performance.now();
+    frameTimeRef.current = performance.now();
     animFrameRef.current = requestAnimationFrame(animate);
+    
+    // Создаем первые ракеты
+    for (let i = 0; i < 2; i++) {
+      setTimeout(() => createRocket(), i * 800);
+    }
     
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animFrameRef.current);
-      particlesRef.current = [];
     };
   }, []);
 
   return (
     <canvas 
-      ref={canvasRef} 
+      ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none z-10"
     />
   );
