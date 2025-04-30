@@ -33,7 +33,7 @@ const Index = () => {
       <header className="sticky top-0 z-50 w-full py-4 px-4 md:px-8 bg-white/95 backdrop-blur-sm border-b">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <Link to="/" className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-green-700">Зоопарк «Баба Фрося»</h1>
+            <h1 className="text-2xl font-bold text-green-700">Баба Фрося</h1>
           </Link>
           
           <NavigationMenu className="hidden md:flex">
