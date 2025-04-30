@@ -8,6 +8,16 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <header className="fixed w-full bg-white shadow-md z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -31,11 +41,11 @@ const Header: React.FC = () => {
 
         {/* Десктопное меню */}
         <nav className="hidden md:flex space-x-8">
-          <Link to="/" className="text-gray-600 hover:text-orange-500 font-medium">Главная</Link>
-          <Link to="/animals" className="text-gray-600 hover:text-orange-500 font-medium">Животные</Link>
-          <Link to="/events" className="text-gray-600 hover:text-orange-500 font-medium">События</Link>
-          <Link to="/about" className="text-gray-600 hover:text-orange-500 font-medium">О нас</Link>
-          <Link to="/contacts" className="text-gray-600 hover:text-orange-500 font-medium">Контакты</Link>
+          <button onClick={() => scrollToSection('hero')} className="text-gray-600 hover:text-orange-500 font-medium">Главная</button>
+          <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-orange-500 font-medium">О нас</button>
+          <button onClick={() => scrollToSection('animal-care')} className="text-gray-600 hover:text-orange-500 font-medium">Животные</button>
+          <button onClick={() => scrollToSection('events')} className="text-gray-600 hover:text-orange-500 font-medium">События</button>
+          <button onClick={() => scrollToSection('contacts')} className="text-gray-600 hover:text-orange-500 font-medium">Контакты</button>
         </nav>
 
         {/* Кнопка покупки билета */}
@@ -65,11 +75,11 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-white border-t">
           <div className="container mx-auto px-4 py-2">
             <nav className="flex flex-col space-y-3">
-              <Link to="/" className="text-gray-600 hover:text-orange-500 py-2 font-medium">Главная</Link>
-              <Link to="/animals" className="text-gray-600 hover:text-orange-500 py-2 font-medium">Животные</Link>
-              <Link to="/events" className="text-gray-600 hover:text-orange-500 py-2 font-medium">События</Link>
-              <Link to="/about" className="text-gray-600 hover:text-orange-500 py-2 font-medium">О нас</Link>
-              <Link to="/contacts" className="text-gray-600 hover:text-orange-500 py-2 font-medium">Контакты</Link>
+              <button onClick={() => scrollToSection('hero')} className="text-left text-gray-600 hover:text-orange-500 py-2 font-medium">Главная</button>
+              <button onClick={() => scrollToSection('about')} className="text-left text-gray-600 hover:text-orange-500 py-2 font-medium">О нас</button>
+              <button onClick={() => scrollToSection('animal-care')} className="text-left text-gray-600 hover:text-orange-500 py-2 font-medium">Животные</button>
+              <button onClick={() => scrollToSection('events')} className="text-left text-gray-600 hover:text-orange-500 py-2 font-medium">События</button>
+              <button onClick={() => scrollToSection('contacts')} className="text-left text-gray-600 hover:text-orange-500 py-2 font-medium">Контакты</button>
               <Link to="/tickets" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition duration-300 inline-block text-center">
                 Купить билет
               </Link>
