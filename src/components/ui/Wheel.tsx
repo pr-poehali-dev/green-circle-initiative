@@ -80,7 +80,7 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
             transform: `rotate(${rotation}deg)`,
             transition: `transform ${spinDuration}ms cubic-bezier(0.2, 0.8, 0.2, 1)`,
             boxShadow: spinning ? "0 0 20px rgba(139, 92, 246, 0.5), inset 0 0 15px rgba(139, 92, 246, 0.3)" : 
-                                  "0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.6)"
+                                   "0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.6)"
           }}
         >
           {/* Создаем секторы */}
@@ -91,18 +91,23 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
                 segments.map((segment, index) => 
                   `${segment.color} ${index * segmentAngle}deg ${(index + 1) * segmentAngle}deg`
                 ).join(', ')
+              })`
+            }}
+          >
+            {/* Неоновая рамка барабана */}
+            <div 
+              className={`absolute inset-0 rounded-full border-4 border-primary/50 ${
+                spinning ? 'animate-pulse-slow' : ''
+              } neon-border overflow-hidden`}
+              style={{ 
+                transform: `scale(0.95)`,
+                backdropFilter: 'blur(2px)'
+              }}
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-primary/10 to-transparent ${spinning ? 'animate-shine' : ''}`}></div>
+            </div>
+          </div>
 
-        <div 
-          className={`absolute inset-0 rounded-full border-4 border-primary/50 ${
-            isSpinning ? 'animate-pulse-slow' : ''
-          } neon-border overflow-hidden`}
-          style={{ 
-            transform: `scale(0.95)`,
-            backdropFilter: 'blur(2px)'
-          }}
-        >
-          <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-primary/10 to-transparent ${isSpinning ? 'animate-shine' : ''}`}></div>
-        </div>
           {segments.map((segment, index) => {
             // Вычисляем средний угол для данного сегмента
             const middleAngle = ((index * segmentAngle) + ((index + 1) * segmentAngle)) / 2;
