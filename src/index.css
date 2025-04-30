@@ -93,4 +93,119 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Неоновые текстовые эффекты */
+  .neon-text {
+    text-shadow: 0 0 5px theme('colors.primary.DEFAULT'),
+                 0 0 10px theme('colors.primary.DEFAULT'),
+                 0 0 20px theme('colors.primary.DEFAULT');
+  }
+  
+  .neon-text-accent {
+    text-shadow: 0 0 5px theme('colors.accent.DEFAULT'),
+                 0 0 10px theme('colors.accent.DEFAULT'),
+                 0 0 20px theme('colors.accent.DEFAULT');
+  }
+  
+  /* Неоновые эффекты границ */
+  .neon-border {
+    box-shadow: 0 0 5px theme('colors.primary.DEFAULT'),
+                0 0 10px theme('colors.primary.DEFAULT'),
+                inset 0 0 5px theme('colors.primary.DEFAULT');
+  }
+  
+  .neon-border-accent {
+    box-shadow: 0 0 5px theme('colors.accent.DEFAULT'),
+                0 0 10px theme('colors.accent.DEFAULT'),
+                inset 0 0 5px theme('colors.accent.DEFAULT');
+  }
+  
+  /* Анимация неонового мерцания */
+  @keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      opacity: 1;
+    }
+    20%, 22%, 24%, 55% {
+      opacity: 0.8;
+    }
+  }
+  
+  @keyframes neon-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes shine {
+    to {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes grid-slide {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 60px 60px;
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes float-particle {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(50px);
+      opacity: 0;
+    }
+  }
+  
+  .animate-neon-flicker {
+    animation: neon-flicker 2s infinite alternate;
+  }
+  
+  .animate-pulse-slow {
+    animation: neon-pulse 4s infinite;
+  }
+  
+  .animate-shine {
+    animation: shine 1.5s infinite;
+  }
+  
+  .animate-grid-slide {
+    animation: grid-slide 20s linear infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
 }
