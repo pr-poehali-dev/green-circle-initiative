@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 const AnimalCare = () => {
-  return (
   const animals = [
     {
       id: 1,
@@ -35,7 +34,7 @@ const AnimalCare = () => {
   ];
 
   return (
-    <section className="py-16 px-4 md:px-8 bg-[#E5DEFF]">
+    <section id="animal-care" className="py-16 px-4 md:px-8 bg-[#E5DEFF]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-purple-800">Опека над животными</h2>
@@ -75,7 +74,7 @@ const AnimalCare = () => {
                 </div>
                 
                 <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  <Icon name="Heart" size={16} />
+                  <Icon name="Heart" size={16} className="mr-2" />
                   Стать опекуном
                 </Button>
               </div>
