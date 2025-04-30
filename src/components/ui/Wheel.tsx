@@ -91,11 +91,18 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
                 segments.map((segment, index) => 
                   `${segment.color} ${index * segmentAngle}deg ${(index + 1) * segmentAngle}deg`
                 ).join(', ')
-              })` 
-            }}
-          />
 
-          {/* Текст на секторах с эмоджи */}
+        <div 
+          className={`absolute inset-0 rounded-full border-4 border-primary/50 ${
+            isSpinning ? 'animate-pulse-slow' : ''
+          } neon-border overflow-hidden`}
+          style={{ 
+            transform: `scale(0.95)`,
+            backdropFilter: 'blur(2px)'
+          }}
+        >
+          <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-primary/10 to-transparent ${isSpinning ? 'animate-shine' : ''}`}></div>
+        </div>
           {segments.map((segment, index) => {
             // Вычисляем средний угол для данного сегмента
             const middleAngle = ((index * segmentAngle) + ((index + 1) * segmentAngle)) / 2;
