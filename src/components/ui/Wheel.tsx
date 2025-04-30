@@ -82,7 +82,9 @@ const Wheel = ({ segments, onSpinEnd, className }: WheelProps) => {
         {/* Колесо рулетки */}
         <div 
           ref={wheelRef}
-          className="w-full h-full rounded-full overflow-hidden border-4 border-gray-800 shadow-xl relative transition-transform duration-[5000ms] ease-out"
+
+          ref={wheelRef}
+          className="w-full h-full rounded-full overflow-hidden border-4 border-gray-800 shadow-xl relative transition-transform duration-[8000ms] ease-out"
           style={{ transform: `rotate(${rotation}deg)` }}
         >
           {/* Создаем секторы с помощью conic-gradient */}
