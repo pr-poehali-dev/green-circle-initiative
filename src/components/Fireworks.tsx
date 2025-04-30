@@ -51,12 +51,10 @@ const Fireworks = () => {
       const speed = (Math.random() * 4 + 2) * explosionSize;
       // Размер частицы варьируется
       const size = Math.random() * 3 + 1;
-      
       // Основной цвет из палитры или случайный оттенок от базового
       const useHue = Math.random() > 0.5 
         ? baseHue + Math.random() * 60 - 30 // Вариация вокруг базового оттенка
-        : parseInt(palette[Math.floor(Math.random() * palette.length)]);
-      
+        : parseInt(Math.random() * 360 + ''); // Гарантированно числовое значение оттенка
       // Расширенные свойства для современных эффектов
       particlesRef.current.push({
         x,
