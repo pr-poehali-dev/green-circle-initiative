@@ -125,12 +125,9 @@
     background: #333333;
     position: relative;
     overflow: hidden;
-
-    overflow: hidden;
   }
   
   .animated-background::before {
     content: none;
   }
-}
 }
