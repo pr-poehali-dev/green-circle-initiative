@@ -48,7 +48,7 @@ const DraggableCircle = () => {
   return (
     <div 
       ref={circleRef}
-      className="absolute h-16 w-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full cursor-grab hover:shadow-lg transition-shadow"
+      className="absolute h-16 w-16 bg-white rounded-full cursor-grab hover:shadow-lg transition-shadow"
       style={{
         transform: `translate(${position.x}px, ${position.y}px)`,
         willChange: 'transform',

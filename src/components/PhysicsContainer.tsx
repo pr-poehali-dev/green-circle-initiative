@@ -27,7 +27,7 @@ const PhysicsContainer = () => {
       id: 'circle1', 
       position: { x: 100, y: 50 }, 
       velocity: { vx: 0, vy: 0 },
-      color: 'bg-red-500', 
+      color: 'bg-white', 
       size: 70, 
       mass: 10 
     },
@@ -35,7 +35,7 @@ const PhysicsContainer = () => {
       id: 'circle2', 
       position: { x: 300, y: 100 }, 
       velocity: { vx: 0, vy: 0 },
-      color: 'bg-blue-500', 
+      color: 'bg-white', 
       size: 60, 
       mass: 8 
     },
@@ -43,7 +43,7 @@ const PhysicsContainer = () => {
       id: 'circle3', 
       position: { x: 500, y: 150 }, 
       velocity: { vx: 0, vy: 0 },
-      color: 'bg-green-500', 
+      color: 'bg-white', 
       size: 80, 
       mass: 12 
     }
@@ -89,8 +89,6 @@ const PhysicsContainer = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === 'Space') {
-        const colors = ['bg-yellow-500', 'bg-purple-500', 'bg-pink-500', 'bg-orange-500', 'bg-cyan-500'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
         const randomSize = Math.floor(Math.random() * 30) + 40; // Меньше размеры для лучшей производительности
         const randomMass = randomSize / 5;
 
@@ -107,7 +105,7 @@ const PhysicsContainer = () => {
               id: `circle${Date.now()}`,
               position: { x: Math.random() * 500 + 50, y: 50 },
               velocity: { vx: (Math.random() - 0.5) * 5, vy: Math.random() * 2 },
-              color: randomColor,
+              color: 'bg-white',
               size: randomSize,
               mass: randomMass
             }
