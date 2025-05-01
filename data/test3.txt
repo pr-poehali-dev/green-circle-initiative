@@ -9,10 +9,11 @@ ID: 12345
 
 Структура данных:
 {
-  "name": "test",
-  "value": 100,
+  "name": "improved_test",
+  "value": 500,
   "active": true,
-  "tags": ["test", "sample", "data"]
+  "description": "Обновленный тестовый объект",
+  "tags": ["test", "sample", "data", "updated"]
 }
 
 ======================
