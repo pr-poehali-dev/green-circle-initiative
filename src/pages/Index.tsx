@@ -1,29 +1,14 @@
 
-import Hero from '@/components/Hero';
-import AboutSection from '@/components/AboutSection';
-import AnimalCare from '@/components/AnimalCare';
-import Events from '@/components/Events';
-import Contacts from '@/components/Contacts';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import Fireworks from '@/components/Fireworks';
-
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <div className="pt-16 relative"> {/* Add padding top to account for fixed header */}
-        <Fireworks />
-        <Hero />
-        <AboutSection />
-        <AnimalCare />
-        <Events />
-        <Contacts />
-        <Footer />
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="text-center">
+        <div className="w-32 h-32 bg-green-500 rounded-full mx-auto mb-6"></div>
+        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
+        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
       </div>
     </div>
   );
 };
 
 export default Index;
-

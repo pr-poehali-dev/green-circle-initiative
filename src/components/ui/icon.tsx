@@ -1,23 +1,28 @@
+import React from 'react';
+import * as LucideIcons from 'lucide-react';
+import { LucideProps } from 'lucide-react';
 
-import React from "react";
-import * as LucideIcons from "lucide-react";
-
-export interface IconProps extends React.SVGProps<SVGSVGElement> {
+interface IconProps extends LucideProps {
   name: string;
-  size?: number;
-  color?: string;
   fallback?: string;
 }
 
-const Icon = ({ name, size = 24, color = "currentColor", fallback = "CircleAlert", ...props }: IconProps) => {
-  const IconComponent = LucideIcons[name as keyof typeof LucideIcons] || LucideIcons[fallback as keyof typeof LucideIcons];
-  
+const Icon: React.FC<IconProps> = ({ name, fallback = 'CircleAlert', ...props }) => {
+  const IconComponent = (LucideIcons as Record<string, React.FC<LucideProps>>)[name];
+
   if (!IconComponent) {
-    console.warn(`Icon "${name}" not found in lucide-react, using fallback "${fallback}"`);
-    return null;
+    // Если иконка не найдена, используем fallback иконку
+    const FallbackIcon = (LucideIcons as Record<string, React.FC<LucideProps>>)[fallback];
+
+    // Если даже fallback не найден, возвращаем пустой span
+    if (!FallbackIcon) {
+      return <span className="text-xs text-gray-400">[icon]</span>;
+    }
+
+    return <FallbackIcon {...props} />;
   }
-  
-  return <IconComponent size={size} color={color} {...props} />;
+
+  return <IconComponent {...props} />;
 };
 
 export default Icon;
