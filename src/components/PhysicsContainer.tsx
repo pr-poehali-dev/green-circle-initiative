@@ -28,12 +28,12 @@ const PhysicsContainer = () => {
       position: { x: 100, y: 50 }, 
       velocity: { vx: 0, vy: 0 },
       color: 'bg-red-500', 
-      size: 80, 
+      size: 70, 
       mass: 10 
     },
     { 
       id: 'circle2', 
-      position: { x: 200, y: 100 }, 
+      position: { x: 300, y: 100 }, 
       velocity: { vx: 0, vy: 0 },
       color: 'bg-blue-500', 
       size: 60, 
@@ -41,11 +41,27 @@ const PhysicsContainer = () => {
     },
     { 
       id: 'circle3', 
-      position: { x: 300, y: 150 }, 
+      position: { x: 500, y: 150 }, 
       velocity: { vx: 0, vy: 0 },
       color: 'bg-green-500', 
-      size: 100, 
-      mass: 15 
+      size: 80, 
+      mass: 12 
+    },
+    { 
+      id: 'circle4', 
+      position: { x: 200, y: 250 }, 
+      velocity: { vx: 0, vy: 0 },
+      color: 'bg-purple-500', 
+      size: 65, 
+      mass: 9 
+    },
+    { 
+      id: 'circle5', 
+      position: { x: 400, y: 300 }, 
+      velocity: { vx: 0, vy: 0 },
+      color: 'bg-yellow-500', 
+      size: 75, 
+      mass: 11 
     }
   ]);
 
@@ -76,8 +92,8 @@ const PhysicsContainer = () => {
           ...prev,
           {
             id: `circle${Date.now()}`,
-            position: { x: Math.random() * 300 + 50, y: 0 },
-            velocity: { vx: (Math.random() - 0.5) * 5, vy: 0 },
+            position: { x: Math.random() * 500 + 50, y: 50 },
+            velocity: { vx: (Math.random() - 0.5) * 5, vy: Math.random() * 2 },
             color: randomColor,
             size: randomSize,
             mass: randomMass
@@ -91,7 +107,7 @@ const PhysicsContainer = () => {
   }, []);
 
   return (
-    <div className="w-full h-full relative overflow-hidden">
+    <div className="w-full h-full relative overflow-hidden" style={{minHeight: '500px'}}>
       {objects.map(obj => (
         <PhysicsObject
           key={obj.id}
@@ -101,7 +117,7 @@ const PhysicsContainer = () => {
           size={obj.size}
           mass={obj.mass}
           onPositionChange={handlePositionChange}
-          otherObjects={objects.map(o => ({ 
+          otherObjects={objects.filter(o => o.id !== obj.id).map(o => ({ 
             id: o.id, 
             position: o.position, 
             size: o.size 

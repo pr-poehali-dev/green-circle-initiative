@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import PhysicsContainer from '@/components/PhysicsContainer';
+import DraggableCircle from '@/components/DraggableCircle';
 
 const Index = () => {
   const [messageVisible, setMessageVisible] = useState(true);
@@ -15,7 +16,10 @@ const Index = () => {
 
       {/* Основная область с физическими объектами */}
       <div className="flex-1 w-full relative overflow-hidden">
-        <PhysicsContainer />
+        <div className="w-full h-full relative">
+          <DraggableCircle />
+          <PhysicsContainer />
+        </div>
         
         {/* Всплывающая подсказка */}
         {messageVisible && (

@@ -49,23 +49,19 @@ const PhysicsObject = ({
         
         // Проверяем столкновения с другими объектами
         otherObjects.forEach(obj => {
-          if (obj.id !== id) {
-            const dx = position.x - obj.position.x;
-            const dy = position.y - obj.position.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            const minDistance = (size + obj.size) / 2;
+          const dx = position.x - obj.position.x;
+          const dy = position.y - obj.position.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const minDistance = (size + obj.size) / 2;
+          
+          // Если произошло столкновение
+          if (distance < minDistance) {
+            // Направление отскока
+            const angle = Math.atan2(dy, dx);
             
-            // Если произошло столкновение
-            if (distance < minDistance) {
-              // Направление отскока
-              const angle = Math.atan2(dy, dx);
-              const targetX = position.x + Math.cos(angle) * minDistance;
-              const targetY = position.y + Math.sin(angle) * minDistance;
-              
-              // Изменяем скорость в зависимости от направления столкновения
-              newVx = (newVx + Math.cos(angle) * 2) * 0.8;
-              newVy = (newVy + Math.sin(angle) * 2) * 0.8;
-            }
+            // Изменяем скорость в зависимости от направления столкновения
+            newVx = (newVx + Math.cos(angle) * 2) * 0.8;
+            newVy = (newVy + Math.sin(angle) * 2) * 0.8;
           }
         });
         
@@ -172,6 +168,7 @@ const PhysicsObject = ({
         width: `${size}px`,
         height: `${size}px`,
         cursor: isDragging ? 'grabbing' : 'grab',
+        zIndex: isDragging ? 10 : 1,
       }}
       onMouseDown={handleMouseDown}
     />
