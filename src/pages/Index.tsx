@@ -7,7 +7,7 @@ const Index = () => {
 
 
   return (
-    <div className="min-h-screen flex flex-col animated-background">
+    <div className="min-h-screen flex flex-col bg-[#121212] animated-background">
 
       {/* Заголовок */}
       <header className="w-full p-4 text-center">
