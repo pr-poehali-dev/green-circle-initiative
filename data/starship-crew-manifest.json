@@ -1,0 +1,256 @@
+{
+  "vessel": {
+    "name": "USS Небоскреб",
+    "mission": "Исследовательская экспедиция ZX-427-Alpha",
+    "launch_date": "2025-05-01T06:30:00Z",
+    "expected_return": "2025-11-15T14:00:00Z",
+    "current_status": "Активна"
+  },
+  "command_staff": [
+    {
+      "id": "CMD-001",
+      "name": "Юрий Космонавтов",
+      "rank": "Капитан",
+      "age": 42,
+      "nationality": "Россия",
+      "specialization": "Астронавигация, Стратегическое командование",
+      "previous_missions": 7,
+      "space_time": "2345 дней",
+      "clearance_level": "Омега",
+      "quarters": "A-01",
+      "notes": "Награжден медалью «За выдающиеся достижения в космических исследованиях»."
+    },
+    {
+      "id": "CMD-002",
+      "name": "Анна Звездова",
+      "rank": "Первый помощник",
+      "age": 38,
+      "nationality": "Россия",
+      "specialization": "Тактическое планирование, Дипломатия",
+      "previous_missions": 5,
+      "space_time": "1780 дней",
+      "clearance_level": "Альфа",
+      "quarters": "A-02",
+      "notes": "Высококвалифицированный специалист по контактам с внеземными цивилизациями."
+    },
+    {
+      "id": "CMD-003",
+      "name": "Ли Чен",
+      "rank": "Второй помощник",
+      "age": 35,
+      "nationality": "Китай",
+      "specialization": "Инженерные системы, Логистика",
+      "previous_missions": 3,
+      "space_time": "967 дней",
+      "clearance_level": "Альфа",
+      "quarters": "A-03",
+      "notes": "Разработал улучшенный протокол обслуживания квантовых двигателей."
+    }
+  ],
+  "science_team": [
+    {
+      "id": "SCI-001",
+      "name": "Алексей Сергеев",
+      "rank": "Главный научный офицер",
+      "age": 45,
+      "nationality": "Россия",
+      "specialization": "Астрофизика, Квантовая механика",
+      "previous_missions": 4,
+      "space_time": "1560 дней",
+      "clearance_level": "Альфа",
+      "quarters": "B-01",
+      "notes": "Автор теории квантовой гравитационной связи. Лауреат Нобелевской премии 2024 года."
+    },
+    {
+      "id": "SCI-002",
+      "name": "Инга Нильссон",
+      "rank": "Ксенобиолог",
+      "age": 39,
+      "nationality": "Швеция",
+      "specialization": "Внеземная биология, Генетика",
+      "previous_missions": 2,
+      "space_time": "784 дней",
+      "clearance_level": "Бета",
+      "quarters": "B-02",
+      "notes": "Открыла 5 новых видов внеземных микроорганизмов."
+    },
+    {
+      "id": "SCI-003",
+      "name": "Томас Вагнер",
+      "rank": "Планетолог",
+      "age": 41,
+      "nationality": "Германия",
+      "specialization": "Геология экзопланет, Атмосферный анализ",
+      "previous_missions": 3,
+      "space_time": "1023 дня",
+      "clearance_level": "Бета",
+      "quarters": "B-03",
+      "notes": "Разработчик улучшенных алгоритмов терраформирования."
+    },
+    {
+      "id": "SCI-004",
+      "name": "Джаянти Патель",
+      "rank": "Астрохимик",
+      "age": 36,
+      "nationality": "Индия",
+      "specialization": "Химический анализ, Спектроскопия",
+      "previous_missions": 2,
+      "space_time": "670 дней",
+      "clearance_level": "Бета",
+      "quarters": "B-04",
+      "notes": "Специалист по поиску биомаркеров в атмосферах экзопланет."
+    }
+  ],
+  "engineering_team": [
+    {
+      "id": "ENG-001",
+      "name": "Михаил Куценко",
+      "rank": "Главный инженер",
+      "age": 43,
+      "nationality": "Украина",
+      "specialization": "Варп-технологии, Силовые установки",
+      "previous_missions": 6,
+      "space_time": "1879 дней",
+      "clearance_level": "Альфа",
+      "quarters": "C-01",
+      "notes": "Модифицировал стандартный варп-двигатель, повысив его эффективность на 17%."
+    },
+    {
+      "id": "ENG-002",
+      "name": "София Родригес",
+      "rank": "Системный инженер",
+      "age": 34,
+      "nationality": "Мексика",
+      "specialization": "Компьютерные системы, ИИ",
+      "previous_missions": 2,
+      "space_time": "547 дней",
+      "clearance_level": "Бета",
+      "quarters": "C-02",
+      "notes": "Разработчик бортовой ИИ-системы 'АРИНА'."
+    },
+    {
+      "id": "ENG-003",
+      "name": "Жан-Люк Пикар",
+      "rank": "Инженер по щитам и вооружению",
+      "age": 37,
+      "nationality": "Франция",
+      "specialization": "Защитные системы, Энергетика",
+      "previous_missions": 3,
+      "space_time": "923 дня",
+      "clearance_level": "Бета",
+      "quarters": "C-03",
+      "notes": "Усовершенствовал квантовые щиты, увеличив их прочность на 35%."
+    }
+  ],
+  "medical_team": [
+    {
+      "id": "MED-001",
+      "name": "Елена Соколова",
+      "rank": "Главный врач",
+      "age": 40,
+      "nationality": "Россия",
+      "specialization": "Космическая медицина, Хирургия",
+      "previous_missions": 4,
+      "space_time": "1230 дней",
+      "clearance_level": "Альфа",
+      "quarters": "D-01",
+      "notes": "Разработала протокол лечения космической радиационной болезни."
+    },
+    {
+      "id": "MED-002",
+      "name": "Карлос Мендес",
+      "rank": "Психолог",
+      "age": 39,
+      "nationality": "Аргентина",
+      "specialization": "Космическая психология, Групповая динамика",
+      "previous_missions": 3,
+      "space_time": "890 дней",
+      "clearance_level": "Бета",
+      "quarters": "D-02",
+      "notes": "Автор методики психологической адаптации к длительным космическим полетам."
+    }
+  ],
+  "security_team": [
+    {
+      "id": "SEC-001",
+      "name": "Александр Волков",
+      "rank": "Начальник службы безопасности",
+      "age": 38,
+      "nationality": "Россия",
+      "specialization": "Тактическая безопасность, Рукопашный бой",
+      "previous_missions": 5,
+      "space_time": "1540 дней",
+      "clearance_level": "Альфа",
+      "quarters": "E-01",
+      "notes": "Бывший командир спецподразделения. Эксперт по кризисным ситуациям."
+    },
+    {
+      "id": "SEC-002",
+      "name": "Майкл Чандлер",
+      "rank": "Офицер безопасности",
+      "age": 32,
+      "nationality": "США",
+      "specialization": "Кибербезопасность, Электронная война",
+      "previous_missions": 2,
+      "space_time": "520 дней",
+      "clearance_level": "Бета",
+      "quarters": "E-02",
+      "notes": "Специалист по защите от внешних информационных угроз."
+    }
+  ],
+  "special_personnel": [
+    {
+      "id": "SPE-001",
+      "name": "АРИНА",
+      "rank": "Бортовой ИИ",
+      "age": "3",
+      "nationality": "Международная",
+      "specialization": "Управление кораблем, Анализ данных, Поддержка экипажа",
+      "previous_missions": 1,
+      "space_time": "365 дней",
+      "clearance_level": "Омега",
+      "quarters": "Центральный компьютер",
+      "notes": "Искусственный интеллект 5-го поколения с эмоциональным модулем. Самообучающаяся система."
+    },
+    {
+      "id": "SPE-002",
+      "name": "Йохансон Тааки",
+      "rank": "Дипломатический представитель",
+      "age": 45,
+      "nationality": "ООН",
+      "specialization": "Межвидовая дипломатия, Лингвистика",
+      "previous_missions": 6,
+      "space_time": "1870 дней",
+      "clearance_level": "Альфа",
+      "quarters": "F-01",
+      "notes": "Владеет 12 земными языками и 3 внеземными коммуникационными системами."
+    }
+  ],
+  "crew_statistics": {
+    "total_personnel": 17,
+    "nationalities": 9,
+    "average_age": 39.2,
+    "average_space_experience": "1055.5 дней",
+    "phd_degrees": 14,
+    "languages_spoken": 27
+  },
+  "emergency_contacts": {
+    "mission_control": {
+      "primary": "Центр управления полетами, Москва",
+      "secondary": "Космический центр им. Кеннеди, США",
+      "quantum_channel": "QC-NEBOSKREB-001",
+      "traditional_channel": "Подпространственный канал Альфа"
+    },
+    "rescue_protocol": {
+      "primary_vessel": "USS Спасатель",
+      "coordinates": "Солнечная система, орбита Марса",
+      "response_time": "72 часа максимум"
+    }
+  },
+  "document_info": {
+    "classification": "Служебное пользование",
+    "last_updated": "2025-05-02T10:15:30Z",
+    "version": "1.3.5",
+    "authorized_by": "Генерал-майор И.И. Иванов"
+  }
+}
