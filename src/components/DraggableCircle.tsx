@@ -68,17 +68,20 @@ const DraggableCircle = () => {
   return (
     <div 
       ref={circleRef}
-      className={`w-32 h-32 ${circleColor} rounded-full shadow-lg cursor-grab transition-colors duration-300 absolute`}
+      className={`w-32 h-32 ${circleColor} rounded-full shadow-lg cursor-grab transition-colors duration-300 absolute shadow-[0_0_20px_rgba(255,255,255,0.3)]`}
       style={{ 
         left: `${position.x}px`, 
         top: `${position.y}px`,
-        cursor: isDragging ? 'grabbing' : 'grab'
+        cursor: isDragging ? 'grabbing' : 'grab',
+        animation: !isDragging ? 'float 6s ease-in-out infinite' : 'none'
       }}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
       onMouseMove={handleMouseMove}
     />
+  );
+
   );
 
 };

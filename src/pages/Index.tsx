@@ -5,8 +5,10 @@ import DraggableCircle from '@/components/DraggableCircle';
 const Index = () => {
   const [messageVisible, setMessageVisible] = useState(true);
 
+
   return (
     <div className="min-h-screen flex flex-col animated-background">
+
       {/* Заголовок */}
       <header className="w-full p-4 text-center">
         <h1 className="text-4xl font-bold text-white">Интерактивный круг</h1>
