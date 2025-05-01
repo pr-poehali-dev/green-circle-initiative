@@ -101,6 +101,7 @@
   }
 
 
+
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
@@ -112,7 +113,6 @@
       background-position: 0% 50%;
     }
   }
-
 
   .animated-background {
     background: linear-gradient(-45deg, #1e293b, #0f172a, #1e3a8a, #3b0764);
