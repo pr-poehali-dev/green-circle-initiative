@@ -7,7 +7,8 @@ const Index = () => {
 
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#333333]">
+    <div className="min-h-screen flex flex-col bg-[#1a1a1a]">
+
 
       {/* Заголовок */}
       <header className="w-full p-4 text-center">
