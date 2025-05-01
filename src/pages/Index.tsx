@@ -15,6 +15,9 @@ const Index = () => {
         <CategorySection />
         <Newsletter />
       </main>
+      <div className="relative py-8">
+        <LegoCharacter />
+      </div>
       <Footer />
     </div>
   );

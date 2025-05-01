@@ -26,7 +26,7 @@ const LegoCharacter = () => {
   return (
     <div 
       className={cn(
-        "fixed bottom-10 z-50 transition-all duration-100 ease-linear cursor-pointer", 
+        "absolute bottom-0 z-50 transition-all duration-100 ease-linear cursor-pointer", 
         direction === 1 ? "" : "scale-x-[-1]"
       )}
       style={{ left: `${position}%` }}
