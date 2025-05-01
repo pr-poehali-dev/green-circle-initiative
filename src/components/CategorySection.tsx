@@ -56,7 +56,7 @@ const CategorySection = () => {
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="bg-primary p-2 rounded-full">
-                    <Icon name={category.icon} size={20} />
+                    <Icon name={category.icon} size={20} className="text-primary-foreground" />
                   </span>
                   <h3 className="text-2xl font-bold">{category.title}</h3>
                 </div>
@@ -69,12 +69,11 @@ const CategorySection = () => {
                 </Button>
               </div>
             </Link>
-              <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="bg-primary p-2 rounded-full">
-                    <Icon name={category.icon} size={20} className="text-primary-foreground" />
-                  </span>
-                  <h3 className="text-2xl font-bold">{category.title}</h3>
-                </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default CategorySection;
