@@ -11,6 +11,7 @@ const DraggableCircle = () => {
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [circleColor, setCircleColor] = useState('bg-red-500');
   const circleRef = useRef<HTMLDivElement>(null);
+  const initialClickOffset = useRef<Position>({ x: 0, y: 0 });
 
   // Начальное положение круга при монтировании
   useEffect(() => {
@@ -24,43 +25,69 @@ const DraggableCircle = () => {
     }
   }, []);
 
+  // Добавляем обработчики на уровне документа для отслеживания движения курсора
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      
+      const circle = circleRef.current;
+      if (circle && circle.parentElement) {
+        const parentRect = circle.parentElement.getBoundingClientRect();
+        
+        // Вычисляем новую позицию круга с учетом смещения от точки захвата
+        const newX = e.clientX - parentRect.left - initialClickOffset.current.x;
+        const newY = e.clientY - parentRect.top - initialClickOffset.current.y;
+        
+        // Ограничиваем перемещение в пределах родительского элемента
+        const maxX = parentRect.width - circle.offsetWidth;
+        const maxY = parentRect.height - circle.offsetHeight;
+        
+        setPosition({
+          x: Math.max(0, Math.min(newX, maxX)),
+          y: Math.max(0, Math.min(newY, maxY))
+        });
+      }
+    };
+
+    const handleGlobalMouseUp = () => {
+      if (isDragging) {
+        setIsDragging(false);
+        // Возвращаем исходный цвет
+        setTimeout(() => {
+          setCircleColor('bg-red-500');
+        }, 500);
+      }
+    };
+
+    // Устанавливаем обработчики на уровне документа
+    if (isDragging) {
+      document.addEventListener('mousemove', handleGlobalMouseMove);
+      document.addEventListener('mouseup', handleGlobalMouseUp);
+    }
+
+    // Очищаем обработчики при размонтировании компонента
+    return () => {
+      document.removeEventListener('mousemove', handleGlobalMouseMove);
+      document.removeEventListener('mouseup', handleGlobalMouseUp);
+    };
+  }, [isDragging]);
+
   const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    // Изменяем цвет на зеленый при нажатии
-    setCircleColor('bg-green-500');
-    
-    // Запрещаем выделение текста при перетаскивании
-    e.preventDefault();
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    // Возвращаем исходный цвет
-    setTimeout(() => {
-      setCircleColor('bg-red-500');
-    }, 500);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    
     const circle = circleRef.current;
-    if (circle && circle.parentElement) {
-      const parentRect = circle.parentElement.getBoundingClientRect();
-      const circleRect = circle.getBoundingClientRect();
+    if (circle) {
+      // Запоминаем смещение от начала круга до точки захвата
+      const rect = circle.getBoundingClientRect();
+      initialClickOffset.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
       
-      // Вычисляем новую позицию круга
-      const newX = e.clientX - parentRect.left - circleRect.width / 2;
-      const newY = e.clientY - parentRect.top - circleRect.height / 2;
+      setIsDragging(true);
+      // Изменяем цвет на зеленый при нажатии
+      setCircleColor('bg-green-500');
       
-      // Ограничиваем перемещение в пределах родительского элемента
-      const maxX = parentRect.width - circleRect.width;
-      const maxY = parentRect.height - circleRect.height;
-      
-      setPosition({
-        x: Math.max(0, Math.min(newX, maxX)),
-        y: Math.max(0, Math.min(newY, maxY))
-      });
+      // Запрещаем выделение текста при перетаскивании
+      e.preventDefault();
     }
   };
 
@@ -75,9 +102,6 @@ const DraggableCircle = () => {
         animation: !isDragging ? 'float 6s ease-in-out infinite' : 'none'
       }}
       onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onMouseMove={handleMouseMove}
     />
   );
 };
