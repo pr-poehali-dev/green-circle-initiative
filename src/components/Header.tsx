@@ -8,6 +8,11 @@ const Header = () => {
     <header className="bg-background/95 backdrop-blur-sm sticky top-0 z-50 border-b">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
+          <img 
+            src="/logo-b.svg" 
+            alt="Кирпичи" 
+            className="h-8 w-8"
+          />
           <span className="font-pixel text-sm font-bold">Кирпичи</span>
         </Link>
         
