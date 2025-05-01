@@ -1,0 +1,119 @@
+# Технические характеристики корабля "USS Небоскреб"
+version: 2.5.1
+last_updated: 2025-05-02T09:30:00Z
+
+spacecraft:
+  model: Исследовательский крейсер класса "Сверхновая"
+  serial_number: XCV-42424-E
+  dimensions:
+    length: 385.5
+    width: 120.7
+    height: 95.2
+    unit: метры
+  mass:
+    empty: 125000
+    fully_loaded: 187500
+    unit: тонны
+  
+propulsion:
+  main_engines:
+    - type: Квантовый варп-привод серии QX-9
+      manufacturer: КосмоТех Индастриз
+      output: 5.8e16
+      unit: ватт
+      efficiency: 99.85
+    - type: Импульсные двигатели Гамма-3
+      count: 8
+      acceleration: 0.5G
+      fuel_type: Дейтерий-Тритиевая смесь
+  auxiliary:
+    - type: Маневровые двигатели
+      count: 24
+      thrust: 7500
+      unit: ньютон
+    - type: Гравитационные стабилизаторы
+      count: 6
+      accuracy: 0.0001
+      unit: G
+
+life_support:
+  atmosphere:
+    oxygen: 21.0
+    nitrogen: 78.1
+    other_gases: 0.9
+    pressure: 101.3
+    unit: кПа
+  temperature:
+    standard: 21.5
+    range:
+      min: 19.0
+      max: 24.0
+    unit: °C
+  water_recycling:
+    efficiency: 99.98
+    capacity: 25000
+    unit: литры/день
+  food_production:
+    hydroponics_capacity: 135
+    protein_synthesizers: 15
+    sufficiency_rating: 87.5
+    unit: процент
+
+shielding:
+  main_shields:
+    layers: 5
+    energy_capacity: 6.8e9
+    unit: джоули
+    recharge_rate: 1.2e7
+    unit_rate: джоули/сек
+  radiation_protection:
+    cosmic_ray_attenuation: 99.9998
+    solar_flare_protection: Класс X9
+    unit: процент
+
+sensors:
+  long_range:
+    range: 15
+    unit: световых лет
+    resolution: 0.1
+    unit_resolution: угловые секунды
+  medium_range:
+    range: 1.5
+    unit: световых лет
+    resolution: 0.01
+    unit_resolution: угловые секунды
+  short_range:
+    range: 0.1
+    unit: световых лет
+    resolution: 0.001
+    unit_resolution: угловые секунды
+  planetary:
+    atmospheric_analysis: Да
+    geological_scanning: Да
+    lifeform_detection: Да
+    accuracy: 99.87
+    unit: процент
+
+communications:
+  quantum_entanglement:
+    channels: 8
+    security_level: Альфа
+    range: Неограничен
+  subspace_radio:
+    channels: 512
+    range: 25
+    unit: световых лет
+    encryption: Квантовая, 8192-бит
+  emergency_beacon:
+    power: 5.0e12
+    unit: ватт
+    range: 50
+    unit_range: световых лет
+
+notes: |
+  Корабль "USS Небоскреб" является флагманом исследовательского флота и включает
+  новейшие технологические разработки 2025 года. Особое внимание при проектировании
+  уделено автономности, безопасности экипажа и научно-исследовательскому потенциалу.
+  
+  Текущая конфигурация оптимизирована для дальних экспедиций продолжительностью до 5 лет
+  без необходимости возвращения на базу для пополнения запасов.
