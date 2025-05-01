@@ -6,14 +6,14 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-12 md:py-24 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <div className="md:w-1/2 z-10">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Постройте свой мир с<br />
             <span className="text-primary">Кирпичами</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-md">
             Крупнейший магазин конструкторов в России. Доставка по всей стране.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Button size="lg" className="font-semibold">
               Каталог товаров
             </Button>
             <Button size="lg" variant="outline" className="font-semibold">

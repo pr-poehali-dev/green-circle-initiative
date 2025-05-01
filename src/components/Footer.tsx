@@ -5,17 +5,15 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="bg-primary p-2 rounded-md">
-                <Icon name="Cube" size={24} className="text-white" />
+                <Icon name="Cube" size={24} className="text-primary-foreground" />
               </div>
               <span className="text-2xl font-bold">Кирпичи</span>
             </div>
-            <p className="text-gray-400 mb-4">
-              Лучший магазин конструкторов в России. С нами вы построите всё что угодно!
-            </p>
             <div className="flex space-x-4">
               <a href="https://vk.com" className="hover:text-primary" aria-label="ВКонтакте">
                 <Icon name="MessageCircle" size={20} />

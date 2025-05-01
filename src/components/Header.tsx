@@ -9,13 +9,11 @@ const Header = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center gap-2">
             <div className="bg-primary p-2 rounded-md">
-              <Icon name="Cube" size={24} className="text-white" />
+              <Icon name="Cube" size={24} className="text-primary-foreground" />
             </div>
             <span className="text-2xl font-bold text-primary">Кирпичи</span>
           </Link>
         </div>
-
-        <nav className="hidden md:flex items-center space-x-6">
           <Link to="/" className="font-medium hover:text-primary transition-colors">
             Главная
           </Link>
