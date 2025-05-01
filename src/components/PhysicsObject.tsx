@@ -1,5 +1,5 @@
 
-import { useState, useRef, useEffect, memo } from 'react';
+import { useState, useRef, useEffect, memo, useCallback } from 'react';
 
 interface Position {
   x: number;
@@ -37,7 +37,7 @@ const PhysicsObject = memo(({
   const initialClickOffset = useRef<Position>({ x: 0, y: 0 });
   const animationFrameRef = useRef<number | null>(null);
   
-  // Использует для хранения последних значений без перерендера
+  // Используем для хранения последних значений без перерендера
   const stateRef = useRef({
     position,
     velocity,
