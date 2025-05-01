@@ -64,7 +64,6 @@ const DraggableCircle = () => {
     }
   };
 
-
   return (
     <div 
       ref={circleRef}
@@ -81,9 +80,6 @@ const DraggableCircle = () => {
       onMouseMove={handleMouseMove}
     />
   );
-
-  );
-
 };
 
 export default DraggableCircle;
