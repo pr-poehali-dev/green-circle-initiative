@@ -195,7 +195,6 @@ const PhysicsObject = memo(({
 
   // Использовать transform вместо top/left для лучшей производительности
   return (
-
     <div 
       ref={objectRef}
       className={`${color} rounded-full shadow-lg absolute shadow-[0_0_25px_rgba(255,255,255,0.3)] transition-colors duration-100`}
@@ -205,9 +204,7 @@ const PhysicsObject = memo(({
         height: `${size}px`,
         cursor: isDragging ? 'grabbing' : 'grab',
         zIndex: isDragging ? 10 : 1,
-        willChange: 'transform',
-      }}
-
+        willChange: 'transform'
       }}
       onMouseDown={handleMouseDown}
     />
