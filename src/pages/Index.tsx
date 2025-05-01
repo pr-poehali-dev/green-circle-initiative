@@ -18,8 +18,10 @@ const Index = () => {
         <DraggableCircle />
         
         {/* Всплывающая подсказка */}
+
+        {/* Всплывающая подсказка */}
         {messageVisible && (
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white/20 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-sm text-center">
+          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-sm text-center">
             <p className="text-white text-lg">Попробуйте перетащить красный круг и нажать на него!</p>
             <button 
               className="mt-2 text-sm text-white/70 hover:text-white"
@@ -29,6 +31,7 @@ const Index = () => {
             </button>
           </div>
         )}
+
       </div>
 
       {/* Информация внизу */}
