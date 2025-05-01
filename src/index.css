@@ -122,8 +122,10 @@
     }
   }
   .animated-background {
-    background: #d2d2d2;
+    background: #333333;
     position: relative;
+    overflow: hidden;
+
     overflow: hidden;
   }
   
