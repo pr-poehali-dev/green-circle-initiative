@@ -28,7 +28,7 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
+					DEFAULT: 'hsl(0, 100%, 50%)', // Изменено на красный цвет
 					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
