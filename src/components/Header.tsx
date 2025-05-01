@@ -14,6 +14,8 @@ const Header = () => {
             <span className="text-2xl font-bold text-primary">Кирпичи</span>
           </Link>
         </div>
+        
+        <nav className="hidden md:flex items-center gap-6">
           <Link to="/" className="font-medium hover:text-primary transition-colors">
             Главная
           </Link>
