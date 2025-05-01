@@ -1,5 +1,5 @@
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 
 interface Position {
   x: number;
@@ -21,7 +21,7 @@ interface PhysicsObjectProps {
   otherObjects: {id: string, position: Position, size: number}[];
 }
 
-const PhysicsObject = ({ 
+const PhysicsObject = memo(({ 
   initialPosition, 
   color, 
   size,
@@ -35,71 +35,106 @@ const PhysicsObject = ({
   const objectRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const initialClickOffset = useRef<Position>({ x: 0, y: 0 });
+  const animationFrameRef = useRef<number | null>(null);
+  
+  // Использует для хранения последних значений без перерендера
+  const stateRef = useRef({
+    position,
+    velocity,
+    isDragging,
+    otherObjects
+  });
 
-  // Обработка столкновений и обновление позиции
+  // Обновляем ref при изменении состояния
   useEffect(() => {
-    if (!isDragging) {
-      const interval = setInterval(() => {
-        // Применяем гравитацию
-        const gravity = 0.2;
-        const friction = 0.98;
-        
-        let newVx = velocity.vx * friction;
-        let newVy = velocity.vy + gravity;
-        
-        // Проверяем столкновения с другими объектами
-        otherObjects.forEach(obj => {
-          const dx = position.x - obj.position.x;
-          const dy = position.y - obj.position.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const minDistance = (size + obj.size) / 2;
-          
-          // Если произошло столкновение
-          if (distance < minDistance) {
-            // Направление отскока
-            const angle = Math.atan2(dy, dx);
-            
-            // Изменяем скорость в зависимости от направления столкновения
-            newVx = (newVx + Math.cos(angle) * 2) * 0.8;
-            newVy = (newVy + Math.sin(angle) * 2) * 0.8;
-          }
-        });
-        
-        let newX = position.x + newVx;
-        let newY = position.y + newVy;
-        
-        const element = objectRef.current;
-        if (element && element.parentElement) {
-          const parentRect = element.parentElement.getBoundingClientRect();
-          const maxX = parentRect.width - size;
-          const maxY = parentRect.height - size;
-          
-          // Проверяем столкновение со стенами
-          if (newX <= 0) {
-            newX = 0;
-            newVx = -newVx * 0.8; // Меняем направление и добавляем потерю энергии
-          } else if (newX >= maxX) {
-            newX = maxX;
-            newVx = -newVx * 0.8;
-          }
-          
-          if (newY <= 0) {
-            newY = 0;
-            newVy = -newVy * 0.8;
-          } else if (newY >= maxY) {
-            newY = maxY;
-            newVy = -newVy * 0.8;
-          }
-          
-          setPosition({ x: newX, y: newY });
-          setVelocity({ vx: newVx, vy: newVy });
-          onPositionChange(id, { x: newX, y: newY }, { vx: newVx, vy: newVy });
-        }
-      }, 16); // 60fps
+    stateRef.current = {
+      position,
+      velocity,
+      isDragging,
+      otherObjects
+    };
+  }, [position, velocity, isDragging, otherObjects]);
+
+  // Функция обновления физики, оптимизированная для requestAnimationFrame
+  const updatePhysics = useCallback(() => {
+    if (stateRef.current.isDragging) return;
+    
+    // Применяем гравитацию
+    const gravity = 0.2;
+    const friction = 0.98;
+    
+    let newVx = stateRef.current.velocity.vx * friction;
+    let newVy = stateRef.current.velocity.vy + gravity;
+    
+    // Проверяем столкновения с другими объектами
+    stateRef.current.otherObjects.forEach(obj => {
+      const dx = stateRef.current.position.x - obj.position.x;
+      const dy = stateRef.current.position.y - obj.position.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const minDistance = (size + obj.size) / 2;
       
-      return () => clearInterval(interval);
+      // Если произошло столкновение
+      if (distance < minDistance && distance > 0) {
+        // Направление отскока
+        const angle = Math.atan2(dy, dx);
+        
+        // Упрощенная физика отскока
+        newVx = (newVx + Math.cos(angle) * 1.5) * 0.8;
+        newVy = (newVy + Math.sin(angle) * 1.5) * 0.8;
+      }
+    });
+    
+    let newX = stateRef.current.position.x + newVx;
+    let newY = stateRef.current.position.y + newVy;
+    
+    const element = objectRef.current;
+    if (element && element.parentElement) {
+      const parentRect = element.parentElement.getBoundingClientRect();
+      const maxX = parentRect.width - size;
+      const maxY = parentRect.height - size;
+      
+      // Проверяем столкновение со стенами
+      if (newX <= 0) {
+        newX = 0;
+        newVx = -newVx * 0.8; // Меняем направление и добавляем потерю энергии
+      } else if (newX >= maxX) {
+        newX = maxX;
+        newVx = -newVx * 0.8;
+      }
+      
+      if (newY <= 0) {
+        newY = 0;
+        newVy = -newVy * 0.8;
+      } else if (newY >= maxY) {
+        newY = maxY;
+        newVy = -newVy * 0.8;
+      }
+      
+      // Обновляем только если изменения существенные
+      if (
+        Math.abs(newX - stateRef.current.position.x) > 0.1 || 
+        Math.abs(newY - stateRef.current.position.y) > 0.1
+      ) {
+        setPosition({ x: newX, y: newY });
+        setVelocity({ vx: newVx, vy: newVy });
+        onPositionChange(id, { x: newX, y: newY }, { vx: newVx, vy: newVy });
+      }
     }
-  }, [position, velocity, isDragging, id, size, mass, onPositionChange, otherObjects]);
+    
+    // Продолжаем анимационный цикл
+    animationFrameRef.current = requestAnimationFrame(updatePhysics);
+  }, [id, size, onPositionChange]);
+
+  // Запускаем и останавливаем физическую симуляцию
+  useEffect(() => {
+    animationFrameRef.current = requestAnimationFrame(updatePhysics);
+    
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [updatePhysics]);
 
   // Обработчики для перетаскивания
   useEffect(() => {
@@ -158,21 +193,22 @@ const PhysicsObject = ({
     }
   };
 
+  // Использовать transform вместо top/left для лучшей производительности
   return (
     <div 
       ref={objectRef}
       className={`${color} rounded-full shadow-lg absolute shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-colors duration-100`}
       style={{ 
-        left: `${position.x}px`, 
-        top: `${position.y}px`,
+        transform: `translate(${position.x}px, ${position.y}px)`,
         width: `${size}px`,
         height: `${size}px`,
         cursor: isDragging ? 'grabbing' : 'grab',
         zIndex: isDragging ? 10 : 1,
+        willChange: 'transform',
       }}
       onMouseDown={handleMouseDown}
     />
   );
-};
+});
 
 export default PhysicsObject;

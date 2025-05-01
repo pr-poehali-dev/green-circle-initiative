@@ -1,5 +1,5 @@
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import PhysicsObject from './PhysicsObject';
 
 interface Position {
@@ -46,37 +46,43 @@ const PhysicsContainer = () => {
       color: 'bg-green-500', 
       size: 80, 
       mass: 12 
-    },
-    { 
-      id: 'circle4', 
-      position: { x: 200, y: 250 }, 
-      velocity: { vx: 0, vy: 0 },
-      color: 'bg-purple-500', 
-      size: 65, 
-      mass: 9 
-    },
-    { 
-      id: 'circle5', 
-      position: { x: 400, y: 300 }, 
-      velocity: { vx: 0, vy: 0 },
-      color: 'bg-yellow-500', 
-      size: 75, 
-      mass: 11 
     }
   ]);
+
+  // Кэшированный массив объектов для каждого компонента
+  const objectsMap = useMemo(() => {
+    return objects.reduce((acc, obj) => {
+      acc[obj.id] = objects
+        .filter(o => o.id !== obj.id)
+        .map(o => ({ id: o.id, position: o.position, size: o.size }));
+      return acc;
+    }, {} as Record<string, { id: string; position: Position; size: number }[]>);
+  }, [objects]);
 
   const handlePositionChange = useCallback((
     id: string, 
     newPosition: Position, 
     newVelocity: Velocity
   ) => {
-    setObjects(prev => 
-      prev.map(obj => 
+    setObjects(prev => {
+      // Проверяем, действительно ли позиция изменилась
+      const oldObject = prev.find(obj => obj.id === id);
+      if (
+        oldObject && 
+        oldObject.position.x === newPosition.x && 
+        oldObject.position.y === newPosition.y &&
+        oldObject.velocity.vx === newVelocity.vx &&
+        oldObject.velocity.vy === newVelocity.vy
+      ) {
+        return prev; // Нет изменений, не обновляем состояние
+      }
+      
+      return prev.map(obj => 
         obj.id === id 
           ? { ...obj, position: newPosition, velocity: newVelocity } 
           : obj
-      )
-    );
+      );
+    });
   }, []);
 
   // Добавить случайный объект при нажатии пробела
@@ -85,20 +91,28 @@ const PhysicsContainer = () => {
       if (e.code === 'Space') {
         const colors = ['bg-yellow-500', 'bg-purple-500', 'bg-pink-500', 'bg-orange-500', 'bg-cyan-500'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        const randomSize = Math.floor(Math.random() * 50) + 40; // От 40 до 90
+        const randomSize = Math.floor(Math.random() * 30) + 40; // Меньше размеры для лучшей производительности
         const randomMass = randomSize / 5;
 
-        setObjects(prev => [
-          ...prev,
-          {
-            id: `circle${Date.now()}`,
-            position: { x: Math.random() * 500 + 50, y: 50 },
-            velocity: { vx: (Math.random() - 0.5) * 5, vy: Math.random() * 2 },
-            color: randomColor,
-            size: randomSize,
-            mass: randomMass
+        setObjects(prev => {
+          // Ограничиваем количество объектов для производительности
+          const newObjects = [...prev];
+          if (newObjects.length > 8) {
+            newObjects.shift(); // Удаляем самый старый объект, если их слишком много
           }
-        ]);
+          
+          return [
+            ...newObjects,
+            {
+              id: `circle${Date.now()}`,
+              position: { x: Math.random() * 500 + 50, y: 50 },
+              velocity: { vx: (Math.random() - 0.5) * 5, vy: Math.random() * 2 },
+              color: randomColor,
+              size: randomSize,
+              mass: randomMass
+            }
+          ];
+        });
       }
     };
 
@@ -117,11 +131,7 @@ const PhysicsContainer = () => {
           size={obj.size}
           mass={obj.mass}
           onPositionChange={handlePositionChange}
-          otherObjects={objects.filter(o => o.id !== obj.id).map(o => ({ 
-            id: o.id, 
-            position: o.position, 
-            size: o.size 
-          }))}
+          otherObjects={objectsMap[obj.id] || []}
         />
       ))}
       
