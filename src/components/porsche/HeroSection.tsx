@@ -42,6 +42,10 @@ const HeroSection = () => {
     return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(price);
   };
 
+  const handleSubmit = () => {
+    window.open('https://t.me/porsche', '_blank');
+  };
+
   return (
     <section className="relative h-screen">
       <div 
@@ -133,9 +137,15 @@ const HeroSection = () => {
                     <span className="font-medium">Ежемесячный платеж:</span>
                     <span className="font-bold">{formatPrice(monthlyPayment)}</span>
                   </div>
-                  <Button className="w-full mt-4 bg-white text-black hover:bg-gray-200">
+                  <Button 
+                    className="w-full mt-4 bg-white text-black hover:bg-gray-200"
+                    onClick={handleSubmit}
+                  >
                     Оставить заявку
                   </Button>
+                  <p className="text-xs text-white/60 text-center mt-2">
+                    Нажимая кнопку, вы будете перенаправлены в Telegram
+                  </p>
                 </div>
               </CardContent>
             </Card>
