@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="relative animated-gradient bg-gradient-to-r from-primary/30 via-accent/20 to-primary/10 overflow-hidden">
+    <section className="relative animated-gradient bg-gradient-to-r from-primary/70 via-accent/40 to-primary/30 overflow-hidden">
       <div className="container mx-auto px-4 py-12 md:py-24 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 z-10">
           <h1 className="text-2xl md:text-3xl font-bold mb-4">
@@ -34,8 +34,8 @@ const Hero = () => {
           />
         </div>
       </div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560961911-ba7ef651d427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=60')] opacity-5 bg-cover bg-center z-0"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-accent/5 to-primary/5 mix-blend-overlay animated-gradient z-1"></div>
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560961911-ba7ef651d427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=60')] opacity-10 bg-cover bg-center z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/15 to-accent/20 mix-blend-overlay animated-gradient z-1"></div>
     </section>
   );
 };
