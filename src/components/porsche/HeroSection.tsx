@@ -20,8 +20,7 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row gap-4">
           <Button className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-6">Тест-драйв</Button>
           <Button 
-            variant="outline" 
-            className="border-2 border-white text-white hover:bg-white hover:text-black text-lg px-8 py-6"
+            className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black text-lg px-8 py-6"
           >
             Каталог моделей
           </Button>
