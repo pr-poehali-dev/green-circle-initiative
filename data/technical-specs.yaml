@@ -1,7 +1,0 @@
-
-spacecraft:
-  name: Астронавт-12
-  propulsion: Ионный двигатель
-  capacity: Экипаж из семи человек
-  mission_duration: Рассчитан на полёт длительностью пять лет
-  special_equipment: Модернизированный телескоп
