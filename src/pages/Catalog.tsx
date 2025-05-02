@@ -11,8 +11,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
 
 const Catalog = () => {
+  const { toast } = useToast();
   const [activeCategory, setActiveCategory] = useState("all");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 50000]);
   const [filters, setFilters] = useState({
@@ -23,6 +25,7 @@ const Catalog = () => {
   const [selectedColor, setSelectedColor] = useState("all");
   const [sortBy, setSortBy] = useState("popular");
   const [searchQuery, setSearchQuery] = useState("");
+  const [likedProductIds, setLikedProductIds] = useState<number[]>([]);
 
   // Данные каталога
   const [products, setProducts] = useState<Product[]>([
@@ -107,6 +110,15 @@ const Catalog = () => {
       productColor: "#22c55e" // зеленый
     }
   ]);
+
+  // Обновляем продукты, добавляя статус лайка
+  useEffect(() => {
+    const updatedProducts = products.map(product => ({
+      ...product,
+      isLiked: likedProductIds.includes(product.id)
+    }));
+    setProducts(updatedProducts);
+  }, [likedProductIds]);
 
   // Фильтрованный список товаров
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
@@ -213,15 +225,64 @@ const Catalog = () => {
     setSortBy("popular");
   };
 
+  const handleToggleLike = (productId: number) => {
+    setLikedProductIds(prev => {
+      const isLiked = prev.includes(productId);
+      const productName = products.find(p => p.id === productId)?.title || 'товар';
+      
+      if (isLiked) {
+        // Убираем из избранного
+        toast({
+          title: "Товар удален из избранного",
+          description: `${productName} больше не в избранном`,
+          duration: 2000,
+        });
+        return prev.filter(id => id !== productId);
+      } else {
+        // Добавляем в избранное
+        toast({
+          title: "Товар добавлен в избранное",
+          description: `${productName} добавлен в избранное`,
+          duration: 2000,
+        });
+        return [...prev, productId];
+      }
+    });
+  };
+
+  // Кнопка показа только избранных товаров
+  const [showOnlyLiked, setShowOnlyLiked] = useState(false);
+
+  // Фильтрация по лайкам
+  useEffect(() => {
+    if (showOnlyLiked) {
+      setFilteredProducts(prev => prev.filter(product => likedProductIds.includes(product.id)));
+    }
+  }, [showOnlyLiked, likedProductIds]);
+
+  const handleToggleLikedFilter = () => {
+    setShowOnlyLiked(prev => !prev);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow py-8 bg-slate-50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
             <h1 className="text-3xl font-bold">Каталог товаров</h1>
             
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <Button 
+                variant={showOnlyLiked ? "default" : "outline"} 
+                size="sm" 
+                onClick={handleToggleLikedFilter}
+                className="flex items-center gap-2"
+              >
+                <Icon name={showOnlyLiked ? "HeartFilled" : "Heart"} size={16} />
+                <span>Избранное{likedProductIds.length > 0 && ` (${likedProductIds.length})`}</span>
+              </Button>
+
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="sm" className="lg:hidden flex items-center gap-2">
@@ -291,7 +352,11 @@ const Catalog = () => {
               {filteredProducts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredProducts.map(product => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard 
+                      key={product.id} 
+                      product={product}
+                      onToggleLike={handleToggleLike} 
+                    />
                   ))}
                 </div>
               ) : (

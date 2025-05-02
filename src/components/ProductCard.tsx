@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
@@ -13,18 +14,31 @@ export type Product = {
   icon: string;
   isNew?: boolean;
   isLimited?: boolean;
-  productColor?: string; // Добавляем параметр цвета товара
+  productColor?: string;
+  isLiked?: boolean;
 };
 
 interface ProductCardProps {
   product: Product;
+  onToggleLike?: (id: number) => void;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
-  const { id, title, price, oldPrice, color, icon, isNew, isLimited, productColor } = product;
+const ProductCard = ({ product, onToggleLike }: ProductCardProps) => {
+  const { id, title, price, oldPrice, color, icon, isNew, isLimited, productColor, isLiked } = product;
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleLikeClick = () => {
+    if (onToggleLike) {
+      onToggleLike(id);
+    }
+  };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div 
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative">
         <Link to={`/product/${id}`}>
           <ProductLogo 
@@ -39,10 +53,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <Button 
           variant="ghost" 
           size="icon" 
-          className="absolute top-2 right-2 bg-white/80 hover:bg-white" 
-          aria-label="Добавить в избранное"
+          className={`absolute top-2 right-2 bg-white/80 hover:bg-white transition-all duration-300 ${
+            isLiked ? "text-red-500 hover:text-red-600" : "text-gray-500 hover:text-gray-700"
+          } ${isHovered || isLiked ? "opacity-100 scale-100" : "lg:opacity-70 lg:scale-95"}`}
+          aria-label={isLiked ? "Убрать из избранного" : "Добавить в избранное"}
+          onClick={handleLikeClick}
         >
-          <Icon name="Heart" size={18} />
+          <Icon name={isLiked ? "HeartFilled" : "Heart"} size={18} />
         </Button>
       </div>
       
