@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import ProductCard, { Product } from './ProductCard';
 import { Button } from "@/components/ui/button";
@@ -9,21 +10,24 @@ const FeaturedProducts = () => {
       title: "Замок принцессы",
       price: 12990,
       oldPrice: 15990,
-      imageUrl: "https://images.unsplash.com/photo-1560343776-97e7d202ff0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      color: "bg-gradient-to-br from-pink-400 to-pink-600",
+      icon: "Castle",
       isNew: true
     },
     {
       id: 2,
       title: "Спорткар Техник",
       price: 8990,
-      imageUrl: "https://images.unsplash.com/photo-1516641051054-9df6a1aad654?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      color: "bg-gradient-to-br from-blue-400 to-blue-600",
+      icon: "Car"
     },
     {
       id: 3,
       title: "Космическая станция",
       price: 19990,
       oldPrice: 22990,
-      imageUrl: "https://images.unsplash.com/photo-1518331483807-f6adb0e1ad23?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      color: "bg-gradient-to-br from-purple-500 to-indigo-600",
+      icon: "Rocket",
       isLimited: true
     }
   ]);

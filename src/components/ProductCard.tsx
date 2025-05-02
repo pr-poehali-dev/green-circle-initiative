@@ -1,13 +1,16 @@
+
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
+import ProductLogo from "./ProductLogo";
 
 export type Product = {
   id: number;
   title: string;
   price: number;
   oldPrice?: number;
-  imageUrl: string;
+  color: string;
+  icon: string;
   isNew?: boolean;
   isLimited?: boolean;
 };
@@ -17,30 +20,20 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { id, title, price, oldPrice, imageUrl, isNew, isLimited } = product;
+  const { id, title, price, oldPrice, color, icon, isNew, isLimited } = product;
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="relative">
         <Link to={`/product/${id}`}>
-          <img 
-            src={imageUrl} 
-            alt={title} 
-            className="w-full h-64 object-cover"
+          <ProductLogo 
+            title={title} 
+            color={color} 
+            icon={icon}
+            isNew={isNew}
+            isLimited={isLimited}
           />
         </Link>
-        
-        {isNew && (
-          <span className="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">
-            Новинка
-          </span>
-        )}
-        
-        {isLimited && (
-          <span className="absolute top-2 right-2 bg-accent text-accent-foreground text-xs px-2 py-1 rounded">
-            Ограниченная серия
-          </span>
-        )}
         
         <Button 
           variant="ghost" 
