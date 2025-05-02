@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import Icon from "@/components/ui/icon";
 import PaymentSystem from "./PaymentSystem";
 
 const HeroSection = () => {
@@ -71,6 +72,14 @@ const HeroSection = () => {
   
   const handlePaymentCancel = () => {
     setIsPaymentOpen(false);
+  };
+
+  const handleScrollDown = () => {
+    // Плавная прокрутка к следующему разделу
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -183,6 +192,17 @@ const HeroSection = () => {
             </Card>
           </div>
         </div>
+      </div>
+      
+      {/* Шеврон для прокрутки вниз */}
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
+        <button 
+          onClick={handleScrollDown}
+          className="bg-white/10 hover:bg-white/20 transition-colors p-3 rounded-full backdrop-blur-sm"
+          aria-label="Прокрутить вниз"
+        >
+          <Icon name="ChevronDown" size={32} className="text-white" />
+        </button>
       </div>
       
       {/* Диалог с платежной системой */}
