@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Car } from "lucide-react";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,15 +34,10 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          <img 
-            src="/public/logo-b.svg" 
-            alt="Porsche" 
-            className="h-10" 
-            onError={(e) => { 
-              e.currentTarget.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Porsche_logo.svg/2560px-Porsche_logo.svg.png";
-              e.currentTarget.style.height = "32px";
-            }} 
-          />
+          <div className="flex items-center text-white">
+            <Car className="w-8 h-8 mr-2" />
+            <span className="text-xl font-bold">PORSCHE</span>
+          </div>
         </div>
 
         {/* Desktop Navigation */}
