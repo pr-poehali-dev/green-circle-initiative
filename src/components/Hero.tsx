@@ -20,7 +20,10 @@ const Hero = () => {
             <Button size="lg" variant="outline" asChild>
               <Link to="/sales">Акции месяца</Link>
             </Button>
-          </div>
+                      <Button size="lg" variant="ghost" asChild>
+              <Link to="/contacts">Контакты</Link>
+            </Button>
+</div>
         </div>
         <div className="md:w-1/2 mt-8 md:mt-0">
           <img 
