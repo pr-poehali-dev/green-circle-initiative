@@ -15,7 +15,7 @@ interface CarCardProps {
 
 const CarCard = ({ car }: CarCardProps) => {
   return (
-    <Card className="overflow-hidden hover-scale">
+    <Card className="overflow-hidden hover-scale flex flex-col h-full">
       <div className="h-64 overflow-hidden">
         <img 
           src={car.image} 
@@ -23,10 +23,10 @@ const CarCard = ({ car }: CarCardProps) => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-2xl font-bold mb-2">{car.name}</h3>
-        <p className="text-gray-600 mb-4">{car.description}</p>
-        <Button className="w-full">Подробнее</Button>
+        <p className="text-gray-600 mb-4 flex-grow">{car.description}</p>
+        <Button className="w-full mt-auto bg-porsche-green hover:bg-porsche-green-light">Подробнее</Button>
       </div>
     </Card>
   );
