@@ -100,7 +100,7 @@ const HeroSection = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6">PORSCHE</h1>
             <p className="text-xl md:text-2xl mb-8 max-w-xl">Воплощение совершенства в каждой детали. Испытайте непревзойденные характеристики и элегантный дизайн.</p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-6">Тест-драйв</Button>
+              <Button className="bg-gold hover:bg-gold-light text-black font-medium text-lg px-8 py-6">Тест-драйв</Button>
               <Button 
                 className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black text-lg px-8 py-6"
               >
