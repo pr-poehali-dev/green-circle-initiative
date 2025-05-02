@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { Product } from "@/components/ProductCard";
 import { useToast } from "@/components/ui/use-toast";
 
+// Ключ для хранения лайков в localStorage
+const LIKED_PRODUCTS_KEY = 'lego-catalog-liked-products';
+
 // Начальные данные каталога
 const initialProducts: Product[] = [
   {
@@ -87,10 +90,31 @@ const initialProducts: Product[] = [
   }
 ];
 
+// Функция для загрузки лайков из localStorage
+const loadLikedProducts = (): number[] => {
+  try {
+    const savedLikes = localStorage.getItem(LIKED_PRODUCTS_KEY);
+    return savedLikes ? JSON.parse(savedLikes) : [];
+  } catch (error) {
+    console.error('Ошибка при загрузке избранных товаров:', error);
+    return [];
+  }
+};
+
+// Функция для сохранения лайков в localStorage
+const saveLikedProducts = (likedIds: number[]): void => {
+  try {
+    localStorage.setItem(LIKED_PRODUCTS_KEY, JSON.stringify(likedIds));
+  } catch (error) {
+    console.error('Ошибка при сохранении избранных товаров:', error);
+  }
+};
+
 export const useCatalogData = () => {
   const { toast } = useToast();
   const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [likedProductIds, setLikedProductIds] = useState<number[]>([]);
+  // Загружаем начальное состояние из localStorage
+  const [likedProductIds, setLikedProductIds] = useState<number[]>(loadLikedProducts);
 
   // Обновляем продукты, добавляя статус лайка
   useEffect(() => {
@@ -99,6 +123,11 @@ export const useCatalogData = () => {
       isLiked: likedProductIds.includes(product.id)
     }));
     setProducts(updatedProducts);
+  }, [likedProductIds]);
+
+  // Сохраняем лайки в localStorage при изменении
+  useEffect(() => {
+    saveLikedProducts(likedProductIds);
   }, [likedProductIds]);
 
   const handleToggleLike = (productId: number) => {
