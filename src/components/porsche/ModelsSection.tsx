@@ -6,19 +6,19 @@ const ModelsSection = () => {
     {
       id: "911",
       name: "911",
-      image: "https://images.unsplash.com/photo-1611821064430-0d40291e5362?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80",
+      image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800&q=80",
       description: "Легендарный спорткар с непревзойденной управляемостью и мощностью."
     },
     {
       id: "taycan",
       name: "Taycan",
-      image: "https://images.unsplash.com/photo-1619551734325-81aaf323686c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80",
+      image: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800&q=80",
       description: "Полностью электрический спорткар с инновационными технологиями."
     },
     {
       id: "cayenne",
       name: "Cayenne",
-      image: "https://images.unsplash.com/photo-1607853827552-0ea7cad29e6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80",
+      image: "https://images.unsplash.com/photo-1580414057403-c5f451f30e1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800&q=80",
       description: "Спортивный внедорожник, объединяющий комфорт и динамику."
     }
   ];
