@@ -11,36 +11,34 @@ export type IconProps = {
   fallback?: string;
 };
 
-// Кастомная иконка заполненного сердечка
-const HeartFilled = ({ size = 24, color, className, strokeWidth = 2 }: Omit<IconProps, "name">) => (
+// Кастомная иконка заполненного сердечка (SVG напрямую)
+const HeartFilledIcon = ({ size = 24, className }: Omit<IconProps, "name">) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}
     viewBox="0 0 24 24"
     fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="0"
-    strokeLinecap="round"
-    strokeLinejoin="round"
     className={className}
   >
-    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    <path d="M19.5 12.572l-7.5 7.428-7.5-7.428c-1.077-1.067-1.5-2.895-1.5-4.572 0-3 2-5 5-5 1.711 0 3.375 1.062 4 3 0.625-1.938 2.289-3 4-3 3 0 5 2 5 5 0 1.677-0.423 3.505-1.5 4.572z" />
   </svg>
 );
 
-// Расширенный набор иконок
-const CustomIcons = {
-  HeartFilled
+// Добавляем кастомную иконку в объект
+const CustomIcons: Record<string, React.FC<Omit<IconProps, "name">>> = {
+  HeartFilled: HeartFilledIcon
 };
 
 const Icon = ({ name, color, size = 24, className, strokeWidth = 2, fallback }: IconProps) => {
-  // Проверяем, существует ли иконка в Lucide
-  const LucideIcon = (LucideIcons as any)[name];
+  // Сначала проверяем, есть ли кастомная иконка
+  if (CustomIcons[name]) {
+    const CustomIcon = CustomIcons[name];
+    return <CustomIcon color={color} size={size} className={className} strokeWidth={strokeWidth} />;
+  }
 
-  // Проверяем, существует ли кастомная иконка
-  const CustomIcon = (CustomIcons as any)[name];
-
+  // Затем проверяем стандартные иконки Lucide
+  const LucideIcon = (LucideIcons as Record<string, any>)[name];
   if (LucideIcon) {
     return (
       <LucideIcon
@@ -52,20 +50,9 @@ const Icon = ({ name, color, size = 24, className, strokeWidth = 2, fallback }: 
     );
   }
 
-  if (CustomIcon) {
-    return (
-      <CustomIcon
-        color={color}
-        size={size}
-        className={className}
-        strokeWidth={strokeWidth}
-      />
-    );
-  }
-
   // Если иконка не найдена и указан fallback, используем его
-  if (fallback && (LucideIcons as any)[fallback]) {
-    const FallbackIcon = (LucideIcons as any)[fallback];
+  if (fallback && (LucideIcons as Record<string, any>)[fallback]) {
+    const FallbackIcon = (LucideIcons as Record<string, any>)[fallback];
     return (
       <FallbackIcon
         color={color}

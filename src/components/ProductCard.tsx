@@ -35,6 +35,9 @@ const ProductCard = ({ product, onToggleLike }: ProductCardProps) => {
     }
   };
 
+  // Для отладки - временно показываем состояние isLiked
+  console.log(`Товар "${title}" (ID: ${id}), в избранном: ${isLiked ? "Да" : "Нет"}`);
+
   return (
     <div 
       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
@@ -61,7 +64,11 @@ const ProductCard = ({ product, onToggleLike }: ProductCardProps) => {
           aria-label={isLiked ? "Убрать из избранного" : "Добавить в избранное"}
           onClick={handleLikeClick}
         >
-          <Icon name={isLiked ? "HeartFilled" : "Heart"} size={18} />
+          {isLiked ? (
+            <Icon name="HeartFilled" size={18} />
+          ) : (
+            <Icon name="Heart" size={18} />
+          )}
         </Button>
       </div>
       
