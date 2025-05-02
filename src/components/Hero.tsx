@@ -21,7 +21,7 @@ const Hero = () => {
                         <Button size="lg" variant="outline" asChild>
               <Link to="/contacts">Контакты</Link>
             </Button>
-                        <Button size="lg" className="btn-orange-gradient" asChild>
+                                    <Button size="lg" className="btn-orange-gradient" asChild>
               <Link to="/sales">Акции</Link>
             </Button>
 </div>
