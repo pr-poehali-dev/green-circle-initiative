@@ -18,13 +18,10 @@ const Hero = () => {
             <Button size="lg" asChild>
               <Link to="/catalog">Каталог товаров</Link>
             </Button>
-                        <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" asChild>
               <Link to="/contacts">Контакты</Link>
             </Button>
-                                    <Button size="lg" className="btn-orange-gradient" asChild>
-              <Link to="/sales">Акции</Link>
-            </Button>
-</div>
+          </div>
         </div>
         <div className="md:w-1/2 mt-8 md:mt-0">
           <img 
