@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
 import ProductLogo from "./ProductLogo";
+import LikeButton from "./LikeButton";
 
 export type Product = {
   id: number;
@@ -35,8 +36,8 @@ const ProductCard = ({ product, onToggleLike }: ProductCardProps) => {
     }
   };
 
-  // Для отладки - временно показываем состояние isLiked
-  console.log(`Товар "${title}" (ID: ${id}), в избранном: ${isLiked ? "Да" : "Нет"}`);
+  // Для отладки
+  console.log(`Рендер ProductCard: "${title}" (ID: ${id}), isLiked = ${Boolean(isLiked)}`);
 
   return (
     <div 
@@ -55,21 +56,12 @@ const ProductCard = ({ product, onToggleLike }: ProductCardProps) => {
           />
         </Link>
         
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className={`absolute top-2 right-2 bg-white/80 hover:bg-white transition-all duration-300 ${
-            isLiked ? "text-red-500 hover:text-red-600" : "text-gray-500 hover:text-gray-700"
-          } ${isHovered || isLiked ? "opacity-100 scale-100" : "lg:opacity-70 lg:scale-95"}`}
-          aria-label={isLiked ? "Убрать из избранного" : "Добавить в избранное"}
+        {/* Новый компонент для кнопки лайка */}
+        <LikeButton 
+          isLiked={Boolean(isLiked)} 
           onClick={handleLikeClick}
-        >
-          {isLiked ? (
-            <Icon name="HeartFilled" size={18} />
-          ) : (
-            <Icon name="Heart" size={18} />
-          )}
-        </Button>
+          className={isHovered || isLiked ? "opacity-100 scale-100" : "lg:opacity-70 lg:scale-95"}
+        />
       </div>
       
       <div className="p-4">

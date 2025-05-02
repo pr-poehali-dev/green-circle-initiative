@@ -93,7 +93,9 @@ const initialProducts: Product[] = [
 const loadLikedProducts = (): number[] => {
   try {
     const savedLikes = localStorage.getItem(LIKED_PRODUCTS_KEY);
-    return savedLikes ? JSON.parse(savedLikes) : [];
+    const result = savedLikes ? JSON.parse(savedLikes) : [];
+    console.log('Загружены ID избранных товаров:', result);
+    return result;
   } catch (error) {
     console.error('Ошибка при загрузке избранных товаров:', error);
     return [];
@@ -104,6 +106,7 @@ const loadLikedProducts = (): number[] => {
 const saveLikedProducts = (likedIds: number[]): void => {
   try {
     localStorage.setItem(LIKED_PRODUCTS_KEY, JSON.stringify(likedIds));
+    console.log('Сохранены ID избранных товаров:', likedIds);
   } catch (error) {
     console.error('Ошибка при сохранении избранных товаров:', error);
   }
@@ -111,74 +114,66 @@ const saveLikedProducts = (likedIds: number[]): void => {
 
 export const useCatalogData = () => {
   const { toast } = useToast();
-  const [likedProductIds, setLikedProductIds] = useState<number[]>(loadLikedProducts);
-  const [products, setProducts] = useState<Product[]>(() => {
-    const savedLikes = loadLikedProducts();
-    // Добавляем лог для отладки
-    console.log('Загружены лайки из localStorage:', savedLikes);
-    
-    return initialProducts.map(product => ({
-      ...product,
-      isLiked: savedLikes.includes(product.id)
-    }));
+  
+  // Загружаем начальные ID избранных товаров
+  const [likedProductIds, setLikedProductIds] = useState<number[]>(() => {
+    // При инициализации загружаем из localStorage
+    return loadLikedProducts();
   });
 
-  // Обработчик для переключения состояния "избранное"
+  // Инициализируем продукты с правильными флагами isLiked
+  const [products, setProducts] = useState<Product[]>(() => {
+    const likes = loadLikedProducts();
+    const initialProductsWithLikes = initialProducts.map(product => ({
+      ...product,
+      isLiked: likes.includes(product.id)
+    }));
+    return initialProductsWithLikes;
+  });
+
+  // Обработчик переключения "избранного" статуса
   const handleToggleLike = (productId: number) => {
-    // Находим товар по ID
+    console.log(`Переключение лайка для товара ${productId}`);
+    
+    // Находим товар в списке
     const product = products.find(p => p.id === productId);
     if (!product) return;
     
-    const productName = product.title;
-    
-    // Определяем, добавлен ли товар в избранное
+    // Проверяем текущий статус избранного
     const isCurrentlyLiked = likedProductIds.includes(productId);
+    const newLikedStatus = !isCurrentlyLiked;
     
-    // Обновляем список избранных товаров
-    setLikedProductIds(prevLiked => {
-      let newLiked;
+    // Обновляем список ID избранных товаров
+    const newLikedIds = isCurrentlyLiked
+      ? likedProductIds.filter(id => id !== productId) // Удаляем из избранного
+      : [...likedProductIds, productId]; // Добавляем в избранное
       
-      if (isCurrentlyLiked) {
-        // Если уже в избранном - удаляем
-        newLiked = prevLiked.filter(id => id !== productId);
-        toast({
-          title: "Удалено из избранного",
-          description: `${productName} удален из избранного`,
-          duration: 2000,
-        });
-      } else {
-        // Если еще не в избранном - добавляем
-        newLiked = [...prevLiked, productId];
-        toast({
-          title: "Добавлено в избранное",
-          description: `${productName} добавлен в избранное`,
-          duration: 2000,
-        });
-      }
-      
-      // Сохраняем в localStorage
-      saveLikedProducts(newLiked);
-      console.log('Обновлен список избранного:', newLiked);
-      
-      return newLiked;
-    });
+    // Устанавливаем новый список ID избранных товаров
+    setLikedProductIds(newLikedIds);
     
-    // Немедленно обновляем состояние товаров для отображения
+    // Обновляем список товаров, устанавливая правильный флаг isLiked
     setProducts(prevProducts => 
       prevProducts.map(p => 
-        p.id === productId 
-          ? { ...p, isLiked: !isCurrentlyLiked } 
+        p.id === productId
+          ? { ...p, isLiked: newLikedStatus }
           : p
       )
     );
+    
+    // Сохраняем изменения в localStorage
+    saveLikedProducts(newLikedIds);
+    
+    // Показываем уведомление
+    toast({
+      title: newLikedStatus 
+        ? "Добавлено в избранное" 
+        : "Удалено из избранного",
+      description: `${product.title} ${newLikedStatus ? "добавлен в" : "удален из"} избранное`,
+      duration: 2000,
+    });
+    
+    console.log(`Товар ${productId} теперь ${newLikedStatus ? "в избранном" : "не в избранном"}`);
   };
-
-  // Обновляем localStorage при изменении лайков
-  useEffect(() => {
-    // Это обновление уже происходит в handleToggleLike
-    // Но оставляем эффект для перестраховки
-    saveLikedProducts(likedProductIds);
-  }, [likedProductIds]);
 
   return {
     products,
