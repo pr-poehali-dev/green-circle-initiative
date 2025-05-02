@@ -45,10 +45,12 @@ const Header = () => {
           <a href="#models" className="text-white hover:text-gray-300 transition">Модели</a>
           <a href="#features" className="text-white hover:text-gray-300 transition">Особенности</a>
           <a href="#contact" className="text-white hover:text-gray-300 transition">Контакты</a>
-          <Button className="bg-white text-black hover:bg-gray-200 ml-4">
+
+          <Button className="bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors ml-4">
             <Phone className="w-4 h-4 mr-2" />
             +7 (800) 123-45-67
           </Button>
+
         </nav>
 
         {/* Mobile Menu Button */}
