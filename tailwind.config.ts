@@ -30,6 +30,13 @@ export default {
           light: "#F2D16B", // Светлый золотой
           dark: "#B8860B", // Темный золотой (DarkGoldenrod)
         },
+        porsche: {
+          green: {
+            DEFAULT: "#1E7F4D", // Насыщенный зеленый
+            light: "#2AA866", // Светлый зеленый
+            dark: "#15603A"  // Темный зеленый
+          }
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
