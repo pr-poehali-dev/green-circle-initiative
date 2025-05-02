@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-        <section className="relative bg-gradient-to-r from-primary/20 via-accent/15 to-background overflow-hidden">
+            <section className="relative animated-gradient bg-gradient-to-r from-primary/30 via-accent/20 to-primary/10 overflow-hidden">
 <div className="container mx-auto px-4 py-12 md:py-24 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 z-10">
           <h1 className="text-2xl md:text-3xl font-bold mb-4">
