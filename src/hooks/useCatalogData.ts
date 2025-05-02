@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Product } from "@/components/ProductCard";
 import { useToast } from "@/components/ui/use-toast";
@@ -112,22 +111,36 @@ const saveLikedProducts = (likedIds: number[]): void => {
 
 export const useCatalogData = () => {
   const { toast } = useToast();
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [products, setProducts] = useState<Product[]>([]);
   // Загружаем начальное состояние из localStorage
-  const [likedProductIds, setLikedProductIds] = useState<number[]>(loadLikedProducts);
+  const [likedProductIds, setLikedProductIds] = useState<number[]>([]);
 
-  // Обновляем продукты, добавляя статус лайка
+  // Инициализация данных при первом рендере
   useEffect(() => {
-    const updatedProducts = products.map(product => ({
+    const savedLikes = loadLikedProducts();
+    setLikedProductIds(savedLikes);
+    
+    // Обновляем продукты с учетом сохраненных лайков
+    const productsWithLikes = initialProducts.map(product => ({
       ...product,
-      isLiked: likedProductIds.includes(product.id)
+      isLiked: savedLikes.includes(product.id)
     }));
-    setProducts(updatedProducts);
-  }, [likedProductIds]);
+    
+    setProducts(productsWithLikes);
+  }, []);
 
-  // Сохраняем лайки в localStorage при изменении
+  // Обновляем продукты при изменении лайков
   useEffect(() => {
-    saveLikedProducts(likedProductIds);
+    if (products.length > 0) {
+      const updatedProducts = products.map(product => ({
+        ...product,
+        isLiked: likedProductIds.includes(product.id)
+      }));
+      setProducts(updatedProducts);
+      
+      // Сохраняем в localStorage
+      saveLikedProducts(likedProductIds);
+    }
   }, [likedProductIds]);
 
   const handleToggleLike = (productId: number) => {

@@ -1,61 +1,91 @@
-
 import React from "react";
 import * as LucideIcons from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Добавляем специальный значок HeartFilled
-const HeartFilled = () => (
+export type IconProps = {
+  name: string;
+  color?: string;
+  size?: number;
+  className?: string;
+  strokeWidth?: number;
+  fallback?: string;
+};
+
+// Кастомная иконка заполненного сердечка
+const HeartFilled = ({ size = 24, color, className, strokeWidth = 2 }: Omit<IconProps, "name">) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth={strokeWidth}
     strokeLinecap="round"
     strokeLinejoin="round"
+    className={className}
   >
     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
   </svg>
 );
 
-// Дополнительные иконки можно добавить здесь
-const CustomIcons: { [key: string]: React.FC } = {
-  HeartFilled,
+// Расширенный набор иконок
+const CustomIcons = {
+  HeartFilled
 };
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  name: string;
-  size?: number;
-  fallback?: string;
-  className?: string;
-}
+const Icon = ({ name, color, size = 24, className, strokeWidth = 2, fallback }: IconProps) => {
+  // Проверяем, существует ли иконка в Lucide
+  const LucideIcon = (LucideIcons as any)[name];
 
-const Icon: React.FC<IconProps> = ({ 
-  name, 
-  size = 24, 
-  fallback = "CircleAlert",
-  className,
-  ...props 
-}) => {
-  let IconComponent: React.FC<any>;
+  // Проверяем, существует ли кастомная иконка
+  const CustomIcon = (CustomIcons as any)[name];
 
-  // Сначала проверяем, есть ли иконка в нашем списке кастомных иконок
-  if (name in CustomIcons) {
-    IconComponent = CustomIcons[name];
-  } 
-  // Затем ищем в библиотеке Lucide
-  else if (name in LucideIcons) {
-    IconComponent = (LucideIcons as { [key: string]: React.FC<any> })[name];
-  } 
-  // Если не найдено, используем fallback
-  else {
-    IconComponent = (LucideIcons as { [key: string]: React.FC<any> })[fallback];
-    console.warn(`Icon "${name}" not found, using "${fallback}" instead`);
+  if (LucideIcon) {
+    return (
+      <LucideIcon
+        color={color}
+        size={size}
+        className={className}
+        strokeWidth={strokeWidth}
+      />
+    );
   }
 
-  return <IconComponent size={size} className={cn(className)} {...props} />;
+  if (CustomIcon) {
+    return (
+      <CustomIcon
+        color={color}
+        size={size}
+        className={className}
+        strokeWidth={strokeWidth}
+      />
+    );
+  }
+
+  // Если иконка не найдена и указан fallback, используем его
+  if (fallback && (LucideIcons as any)[fallback]) {
+    const FallbackIcon = (LucideIcons as any)[fallback];
+    return (
+      <FallbackIcon
+        color={color}
+        size={size}
+        className={cn("text-yellow-500", className)}
+        strokeWidth={strokeWidth}
+      />
+    );
+  }
+
+  // Если ничего не найдено, возвращаем предупреждение
+  console.warn(`Icon "${name}" not found`);
+  return (
+    <LucideIcons.AlertCircle
+      color="red"
+      size={size}
+      className={className}
+      strokeWidth={strokeWidth}
+    />
+  );
 };
 
 export default Icon;
