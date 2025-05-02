@@ -14,7 +14,7 @@ const CallToAction = () => {
       <div className="relative max-w-7xl mx-auto text-white text-center">
         <h2 className="text-4xl font-bold mb-6">Запишитесь на тест-драйв сегодня</h2>
         <p className="text-xl mb-8 max-w-3xl mx-auto">Ощутите непередаваемые эмоции за рулем Porsche. Наши специалисты помогут подобрать идеальную модель для вас.</p>
-        <Button className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-6">Записаться на тест-драйв</Button>
+        <Button className="bg-porsche-green hover:bg-porsche-green-light text-white text-lg px-8 py-6">Записаться на тест-драйв</Button>
       </div>
     </section>
   );
