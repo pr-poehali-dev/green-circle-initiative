@@ -20,6 +20,7 @@ const Catalog = () => {
     isLimited: false,
     hasDiscount: false
   });
+  const [selectedColor, setSelectedColor] = useState("all");
   const [sortBy, setSortBy] = useState("popular");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -32,14 +33,16 @@ const Catalog = () => {
       oldPrice: 15990,
       color: "bg-gradient-to-br from-pink-400 to-pink-600",
       icon: "Castle",
-      isNew: true
+      isNew: true,
+      productColor: "#ef4444" // красный
     },
     {
       id: 2,
       title: "Спорткар Техник",
       price: 8990,
       color: "bg-gradient-to-br from-blue-400 to-blue-600",
-      icon: "Car"
+      icon: "Car",
+      productColor: "#3b82f6" // синий
     },
     {
       id: 3,
@@ -48,14 +51,16 @@ const Catalog = () => {
       oldPrice: 22990,
       color: "bg-gradient-to-br from-purple-500 to-indigo-600",
       icon: "Rocket",
-      isLimited: true
+      isLimited: true,
+      productColor: "#1c1917" // черный
     },
     {
       id: 4,
       title: "Городская площадь",
       price: 15990,
       color: "bg-gradient-to-br from-green-400 to-green-600",
-      icon: "Building2"
+      icon: "Building2",
+      productColor: "#22c55e" // зеленый
     },
     {
       id: 5,
@@ -63,14 +68,16 @@ const Catalog = () => {
       price: 7990,
       oldPrice: 9990,
       color: "bg-gradient-to-br from-blue-300 to-blue-500",
-      icon: "Ship"
+      icon: "Ship",
+      productColor: "#3b82f6" // синий
     },
     {
       id: 6,
       title: "Динозавры",
       price: 6990,
       color: "bg-gradient-to-br from-orange-400 to-orange-600",
-      icon: "Footprints"
+      icon: "Footprints",
+      productColor: "#eab308" // желтый
     },
     {
       id: 7,
@@ -78,7 +85,8 @@ const Catalog = () => {
       price: 17990,
       color: "bg-gradient-to-br from-slate-500 to-slate-700",
       icon: "Castle",
-      isLimited: true
+      isLimited: true,
+      productColor: "#71717a" // серый
     },
     {
       id: 8,
@@ -86,7 +94,8 @@ const Catalog = () => {
       price: 9990,
       oldPrice: 12990,
       color: "bg-gradient-to-br from-red-500 to-red-700",
-      icon: "Car"
+      icon: "Car",
+      productColor: "#ef4444" // красный
     },
     {
       id: 9,
@@ -94,7 +103,8 @@ const Catalog = () => {
       price: 5990,
       color: "bg-gradient-to-br from-green-500 to-green-700",
       icon: "Leaf",
-      isNew: true
+      isNew: true,
+      productColor: "#22c55e" // зеленый
     }
   ]);
 
@@ -122,6 +132,21 @@ const Catalog = () => {
     result = result.filter(product => 
       product.price >= priceRange[0] && product.price <= priceRange[1]
     );
+    
+    // Фильтр по цвету
+    if (selectedColor !== "all") {
+      const colorMapping: { [key: string]: string } = {
+        red: "#ef4444",
+        blue: "#3b82f6",
+        green: "#22c55e",
+        yellow: "#eab308",
+        black: "#1c1917",
+        white: "#f9fafb",
+        gray: "#71717a"
+      };
+      
+      result = result.filter(product => product.productColor === colorMapping[selectedColor]);
+    }
     
     // Фильтр по другим параметрам
     if (filters.isNew) {
@@ -162,7 +187,7 @@ const Catalog = () => {
     }
     
     setFilteredProducts(result);
-  }, [activeCategory, priceRange, filters, sortBy, searchQuery, products]);
+  }, [activeCategory, priceRange, selectedColor, filters, sortBy, searchQuery, products]);
 
   const handleFilterChange = (filterId: string, value: boolean) => {
     setFilters(prev => ({
@@ -173,6 +198,19 @@ const Catalog = () => {
 
   const handlePriceChange = (min: number, max: number) => {
     setPriceRange([min, max]);
+  };
+
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+  };
+
+  const resetFilters = () => {
+    setActiveCategory("all");
+    setPriceRange([0, 50000]);
+    setFilters({ isNew: false, isLimited: false, hasDiscount: false });
+    setSelectedColor("all");
+    setSearchQuery("");
+    setSortBy("popular");
   };
 
   return (
@@ -197,7 +235,10 @@ const Catalog = () => {
                   <FilterSidebar 
                     onPriceChange={handlePriceChange} 
                     onFilterChange={handleFilterChange}
+                    onColorChange={handleColorChange}
                     filters={filters}
+                    selectedColor={selectedColor}
+                    onResetFilters={resetFilters}
                   />
                 </SheetContent>
               </Sheet>
@@ -239,7 +280,10 @@ const Catalog = () => {
               <FilterSidebar 
                 onPriceChange={handlePriceChange} 
                 onFilterChange={handleFilterChange}
+                onColorChange={handleColorChange}
                 filters={filters}
+                selectedColor={selectedColor}
+                onResetFilters={resetFilters}
               />
             </div>
             
@@ -259,13 +303,7 @@ const Catalog = () => {
                   </p>
                   <Button 
                     variant="outline"
-                    onClick={() => {
-                      setActiveCategory("all");
-                      setPriceRange([0, 50000]);
-                      setFilters({ isNew: false, isLimited: false, hasDiscount: false });
-                      setSearchQuery("");
-                      setSortBy("popular");
-                    }}
+                    onClick={resetFilters}
                   >
                     Сбросить все фильтры
                   </Button>

@@ -4,24 +4,40 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import Icon from "@/components/ui/icon";
 import PriceFilter from "./PriceFilter";
+import ColorFilter from "./ColorFilter";
 
 interface FilterSidebarProps {
   onPriceChange: (min: number, max: number) => void;
   onFilterChange: (filterId: string, value: boolean) => void;
+  onColorChange: (color: string) => void;
   filters: {
     isNew: boolean;
     isLimited: boolean;
     hasDiscount: boolean;
   };
+  selectedColor: string;
+  onResetFilters: () => void;
 }
 
-const FilterSidebar = ({ onPriceChange, onFilterChange, filters }: FilterSidebarProps) => {
+const FilterSidebar = ({ 
+  onPriceChange, 
+  onFilterChange, 
+  onColorChange,
+  filters, 
+  selectedColor,
+  onResetFilters
+}: FilterSidebarProps) => {
   return (
     <div className="space-y-6">
       <PriceFilter 
         minPrice={0} 
         maxPrice={50000} 
         onPriceChange={onPriceChange} 
+      />
+      
+      <ColorFilter
+        selectedColor={selectedColor}
+        onColorChange={onColorChange}
       />
       
       <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -66,7 +82,12 @@ const FilterSidebar = ({ onPriceChange, onFilterChange, filters }: FilterSidebar
         </div>
       </div>
       
-      <Button variant="outline" className="w-full" size="sm">
+      <Button 
+        variant="outline" 
+        className="w-full" 
+        size="sm"
+        onClick={onResetFilters}
+      >
         Сбросить фильтры
       </Button>
     </div>

@@ -13,6 +13,7 @@ export type Product = {
   icon: string;
   isNew?: boolean;
   isLimited?: boolean;
+  productColor?: string; // Добавляем параметр цвета товара
 };
 
 interface ProductCardProps {
@@ -20,7 +21,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { id, title, price, oldPrice, color, icon, isNew, isLimited } = product;
+  const { id, title, price, oldPrice, color, icon, isNew, isLimited, productColor } = product;
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
@@ -49,6 +50,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <Link to={`/product/${id}`} className="hover:text-primary">
           <h3 className="font-semibold text-lg mb-2 line-clamp-2">{title}</h3>
         </Link>
+        
+        {productColor && (
+          <div className="flex items-center mt-2 mb-3">
+            <span className="text-sm text-muted-foreground mr-2">Цвет:</span>
+            <div 
+              className="w-5 h-5 rounded-full border border-gray-200" 
+              style={{ backgroundColor: productColor }} 
+              title={productColor}
+            />
+          </div>
+        )}
         
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center gap-2">
