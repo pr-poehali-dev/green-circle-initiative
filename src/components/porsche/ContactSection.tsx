@@ -4,7 +4,7 @@ import ContactInfo from "./ContactInfo";
 
 const ContactSection = () => {
   return (
-    <section className="py-20 px-6 bg-white">
+    <section id="contact-section" className="py-20 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold mb-12 text-center">Контакты</h2>
         
