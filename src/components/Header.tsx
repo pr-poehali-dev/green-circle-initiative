@@ -32,14 +32,15 @@ const Header = () => {
         </nav>
         
         <div className="flex items-center space-x-3">
-          <Button variant="ghost" size="sm" className="hidden md:flex">
-            <Icon name="Search" size={14} />
+          <Button variant="outline" size="sm" className="hidden md:flex border-primary/30 hover:bg-primary/10 hover:text-primary">
+            <Icon name="Search" size={16} />
           </Button>
-          <Button variant="ghost" size="sm">
-            <Icon name="ShoppingCart" size={14} />
+          <Button variant="outline" size="sm" className="border-primary/30 hover:bg-primary/10 hover:text-primary">
+            <Icon name="ShoppingCart" size={16} />
+            <span className="ml-1 hidden md:inline-block">Корзина</span>
           </Button>
-          <Button variant="ghost" size="sm" className="md:hidden">
-            <Icon name="Menu" size={14} />
+          <Button variant="primary" size="sm" className="md:hidden">
+            <Icon name="Menu" size={16} />
           </Button>
         </div>
       </div>
