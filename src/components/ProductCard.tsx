@@ -27,7 +27,9 @@ const ProductCard = ({ product, onToggleLike }: ProductCardProps) => {
   const { id, title, price, oldPrice, color, icon, isNew, isLimited, productColor, isLiked } = product;
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleLikeClick = () => {
+  const handleLikeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (onToggleLike) {
       onToggleLike(id);
     }

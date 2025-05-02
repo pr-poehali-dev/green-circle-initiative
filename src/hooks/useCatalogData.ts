@@ -111,61 +111,53 @@ const saveLikedProducts = (likedIds: number[]): void => {
 
 export const useCatalogData = () => {
   const { toast } = useToast();
-  const [products, setProducts] = useState<Product[]>([]);
-  // Загружаем начальное состояние из localStorage
-  const [likedProductIds, setLikedProductIds] = useState<number[]>([]);
-
-  // Инициализация данных при первом рендере
-  useEffect(() => {
+  // Загружаем начальное состояние из localStorage при инициализации
+  const [likedProductIds, setLikedProductIds] = useState<number[]>(() => loadLikedProducts());
+  const [products, setProducts] = useState<Product[]>(() => {
     const savedLikes = loadLikedProducts();
-    setLikedProductIds(savedLikes);
-    
-    // Обновляем продукты с учетом сохраненных лайков
-    const productsWithLikes = initialProducts.map(product => ({
+    return initialProducts.map(product => ({
       ...product,
       isLiked: savedLikes.includes(product.id)
     }));
-    
-    setProducts(productsWithLikes);
-  }, []);
+  });
 
-  // Обновляем продукты при изменении лайков
+  // Обновляем localStorage при изменении лайков
   useEffect(() => {
-    if (products.length > 0) {
-      const updatedProducts = products.map(product => ({
+    saveLikedProducts(likedProductIds);
+    
+    // Обновляем продукты с учетом новых лайков
+    setProducts(prevProducts => 
+      prevProducts.map(product => ({
         ...product,
         isLiked: likedProductIds.includes(product.id)
-      }));
-      setProducts(updatedProducts);
-      
-      // Сохраняем в localStorage
-      saveLikedProducts(likedProductIds);
-    }
+      }))
+    );
   }, [likedProductIds]);
 
   const handleToggleLike = (productId: number) => {
-    setLikedProductIds(prev => {
-      const isLiked = prev.includes(productId);
-      const productName = products.find(p => p.id === productId)?.title || 'товар';
-      
-      if (isLiked) {
-        // Убираем из избранного
-        toast({
-          title: "Товар удален из избранного",
-          description: `${productName} больше не в избранном`,
-          duration: 2000,
-        });
-        return prev.filter(id => id !== productId);
-      } else {
-        // Добавляем в избранное
-        toast({
-          title: "Товар добавлен в избранное",
-          description: `${productName} добавлен в избранное`,
-          duration: 2000,
-        });
-        return [...prev, productId];
-      }
-    });
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    const productName = product.title || 'Товар';
+    const isCurrentlyLiked = likedProductIds.includes(productId);
+    
+    if (isCurrentlyLiked) {
+      // Убираем из избранного
+      setLikedProductIds(prev => prev.filter(id => id !== productId));
+      toast({
+        title: "Товар удален из избранного",
+        description: `${productName} больше не в избранном`,
+        duration: 2000,
+      });
+    } else {
+      // Добавляем в избранное
+      setLikedProductIds(prev => [...prev, productId]);
+      toast({
+        title: "Товар добавлен в избранное",
+        description: `${productName} добавлен в избранное`,
+        duration: 2000,
+      });
+    }
   };
 
   return {

@@ -20,7 +20,7 @@ const HeartFilled = ({ size = 24, color, className, strokeWidth = 2 }: Omit<Icon
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="currentColor"
-    strokeWidth={strokeWidth}
+    strokeWidth="0"
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
