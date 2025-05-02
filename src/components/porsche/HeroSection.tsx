@@ -6,11 +6,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import PaymentSystem from "./PaymentSystem";
 
 const HeroSection = () => {
   const [model, setModel] = useState("911");
   const [downPayment, setDownPayment] = useState(30);
   const [extraPackage, setExtraPackage] = useState(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   
   // Базовые цены моделей
   const modelPrices = {
@@ -19,6 +22,14 @@ const HeroSection = () => {
     "Cayenne": 7500000,
     "Macan": 5600000,
     "Panamera": 8900000
+  };
+  
+  const modelNames = {
+    "911": "Porsche 911",
+    "Taycan": "Porsche Taycan",
+    "Cayenne": "Porsche Cayenne",
+    "Macan": "Porsche Macan",
+    "Panamera": "Porsche Panamera"
   };
   
   // Расчет итоговой цены
@@ -42,8 +53,24 @@ const HeroSection = () => {
     return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(price);
   };
 
-  const handleSubmit = () => {
+  const handleContactTelegram = () => {
     window.open('https://t.me/porsche', '_blank');
+  };
+  
+  const handleStartPayment = () => {
+    setIsPaymentOpen(true);
+  };
+  
+  const handlePaymentSuccess = () => {
+    setIsPaymentOpen(false);
+    // Можно добавить дополнительное действие после успешной оплаты
+    setTimeout(() => {
+      handleContactTelegram();
+    }, 500);
+  };
+  
+  const handlePaymentCancel = () => {
+    setIsPaymentOpen(false);
   };
 
   return (
@@ -137,21 +164,44 @@ const HeroSection = () => {
                     <span className="font-medium">Ежемесячный платеж:</span>
                     <span className="font-bold">{formatPrice(monthlyPayment)}</span>
                   </div>
-                  <Button 
-                    className="w-full mt-4 bg-white text-black hover:bg-gray-200"
-                    onClick={handleSubmit}
-                  >
-                    Оставить заявку
-                  </Button>
-                  <p className="text-xs text-white/60 text-center mt-2">
-                    Нажимая кнопку, вы будете перенаправлены в Telegram
-                  </p>
+                  <div className="grid grid-cols-2 gap-4 mt-4">
+                    <Button 
+                      className="bg-white text-black hover:bg-gray-200"
+                      onClick={handleContactTelegram}
+                    >
+                      Связаться
+                    </Button>
+                    <Button 
+                      className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black"
+                      onClick={handleStartPayment}
+                    >
+                      Оплатить взнос
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
+      
+      {/* Диалог с платежной системой */}
+      <Dialog open={isPaymentOpen} onOpenChange={setIsPaymentOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Оплата</DialogTitle>
+            <DialogDescription>
+              Внесение предоплаты за {modelNames[model as keyof typeof modelNames]}
+            </DialogDescription>
+          </DialogHeader>
+          <PaymentSystem 
+            amount={downPaymentAmount} 
+            modelName={modelNames[model as keyof typeof modelNames]}
+            onSuccess={handlePaymentSuccess}
+            onCancel={handlePaymentCancel}
+          />
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
