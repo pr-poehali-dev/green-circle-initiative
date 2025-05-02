@@ -1,4 +1,5 @@
 
+import Header from "@/components/porsche/Header";
 import HeroSection from "@/components/porsche/HeroSection";
 import ModelsSection from "@/components/porsche/ModelsSection";
 import FeaturesSection from "@/components/porsche/FeaturesSection";
@@ -13,6 +14,7 @@ import Footer from "@/components/porsche/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100">
+      <Header />
       <HeroSection />
       <ModelsSection />
       <FeaturesSection />
