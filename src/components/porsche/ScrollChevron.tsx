@@ -1,44 +1,34 @@
 
-import { useEffect, useState } from "react";
-import Icon from "@/components/ui/icon";
-
-interface ScrollChevronProps {
-  targetId: string;
-}
-
-const ScrollChevron = ({ targetId }: ScrollChevronProps) => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTarget = () => {
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+const ScrollChevron = () => {
+  const scrollToModels = () => {
+    const modelsSection = document.getElementById("models");
+    if (modelsSection) {
+      modelsSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <button
-      className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-300 animate-bounce ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
-      onClick={scrollToTarget}
-      aria-label="Прокрутить вниз"
+    <div
+      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer animate-bounce"
+      onClick={scrollToModels}
     >
-      <Icon name="ChevronDown" className="w-6 h-6 text-white" />
-    </button>
+      <div className="flex flex-col items-center text-white">
+        <span className="text-sm mb-2 opacity-80">Давайте начнем</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
   );
 };
 

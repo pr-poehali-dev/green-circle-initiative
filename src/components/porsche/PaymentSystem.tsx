@@ -1,182 +1,190 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import Icon from "@/components/ui/icon";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 
-interface PaymentProps {
-  amount: number;
-  modelName: string;
-  onSuccess: () => void;
-  onCancel: () => void;
-}
-
-const PaymentSystem = ({ amount, modelName, onSuccess, onCancel }: PaymentProps) => {
-  const [paymentMethod, setPaymentMethod] = useState("card");
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(price);
-  };
-  
-  const handlePayment = () => {
-    setIsProcessing(true);
-    
-    // Имитация обработки платежа
-    setTimeout(() => {
-      setIsProcessing(false);
-      setIsSuccess(true);
-      
-      // Закрыть диалог после успешной оплаты
-      setTimeout(() => {
-        onSuccess();
-      }, 2000);
-    }, 2000);
-  };
-  
+const PaymentSystem = () => {
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle className="text-xl">Оформление платежа</CardTitle>
-        <CardDescription>
-          Предоплата за {modelName} {formatPrice(amount)}
-        </CardDescription>
-      </CardHeader>
-      
-      <CardContent>
-        <Tabs defaultValue="card" onValueChange={setPaymentMethod}>
-          <TabsList className="grid grid-cols-3 mb-6">
-            <TabsTrigger value="card">Картой</TabsTrigger>
-            <TabsTrigger value="sbp">СБП</TabsTrigger>
-            <TabsTrigger value="crypto">Криптовалюта</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="card" className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="cardNumber">Номер карты</Label>
-              <Input 
-                id="cardNumber" 
-                placeholder="0000 0000 0000 0000" 
-                maxLength={19}
-                onChange={(e) => {
-                  // Форматирование номера карты с пробелами
-                  let value = e.target.value.replace(/\s+/g, '');
-                  value = value.replace(/[^0-9]/gi, '');
-                  const parts = [];
-                  for (let i = 0; i < value.length; i += 4) {
-                    parts.push(value.substring(i, i + 4));
-                  }
-                  e.target.value = parts.join(' ');
-                }}
-              />
-            </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="expiry">Срок действия</Label>
-                <Input 
-                  id="expiry" 
-                  placeholder="ММ/ГГ" 
-                  maxLength={5}
-                  onChange={(e) => {
-                    // Форматирование срока действия карты
-                    let value = e.target.value.replace(/\//g, '');
-                    value = value.replace(/[^0-9]/gi, '');
-                    if (value.length > 2) {
-                      value = value.substring(0, 2) + '/' + value.substring(2);
-                    }
-                    e.target.value = value;
-                  }}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="cvv">CVV</Label>
-                <Input id="cvv" type="password" placeholder="***" maxLength={3} />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="cardHolder">Имя владельца</Label>
-              <Input id="cardHolder" placeholder="IVAN IVANOV" />
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="sbp" className="space-y-4">
-            <div className="flex flex-col items-center space-y-4">
-              <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                <span className="text-gray-400">QR-код СБП</span>
-              </div>
-              <p className="text-center text-sm text-gray-600">
-                Отсканируйте QR-код с помощью приложения банка для оплаты через Систему Быстрых Платежей
-              </p>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="crypto" className="space-y-4">
-            <RadioGroup defaultValue="btc">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="btc" id="btc" />
-                <Label htmlFor="btc">Bitcoin (BTC)</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="eth" id="eth" />
-                <Label htmlFor="eth">Ethereum (ETH)</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="usdt" id="usdt" />
-                <Label htmlFor="usdt">Tether (USDT)</Label>
-              </div>
-            </RadioGroup>
-            
-            <div className="mt-4 p-3 bg-gray-100 rounded-md break-all">
-              <p className="text-xs font-mono">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</p>
-            </div>
-            <p className="text-center text-sm text-gray-600">
-              Отправьте эквивалент {formatPrice(amount)} на указанный адрес
+    <div className="bg-white rounded-lg shadow-md">
+      <Tabs defaultValue="credit">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="credit">Кредит</TabsTrigger>
+          <TabsTrigger value="lease">Лизинг</TabsTrigger>
+          <TabsTrigger value="trade">Trade-in</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="credit" className="p-6">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Специальные кредитные программы</h3>
+            <p className="text-gray-600">
+              Мы предлагаем выгодные условия кредитования при покупке вашего нового Porsche. 
+              Наши финансовые консультанты всегда помогут подобрать оптимальную программу.
             </p>
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-      
-      <CardFooter className="flex justify-between">
-        <Button variant="outline" onClick={onCancel}>Отмена</Button>
-        <Button 
-          onClick={handlePayment} 
-          disabled={isProcessing}
-        >
-          {isProcessing ? (
-            <>
-              <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-              Обработка
-            </>
-          ) : "Оплатить"}
-        </Button>
-      </CardFooter>
-      
-      {/* Диалог успешной оплаты */}
-      <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Icon name="CheckCircle" className="text-green-500" />
-              Оплата успешно выполнена
-            </DialogTitle>
-            <DialogDescription>
-              Ваш платеж за {modelName} успешно обработан. Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button onClick={onSuccess} className="w-full">Готово</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </Card>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Стандарт</CardTitle>
+                  <CardDescription>Базовая кредитная программа</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm">
+                    <li>• Ставка от 7.9% годовых</li>
+                    <li>• Первый взнос от 20%</li>
+                    <li>• Срок до 5 лет</li>
+                    <li>• Быстрое одобрение</li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" className="w-full">Подробнее</Button>
+                </CardFooter>
+              </Card>
+              
+              <Card className="border-primary">
+                <CardHeader>
+                  <div className="flex justify-between items-center">
+                    <CardTitle>Премиум</CardTitle>
+                    <span className="bg-primary text-white text-xs px-2 py-1 rounded">Популярно</span>
+                  </div>
+                  <CardDescription>Для постоянных клиентов</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm">
+                    <li>• Ставка от 5.9% годовых</li>
+                    <li>• Первый взнос от 15%</li>
+                    <li>• Срок до 7 лет</li>
+                    <li>• Страхование включено</li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full">Рассчитать платеж</Button>
+                </CardFooter>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle>Бизнес</CardTitle>
+                  <CardDescription>Для корпоративных клиентов</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm">
+                    <li>• Ставка от 6.5% годовых</li>
+                    <li>• Первый взнос от 10%</li>
+                    <li>• Срок до 6 лет</li>
+                    <li>• Налоговые преимущества</li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" className="w-full">Подробнее</Button>
+                </CardFooter>
+              </Card>
+            </div>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="lease" className="p-6">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Лизинговые программы</h3>
+            <p className="text-gray-600">
+              Porsche Financial Services предлагает гибкие условия лизинга для частных и корпоративных клиентов.
+              Приобретайте автомобиль вашей мечты с минимальными затратами.
+            </p>
+            
+            <div className="mt-6 space-y-4">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-medium mb-2">Преимущества лизинга с Porsche:</h4>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Экономия на налогах
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Минимальный первоначальный взнос
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Включение всех расходов в платежи
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Возможность обновления автомобиля
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Фиксированные ежемесячные платежи
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Гибкие условия договора
+                  </li>
+                </ul>
+              </div>
+              
+              <Button className="mt-4">Получить индивидуальное предложение</Button>
+            </div>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="trade" className="p-6">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Программа Trade-in</h3>
+            <p className="text-gray-600">
+              Обменяйте ваш текущий автомобиль на новый Porsche с доплатой. 
+              Мы предложим выгодные условия и позаботимся обо всех формальностях.
+            </p>
+            
+            <div className="mt-6">
+              <h4 className="font-medium mb-4">Как работает программа Trade-in:</h4>
+              <ol className="space-y-4">
+                <li className="flex">
+                  <span className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white mr-3">1</span>
+                  <div>
+                    <h5 className="font-medium">Оценка вашего автомобиля</h5>
+                    <p className="text-sm text-gray-600">Наши специалисты проведут бесплатную оценку технического состояния вашего автомобиля</p>
+                  </div>
+                </li>
+                <li className="flex">
+                  <span className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white mr-3">2</span>
+                  <div>
+                    <h5 className="font-medium">Выбор нового Porsche</h5>
+                    <p className="text-sm text-gray-600">Подберите новый автомобиль из нашего модельного ряда</p>
+                  </div>
+                </li>
+                <li className="flex">
+                  <span className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white mr-3">3</span>
+                  <div>
+                    <h5 className="font-medium">Оформление документов</h5>
+                    <p className="text-sm text-gray-600">Мы поможем оформить все необходимые документы в кратчайшие сроки</p>
+                  </div>
+                </li>
+                <li className="flex">
+                  <span className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white mr-3">4</span>
+                  <div>
+                    <h5 className="font-medium">Получение нового автомобиля</h5>
+                    <p className="text-sm text-gray-600">Заберите ваш новый Porsche в удобное для вас время</p>
+                  </div>
+                </li>
+              </ol>
+              
+              <Button className="mt-6">Оценить ваш автомобиль</Button>
+            </div>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 };
 

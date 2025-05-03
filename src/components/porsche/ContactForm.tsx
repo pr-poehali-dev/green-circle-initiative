@@ -1,132 +1,82 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { useState } from "react";
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
+  const [formState, setFormState] = useState({
     name: "",
-    phone: "",
     email: "",
-    interest: "",
+    phone: "",
     message: "",
-    agreement: false
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData(prev => ({ ...prev, interest: value }));
-  };
-
-  const handleAgreementChange = (checked: boolean) => {
-    setFormData(prev => ({ ...prev, agreement: checked }));
+    setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    // Здесь будет отправка формы
+    // Здесь будет логика отправки формы
+    console.log("Form submitted:", formState);
+    alert("Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.");
+    setFormState({ name: "", email: "", phone: "", message: "" });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <Label htmlFor="name">Как к вам обращаться</Label>
-        <Input 
-          id="name" 
+        <Input
+          type="text"
           name="name"
-          placeholder="Ваше имя" 
-          value={formData.name}
+          placeholder="Ваше имя"
+          value={formState.name}
           onChange={handleChange}
           required
-          className="mt-1"
+          className="w-full"
         />
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor="phone">Телефон</Label>
-          <Input 
-            id="phone" 
-            name="phone"
-            placeholder="+7 (___) ___-__-__" 
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className="mt-1"
-          />
-        </div>
-        <div>
-          <Label htmlFor="email">Email</Label>
-          <Input 
-            id="email" 
-            name="email"
-            type="email" 
-            placeholder="your@email.com" 
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="mt-1"
-          />
-        </div>
-      </div>
-      
       <div>
-        <Label htmlFor="interest">Что вас интересует?</Label>
-        <Select onValueChange={handleSelectChange}>
-          <SelectTrigger id="interest" className="mt-1">
-            <SelectValue placeholder="Выберите из списка" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="test-drive">Тест-драйв</SelectItem>
-            <SelectItem value="purchase">Покупка автомобиля</SelectItem>
-            <SelectItem value="service">Сервисное обслуживание</SelectItem>
-            <SelectItem value="other">Другое</SelectItem>
-          </SelectContent>
-        </Select>
+        <Input
+          type="email"
+          name="email"
+          placeholder="Ваш email"
+          value={formState.email}
+          onChange={handleChange}
+          required
+          className="w-full"
+        />
       </div>
-      
       <div>
-        <Label htmlFor="message">Ваше сообщение</Label>
-        <Textarea 
-          id="message" 
+        <Input
+          type="tel"
+          name="phone"
+          placeholder="Ваш телефон"
+          value={formState.phone}
+          onChange={handleChange}
+          required
+          className="w-full"
+        />
+      </div>
+      <div>
+        <Textarea
           name="message"
-          placeholder="Расскажите подробнее о вашем запросе" 
-          value={formData.message}
+          placeholder="Ваше сообщение или вопрос..."
+          value={formState.message}
           onChange={handleChange}
-          className="mt-1 h-32"
+          rows={4}
+          className="w-full"
         />
       </div>
-      
-      <div className="flex items-start space-x-2">
-        <Checkbox 
-          id="agreement" 
-          checked={formData.agreement}
-          onCheckedChange={handleAgreementChange}
-          required
-        />
-        <Label htmlFor="agreement" className="text-sm text-gray-600">
-          Я согласен на обработку персональных данных и принимаю условия политики конфиденциальности
-        </Label>
-      </div>
-      
-      <Button type="submit" className="bg-red-600 hover:bg-red-700 w-full">
+      <Button type="submit" size="lg" className="w-full">
         Отправить сообщение
       </Button>
+      <p className="text-gray-500 text-sm text-center">
+        Нажимая кнопку, вы соглашаетесь с нашей политикой конфиденциальности.
+        Мы гарантируем защиту ваших персональных данных!
+      </p>
     </form>
   );
 };

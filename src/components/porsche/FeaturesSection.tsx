@@ -1,58 +1,49 @@
 
 import FeatureCard from "./FeatureCard";
-import Icon from "@/components/ui/icon";
-
-const features = [
-  {
-    icon: "Sparkles",
-    title: "Инновационные технологии",
-    description: "Наслаждайтесь передовыми технологиями, которые делают каждую поездку комфортнее и интереснее"
-  },
-  {
-    icon: "Timer",
-    title: "Невероятная динамика",
-    description: "Почувствуйте мощь и скорость, которые буквально приковывают вас к сиденью при каждом ускорении"
-  },
-  {
-    icon: "Settings",
-    title: "Немецкое качество",
-    description: "Оцените безупречное исполнение каждой детали — результат легендарной немецкой инженерной мысли"
-  },
-  {
-    icon: "Heart",
-    title: "Эмоциональный дизайн",
-    description: "Влюбитесь в каждую линию кузова, созданную с любовью к скорости и аэродинамике"
-  },
-  {
-    icon: "Shield",
-    title: "Максимальная безопасность",
-    description: "Доверьтесь системам безопасности, которые заботятся о вас и ваших близких в любой ситуации"
-  },
-  {
-    icon: "Crown",
-    title: "Особый статус",
-    description: "Станьте частью эксклюзивного сообщества владельцев Porsche — символа успеха и хорошего вкуса"
-  }
-];
 
 const FeaturesSection = () => {
   return (
     <section id="features" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">Почему Porsche — это особенный выбор</h2>
-        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-16">
-          Каждый Porsche создан с особой философией, которая делает его не просто автомобилем, а источником вдохновения и радости
-        </p>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Почему выбирают Porsche?</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Каждый Porsche создан с любовью к деталям и стремлением к совершенству. 
+            Узнайте, что делает Porsche особенным автомобилем
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <FeatureCard 
-              key={index} 
-              icon={feature.icon} 
-              title={feature.title} 
-              description={feature.description} 
-            />
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <FeatureCard
+            icon={<span>⚡</span>}
+            title="Невероятная динамика"
+            description="Почувствуйте захватывающий разгон и управляемость, которые подарят вам незабываемые эмоции от каждой поездки"
+          />
+          <FeatureCard
+            icon={<span>🛠️</span>}
+            title="Инженерное совершенство"
+            description="Более 70 лет опыта в создании спортивных автомобилей с немецкой точностью и вниманием к каждой детали"
+          />
+          <FeatureCard
+            icon={<span>🏆</span>}
+            title="Богатое наследие"
+            description="Присоединитесь к легендарной истории марки с богатыми спортивными традициями и уникальным наследием"
+          />
+          <FeatureCard
+            icon={<span>🌿</span>}
+            title="Экологичность"
+            description="Современные технологии и экологичные решения для ответственного вождения и заботы о нашей планете"
+          />
+          <FeatureCard
+            icon={<span>💎</span>}
+            title="Эксклюзивность"
+            description="Станьте частью избранного сообщества владельцев, где каждый автомобиль отражает индивидуальность своего хозяина"
+          />
+          <FeatureCard
+            icon={<span>🔧</span>}
+            title="Надёжная поддержка"
+            description="Наша дружелюбная команда профессионалов всегда готова помочь с обслуживанием и любыми вопросами о вашем Porsche"
+          />
         </div>
       </div>
     </section>
