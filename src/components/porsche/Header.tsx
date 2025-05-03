@@ -24,10 +24,10 @@ const Header = () => {
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled 
           ? "bg-black/50 backdrop-blur-md" 
-          : "bg-transparent backdrop-blur-sm"
+          : "bg-gradient-to-b from-black/80 via-black/40 to-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center relative">
         <div className="flex items-center space-x-2">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -65,27 +65,27 @@ const Header = () => {
               c0.4,0,0.9,0,1.3-0.1c0.3-0.1,0.6-0.2,0.8-0.3c0.3-0.1,0.5-0.3,0.7-0.5c0.2-0.2,0.4-0.4,0.5-0.6c0.1-0.2,0.3-0.5,0.3-0.8
               c0.1-0.1,0.1-0.3,0.1-0.4c0-0.1,0.1-0.3,0.1-0.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4C23,9.9,23,9.6,22.9,9.4C22.9,9.7,22.9,9.9,22.9,10.2z" />
           </svg>
-          <span className="text-xl font-semibold text-white">Porsche Центр</span>
+          <span className="text-xl font-semibold text-white drop-shadow-md">Porsche Центр</span>
         </div>
 
         {/* Десктопное меню */}
         <nav className="hidden md:flex space-x-8">
-          <a href="#models" className="text-white hover:text-primary/90 transition-colors">
+          <a href="#models" className="text-white hover:text-red-400 transition-colors drop-shadow-md">
             Наши модели
           </a>
-          <a href="#features" className="text-white hover:text-primary/90 transition-colors">
+          <a href="#features" className="text-white hover:text-red-400 transition-colors drop-shadow-md">
             Почему Porsche?
           </a>
-          <a href="#contact" className="text-white hover:text-primary/90 transition-colors">
+          <a href="#contact" className="text-white hover:text-red-400 transition-colors drop-shadow-md">
             Связаться с нами
           </a>
         </nav>
 
         <div className="hidden md:block">
-          <Button variant="outline" className="mr-2 border-white text-white hover:bg-white/20">
+          <Button variant="outline" className="mr-2 border-white text-white hover:bg-white/20 shadow-lg">
             Запись на тест-драйв
           </Button>
-          <Button className="bg-white text-black hover:bg-white/90">
+          <Button className="bg-red-600 text-white hover:bg-red-700 shadow-lg border-none">
             Позвонить нам
           </Button>
         </div>
@@ -112,21 +112,21 @@ const Header = () => {
 
       {/* Мобильное меню выпадающее */}
       {isMenuOpen && (
-        <div className="md:hidden bg-black/70 backdrop-blur-md shadow-lg animate-fade-in">
+        <div className="md:hidden bg-black/90 backdrop-blur-md shadow-lg animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <a href="#models" className="text-white hover:text-primary/90 transition-colors py-2 border-b border-gray-700">
+            <a href="#models" className="text-white hover:text-red-400 transition-colors py-2 border-b border-gray-700">
               Наши модели
             </a>
-            <a href="#features" className="text-white hover:text-primary/90 transition-colors py-2 border-b border-gray-700">
+            <a href="#features" className="text-white hover:text-red-400 transition-colors py-2 border-b border-gray-700">
               Почему Porsche?
             </a>
-            <a href="#contact" className="text-white hover:text-primary/90 transition-colors py-2 border-b border-gray-700">
+            <a href="#contact" className="text-white hover:text-red-400 transition-colors py-2 border-b border-gray-700">
               Связаться с нами
             </a>
             <Button variant="outline" className="w-full border-white text-white hover:bg-white/20">
               Запись на тест-драйв
             </Button>
-            <Button className="w-full bg-white text-black hover:bg-white/90">
+            <Button className="w-full bg-red-600 text-white hover:bg-red-700 border-none">
               Позвонить нам
             </Button>
           </div>
