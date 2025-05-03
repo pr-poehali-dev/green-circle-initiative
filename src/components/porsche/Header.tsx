@@ -84,7 +84,7 @@ const Header = () => {
         <div className="hidden md:block">
           <Button 
             variant="outline" 
-            className="mr-2 border-white text-white hover:bg-white/20 shadow-lg"
+            className="mr-2 border-white text-white bg-transparent hover:bg-white/20 shadow-lg"
             onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Запись на тест-драйв
@@ -129,7 +129,7 @@ const Header = () => {
             </a>
             <Button 
               variant="outline" 
-              className="w-full border-white text-white hover:bg-white/20"
+              className="w-full border-white text-white bg-transparent hover:bg-white/20"
               onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Запись на тест-драйв
