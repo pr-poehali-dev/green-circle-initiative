@@ -82,7 +82,11 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:block">
-          <Button variant="outline" className="mr-2 border-white text-white hover:bg-white/20 shadow-lg">
+          <Button 
+            variant="outline" 
+            className="mr-2 bg-[#D5001C] hover:bg-[#B0001A] text-white shadow-lg border-none"
+            onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             Запись на тест-драйв
           </Button>
           <Button className="bg-red-600 text-white hover:bg-red-700 shadow-lg border-none">
@@ -123,7 +127,11 @@ const Header = () => {
             <a href="#contact" className="text-white hover:text-red-400 transition-colors py-2 border-b border-gray-700">
               Связаться с нами
             </a>
-            <Button variant="outline" className="w-full border-white text-white hover:bg-white/20">
+            <Button 
+              variant="outline" 
+              className="w-full bg-[#D5001C] hover:bg-[#B0001A] text-white border-none"
+              onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               Запись на тест-драйв
             </Button>
             <Button className="w-full bg-red-600 text-white hover:bg-red-700 border-none">
