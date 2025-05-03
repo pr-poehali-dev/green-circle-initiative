@@ -24,7 +24,7 @@ const HeroContent = () => {
           className="bg-[#D5001C] hover:bg-[#B0001A] text-white font-medium px-8"
           onClick={scrollToContact}
         >
-          Записаться
+          Записаться на тест-драйв
         </Button>
         
         <Button 
@@ -33,7 +33,7 @@ const HeroContent = () => {
           className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20"
           onClick={() => document.getElementById('models-section')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          Модельный ряд
+          Узнать больше
         </Button>
       </div>
     </div>

@@ -23,7 +23,7 @@ const CallToAction = () => {
               size="lg" 
               className="bg-[#D5001C] hover:bg-[#B0001A] text-white font-medium px-6"
             >
-              Записаться на тест-драйв
+              Записаться
             </Button>
           </Link>
         </div>
