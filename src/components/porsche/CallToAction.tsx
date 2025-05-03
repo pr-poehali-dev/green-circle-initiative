@@ -2,31 +2,23 @@
 import { Button } from "@/components/ui/button";
 
 const CallToAction = () => {
-  const scrollToContactForm = () => {
-    const contactSection = document.querySelector("#contact-section");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section className="relative py-20 px-6 overflow-hidden">
-      <div 
-        className="absolute inset-0 bg-cover bg-center brightness-[0.3]" 
-        style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&h=1300&q=80')"
-        }}
-      />
-      
-      <div className="relative max-w-7xl mx-auto text-white text-center">
-        <h2 className="text-4xl font-bold mb-6">Запишитесь на тест-драйв сегодня</h2>
-        <p className="text-xl mb-8 max-w-3xl mx-auto">Ощутите непередаваемые эмоции за рулем Porsche. Наши специалисты помогут подобрать идеальную модель для вас.</p>
-        <Button 
-          className="bg-red-600 hover:bg-red-700 text-white text-lg px-8 py-6"
-          onClick={scrollToContactForm}
-        >
-          Записаться на тест-драйв
-        </Button>
+    <section className="py-16 bg-gray-900 text-white">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Готовы испытать настоящие эмоции за рулём?
+        </h2>
+        <p className="max-w-2xl mx-auto text-gray-300 mb-8">
+          Запишитесь на персональный тест-драйв и почувствуйте, почему Porsche — это больше, чем просто автомобиль. Это начало вашей новой истории.
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-3">
+            Записаться на тест-драйв
+          </Button>
+          <Button variant="outline" className="border-white text-white hover:bg-white/10">
+            Узнать больше о моделях
+          </Button>
+        </div>
       </div>
     </section>
   );

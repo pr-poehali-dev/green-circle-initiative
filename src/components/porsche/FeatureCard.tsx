@@ -1,27 +1,24 @@
 
+import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
-import { LucideIcon } from "lucide-react";
-
-export interface Feature {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-}
 
 interface FeatureCardProps {
-  feature: Feature;
+  icon: string;
+  title: string;
+  description: string;
 }
 
-const FeatureCard = ({ feature }: FeatureCardProps) => {
+const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className="bg-white rounded-full p-6 mb-4 shadow-md">
-        <Icon name={feature.icon} size={48} />
-      </div>
-      <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-      <p className="text-gray-600">{feature.description}</p>
-    </div>
+    <Card className="hover-scale transition-all duration-300 border-none shadow-md hover:shadow-lg">
+      <CardContent className="pt-6">
+        <div className="bg-red-600 w-12 h-12 rounded-full flex items-center justify-center mb-6">
+          <Icon name={icon} className="w-6 h-6 text-white" />
+        </div>
+        <h3 className="text-xl font-semibold mb-3">{title}</h3>
+        <p className="text-gray-600">{description}</p>
+      </CardContent>
+    </Card>
   );
 };
 

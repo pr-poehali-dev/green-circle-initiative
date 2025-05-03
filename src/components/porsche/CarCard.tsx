@@ -1,33 +1,61 @@
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { 
+  Card, 
+  CardContent, 
+  CardDescription, 
+  CardFooter, 
+  CardHeader, 
+  CardTitle 
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
-export interface CarModel {
-  id: string;
+interface CarFeature {
   name: string;
-  image: string;
+  value: string;
+}
+
+interface Car {
+  id: number;
+  name: string;
   description: string;
+  price: string;
+  imageUrl: string;
+  features: string[];
 }
 
 interface CarCardProps {
-  car: CarModel;
+  car: Car;
 }
 
 const CarCard = ({ car }: CarCardProps) => {
   return (
-    <Card className="overflow-hidden hover-scale flex flex-col h-full">
-      <div className="h-64 overflow-hidden">
+    <Card className="overflow-hidden hover-scale transition-all duration-300">
+      <div className="h-52 overflow-hidden">
         <img 
-          src={car.image} 
-          alt={`Porsche ${car.name}`} 
-          className="w-full h-full object-cover"
+          src={car.imageUrl} 
+          alt={car.name} 
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
         />
       </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-2xl font-bold mb-2">{car.name}</h3>
-        <p className="text-gray-600 mb-4 flex-grow">{car.description}</p>
-        <Button className="w-full mt-auto bg-porsche-green hover:bg-porsche-green-light">Подробнее</Button>
-      </div>
+      <CardHeader>
+        <CardTitle>{car.name}</CardTitle>
+        <CardDescription className="text-gray-600 mt-1">{car.price}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-gray-700 mb-4">{car.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {car.features.map((feature, index) => (
+            <Badge key={index} variant="outline" className="bg-gray-100">
+              {feature}
+            </Badge>
+          ))}
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Подробнее</Button>
+        <Button className="bg-red-600 hover:bg-red-700">Тест-драйв</Button>
+      </CardFooter>
     </Card>
   );
 };

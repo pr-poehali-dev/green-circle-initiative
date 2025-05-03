@@ -1,22 +1,44 @@
 
-import React from "react";
+import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 interface ScrollChevronProps {
-  onClick: () => void;
+  targetId: string;
 }
 
-const ScrollChevron: React.FC<ScrollChevronProps> = ({ onClick }) => {
+const ScrollChevron = ({ targetId }: ScrollChevronProps) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTarget = () => {
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
-      <button 
-        onClick={onClick}
-        className="bg-white/10 hover:bg-white/20 transition-colors p-3 rounded-full backdrop-blur-sm"
-        aria-label="Прокрутить вниз"
-      >
-        <Icon name="ChevronDown" size={32} className="text-white" />
-      </button>
-    </div>
+    <button
+      className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-300 animate-bounce ${
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`}
+      onClick={scrollToTarget}
+      aria-label="Прокрутить вниз"
+    >
+      <Icon name="ChevronDown" className="w-6 h-6 text-white" />
+    </button>
   );
 };
 

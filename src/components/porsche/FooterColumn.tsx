@@ -1,16 +1,32 @@
 
-import { ReactNode } from "react";
+import { Link } from "react-router-dom";
+
+interface FooterLink {
+  name: string;
+  href: string;
+}
 
 interface FooterColumnProps {
   title: string;
-  children: ReactNode;
+  links: FooterLink[];
 }
 
-const FooterColumn = ({ title, children }: FooterColumnProps) => {
+const FooterColumn = ({ title, links }: FooterColumnProps) => {
   return (
     <div>
-      <h3 className="text-lg font-bold mb-4">{title}</h3>
-      {children}
+      <h3 className="text-lg font-semibold mb-4">{title}</h3>
+      <ul className="space-y-3">
+        {links.map((link, index) => (
+          <li key={index}>
+            <Link 
+              to={link.href} 
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
