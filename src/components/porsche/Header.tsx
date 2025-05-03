@@ -1,5 +1,4 @@
 
-import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 
 const Header = () => {
@@ -36,7 +35,6 @@ const Header = () => {
             height="36"
             className="text-red-600 fill-current"
           >
-            {/* Силуэт спортивного автомобиля Porsche */}
             <path d="M22.9,10.2l-1.2-4.5C21.6,5.3,21.2,5,20.8,5h-2.3v0.5c0,0.1-0.1,0.2-0.2,0.2h-5.2c-0.1,0-0.2-0.1-0.2-0.2V5H7.7
               c-0.1,0-0.2,0-0.3,0.1C7.3,5.2,7.1,5.3,7.1,5.5c-0.1,0.2-0.2,0.3-0.4,0.3c-0.2,0-0.4,0-0.5,0.1C5.8,6.1,5.5,6.5,5.3,7
               C5.2,7.2,5.2,7.5,5.1,7.8c-0.1,0.3-0.1,0.5-0.2,0.8c0,0.2-0.1,0.5-0.2,0.7c-0.1,0.2-0.1,0.5-0.1,0.7l0,0.1c0,0.3,0,0.5,0.1,0.8
@@ -46,7 +44,7 @@ const Header = () => {
               c0.4-0.1,0.8-0.2,1.1-0.4c0.3-0.2,0.6-0.4,0.8-0.8c0.2-0.3,0.4-0.7,0.5-1.1c0.1-0.4,0.2-0.7,0.3-1.1c0-0.1,0.1-0.2,0.1-0.3
               c0.1-0.1,0.1-0.2,0.2-0.2c0.1,0,0.2-0.1,0.3-0.1c0.2,0,0.4,0,0.6,0c0.1,0,0.2,0,0.3,0c0.2,0,0.3,0,0.5,0c0.1,0,0.1,0,0.2-0.1
               c0.2-0.1,0.4-0.3,0.6-0.4c0.2-0.2,0.3-0.4,0.5-0.6c0.1-0.2,0.2-0.4,0.3-0.6c0.1-0.2,0.1-0.5,0.1-0.8l0-0.1c0-0.2-0.1-0.5-0.1-0.7
-              c-0.1-0.2-0.1-0.5-0.2-0.7c-0.1-0.3-0.2-0.5-0.2-0.8C18,7.5,17.9,7.2,17.8,7c-0.1-0.1-0.1-0.3-0.3-0.4c-0.1-0.1-0.3-0.2-0.4-0.3
+              c-0.1-0.2-0.1-0.5-0.2-0.7c-0.1-0.3-0.2-0.5-0.2-0.8C17,7.5,16.9,7.2,16.8,7c-0.1-0.1-0.1-0.3-0.3-0.4c-0.1-0.1-0.3-0.2-0.4-0.3
               C17,6.2,16.9,6.1,16.8,6c-0.1-0.1-0.2-0.2-0.4-0.2H16c-0.2,0-0.5,0-0.7,0c-0.1,0-0.2,0-0.3,0h-0.1c0,0,0,0-0.1,0h-0.1
               c0,0,0,0-0.1,0h-0.1c0,0,0,0-0.1,0c-0.1,0-0.1,0-0.2,0h-0.1c0,0,0,0-0.1,0c-0.1,0-0.3,0-0.4,0.1c-0.1,0-0.2,0.1-0.2,0.2
               c-0.1,0.1-0.1,0.2-0.2,0.3c-0.1,0.1-0.1,0.3-0.1,0.4c0,0,0,0.1,0,0.1c0,0.1,0,0.1,0,0.2c0,0.1,0,0.2,0,0.2c0,0.1,0,0.1,0,0.2
@@ -82,16 +80,9 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:block">
-          <Button 
-            variant="outline" 
-            className="mr-2 border-white text-white bg-transparent hover:bg-white/20 shadow-lg"
-            onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Запись на тест-драйв
-          </Button>
-          <Button className="bg-red-600 text-white hover:bg-red-700 shadow-lg border-none">
+          <button className="bg-red-600 text-white hover:bg-red-700 shadow-lg border-none px-4 py-2 rounded-md">
             Позвонить нам
-          </Button>
+          </button>
         </div>
 
         {/* Мобильное меню */}
@@ -127,16 +118,9 @@ const Header = () => {
             <a href="#contact" className="text-white hover:text-red-400 transition-colors py-2 border-b border-gray-700">
               Связаться с нами
             </a>
-            <Button 
-              variant="outline" 
-              className="w-full border-white text-white bg-transparent hover:bg-white/20"
-              onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Запись на тест-драйв
-            </Button>
-            <Button className="w-full bg-red-600 text-white hover:bg-red-700 border-none">
+            <button className="w-full bg-red-600 text-white hover:bg-red-700 border-none py-2 rounded-md">
               Позвонить нам
-            </Button>
+            </button>
           </div>
         </div>
       )}
