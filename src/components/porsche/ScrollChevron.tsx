@@ -1,16 +1,24 @@
 
-const ScrollChevron = () => {
-  const scrollToModels = () => {
-    const modelsSection = document.getElementById("models");
-    if (modelsSection) {
-      modelsSection.scrollIntoView({ behavior: "smooth" });
+interface ScrollChevronProps {
+  onClick?: () => void;
+}
+
+const ScrollChevron = ({ onClick }: ScrollChevronProps) => {
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      const modelsSection = document.getElementById("models");
+      if (modelsSection) {
+        modelsSection.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
   return (
     <div
-      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer animate-bounce"
-      onClick={scrollToModels}
+      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer animate-bounce"
+      onClick={handleClick}
     >
       <div className="flex flex-col items-center text-white">
         <span className="text-sm mb-2 opacity-80">Давайте начнем</span>
