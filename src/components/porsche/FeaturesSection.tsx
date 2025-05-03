@@ -4,35 +4,38 @@ import FeatureCard from "./FeatureCard";
 const FeaturesSection = () => {
   const features = [
     {
-      title: "Индивидуальный подход",
-      description: "Мы понимаем, что каждый клиент уникален. Наши эксперты создадут конфигурацию автомобиля точно под ваши предпочтения и стиль жизни.",
-      icon: "UserCheck"
+      title: "Передовые технологии",
+      description: "Инновационные решения, объединяющие цифровые технологии и безупречную механику для исключительного контроля на дороге.",
+      icon: "Zap"
     },
     {
-      title: "Премиальный сервис",
-      description: "Наша забота о вас не заканчивается после покупки. Мы гарантируем первоклассное обслуживание и персонального консультанта 24/7.",
-      icon: "Star"
+      title: "Безупречный дизайн",
+      description: "Узнаваемые аэродинамические линии, созданные с вниманием к каждой детали — воплощение элегантности и спортивного характера.",
+      icon: "Paintbrush"
     },
     {
-      title: "Гибкие финансовые решения",
-      description: "Мы разработаем индивидуальное финансовое предложение, которое идеально впишется в ваши планы и бюджет.",
-      icon: "Wallet"
+      title: "Высочайшие стандарты безопасности",
+      description: "Комплексная система активной и пассивной безопасности, обеспечивающая защиту даже в экстремальных условиях.",
+      icon: "Shield"
     }
   ];
 
   return (
-    <section id="features" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-          Ваше особое отношение к жизни заслуживает особого отношения к вам
-        </h2>
-        <p className="text-lg text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-          Выбирая Porsche, вы выбираете не просто автомобиль премиум-класса, но и исключительный уровень заботы о вас как о клиенте.
-        </p>
-
-        <div className="grid md:grid-cols-3 gap-10">
+    <section className="py-16 md:py-24 bg-white" id="features-section">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Преимущества Porsche
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Каждый автомобиль Porsche — это произведение искусства, 
+            в котором сочетаются инновации, совершенство и страсть к вождению.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {features.map((feature, index) => (
-            <FeatureCard
+            <FeatureCard 
               key={index}
               title={feature.title}
               description={feature.description}
