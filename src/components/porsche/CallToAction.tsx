@@ -22,7 +22,7 @@ const CallToAction = () => {
         <h2 className="text-4xl font-bold mb-6">Запишитесь на тест-драйв сегодня</h2>
         <p className="text-xl mb-8 max-w-3xl mx-auto">Ощутите непередаваемые эмоции за рулем Porsche. Наши специалисты помогут подобрать идеальную модель для вас.</p>
         <Button 
-          className="bg-porsche-green hover:bg-porsche-green-light text-white text-lg px-8 py-6"
+          className="bg-white hover:bg-gray-100 text-black text-lg px-8 py-6"
           onClick={scrollToContactForm}
         >
           Записаться на тест-драйв
