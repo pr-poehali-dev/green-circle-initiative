@@ -7,6 +7,7 @@ const HeroBackground = () => {
         alt="Porsche"
         className="w-full h-full object-cover"
       />
+      <div className="absolute inset-0 bg-black/40"></div>
     </div>
   );
 };

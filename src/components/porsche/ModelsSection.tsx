@@ -1,12 +1,12 @@
 
-import { Button } from "@/components/ui/button";
 import CarCard from "./CarCard";
 
 const ModelsSection = () => {
   const cars = [
     {
+      id: "911",
       name: "Porsche 911",
-      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1553440569-bcc610516146?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       price: "11 200 000 ₽",
       specs: {
         power: "385 л.с.",
@@ -15,8 +15,9 @@ const ModelsSection = () => {
       },
     },
     {
+      id: "taycan",
       name: "Porsche Taycan",
-      image: "https://images.unsplash.com/photo-1607603750909-408f4cbcf8b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1618509731442-9c9a2eab45b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       price: "7 890 000 ₽",
       specs: {
         power: "408 л.с.",
@@ -25,6 +26,7 @@ const ModelsSection = () => {
       },
     },
     {
+      id: "cayenne",
       name: "Porsche Cayenne",
       image: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       price: "6 700 000 ₽",
@@ -37,7 +39,7 @@ const ModelsSection = () => {
   ];
 
   return (
-    <section id="models" className="py-20">
+    <section id="models-section" className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Наши любимые модели</h2>
@@ -48,13 +50,10 @@ const ModelsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {cars.map((car, index) => (
+          {cars.map((car) => (
             <CarCard
-              key={index}
-              name={car.name}
-              image={car.image}
-              price={car.price}
-              specs={car.specs}
+              key={car.id}
+              {...car}
             />
           ))}
         </div>
