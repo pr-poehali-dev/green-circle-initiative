@@ -1,43 +1,63 @@
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+    <header 
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? "bg-black/50 backdrop-blur-md" 
+          : "bg-transparent backdrop-blur-sm"
+      }`}
+    >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <img src="/logo-b.svg" alt="Porsche" className="h-8" />
-          <span className="text-xl font-semibold">Porsche Центр</span>
+          <img src="/public/favicon.svg" alt="Porsche" className="h-9" />
+          <span className="text-xl font-semibold text-white">Porsche Центр</span>
         </div>
 
         {/* Десктопное меню */}
         <nav className="hidden md:flex space-x-8">
-          <a href="#models" className="text-gray-700 hover:text-primary transition-colors">
+          <a href="#models" className="text-white hover:text-primary/90 transition-colors">
             Наши модели
           </a>
-          <a href="#features" className="text-gray-700 hover:text-primary transition-colors">
+          <a href="#features" className="text-white hover:text-primary/90 transition-colors">
             Почему Porsche?
           </a>
-          <a href="#contact" className="text-gray-700 hover:text-primary transition-colors">
+          <a href="#contact" className="text-white hover:text-primary/90 transition-colors">
             Связаться с нами
           </a>
         </nav>
 
         <div className="hidden md:block">
-          <Button variant="outline" className="mr-2">
+          <Button variant="outline" className="mr-2 border-white text-white hover:bg-white/20">
             Запись на тест-драйв
           </Button>
-          <Button>
+          <Button className="bg-white text-black hover:bg-white/90">
             Позвонить нам
           </Button>
         </div>
 
         {/* Мобильное меню */}
         <button
-          className="block md:hidden text-gray-700"
+          className="block md:hidden text-white"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
@@ -57,21 +77,21 @@ const Header = () => {
 
       {/* Мобильное меню выпадающее */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg animate-fade-in">
+        <div className="md:hidden bg-black/70 backdrop-blur-md shadow-lg animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <a href="#models" className="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">
+            <a href="#models" className="text-white hover:text-primary/90 transition-colors py-2 border-b border-gray-700">
               Наши модели
             </a>
-            <a href="#features" className="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">
+            <a href="#features" className="text-white hover:text-primary/90 transition-colors py-2 border-b border-gray-700">
               Почему Porsche?
             </a>
-            <a href="#contact" className="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">
+            <a href="#contact" className="text-white hover:text-primary/90 transition-colors py-2 border-b border-gray-700">
               Связаться с нами
             </a>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full border-white text-white hover:bg-white/20">
               Запись на тест-драйв
             </Button>
-            <Button className="w-full">
+            <Button className="w-full bg-white text-black hover:bg-white/90">
               Позвонить нам
             </Button>
           </div>
