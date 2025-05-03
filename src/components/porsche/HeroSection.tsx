@@ -1,15 +1,18 @@
 
-import HeroBackground from "./HeroBackground";
 import HeroContent from "./HeroContent";
+import HeroBackground from "./HeroBackground";
 import ScrollChevron from "./ScrollChevron";
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen flex items-center overflow-hidden">
+    <section id="hero" className="relative h-screen overflow-hidden">
       <HeroBackground />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-10" />
-      <HeroContent />
-      <ScrollChevron />
+      <div className="absolute inset-0 flex items-center justify-center px-6 md:px-12 lg:px-24">
+        <HeroContent />
+      </div>
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <ScrollChevron />
+      </div>
     </section>
   );
 };
