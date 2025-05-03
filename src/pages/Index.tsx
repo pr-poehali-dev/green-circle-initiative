@@ -1,28 +1,22 @@
 
-import Header from "@/components/porsche/Header";
-import HeroSection from "@/components/porsche/HeroSection";
-import ModelsSection from "@/components/porsche/ModelsSection";
-import FeaturesSection from "@/components/porsche/FeaturesSection";
-import CallToAction from "@/components/porsche/CallToAction";
-import ContactSection from "@/components/porsche/ContactSection";
-import Footer from "@/components/porsche/Footer";
+import Header from "@/components/coffee/Header";
+import HeroSection from "@/components/coffee/HeroSection";
+import AboutSection from "@/components/coffee/AboutSection";
+import MenuSection from "@/components/coffee/MenuSection";
+import ContactSection from "@/components/coffee/ContactSection";
+import Footer from "@/components/coffee/Footer";
 
-/**
- * Главная страница лендинга по продаже Porsche
- * Состоит из нескольких секций, каждая из которых вынесена в отдельный компонент
- */
-const Index = () => {
+const CoffeeShopLanding = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-[#F5E6D3] text-[#4A3933]">
       <Header />
       <HeroSection />
-      <ModelsSection />
-      <FeaturesSection />
-      <CallToAction />
+      <AboutSection />
+      <MenuSection />
       <ContactSection />
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default CoffeeShopLanding;
