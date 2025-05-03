@@ -1,26 +1,14 @@
+// Update this page (the content is just a fallback if you fail to update the page)
 
-import Header from "@/components/porsche/Header";
-import HeroSection from "@/components/porsche/HeroSection";
-import ModelsSection from "@/components/porsche/ModelsSection";
-import FeaturesSection from "@/components/porsche/FeaturesSection";
-import PaymentSystem from "@/components/porsche/PaymentSystem";
-import ContactSection from "@/components/porsche/ContactSection";
-import CallToAction from "@/components/porsche/CallToAction";
-import Footer from "@/components/porsche/Footer";
-
-const PorscheLanding = () => {
+const Index = () => {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <Header />
-      <HeroSection />
-      <ModelsSection />
-      <FeaturesSection />
-      <PaymentSystem />
-      <ContactSection />
-      <CallToAction />
-      <Footer />
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
+        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
+      </div>
     </div>
   );
 };
 
-export default PorscheLanding;
+export default Index;
