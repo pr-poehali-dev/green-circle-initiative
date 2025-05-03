@@ -1,5 +1,5 @@
 
-import { Coffee, Tea, Cookie } from "lucide-react";
+import { Coffee, CupSoda, Cookie } from "lucide-react";
 
 const menuItems = [
   {
@@ -12,8 +12,8 @@ const menuItems = [
     ]
   },
   {
-    category: "Чай",
-    icon: Tea,
+    category: "Напитки",
+    icon: CupSoda,
     items: [
       { name: "Эрл Грей", description: "Классический черный чай с бергамотом", price: "150₽" },
       { name: "Зеленый Сенча", description: "Традиционный японский чай", price: "180₽" },
