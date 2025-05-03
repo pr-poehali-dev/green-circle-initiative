@@ -1,6 +1,5 @@
 
 import { Button } from "@/components/ui/button";
-import ScrollChevron from "./ScrollChevron";
 
 const HeroContent = () => {
   const scrollToModels = () => {
@@ -32,7 +31,6 @@ const HeroContent = () => {
           Записаться на тест-драйв
         </Button>
       </div>
-      <ScrollChevron onClick={scrollToModels} />
     </div>
   );
 };

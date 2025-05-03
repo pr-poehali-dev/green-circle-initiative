@@ -8,7 +8,7 @@ const ScrollChevron = ({ onClick }: ScrollChevronProps) => {
     if (onClick) {
       onClick();
     } else {
-      const modelsSection = document.getElementById("models");
+      const modelsSection = document.getElementById("models-section");
       if (modelsSection) {
         modelsSection.scrollIntoView({ behavior: "smooth" });
       }
@@ -17,7 +17,7 @@ const ScrollChevron = ({ onClick }: ScrollChevronProps) => {
 
   return (
     <div
-      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer animate-bounce"
+      className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer animate-bounce"
       onClick={handleClick}
     >
       <div className="flex flex-col items-center text-white">
