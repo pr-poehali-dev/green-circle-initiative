@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Coffee, TeaCup, Cake, UtensilsCrossed } from 'lucide-react';
+import Icon from '@/components/ui/Icon';
 
 const menuData = {
   coffee: [
@@ -27,10 +27,10 @@ const menuData = {
 
 // Маппинг категорий с иконками
 const categoryIcons = {
-  coffee: <Coffee className="h-6 w-6" />,
-  tea: <TeaCup className="h-6 w-6" />,
-  desserts: <Cake className="h-6 w-6" />,
-  breakfasts: <UtensilsCrossed className="h-6 w-6" />
+  coffee: "Coffee",
+  tea: "Coffee", // Заменено на Coffee, так как TeaCup нет в Lucide
+  desserts: "Cake",
+  breakfasts: "UtensilsCrossed"
 };
 
 const categoryTitles = {
@@ -60,7 +60,11 @@ const Menu = () => {
                   : 'bg-[#FFF5E6] text-[#4A3933] hover:bg-[#FFE8C8]'
               }`}
             >
-              {categoryIcons[category as keyof typeof categoryIcons]}
+              <Icon 
+                name={categoryIcons[category as keyof typeof categoryIcons]} 
+                size={24} 
+                fallback="Coffee"
+              />
               <span>{categoryTitles[category as keyof typeof categoryTitles]}</span>
             </button>
           ))}
@@ -74,8 +78,19 @@ const Menu = () => {
               className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 
                       hover:shadow-xl hover:-translate-y-1 cursor-pointer group"
             >
-              <h3 className="text-xl font-semibold text-[#4A3933] mb-2 
-                        group-hover:text-[#8B4513] transition-colors">{item.name}</h3>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-semibold text-[#4A3933] 
+                          group-hover:text-[#8B4513] transition-colors">{item.name}</h3>
+                <Icon 
+                  name={
+                    activeCategory === 'coffee' ? 'Coffee' :
+                    activeCategory === 'tea' ? 'Coffee' :
+                    activeCategory === 'desserts' ? 'Cake' : 'UtensilsCrossed'
+                  }
+                  size={20}
+                  className="text-[#8B4513] opacity-70 group-hover:opacity-100 transition-opacity"
+                />
+              </div>
               <p className="text-gray-600 mb-3 text-sm transition-opacity 
                         group-hover:opacity-100 opacity-80">{item.description}</p>
               <p className="text-[#8B4513] font-bold transition-all 

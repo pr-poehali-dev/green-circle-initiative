@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
+import Icon from '@/components/ui/Icon';
 
 const Home: React.FC = () => {
   const scrollToAbout = () => {
@@ -50,10 +50,10 @@ const Home: React.FC = () => {
         animate-bounce text-[#8B4513] hover:text-[#4A3933] 
         transition-colors duration-300"
       >
-        <ChevronDown size={48} />
+        <Icon name="ChevronDown" size={48} />
       </button>
     </section>
   );
 };
 
-export default Home; // Убедитесь, что есть экспорт по умолчанию
+export default Home;
