@@ -73,12 +73,12 @@ const Home: React.FC = () => {
                 <Icon name="Coffee" size={18} className="inline mr-2" />
                 <span>Спешиалти кофе и выпечка</span>
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight animate-slideInFromLeft">
+              <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight animate-slideInFromLeft">
                 Утренний<br /><span className="text-[#DEB887]">Аромат</span>
               </h1>
             </div>
             
-            <p className="text-xl text-[#A7C7E7] leading-relaxed animate-slideInFromLeft animation-delay-300">
+            <p className="text-xl text-[#A7C7E7] leading-relaxed font-light animate-slideInFromLeft animation-delay-300">
               Место, где каждый глоток – это история. 
               Мы создаем уникальный опыт с каждой чашкой кофе и свежей выпечкой, 
               приготовленной с любовью.
@@ -88,7 +88,7 @@ const Home: React.FC = () => {
               <Button 
                 onClick={scrollToMenu}
                 className="bg-[#4A80BD] text-white px-6 py-6 rounded-lg 
-                hover:bg-[#3A6CA8] transition-colors text-lg h-auto"
+                hover:bg-[#3A6CA8] transition-colors text-lg h-auto font-medium"
               >
                 <Icon name="Coffee" className="mr-2" />
                 Наше меню
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
               <Button 
                 variant="outline"
                 className="border-[#DEB887] text-[#DEB887] px-6 py-6 rounded-lg 
-                hover:bg-[#DEB887] hover:text-[#0F1A2A] transition-colors text-lg h-auto"
+                hover:bg-[#DEB887] hover:text-[#0F1A2A] transition-colors text-lg h-auto font-medium"
               >
                 <Icon name="MapPin" className="mr-2" />
                 Как нас найти

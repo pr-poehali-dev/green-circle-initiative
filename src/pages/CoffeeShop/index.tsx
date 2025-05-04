@@ -8,7 +8,7 @@ import Contacts from './sections/Contacts';
 
 const CoffeeShop = () => {
   return (
-    <div className="font-sans">
+    <div className="font-montserrat">
       <Header />
       <Home />
       <About />

@@ -44,7 +44,7 @@ const Menu = () => {
   const [activeCategory, setActiveCategory] = useState('coffee');
 
   return (
-    <section id="menu" className="py-20 bg-[#F5E6D3]">
+    <section id="menu" className="py-20 bg-[#F5E6D3] font-montserrat">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-[#4A3933] text-center mb-10">Наше Меню</h2>
         
@@ -56,8 +56,8 @@ const Menu = () => {
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 transform hover:scale-105 ${
                 activeCategory === category 
-                  ? 'bg-[#8B4513] text-white shadow-lg' 
-                  : 'bg-[#FFF5E6] text-[#4A3933] hover:bg-[#FFE8C8]'
+                  ? 'bg-[#8B4513] text-white shadow-lg font-medium' 
+                  : 'bg-[#FFF5E6] text-[#4A3933] hover:bg-[#FFE8C8] font-medium'
               }`}
             >
               <Icon 
@@ -92,7 +92,7 @@ const Menu = () => {
                 />
               </div>
               <p className="text-gray-600 mb-3 text-sm transition-opacity 
-                        group-hover:opacity-100 opacity-80">{item.description}</p>
+                        group-hover:opacity-100 opacity-80 font-light">{item.description}</p>
               <p className="text-[#8B4513] font-bold transition-all 
                         group-hover:scale-110 origin-left transform">{item.price}</p>
             </div>

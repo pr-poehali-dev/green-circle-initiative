@@ -3,22 +3,22 @@ import React from 'react';
 
 const Contacts = () => {
   return (
-    <section id="contacts" className="py-20 bg-[#FFF5E6]">
+    <section id="contacts" className="py-20 bg-[#FFF5E6] font-montserrat">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-[#4A3933] text-center mb-10">Контакты</h2>
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <div className="mb-6">
               <h3 className="text-2xl font-semibold text-[#4A3933] mb-4">Наш адрес</h3>
-              <p className="text-[#8B4513]">ул. Пушкина, 15</p>
+              <p className="text-[#8B4513] font-light">ул. Пушкина, 15</p>
             </div>
             <div className="mb-6">
               <h3 className="text-2xl font-semibold text-[#4A3933] mb-4">Телефон</h3>
-              <p className="text-[#8B4513]">+7 (999) 123-45-67</p>
+              <p className="text-[#8B4513] font-light">+7 (999) 123-45-67</p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-[#4A3933] mb-4">Часы работы</h3>
-              <p className="text-[#8B4513]">
+              <p className="text-[#8B4513] font-light">
                 Пн-Пт: 8:00 - 22:00<br />
                 Сб-Вс: 9:00 - 23:00
               </p>
