@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden bg-gradient-to-br from-[#1A1A1A] via-[#2A2A2A] to-[#1A1A1A]"
+      className="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden bg-gradient-to-br from-[#0F1A2A] via-[#162238] to-[#0D1724]"
     >
       {/* Анимированный фон */}
       <div className="absolute inset-0 w-full h-full z-0">
@@ -25,8 +25,23 @@ const Home: React.FC = () => {
         <div className="absolute bottom-10 left-1/4 w-40 h-40 rounded-full bg-[#DEB887]/10 animate-pulse animation-delay-4000"></div>
         
         {/* Стилизованные "блики" на темном фоне */}
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-gradient-to-br from-[#8B4513]/5 to-transparent blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-gradient-to-br from-[#4A80BD]/5 to-transparent blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-gradient-to-tr from-[#DEB887]/5 to-transparent blur-3xl"></div>
+        
+        {/* Звездный фон для создания атмосферы ночи */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <div 
+              key={i}
+              className="absolute rounded-full bg-white w-[2px] h-[2px] opacity-[0.15]"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animation: `twinkle ${3 + Math.random() * 7}s ease-in-out infinite ${Math.random() * 5}s`
+              }}
+            />
+          ))}
+        </div>
         
         {/* Анимированные кофейные зерна */}
         <div className="absolute top-20 left-[20%] rotate-45 opacity-5 animate-float-slow text-5xl">☕</div>
@@ -38,12 +53,12 @@ const Home: React.FC = () => {
         <svg className="absolute top-0 left-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
           <path 
             d="M0,64 C150,150 350,0 500,64 C650,150 850,0 1000,64 L1000,0 L0,0 Z" 
-            fill="#DEB887" 
+            fill="#A7C7E7" 
             className="animate-wave animation-delay-2000"
           ></path>
           <path 
             d="M0,128 C150,214 350,64 500,128 C650,214 850,64 1000,128 L1000,0 L0,0 Z" 
-            fill="#FFCC99" 
+            fill="#DEB887" 
             className="animate-wave"
           ></path>
         </svg>
@@ -54,7 +69,7 @@ const Home: React.FC = () => {
           {/* Текст слева */}
           <div className="space-y-8 text-left">
             <div>
-              <div className="inline-block px-4 py-1 bg-[#8B4513] rounded-full text-white font-medium mb-4 animate-fadeIn">
+              <div className="inline-block px-4 py-1 bg-[#4A80BD] rounded-full text-white font-medium mb-4 animate-fadeIn">
                 <Icon name="Coffee" size={18} className="inline mr-2" />
                 <span>Спешиалти кофе и выпечка</span>
               </div>
@@ -63,7 +78,7 @@ const Home: React.FC = () => {
               </h1>
             </div>
             
-            <p className="text-xl text-[#E0E0E0] leading-relaxed animate-slideInFromLeft animation-delay-300">
+            <p className="text-xl text-[#A7C7E7] leading-relaxed animate-slideInFromLeft animation-delay-300">
               Место, где каждый глоток – это история. 
               Мы создаем уникальный опыт с каждой чашкой кофе и свежей выпечкой, 
               приготовленной с любовью.
@@ -72,8 +87,8 @@ const Home: React.FC = () => {
             <div className="flex items-center gap-4 flex-wrap animate-fadeIn animation-delay-600">
               <Button 
                 onClick={scrollToMenu}
-                className="bg-[#8B4513] text-white px-6 py-6 rounded-lg 
-                hover:bg-[#6B3E23] transition-colors text-lg h-auto"
+                className="bg-[#4A80BD] text-white px-6 py-6 rounded-lg 
+                hover:bg-[#3A6CA8] transition-colors text-lg h-auto"
               >
                 <Icon name="Coffee" className="mr-2" />
                 Наше меню
@@ -82,7 +97,7 @@ const Home: React.FC = () => {
               <Button 
                 variant="outline"
                 className="border-[#DEB887] text-[#DEB887] px-6 py-6 rounded-lg 
-                hover:bg-[#DEB887] hover:text-[#1A1A1A] transition-colors text-lg h-auto"
+                hover:bg-[#DEB887] hover:text-[#0F1A2A] transition-colors text-lg h-auto"
               >
                 <Icon name="MapPin" className="mr-2" />
                 Как нас найти
@@ -92,17 +107,17 @@ const Home: React.FC = () => {
                 <div className="flex -space-x-2">
                   <img 
                     src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" 
-                    className="w-10 h-10 rounded-full border-2 border-[#2A2A2A]" 
+                    className="w-10 h-10 rounded-full border-2 border-[#1D2B3F]" 
                     alt="User" 
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1527980965255-d3b416303d12" 
-                    className="w-10 h-10 rounded-full border-2 border-[#2A2A2A]" 
+                    className="w-10 h-10 rounded-full border-2 border-[#1D2B3F]" 
                     alt="User" 
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1580489944761-15a19d654956" 
-                    className="w-10 h-10 rounded-full border-2 border-[#2A2A2A]" 
+                    className="w-10 h-10 rounded-full border-2 border-[#1D2B3F]" 
                     alt="User" 
                   />
                 </div>
@@ -129,7 +144,7 @@ const Home: React.FC = () => {
               <img 
                 src="https://images.unsplash.com/photo-1555507036-ab1f4038808a" 
                 alt="Круассан" 
-                className="w-[200px] h-[200px] object-cover rounded-2xl border-4 border-[#2A2A2A]"
+                className="w-[200px] h-[200px] object-cover rounded-2xl border-4 border-[#1D2B3F]"
               />
             </div>
             
@@ -138,7 +153,7 @@ const Home: React.FC = () => {
               <img 
                 src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd" 
                 alt="Кофе" 
-                className="w-[180px] h-[180px] object-cover rounded-2xl border-4 border-[#2A2A2A]"
+                className="w-[180px] h-[180px] object-cover rounded-2xl border-4 border-[#1D2B3F]"
               />
             </div>
           </div>
@@ -149,7 +164,7 @@ const Home: React.FC = () => {
       <button 
         onClick={scrollToAbout}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 
-        animate-bounce text-[#DEB887] hover:text-white 
+        animate-bounce text-[#A7C7E7] hover:text-white 
         transition-colors duration-300"
       >
         <Icon name="ChevronDown" size={48} />
