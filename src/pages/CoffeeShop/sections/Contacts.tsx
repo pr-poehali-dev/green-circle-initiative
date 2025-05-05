@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Icon from '@/components/ui/Icon';
 import { Button } from '@/components/ui/button';
@@ -57,21 +56,24 @@ const Contacts = () => {
                           <Icon name="Send" size={24} className="text-[#DEB887]" />
                         </div>
                         <div>
-                          <p className="text-white font-medium">Telegram</p>
+                          <p className="text-white font-medium">Лодическое</p>
                           <a 
                             href="https://t.me/balck_coffee" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-[#DEB887] text-sm hover:underline"
                           >
-                            t.me/balck_coffee
+t.me/balck_coffee
                           </a>
                         </div>
                       </div>
                     </div>
                     
                     <div className="mt-8">
-                      <Button className="bg-[#2E8B57] hover:bg-[#3a9d67] text-white px-6 py-6 h-auto rounded-xl font-medium">
+                      <Button 
+                        className="bg-[#2E8B57] hover:bg-[#3a9d67] text-white px-6 py-6 h-auto rounded-xl font-medium"
+                        onClick={() => window.open('https://t.me/balck_coffee', '_blank')}
+                      >
                         <Icon name="MessageCircle" className="mr-2" />
                         Написать нам
                       </Button>
