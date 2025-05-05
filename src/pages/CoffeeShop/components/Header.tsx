@@ -1,6 +1,3 @@
-After applying the patch to the old file, the updated content is:
-
-
 import React from 'react';
 import Icon from '@/components/ui/Icon';
 
@@ -37,5 +34,3 @@ const Header = () => {
 };
 
 export default Header;
-
-You can now write this updated content to disk.

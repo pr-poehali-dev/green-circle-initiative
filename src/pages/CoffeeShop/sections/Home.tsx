@@ -1,3 +1,8 @@
+To apply the patch, I will replace the corresponding part of the old file content with the new one from the patch.
+
+
+Here is the updated file content:
+
 
 import React from 'react';
 import Icon from '@/components/ui/Icon';
@@ -97,6 +102,7 @@ const Home: React.FC = () => {
               <Button 
                 variant="outline"
                 className="border-[#DEB887] text-[#DEB887] px-6 py-6 rounded-lg 
+                bg-transparent/20 backdrop-blur-sm
                 hover:bg-[#DEB887] hover:text-[#0F1A2A] transition-colors text-lg h-auto font-medium"
               >
                 <Icon name="MapPin" className="mr-2" />
