@@ -35,7 +35,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="text-white font-bold text-2xl flex items-center gap-2">
-            <Icon name="Coffee" size={28} className="text-[#DEB887]" />
+            <Icon name="Coffee" size={28} className="text-white" />
             Утренний Аромат
           </div>
           
