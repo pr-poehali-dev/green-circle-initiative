@@ -1,3 +1,6 @@
+Here is the updated file content:
+
+
 import React from 'react';
 import Icon from '@/components/ui/Icon';
 import { Button } from '@/components/ui/button';
@@ -160,12 +163,11 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Указатель вниз с анимацией */}
+      {/* Указатель вниз */}
       <button 
         onClick={scrollToAbout}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 
-        transition-all duration-500 hover:text-white text-[#A7C7E7]
-        animate-[pulse_6s_ease-in-out_infinite] opacity-80"
+        transition-all duration-500 hover:text-white text-[#A7C7E7] opacity-80"
       >
         <Icon name="ChevronDown" size={48} />
       </button>
