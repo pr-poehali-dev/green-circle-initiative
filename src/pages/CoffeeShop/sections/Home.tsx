@@ -1,6 +1,3 @@
-Here is the updated file content:
-
-
 import React from 'react';
 import Icon from '@/components/ui/Icon';
 import { Button } from '@/components/ui/button';
