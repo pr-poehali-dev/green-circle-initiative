@@ -79,10 +79,10 @@ const Home: React.FC = () => {
                   <Icon 
                     name="Coffee" 
                     size={56} 
-                    className="text-[#DEB887] relative z-10 animate-pulse" 
+                    className="text-[#DEB887] relative z-10 animate-[sway_3s_ease-in-out_infinite]" 
                   />
-                  <div className="absolute -top-2 -left-2 w-[72px] h-[72px] bg-[#4A80BD]/30 rounded-full animate-ping opacity-70"></div>
-                  <div className="absolute -top-2.5 -left-2.5 w-[80px] h-[80px] bg-[#DEB887]/20 rounded-full animate-pulse"></div>
+                  <div className="absolute -top-2 -left-2 w-[72px] h-[72px] bg-[#4A80BD]/30 rounded-full animate-[sway_3s_ease-in-out_infinite_0.2s]"></div>
+                  <div className="absolute -top-2.5 -left-2.5 w-[80px] h-[80px] bg-[#DEB887]/20 rounded-full animate-[sway_3s_ease-in-out_infinite_0.4s]"></div>
                 </div>
                 Утренний<br /><span className="text-[#DEB887]">Аромат</span>
               </h1>
