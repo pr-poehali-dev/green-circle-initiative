@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Icon from '@/components/ui/Icon';
 
@@ -44,9 +43,9 @@ const Menu = () => {
   const [activeCategory, setActiveCategory] = useState('coffee');
 
   return (
-    <section id="menu" className="py-20 bg-[#F5E6D3] font-montserrat">
+    <section id="menu" className="py-20 bg-[#0F1A2A] font-montserrat">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-[#4A3933] text-center mb-10">Наше Меню</h2>
+        <h2 className="text-4xl font-bold text-white text-center mb-10">Наше Меню</h2>
         
         {/* Категории меню с иконками */}
         <div className="flex flex-wrap justify-center mb-12 gap-4">
@@ -54,10 +53,10 @@ const Menu = () => {
             <button 
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 transform hover:scale-105 ${
+              className={`px-6 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 transform hover:scale-105 $ {
                 activeCategory === category 
-                  ? 'bg-[#8B4513] text-white shadow-lg font-medium' 
-                  : 'bg-[#FFF5E6] text-[#4A3933] hover:bg-[#FFE8C8] font-medium'
+                  ? 'bg-[#4A80BD] text-white shadow-lg font-medium' 
+                  : 'bg-[#1D2B3F] text-[#A7C7E7] hover:bg-[#2A3B50] font-medium'
               }`}
             >
               <Icon 
@@ -75,12 +74,12 @@ const Menu = () => {
           {menuData[activeCategory as keyof typeof menuData].map((item, index) => (
             <div 
               key={index} 
-              className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 
+              className="bg-[#1D2B3F] p-6 rounded-lg shadow-md transition-all duration-300 
                       hover:shadow-xl hover:-translate-y-1 cursor-pointer group"
             >
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl font-semibold text-[#4A3933] 
-                          group-hover:text-[#8B4513] transition-colors">{item.name}</h3>
+                <h3 className="text-xl font-semibold text-white 
+                          group-hover:text-[#DEB887] transition-colors">{item.name}</h3>
                 <Icon 
                   name={
                     activeCategory === 'coffee' ? 'Coffee' :
@@ -88,12 +87,12 @@ const Menu = () => {
                     activeCategory === 'desserts' ? 'Cake' : 'UtensilsCrossed'
                   }
                   size={20}
-                  className="text-[#8B4513] opacity-70 group-hover:opacity-100 transition-opacity"
+                  className="text-[#DEB887] opacity-70 group-hover:opacity-100 transition-opacity"
                 />
               </div>
-              <p className="text-gray-600 mb-3 text-sm transition-opacity 
+              <p className="text-[#A7C7E7] mb-3 text-sm transition-opacity 
                         group-hover:opacity-100 opacity-80 font-light">{item.description}</p>
-              <p className="text-[#8B4513] font-bold transition-all 
+              <p className="text-[#DEB887] font-bold transition-all 
                         group-hover:scale-110 origin-left transform">{item.price}</p>
             </div>
           ))}
