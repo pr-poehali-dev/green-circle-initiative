@@ -30,8 +30,8 @@ const Header = () => {
     <header 
       className={`fixed top-0 left-0 w-full py-4 z-50 font-montserrat backdrop-blur-lg transition-all duration-300 ${
         scrolled 
-          ? 'bg-[#1D2B3F]/80 shadow-lg'
-          : 'bg-[#1D2B3F]/50'
+          ? 'bg-[#4A80BD]/80 shadow-lg'
+          : 'bg-[#4A80BD]/50'
       }`}
     >
       <div className="container mx-auto flex justify-between items-center px-4">
@@ -68,7 +68,7 @@ const Header = () => {
 
       {/* Мобильное выпадающее меню */}
       {isOpen && (
-        <div className="md:hidden bg-[#1D2B3F]/95 backdrop-blur-lg py-4 px-4 shadow-lg border-t border-[#2A3B50]">
+        <div className="md:hidden bg-[#4A80BD]/95 backdrop-blur-lg py-4 px-4 shadow-lg border-t border-[#2A3B50]">
           <nav className="flex flex-col space-y-4">
             <a 
               href="#home" 
