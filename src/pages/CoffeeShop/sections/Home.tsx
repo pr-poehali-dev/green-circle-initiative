@@ -1,9 +1,3 @@
-To apply the patch, I will replace the corresponding part of the old file content with the new one from the patch.
-
-
-Here is the updated file content:
-
-
 import React from 'react';
 import Icon from '@/components/ui/Icon';
 import { Button } from '@/components/ui/button';
@@ -92,8 +86,8 @@ const Home: React.FC = () => {
             <div className="flex items-center gap-4 flex-wrap animate-fadeIn animation-delay-600">
               <Button 
                 onClick={scrollToMenu}
-                className="bg-[#4A80BD] text-white px-6 py-6 rounded-lg 
-                hover:bg-[#3A6CA8] transition-colors text-lg h-auto font-medium"
+                className="bg-[#DD2E44] text-white px-6 py-6 rounded-lg 
+                hover:bg-[#C1223A] transition-colors text-lg h-auto font-medium"
               >
                 <Icon name="Coffee" className="mr-2" />
                 Наше меню
