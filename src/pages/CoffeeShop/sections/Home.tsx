@@ -86,8 +86,8 @@ const Home: React.FC = () => {
             <div className="flex items-center gap-4 flex-wrap animate-fadeIn animation-delay-600">
               <Button 
                 onClick={scrollToMenu}
-                className="bg-[#DD2E44] text-white px-6 py-6 rounded-lg 
-                hover:bg-[#C1223A] transition-colors text-lg h-auto font-medium"
+                className="bg-[#2E8B57] text-white px-6 py-6 rounded-lg 
+                hover:bg-[#22704a] transition-colors text-lg h-auto font-medium"
               >
                 <Icon name="Coffee" className="mr-2" />
                 Наше меню
