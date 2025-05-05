@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Icon from '@/components/ui/Icon';
 
@@ -35,7 +34,10 @@ const Header = () => {
       }`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <div className="text-white font-bold text-2xl">Утренний Аромат</div>
+          <div className="text-white font-bold text-2xl flex items-center gap-2">
+            <Icon name="Coffee" size={28} className="text-[#DEB887]" />
+            Утренний Аромат
+          </div>
           
           {/* Кнопка мобильного меню */}
           <button 
