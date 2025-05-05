@@ -33,11 +33,13 @@ const Home: React.FC = () => {
             <div 
               key={i}
               className="absolute rounded-full bg-white w-[2px] h-[2px] opacity-[0.15]"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animation: `twinkle ${3 + Math.random() * 7}s ease-in-out infinite ${Math.random() * 5}s`
-              }}
+              style={
+                {
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animation: `twinkle ${3 + Math.random() * 7}s ease-in-out infinite ${Math.random() * 5}s`
+                }
+              }
             />
           ))}
         </div>
@@ -73,6 +75,15 @@ const Home: React.FC = () => {
                 <span>Спешиалти кофе и выпечка</span>
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight animate-slideInFromLeft">
+                <div className="relative inline-block mr-3 align-middle">
+                  <Icon 
+                    name="Coffee" 
+                    size={56} 
+                    className="text-[#DEB887] relative z-10 animate-pulse" 
+                  />
+                  <div className="absolute -top-2 -left-2 w-[72px] h-[72px] bg-[#4A80BD]/30 rounded-full animate-ping opacity-70"></div>
+                  <div className="absolute -top-2.5 -left-2.5 w-[80px] h-[80px] bg-[#DEB887]/20 rounded-full animate-pulse"></div>
+                </div>
                 Утренний<br /><span className="text-[#DEB887]">Аромат</span>
               </h1>
             </div>
