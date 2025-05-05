@@ -34,7 +34,15 @@ const Header = () => {
       }`}>      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="text-white font-bold text-2xl flex items-center gap-2">
-            <Icon name="Coffee" size={28} className="text-white" />
+            <div className="relative">
+              <Icon 
+                name="Coffee" 
+                size={28} 
+                className="text-[#DEB887] relative z-10 animate-pulse" 
+              />
+              <div className="absolute -top-1 -left-1 w-[36px] h-[36px] bg-[#4A80BD]/30 rounded-full animate-ping opacity-70"></div>
+              <div className="absolute -top-1.5 -left-1.5 w-[40px] h-[40px] bg-[#DEB887]/20 rounded-full animate-pulse"></div>
+            </div>
             Утренний Аромат
           </div>
           
