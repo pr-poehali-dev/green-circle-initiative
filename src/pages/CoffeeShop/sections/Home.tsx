@@ -164,8 +164,8 @@ const Home: React.FC = () => {
       <button 
         onClick={scrollToAbout}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 
-        animate-bounce text-[#A7C7E7] hover:text-white 
-        transition-colors duration-300"
+        transition-all duration-500 hover:text-white text-[#A7C7E7]
+        animate-[pulse_3s_ease-in-out_infinite]"
       >
         <Icon name="ChevronDown" size={48} />
       </button>
