@@ -163,12 +163,6 @@ const CarFilter: React.FC<CarFilterProps> = ({
     }
   };
   
-  // Проверка выбора в множественном выборе
-  const isMultiSelected = (key: keyof FilterOptions, value: string): boolean => {
-    const values = filters[key] as string[] || [];
-    return values.includes(value);
-  };
-  
   // Сброс всех фильтров
   const resetFilters = () => {
     setFilters({});
@@ -222,22 +216,14 @@ const CarFilter: React.FC<CarFilterProps> = ({
           icon="CarFront"
           badgeValue={filters.brand ? filters.brand : null}
         >
-          <Select
-            value={filters.brand as string || ''}
-            onValueChange={(value) => handleFilterChange('brand', value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Все марки" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="">Все марки</SelectItem>
-              {brands.map((brand) => (
-                <SelectItem key={brand} value={brand}>
-                  {brand}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <FilterCheckboxGroup
+            items={brands}
+            selectedItems={[(filters.brand as string) || '']}
+            onChange={(value, checked) => {
+              handleFilterChange('brand', checked ? value : '');
+            }}
+            itemPrefix="brand"
+          />
         </FilterAccordionItem>
         
         <FilterAccordionItem 
