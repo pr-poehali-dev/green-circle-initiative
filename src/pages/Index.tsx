@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -28,7 +29,7 @@ const Index: React.FC = () => {
             Широкий выбор автомобилей премиум-класса для вашего комфорта и удовольствия от вождения
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
-            <Button asChild size="lg" className="text-lg px-8">
+            <Button asChild size="lg" className="text-lg px-8 bg-green-600 hover:bg-green-700">
               <Link to="/catalog">Выбрать автомобиль</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-lg px-8 bg-white/10">
@@ -157,7 +158,7 @@ const Index: React.FC = () => {
           </div>
           
           <div className="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
-            <p>© 2025 АвтоПрокат. Все права защищены.</p>
+            <p> 2025 АвтоПрокат. Все права защищены.</p>
           </div>
         </div>
       </footer>
