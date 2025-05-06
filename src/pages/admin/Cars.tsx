@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+io React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Car } from '@/types/admin';
 import { carsApi } from '@/lib/api';
@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,7 +31,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -51,7 +51,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -92,9 +92,7 @@ const exportToCSV = (cars: Car[]) => {
   ].join(','));
   
   // Объединяем в CSV текст
-  const csvContent = `data:text/csv;charset=utf-8,${headers}
-${rows.join('
-')}`;
+  const csvContent = `data:text/csv;charset=utf-8,${headers}\n${rows.join('\n')}`;
   
   // Создаем ссылку и скачиваем файл
   const encodedUri = encodeURI(csvContent);
@@ -133,12 +131,4 @@ const parseCSV = (csvText: string): any[] => {
       let value = values[i];
       if (value) {
         value = value.trim();
-        if (value.startsWith('"') && value.endsWith('"')) {
-          value = value.slice(1, -1);
-        }
-      }
-      obj[header] = value;
-      return obj;
-    }, {});
-  });
-};
+        if (value.startsWith('
