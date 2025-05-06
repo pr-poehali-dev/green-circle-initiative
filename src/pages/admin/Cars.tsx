@@ -99,6 +99,13 @@ const AdminCars: React.FC = () => {
     availabilityStatus: []
   });
   
+  // Новое состояние для массового выбора
+  const [selectedCars, setSelectedCars] = useState<string[]>([]);
+  const [isAllSelected, setIsAllSelected] = useState(false);
+  const [isBulkActionDialogOpen, setIsBulkActionDialogOpen] = useState(false);
+  const [bulkAction, setBulkAction] = useState<'status' | 'delete' | null>(null);
+  const [bulkActionStatus, setBulkActionStatus] = useState<string>('available');
+  
   // Состояние для модальных окон
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
@@ -500,6 +507,128 @@ const AdminCars: React.FC = () => {
     </div>
   );
   
+  // Обработчики массового выбора
+  const toggleSelectAll = () => {
+    if (isAllSelected) {
+      setSelectedCars([]);
+    } else {
+      setSelectedCars(cars.map(car => car.id));
+    }
+    setIsAllSelected(!isAllSelected);
+  };
+  
+  const toggleSelectCar = (carId: string) => {
+    if (selectedCars.includes(carId)) {
+      setSelectedCars(selectedCars.filter(id => id !== carId));
+      setIsAllSelected(false);
+    } else {
+      setSelectedCars([...selectedCars, carId]);
+      if (selectedCars.length + 1 === cars.length) {
+        setIsAllSelected(true);
+      }
+    }
+  };
+  
+  // Сброс выбора при изменении страницы или применении фильтров
+  useEffect(() => {
+    setSelectedCars([]);
+    setIsAllSelected(false);
+  }, [currentPage, cars]);
+  
+  // Массовое изменение статуса
+  const handleBulkStatusChange = async () => {
+    try {
+      setLoading(true);
+      
+      // Последовательное обновление всех выбранных автомобилей
+      for (const carId of selectedCars) {
+        await carsApi.update(carId, { status: bulkActionStatus });
+      }
+      
+      // Обновление локального состояния
+      setCars(cars.map(car => 
+        selectedCars.includes(car.id) 
+          ? { ...car, status: bulkActionStatus } 
+          : car
+      ));
+      
+      toast({
+        title: "Статус обновлен",
+        description: `Обновлен статус для ${selectedCars.length} автомобилей`,
+      });
+      
+      // Сброс выбора
+      setSelectedCars([]);
+      setIsAllSelected(false);
+      setIsBulkActionDialogOpen(false);
+    } catch (err) {
+      console.error('Failed to update cars status:', err);
+      toast({
+        title: "Ошибка",
+        description: "Не удалось обновить статус автомобилей",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Массовое удаление
+  const handleBulkDelete = async () => {
+    try {
+      setLoading(true);
+      
+      // Последовательное удаление всех выбранных автомобилей
+      for (const carId of selectedCars) {
+        await carsApi.delete(carId);
+      }
+      
+      // Обновление локального состояния
+      setCars(cars.filter(car => !selectedCars.includes(car.id)));
+      setTotalCars(prev => prev - selectedCars.length);
+      
+      toast({
+        title: "Автомобили удалены",
+        description: `Удалено ${selectedCars.length} автомобилей`,
+      });
+      
+      // Сброс выбора
+      setSelectedCars([]);
+      setIsAllSelected(false);
+      setIsBulkActionDialogOpen(false);
+    } catch (err) {
+      console.error('Failed to delete cars:', err);
+      toast({
+        title: "Ошибка",
+        description: "Не удалось удалить автомобили",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Экспорт выбранных автомобилей в JSON
+  const handleExportSelected = () => {
+    const selectedData = cars.filter(car => selectedCars.includes(car.id));
+    const jsonData = JSON.stringify(selectedData, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `exported_cars_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    toast({
+      title: "Экспорт завершен",
+      description: `Экспортировано ${selectedCars.length} автомобилей`,
+    });
+  };
+  
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -511,6 +640,60 @@ const AdminCars: React.FC = () => {
           </Link>
         </Button>
       </div>
+      
+      {selectedCars.length > 0 && (
+        <Card className="p-4 mb-4 bg-muted/50 border-primary/20">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Badge variant="secondary" className="px-2 py-1">
+                {selectedCars.length} выбрано
+              </Badge>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => {
+                  setSelectedCars([]);
+                  setIsAllSelected(false);
+                }}
+              >
+                Очистить выбор
+              </Button>
+            </div>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => {
+                  setBulkAction('status');
+                  setIsBulkActionDialogOpen(true);
+                }}
+              >
+                <Icon name="RefreshCw" className="h-4 w-4 mr-2" />
+                Изменить статус
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleExportSelected}
+              >
+                <Icon name="Download" className="h-4 w-4 mr-2" />
+                Экспорт JSON
+              </Button>
+              <Button 
+                variant="destructive" 
+                size="sm" 
+                onClick={() => {
+                  setBulkAction('delete');
+                  setIsBulkActionDialogOpen(true);
+                }}
+              >
+                <Icon name="Trash2" className="h-4 w-4 mr-2" />
+                Удалить
+              </Button>
+            </div>
+          </div>
+        </Card>
+      )}
       
       <Card className="p-4 mb-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -622,6 +805,13 @@ const AdminCars: React.FC = () => {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="w-12">
+                    <Checkbox 
+                      checked={isAllSelected}
+                      onCheckedChange={toggleSelectAll}
+                      aria-label="Выбрать все автомобили"
+                    />
+                  </TableHead>
                   <TableHead>Автомобиль</TableHead>
                   <TableHead>Год</TableHead>
                   <TableHead>Цена/день</TableHead>
@@ -633,7 +823,17 @@ const AdminCars: React.FC = () => {
               </TableHeader>
               <TableBody>
                 {cars.map((car) => (
-                  <TableRow key={car.id}>
+                  <TableRow 
+                    key={car.id}
+                    className={selectedCars.includes(car.id) ? "bg-primary/5" : ""}
+                  >
+                    <TableCell>
+                      <Checkbox 
+                        checked={selectedCars.includes(car.id)}
+                        onCheckedChange={() => toggleSelectCar(car.id)}
+                        aria-label={`Выбрать ${car.brand} ${car.model}`}
+                      />
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center">
                         <div className="w-10 h-10 rounded overflow-hidden mr-3 bg-gray-100 flex items-center justify-center">
@@ -699,7 +899,7 @@ const AdminCars: React.FC = () => {
                 
                 {cars.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8">
+                    <TableCell colSpan={8} className="text-center py-8">
                       <div className="flex flex-col items-center">
                         <Icon name="Car" className="w-12 h-12 mb-2 text-gray-300" />
                         <p className="text-gray-500">Автомобили не найдены</p>
@@ -769,6 +969,50 @@ const AdminCars: React.FC = () => {
             </Button>
             <Button variant="destructive" onClick={handleDeleteCar}>
               Удалить
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Диалог для массовых действий */}
+      <Dialog open={isBulkActionDialogOpen} onOpenChange={setIsBulkActionDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {bulkAction === 'status' ? 'Изменить статус автомобилей' : 'Удалить автомобили'}
+            </DialogTitle>
+            <DialogDescription>
+              {bulkAction === 'status' 
+                ? `Выберите новый статус для ${selectedCars.length} выбранных автомобилей.`
+                : `Вы уверены, что хотите удалить ${selectedCars.length} выбранных автомобилей? Это действие нельзя отменить.`
+              }
+            </DialogDescription>
+          </DialogHeader>
+          
+          {bulkAction === 'status' && (
+            <div className="py-4">
+              <Select value={bulkActionStatus} onValueChange={setBulkActionStatus}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Выберите статус" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="available">Активен</SelectItem>
+                  <SelectItem value="unavailable">Скрыт</SelectItem>
+                  <SelectItem value="maintenance">Техобслуживание</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+          
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsBulkActionDialogOpen(false)}>
+              Отмена
+            </Button>
+            <Button 
+              variant={bulkAction === 'delete' ? "destructive" : "default"}
+              onClick={bulkAction === 'status' ? handleBulkStatusChange : handleBulkDelete}
+            >
+              {bulkAction === 'status' ? 'Обновить статус' : 'Удалить'}
             </Button>
           </DialogFooter>
         </DialogContent>
