@@ -35,6 +35,12 @@ import { Separator } from '@/components/ui/separator';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 
+// Импорт компонентов-фильтров
+import FilterBadge from './filters/FilterBadge';
+import FilterCheckboxGroup from './filters/FilterCheckboxGroup';
+import RangeSlider from './filters/RangeSlider';
+import FilterAccordionItem from './filters/FilterAccordionItem';
+
 interface CarFilterProps {
   onFilterChange: (filters: FilterOptions) => void;
   initialFilters?: FilterOptions;
@@ -123,19 +129,17 @@ const CarFilter: React.FC<CarFilterProps> = ({
   };
   
   // Обработчик изменения диапазона цен
-  const handlePriceRangeChange = (value: number[]) => {
-    const [min, max] = value as [number, number];
-    setPriceRange([min, max]);
-    handleFilterChange('minPrice', min);
-    handleFilterChange('maxPrice', max);
+  const handlePriceRangeChange = (value: [number, number]) => {
+    setPriceRange(value);
+    handleFilterChange('minPrice', value[0]);
+    handleFilterChange('maxPrice', value[1]);
   };
   
   // Обработчик изменения диапазона годов
-  const handleYearRangeChange = (value: number[]) => {
-    const [min, max] = value as [number, number];
-    setYearRange([min, max]);
-    handleFilterChange('minYear', min);
-    handleFilterChange('maxYear', max);
+  const handleYearRangeChange = (value: [number, number]) => {
+    setYearRange(value);
+    handleFilterChange('minYear', value[0]);
+    handleFilterChange('maxYear', value[1]);
   };
   
   // Обработчик множественного выбора
@@ -189,15 +193,7 @@ const CarFilter: React.FC<CarFilterProps> = ({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Фильтры</h3>
-        {activeFiltersCount > 0 && (
-          <Badge 
-            variant="secondary" 
-            className="ml-2 flex items-center py-1 px-2 gap-1"
-          >
-            <span>{activeFiltersCount}</span>
-            <span className="hidden sm:inline">активных</span>
-          </Badge>
-        )}
+        <FilterBadge count={activeFiltersCount} />
       </div>
       
       {activeFiltersCount > 0 && (
@@ -220,251 +216,115 @@ const CarFilter: React.FC<CarFilterProps> = ({
         onValueChange={handleAccordionChange}
         className="space-y-2"
       >
-        <AccordionItem value="brand" className="border rounded-md">
-          <AccordionTrigger className="px-4 py-3 hover:no-underline data-[state=open]:bg-slate-50 rounded-t-md">
-            <div className="flex justify-between w-full">
-              <span className="flex items-center gap-2">
-                <Icon name="CarFront" className="h-4 w-4 text-slate-500" />
-                <span>Марка</span>
-              </span>
-              {filters.brand && (
-                <Badge variant="secondary" className="ml-auto mr-2">
-                  {typeof filters.brand === 'string' ? filters.brand : 'Выбрано'}
-                </Badge>
-              )}
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="pt-2 px-4 pb-4">
-            <Select
-              value={filters.brand as string || ''}
-              onValueChange={(value) => handleFilterChange('brand', value)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Все марки" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">Все марки</SelectItem>
-                {brands.map((brand) => (
-                  <SelectItem key={brand} value={brand}>
-                    {brand}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </AccordionContent>
-        </AccordionItem>
-        
-        <AccordionItem value="transmission" className="border rounded-md">
-          <AccordionTrigger className="px-4 py-3 hover:no-underline data-[state=open]:bg-slate-50 rounded-t-md">
-            <div className="flex justify-between w-full">
-              <span className="flex items-center gap-2">
-                <Icon name="Cog" className="h-4 w-4 text-slate-500" />
-                <span>Коробка передач</span>
-              </span>
-              {filters.transmissionTypes && (filters.transmissionTypes as string[]).length > 0 && (
-                <Badge variant="secondary" className="ml-auto mr-2">
-                  {(filters.transmissionTypes as string[]).length}
-                </Badge>
-              )}
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="pt-2 px-4 pb-4">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {transmissionTypes.map((type) => (
-                <div key={type} className="flex items-center space-x-2">
-                  <Checkbox 
-                    id={`transmission-${type}`}
-                    checked={isMultiSelected('transmissionTypes', type)}
-                    onCheckedChange={(checked) => 
-                      handleMultiSelectChange('transmissionTypes', type, checked === true)
-                    }
-                  />
-                  <Label htmlFor={`transmission-${type}`}>{type}</Label>
-                </div>
+        <FilterAccordionItem 
+          value="brand" 
+          title="Марка" 
+          icon="CarFront"
+          badgeValue={filters.brand ? filters.brand : null}
+        >
+          <Select
+            value={filters.brand as string || ''}
+            onValueChange={(value) => handleFilterChange('brand', value)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Все марки" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Все марки</SelectItem>
+              {brands.map((brand) => (
+                <SelectItem key={brand} value={brand}>
+                  {brand}
+                </SelectItem>
               ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+            </SelectContent>
+          </Select>
+        </FilterAccordionItem>
         
-        <AccordionItem value="fuel" className="border rounded-md">
-          <AccordionTrigger className="px-4 py-3 hover:no-underline data-[state=open]:bg-slate-50 rounded-t-md">
-            <div className="flex justify-between w-full">
-              <span className="flex items-center gap-2">
-                <Icon name="Droplets" className="h-4 w-4 text-slate-500" />
-                <span>Тип топлива</span>
-              </span>
-              {filters.fuelTypes && (filters.fuelTypes as string[]).length > 0 && (
-                <Badge variant="secondary" className="ml-auto mr-2">
-                  {(filters.fuelTypes as string[]).length}
-                </Badge>
-              )}
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="pt-2 px-4 pb-4">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {fuelTypes.map((type) => (
-                <div key={type} className="flex items-center space-x-2">
-                  <Checkbox 
-                    id={`fuel-${type}`}
-                    checked={isMultiSelected('fuelTypes', type)}
-                    onCheckedChange={(checked) => 
-                      handleMultiSelectChange('fuelTypes', type, checked === true)
-                    }
-                  />
-                  <Label htmlFor={`fuel-${type}`}>{type}</Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+        <FilterAccordionItem 
+          value="transmission" 
+          title="Коробка передач" 
+          icon="Cog"
+          badgeValue={(filters.transmissionTypes && (filters.transmissionTypes as string[]).length > 0) 
+            ? (filters.transmissionTypes as string[]).length 
+            : null}
+        >
+          <FilterCheckboxGroup
+            items={transmissionTypes}
+            selectedItems={(filters.transmissionTypes as string[]) || []}
+            onChange={(value, checked) => handleMultiSelectChange('transmissionTypes', value, checked)}
+            itemPrefix="transmission"
+          />
+        </FilterAccordionItem>
         
-        <AccordionItem value="price" className="border rounded-md">
-          <AccordionTrigger className="px-4 py-3 hover:no-underline data-[state=open]:bg-slate-50 rounded-t-md">
-            <div className="flex justify-between w-full">
-              <span className="flex items-center gap-2">
-                <Icon name="CircleDollarSign" className="h-4 w-4 text-slate-500" />
-                <span>Цена (₽/день)</span>
-              </span>
-              {(filters.minPrice || filters.maxPrice) && (
-                <Badge variant="secondary" className="ml-auto mr-2">
-                  {priceRange[0].toLocaleString()} — {priceRange[1].toLocaleString()} ₽
-                </Badge>
-              )}
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="pt-2 px-4 pb-4">
-            <div className="space-y-4 px-1">
-              <Slider
-                defaultValue={[500, 5000]}
-                min={500}
-                max={10000}
-                step={100}
-                value={priceRange}
-                onValueChange={handlePriceRangeChange}
-                className="pt-6"
-              />
-              <div className="flex items-center justify-between">
-                <div className="flex flex-col">
-                  <Label htmlFor="min-price" className="text-xs text-slate-500 mb-1">От</Label>
-                  <Input
-                    id="min-price"
-                    type="number"
-                    value={priceRange[0]}
-                    onChange={(e) => handlePriceRangeChange([
-                      Math.max(500, Math.min(parseInt(e.target.value) || 500, priceRange[1] - 100)), 
-                      priceRange[1]
-                    ])}
-                    className="w-24"
-                  />
-                </div>
-                <span className="text-slate-400 mt-4">—</span>
-                <div className="flex flex-col">
-                  <Label htmlFor="max-price" className="text-xs text-slate-500 mb-1">До</Label>
-                  <Input
-                    id="max-price"
-                    type="number"
-                    value={priceRange[1]}
-                    onChange={(e) => handlePriceRangeChange([
-                      priceRange[0], 
-                      Math.max(priceRange[0] + 100, parseInt(e.target.value) || 5000)
-                    ])}
-                    className="w-24"
-                  />
-                </div>
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+        <FilterAccordionItem 
+          value="fuel" 
+          title="Тип топлива" 
+          icon="Droplets"
+          badgeValue={(filters.fuelTypes && (filters.fuelTypes as string[]).length > 0) 
+            ? (filters.fuelTypes as string[]).length 
+            : null}
+        >
+          <FilterCheckboxGroup
+            items={fuelTypes}
+            selectedItems={(filters.fuelTypes as string[]) || []}
+            onChange={(value, checked) => handleMultiSelectChange('fuelTypes', value, checked)}
+            itemPrefix="fuel"
+          />
+        </FilterAccordionItem>
         
-        <AccordionItem value="year" className="border rounded-md">
-          <AccordionTrigger className="px-4 py-3 hover:no-underline data-[state=open]:bg-slate-50 rounded-t-md">
-            <div className="flex justify-between w-full">
-              <span className="flex items-center gap-2">
-                <Icon name="Calendar" className="h-4 w-4 text-slate-500" />
-                <span>Год выпуска</span>
-              </span>
-              {(filters.minYear || filters.maxYear) && (
-                <Badge variant="secondary" className="ml-auto mr-2">
-                  {yearRange[0]} — {yearRange[1]}
-                </Badge>
-              )}
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="pt-2 px-4 pb-4">
-            <div className="space-y-4 px-1">
-              <Slider
-                defaultValue={[2010, currentYear + 1]}
-                min={2000}
-                max={currentYear + 1}
-                step={1}
-                value={yearRange}
-                onValueChange={handleYearRangeChange}
-                className="pt-6"
-              />
-              <div className="flex items-center justify-between">
-                <div className="flex flex-col">
-                  <Label htmlFor="min-year" className="text-xs text-slate-500 mb-1">От</Label>
-                  <Input
-                    id="min-year"
-                    type="number"
-                    value={yearRange[0]}
-                    onChange={(e) => handleYearRangeChange([
-                      Math.max(2000, Math.min(parseInt(e.target.value) || 2000, yearRange[1] - 1)), 
-                      yearRange[1]
-                    ])}
-                    className="w-24"
-                  />
-                </div>
-                <span className="text-slate-400 mt-4">—</span>
-                <div className="flex flex-col">
-                  <Label htmlFor="max-year" className="text-xs text-slate-500 mb-1">До</Label>
-                  <Input
-                    id="max-year"
-                    type="number"
-                    value={yearRange[1]}
-                    onChange={(e) => handleYearRangeChange([
-                      yearRange[0], 
-                      Math.max(yearRange[0] + 1, parseInt(e.target.value) || currentYear + 1)
-                    ])}
-                    className="w-24"
-                  />
-                </div>
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+        <FilterAccordionItem 
+          value="price" 
+          title="Цена (₽/день)" 
+          icon="CircleDollarSign"
+          badgeValue={filters.minPrice || filters.maxPrice 
+            ? `${priceRange[0].toLocaleString()} — ${priceRange[1].toLocaleString()} ₽` 
+            : null}
+        >
+          <RangeSlider
+            min={500}
+            max={10000}
+            step={100}
+            value={priceRange}
+            onChange={handlePriceRangeChange}
+            labelMin="От"
+            labelMax="До"
+          />
+        </FilterAccordionItem>
         
-        <AccordionItem value="features" className="border rounded-md">
-          <AccordionTrigger className="px-4 py-3 hover:no-underline data-[state=open]:bg-slate-50 rounded-t-md">
-            <div className="flex justify-between w-full">
-              <span className="flex items-center gap-2">
-                <Icon name="ListChecks" className="h-4 w-4 text-slate-500" />
-                <span>Дополнительные опции</span>
-              </span>
-              {filters.features && (filters.features as string[])?.length > 0 && (
-                <Badge variant="secondary" className="ml-auto mr-2">
-                  {(filters.features as string[])?.length}
-                </Badge>
-              )}
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="pt-2 px-4 pb-4">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {carFeatures.map((feature) => (
-                <div key={feature} className="flex items-center space-x-2">
-                  <Checkbox 
-                    id={`feature-${feature}`}
-                    checked={isMultiSelected('features', feature)}
-                    onCheckedChange={(checked) => 
-                      handleMultiSelectChange('features', feature, checked === true)
-                    }
-                  />
-                  <Label htmlFor={`feature-${feature}`}>{feature}</Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+        <FilterAccordionItem 
+          value="year" 
+          title="Год выпуска" 
+          icon="Calendar"
+          badgeValue={filters.minYear || filters.maxYear 
+            ? `${yearRange[0]} — ${yearRange[1]}` 
+            : null}
+        >
+          <RangeSlider
+            min={2000}
+            max={currentYear + 1}
+            step={1}
+            value={yearRange}
+            onChange={handleYearRangeChange}
+            labelMin="От"
+            labelMax="До"
+          />
+        </FilterAccordionItem>
+        
+        <FilterAccordionItem 
+          value="features" 
+          title="Дополнительные опции" 
+          icon="ListChecks"
+          badgeValue={filters.features && (filters.features as string[])?.length > 0 
+            ? (filters.features as string[])?.length 
+            : null}
+        >
+          <FilterCheckboxGroup
+            items={carFeatures}
+            selectedItems={(filters.features as string[]) || []}
+            onChange={(value, checked) => handleMultiSelectChange('features', value, checked)}
+            itemPrefix="feature"
+          />
+        </FilterAccordionItem>
       </Accordion>
       
       {isMobile && (
@@ -504,11 +364,7 @@ const CarFilter: React.FC<CarFilterProps> = ({
             >
               <Icon name="SlidersHorizontal" className="h-4 w-4" />
               Фильтры
-              {activeFiltersCount > 0 && (
-                <Badge variant="secondary" className="ml-1">
-                  {activeFiltersCount}
-                </Badge>
-              )}
+              <FilterBadge count={activeFiltersCount} showText={false} />
             </Button>
           </SheetTrigger>
           <SheetContent side="bottom" className="h-[85vh] overflow-y-auto">
