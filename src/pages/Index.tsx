@@ -27,7 +27,7 @@ const Index: React.FC = () => {
             Широкий выбор автомобилей премиум-класса для вашего комфорта и удовольствия от вождения
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
-            <Button asChild size="lg" className="text-lg px-8 bg-white text-primary hover:bg-gray-100">
+            <Button asChild size="lg" className="text-lg px-8 bg-white text-gray-900 hover:bg-gray-100">
               <Link to="/catalog">Выбрать автомобиль</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-lg px-8 bg-white/10">
@@ -57,7 +57,7 @@ const Index: React.FC = () => {
               <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
                 <Icon name="ShieldCheck" className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Полная страховка</h3>
+              <h3 class="text-xl font-semibold mb-3">Полная страховка</h3>
               <p className="text-gray-600">
                 Все наши автомобили застрахованы по КАСКО и ОСАГО, что обеспечивает вашу безопасность
               </p>
@@ -156,7 +156,7 @@ const Index: React.FC = () => {
           </div>
           
           <div className="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
-            <p>© 2025 АвтоПрокат. Все права защищены.</p>
+            <p> 2025 АвтоПрокат. Все права защищены.</p>
           </div>
         </div>
       </footer>
