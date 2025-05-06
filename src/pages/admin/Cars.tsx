@@ -131,12 +131,4 @@ const parseCSV = (csvText: string): any[] => {
       let value = values[i];
       if (value) {
         value = value.trim();
-        if (value.startsWith('"') && value.endsWith('"')) {
-          value = value.slice(1, -1);
-        }
-      }
-      obj[header] = value;
-      return obj;
-    }, {});
-  });
-};
+        if (value.startsWith('
