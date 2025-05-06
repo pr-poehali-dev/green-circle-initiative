@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Car } from '@/types/admin';
@@ -32,10 +31,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Slider } from '@/components/ui/slider';
+import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
 import Icon from '@/components/ui/icon';
@@ -47,6 +60,16 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
+
+// Интерфейс для расширенных фильтров
+interface AdvancedFilters {
+  priceRange: [number, number];
+  yearRange: [number, number];
+  transmissions: string[];
+  fuelTypes: string[];
+  features: string[];
+  availabilityStatus: string[];
+}
 
 const AdminCars: React.FC = () => {
   // Состояние для автомобилей и пагинации
@@ -63,14 +86,49 @@ const AdminCars: React.FC = () => {
   const [brand, setBrand] = useState<string>('');
   const [status, setStatus] = useState<string>('');
   const [sortBy, setSortBy] = useState<string>('');
+  const [isAdvancedFiltersOpen, setIsAdvancedFiltersOpen] = useState(false);
+  const [activeFiltersCount, setActiveFiltersCount] = useState(0);
+
+  // Новое состояние для расширенных фильтров
+  const [advancedFilters, setAdvancedFilters] = useState<AdvancedFilters>({
+    priceRange: [500, 5000],
+    yearRange: [2015, new Date().getFullYear()],
+    transmissions: [],
+    fuelTypes: [],
+    features: [],
+    availabilityStatus: []
+  });
   
   // Состояние для модальных окон
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   
-  // Доступные бренды для фильтрации (можно получать с сервера)
-  const availableBrands = ['BMW', 'Mercedes', 'Audi', 'Toyota', 'Kia', 'Hyundai'];
+  // Доступные значения для расширенных фильтров
+  const availableBrands = ['BMW', 'Mercedes', 'Audi', 'Toyota', 'Kia', 'Hyundai', 'Volkswagen', 'Tesla'];
+  const availableTransmissions = ['Автомат', 'Механика', 'Робот', 'Вариатор'];
+  const availableFuelTypes = ['Бензин', 'Дизель', 'Электро', 'Гибрид', 'Газ'];
+  const availableFeatures = ['Кондиционер', 'Кожаный салон', 'Навигация', 'Подогрев сидений', 'Парктроник', 'Камера заднего вида', 'Панорамная крыша', 'Премиум аудио', 'Автозапуск', 'Круиз-контроль'];
+  
   const { toast } = useToast();
+  
+  // Подсчет активных фильтров
+  useEffect(() => {
+    let count = 0;
+    
+    if (searchQuery) count++;
+    if (brand) count++;
+    if (status) count++;
+    
+    // Подсчёт активных расширенных фильтров
+    if (advancedFilters.priceRange[0] > 500 || advancedFilters.priceRange[1] < 5000) count++;
+    if (advancedFilters.yearRange[0] > 2015 || advancedFilters.yearRange[1] < new Date().getFullYear()) count++;
+    if (advancedFilters.transmissions.length > 0) count++;
+    if (advancedFilters.fuelTypes.length > 0) count++;
+    if (advancedFilters.features.length > 0) count++;
+    if (advancedFilters.availabilityStatus.length > 0) count++;
+    
+    setActiveFiltersCount(count);
+  }, [searchQuery, brand, status, advancedFilters]);
   
   // Получение списка автомобилей с учетом фильтров
   const fetchCars = async () => {
@@ -89,6 +147,18 @@ const AdminCars: React.FC = () => {
       if (brand) params.brand = brand;
       if (status) params.status = status;
       if (sortBy) params.sort = sortBy;
+      
+      // Добавление параметров расширенных фильтров
+      if (advancedFilters.priceRange[0] > 500) params.minPrice = advancedFilters.priceRange[0];
+      if (advancedFilters.priceRange[1] < 5000) params.maxPrice = advancedFilters.priceRange[1];
+      
+      if (advancedFilters.yearRange[0] > 2015) params.minYear = advancedFilters.yearRange[0];
+      if (advancedFilters.yearRange[1] < new Date().getFullYear()) params.maxYear = advancedFilters.yearRange[1];
+      
+      if (advancedFilters.transmissions.length > 0) params.transmissions = advancedFilters.transmissions.join(',');
+      if (advancedFilters.fuelTypes.length > 0) params.fuelTypes = advancedFilters.fuelTypes.join(',');
+      if (advancedFilters.features.length > 0) params.features = advancedFilters.features.join(',');
+      if (advancedFilters.availabilityStatus.length > 0) params.availabilityStatus = advancedFilters.availabilityStatus.join(',');
       
       // Запрос к API
       const response = await carsApi.getAll(params);
@@ -122,7 +192,48 @@ const AdminCars: React.FC = () => {
     setBrand('');
     setStatus('');
     setSortBy('');
+    setAdvancedFilters({
+      priceRange: [500, 5000],
+      yearRange: [2015, new Date().getFullYear()],
+      transmissions: [],
+      fuelTypes: [],
+      features: [],
+      availabilityStatus: []
+    });
     setCurrentPage(1);
+  };
+  
+  // Обработчики изменения расширенных фильтров
+  const handlePriceRangeChange = (value: number[]) => {
+    setAdvancedFilters({
+      ...advancedFilters,
+      priceRange: [value[0], value[1]]
+    });
+  };
+  
+  const handleYearRangeChange = (value: number[]) => {
+    setAdvancedFilters({
+      ...advancedFilters,
+      yearRange: [value[0], value[1]]
+    });
+  };
+  
+  const handleCheckboxFilterChange = (
+    filterName: 'transmissions' | 'fuelTypes' | 'features' | 'availabilityStatus',
+    value: string,
+    checked: boolean
+  ) => {
+    if (checked) {
+      setAdvancedFilters({
+        ...advancedFilters,
+        [filterName]: [...advancedFilters[filterName], value]
+      });
+    } else {
+      setAdvancedFilters({
+        ...advancedFilters,
+        [filterName]: advancedFilters[filterName].filter(item => item !== value)
+      });
+    }
   };
   
   // Изменение статуса автомобиля
@@ -222,6 +333,173 @@ const AdminCars: React.FC = () => {
     </div>
   );
   
+  // Компонент для расширенных фильтров
+  const AdvancedFiltersContent = () => (
+    <div className="p-4 space-y-4">
+      <h3 className="text-lg font-medium">Расширенные фильтры</h3>
+      
+      <Accordion type="single" collapsible defaultValue="price">
+        <AccordionItem value="price">
+          <AccordionTrigger>Цена за день</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-4 px-2">
+              <Slider
+                value={advancedFilters.priceRange}
+                min={500}
+                max={5000}
+                step={100}
+                onValueChange={handlePriceRangeChange}
+                className="pt-6"
+              />
+              <div className="flex justify-between">
+                <div>
+                  <span className="text-sm text-gray-500">От:</span>
+                  <div className="font-medium">{advancedFilters.priceRange[0]} ₽</div>
+                </div>
+                <div>
+                  <span className="text-sm text-gray-500">До:</span>
+                  <div className="font-medium">{advancedFilters.priceRange[1]} ₽</div>
+                </div>
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="year">
+          <AccordionTrigger>Год выпуска</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-4 px-2">
+              <Slider
+                value={advancedFilters.yearRange}
+                min={2000}
+                max={new Date().getFullYear()}
+                step={1}
+                onValueChange={handleYearRangeChange}
+                className="pt-6"
+              />
+              <div className="flex justify-between">
+                <div>
+                  <span className="text-sm text-gray-500">От:</span>
+                  <div className="font-medium">{advancedFilters.yearRange[0]}</div>
+                </div>
+                <div>
+                  <span className="text-sm text-gray-500">До:</span>
+                  <div className="font-medium">{advancedFilters.yearRange[1]}</div>
+                </div>
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="transmission">
+          <AccordionTrigger>Трансмиссия</AccordionTrigger>
+          <AccordionContent>
+            <div className="grid grid-cols-2 gap-2">
+              {availableTransmissions.map((type) => (
+                <div key={type} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`transmission-${type}`}
+                    checked={advancedFilters.transmissions.includes(type)}
+                    onCheckedChange={(checked) => 
+                      handleCheckboxFilterChange('transmissions', type, checked === true)
+                    }
+                  />
+                  <Label htmlFor={`transmission-${type}`}>{type}</Label>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="fuel">
+          <AccordionTrigger>Тип топлива</AccordionTrigger>
+          <AccordionContent>
+            <div className="grid grid-cols-2 gap-2">
+              {availableFuelTypes.map((type) => (
+                <div key={type} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`fuel-${type}`}
+                    checked={advancedFilters.fuelTypes.includes(type)}
+                    onCheckedChange={(checked) => 
+                      handleCheckboxFilterChange('fuelTypes', type, checked === true)
+                    }
+                  />
+                  <Label htmlFor={`fuel-${type}`}>{type}</Label>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="features">
+          <AccordionTrigger>Опции и характеристики</AccordionTrigger>
+          <AccordionContent>
+            <div className="grid grid-cols-2 gap-2">
+              {availableFeatures.map((feature) => (
+                <div key={feature} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`feature-${feature}`}
+                    checked={advancedFilters.features.includes(feature)}
+                    onCheckedChange={(checked) => 
+                      handleCheckboxFilterChange('features', feature, checked === true)
+                    }
+                  />
+                  <Label htmlFor={`feature-${feature}`}>{feature}</Label>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="status">
+          <AccordionTrigger>Доступность</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="status-available"
+                  checked={advancedFilters.availabilityStatus.includes('available')}
+                  onCheckedChange={(checked) => 
+                    handleCheckboxFilterChange('availabilityStatus', 'available', checked === true)
+                  }
+                />
+                <Label htmlFor="status-available">Доступны для бронирования</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="status-unavailable"
+                  checked={advancedFilters.availabilityStatus.includes('unavailable')}
+                  onCheckedChange={(checked) => 
+                    handleCheckboxFilterChange('availabilityStatus', 'unavailable', checked === true)
+                  }
+                />
+                <Label htmlFor="status-unavailable">Недоступны для бронирования</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="status-maintenance"
+                  checked={advancedFilters.availabilityStatus.includes('maintenance')}
+                  onCheckedChange={(checked) => 
+                    handleCheckboxFilterChange('availabilityStatus', 'maintenance', checked === true)
+                  }
+                />
+                <Label htmlFor="status-maintenance">На техобслуживании</Label>
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      
+      <div className="flex justify-end space-x-2 pt-4">
+        <Button variant="outline" onClick={resetFilters}>Сбросить</Button>
+        <Button onClick={() => {
+          applyFilters();
+          setIsAdvancedFiltersOpen(false);
+        }}>Применить</Button>
+      </div>
+    </div>
+  );
+  
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -290,20 +568,40 @@ const AdminCars: React.FC = () => {
                 <SelectItem value="-year">По году (новее)</SelectItem>
                 <SelectItem value="year">По году (старше)</SelectItem>
                 <SelectItem value="-rating">По рейтингу</SelectItem>
+                <SelectItem value="brand">По марке (А-Я)</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
         
         <div className="flex justify-between mt-4">
-          <Button variant="outline" onClick={resetFilters}>
-            <Icon name="X" className="h-4 w-4 mr-2" />
-            Сбросить
-          </Button>
-          <Button onClick={applyFilters}>
-            <Icon name="Filter" className="h-4 w-4 mr-2" />
-            Применить фильтры
-          </Button>
+          <Popover open={isAdvancedFiltersOpen} onOpenChange={setIsAdvancedFiltersOpen}>
+            <PopoverTrigger asChild>
+              <Button variant="outline">
+                <Icon name="SlidersHorizontal" className="h-4 w-4 mr-2" />
+                Расширенный фильтр
+                {activeFiltersCount > 0 && (
+                  <Badge variant="secondary" className="ml-2">
+                    {activeFiltersCount}
+                  </Badge>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[350px] p-0">
+              <AdvancedFiltersContent />
+            </PopoverContent>
+          </Popover>
+          
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={resetFilters}>
+              <Icon name="X" className="h-4 w-4 mr-2" />
+              Сбросить
+            </Button>
+            <Button onClick={applyFilters}>
+              <Icon name="Filter" className="h-4 w-4 mr-2" />
+              Применить фильтры
+            </Button>
+          </div>
         </div>
       </Card>
       
