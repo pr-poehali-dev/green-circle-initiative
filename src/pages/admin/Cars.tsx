@@ -92,7 +92,9 @@ const exportToCSV = (cars: Car[]) => {
   ].join(','));
   
   // Объединяем в CSV текст
-  const csvContent = `data:text/csv;charset=utf-8,${headers}\n${rows.join('\n')}`;
+  const csvContent = `data:text/csv;charset=utf-8,${headers}
+${rows.join('
+')}`;
   
   // Создаем ссылку и скачиваем файл
   const encodedUri = encodeURI(csvContent);
@@ -131,4 +133,12 @@ const parseCSV = (csvText: string): any[] => {
       let value = values[i];
       if (value) {
         value = value.trim();
-        if (value.startsWith('
+        if (value.startsWith('"') && value.endsWith('"')) {
+          value = value.slice(1, -1);
+        }
+      }
+      obj[header] = value;
+      return obj;
+    }, {});
+  });
+};
