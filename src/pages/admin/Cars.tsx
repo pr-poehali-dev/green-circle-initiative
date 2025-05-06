@@ -1,4 +1,4 @@
-}import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Car } from '@/types/admin';
 import { carsApi } from '@/lib/api';
@@ -104,7 +104,7 @@ const exportToCSV = (cars: Car[]) => {
   document.body.removeChild(link);
 };
 
-// Функция для экспоرта данных в JSON
+// Функция для экспоорта данных в JSON
 const exportToJSON = (cars: Car[]) => {
   const jsonString = JSON.stringify(cars, null, 2);
   const blob = new Blob([jsonString], { type: 'application/json' });
@@ -131,4 +131,12 @@ const parseCSV = (csvText: string): any[] => {
       let value = values[i];
       if (value) {
         value = value.trim();
-        if (value.startsWith('
+        if (value.startsWith('"') && value.endsWith('"')) {
+          value = value.slice(1, -1);
+        }
+      }
+      obj[header] = value;
+      return obj;
+    }, {});
+  });
+};
