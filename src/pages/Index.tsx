@@ -1,4 +1,5 @@
-}import React from 'react';
+
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
@@ -156,7 +157,7 @@ const Index: React.FC = () => {
           </div>
           
           <div className="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
-            <p> 2025 АвтоПрокат. Все права защищены.</p>
+            <p>© 2025 АвтоПрокат. Все права защищены.</p>
           </div>
         </div>
       </footer>
