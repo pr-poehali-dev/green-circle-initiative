@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { dashboardApi } from '@/lib/api';
 import { Booking, Car, CarStats, BookingStats, RevenueStats } from '@/types/admin';
 import { Skeleton } from '@/components/ui/skeleton';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -32,7 +32,7 @@ const timePeriods = [
   { value: 'day', label: 'Сегодня' },
   { value: 'week', label: 'Эта неделя' },
   { value: 'month', label: 'Этот месяц' },
-  { value: 'quarter', label: 'Этот кваرтал' },
+  { value: 'quarter', label: 'Этот квартал' },
   { value: 'year', label: 'Этот год' },
 ];
 
@@ -312,4 +312,9 @@ const AdminDashboard: React.FC = () => {
   
   const getNotificationIcon = (type: string) => {
     switch (type) {
-      case 'success': return <Icon name=
+      case 'success': return <Icon name='Check' />;
+      case 'warning': return <Icon name='AlertCircle' />;
+      case 'error': return <Icon name='AlertCircle' />;
+      default: return <Icon name='Info' />;
+    }
+  };
