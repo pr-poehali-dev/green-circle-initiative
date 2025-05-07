@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center animated-gradient">
-      <div className="text-center bg-zinc-800/60 p-8 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 backdrop-blur-md text-white">
+      <div className="text-center bg-zinc-800/60 p-8 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-green-500/50 backdrop-blur-md text-white">
         <h1 className="text-3xl font-bold mb-4">🚀 Добро пожаловать!</h1>
         <p className="text-xl text-white mb-6">тут будет отображаться ваш проект</p>
 
