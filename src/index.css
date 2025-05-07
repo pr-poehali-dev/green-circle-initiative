@@ -117,5 +117,23 @@
     background-position: 0% 50%;
   }
 }
-background: linear-gradient(-45deg, #FFD700, #FF8C00, #00BFFF, #3CB371);
-background: linear-gradient(-45deg, #FFD700, #FF8C00, #FFD700, #FF8C00);
+background: linear-gradient(-45deg, #ffd700, #ff8c00, #00bfff, #3cb371);
+background: linear-gradient(-45deg, #ffd700, #ff8c00, #ffd700, #ff8c00);
+/* Градиентный фон с анимацией */
+.animated-gradient {
+  background: linear-gradient(-45deg, #ffd700, #ff8c00, #ffd700, #ff8c00);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
