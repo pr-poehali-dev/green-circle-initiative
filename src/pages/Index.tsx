@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <div className="text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center animated-gradient">
+      <div className="text-center bg-white bg-opacity-80 p-8 rounded-lg shadow-lg">
         <h1 className="text-4xl font-bold mb-4 text-black">Добро пожаловать!</h1>
         <p className="text-xl text-gray-600 mb-8">тут будет отображаться ваш проект</p>
 
