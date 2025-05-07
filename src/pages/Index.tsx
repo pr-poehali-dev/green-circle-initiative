@@ -4,7 +4,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center animated-gradient">
       <div className="text-center bg-zinc-900/80 p-8 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 backdrop-blur-md text-white">
-        <h1 className="text-3xl font-bold mb-4">Добро пожаловать!</h1>
+        <h1 className="text-3xl font-bold mb-4">🚀 Добро пожаловать!</h1>
         <p className="text-xl text-white mb-8">тут будет отображаться ваш проект</p>
         <div className="flex gap-4 justify-center">
           <Button className="bg-red-500 hover:bg-red-600 text-white w-16 h-16 rounded-full p-0">
