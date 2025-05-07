@@ -9,13 +9,17 @@ const Index = () => {
 
         <div className="flex flex-col gap-4 w-40 mx-auto">
           <Button className="bg-red-500 hover:bg-red-600 text-white">
-            Красная кнопка
+<div className="flex flex-col gap-4 w-40 mx-auto">
+          <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full">
+            Красная
           </Button>
-<Button className="bg-blue-500 hover:bg-blue-600 text-white">
-            Голубая кнопка
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full">
+            Голубая
           </Button>
-          <Button className="bg-green-500 hover:bg-green-600 text-white">
-            Зеленая кнопка
+          <Button className="bg-green-500 hover:bg-green-600 text-white rounded-full">
+            Зеленая
+          </Button>
+        </div>
           </Button>
         </div>
       </div>
