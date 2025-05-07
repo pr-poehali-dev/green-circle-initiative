@@ -1,14 +1,15 @@
-
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
 const Index = () => {
-  const [currentGift, setCurrentGift] = useState<string>("https://cdn.poehali.dev/files/86443b1f-ce58-4a9d-8c7b-5589911afa63.png");
+  const [currentGift, setCurrentGift] = useState<string>(
+    'https://cdn.poehali.dev/files/86443b1f-ce58-4a9d-8c7b-5589911afa63.png',
+  );
 
   const gifts = {
-    red: "https://cdn.poehali.dev/files/86443b1f-ce58-4a9d-8c7b-5589911afa63.png",
-    blue: "https://cdn.poehali.dev/files/d9575e84-fd0f-4ae1-bb42-7c143d5ccf24.png",
-    green: "https://cdn.poehali.dev/files/ab49c7da-f851-4457-a458-7163513008c9.png"
+    red: 'https://cdn.poehali.dev/files/86443b1f-ce58-4a9d-8c7b-5589911afa63.png',
+    blue: 'https://cdn.poehali.dev/files/d9575e84-fd0f-4ae1-bb42-7c143d5ccf24.png',
+    green: 'https://cdn.poehali.dev/files/ab49c7da-f851-4457-a458-7163513008c9.png',
   };
 
   const changeGift = (color: 'red' | 'blue' | 'green') => {
@@ -25,24 +26,25 @@ const Index = () => {
           <img
             src={currentGift}
             alt="Подарочная коробка"
-            className="w-48 h-48 object-contain transition-all duration-300"
+            className="w-48 h-48 object-contain transition-all duration-300 transform hover:scale-105 animate-fade-in"
+            style={{ animation: 'fadeIn 0.5s ease-in-out' }}
           />
         </div>
 
         <div className="flex gap-4 justify-center">
-          <Button 
+          <Button
             className="bg-red-500 hover:bg-red-600 text-white w-16 h-16 rounded-full p-0"
             onClick={() => changeGift('red')}
           >
             К
           </Button>
-          <Button 
+          <Button
             className="bg-blue-500 hover:bg-blue-600 text-white w-16 h-16 rounded-full p-0"
             onClick={() => changeGift('blue')}
           >
             С
           </Button>
-          <Button 
+          <Button
             className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full p-0"
             onClick={() => changeGift('green')}
           >
