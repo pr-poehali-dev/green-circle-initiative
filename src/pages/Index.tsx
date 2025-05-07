@@ -5,6 +5,7 @@ const Index = () => {
   const [currentGift, setCurrentGift] = useState<string>(
     'https://cdn.poehali.dev/files/86443b1f-ce58-4a9d-8c7b-5589911afa63.png',
   );
+  const [fadeState, setFadeState] = useState<'fadeIn' | 'fadeOut'>('fadeIn');
 
   const gifts = {
     red: 'https://cdn.poehali.dev/files/86443b1f-ce58-4a9d-8c7b-5589911afa63.png',
@@ -13,7 +14,14 @@ const Index = () => {
   };
 
   const changeGift = (color: 'red' | 'blue' | 'green') => {
-    setCurrentGift(gifts[color]);
+    // Сначала исчезновение
+    setFadeState('fadeOut');
+
+    // После завершения анимации исчезновения меняем изображение и запускаем появление
+    setTimeout(() => {
+      setCurrentGift(gifts[color]);
+      setFadeState('fadeIn');
+    }, 300); // Длительность анимации исчезновения
   };
 
   return (
@@ -26,8 +34,7 @@ const Index = () => {
           <img
             src={currentGift}
             alt="Подарочная коробка"
-            className="w-48 h-48 object-contain transition-all duration-300 transform hover:scale-105 animate-fade-in"
-            style={{ animation: 'fadeIn 0.5s ease-in-out' }}
+            className={`w-48 h-48 object-contain transition-all duration-300 transform hover:scale-105 ${fadeState === 'fadeIn' ? 'animate-fade-in' : 'animate-fade-out'}`}
           />
         </div>
 
