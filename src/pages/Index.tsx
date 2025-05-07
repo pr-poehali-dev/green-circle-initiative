@@ -11,8 +11,8 @@ const Index = () => {
           <Button className="bg-red-500 hover:bg-red-600 text-white">
             Красная кнопка
           </Button>
-          <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
-            Желтая кнопка
+<Button className="bg-black hover:bg-gray-800 text-white">
+            Черная кнопка
           </Button>
           <Button className="bg-green-500 hover:bg-green-600 text-white">
             Зеленая кнопка
