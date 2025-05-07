@@ -135,5 +135,9 @@ background: linear-gradient(-45deg, #ffd700, #ff8c00, #ffd700, #ff8c00);
   }
   100% {
     background-position: 0% 50%;
-  }
+/* Градиентный фон с анимацией */
+.animated-gradient {
+  background: linear-gradient(-45deg, #ffd700, #ff8c00, #ffd700, #ff8c00);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 }
