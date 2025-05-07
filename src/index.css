@@ -98,46 +98,20 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-/* Градиентный фон с анимацией */
 .animated-gradient {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
+    background: linear-gradient(-45deg, #FFD700, #FFA500, #FF8C00, #FFBB00);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
   }
-  50% {
-    background-position: 100% 50%;
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-background: linear-gradient(-45deg, #ffd700, #ff8c00, #00bfff, #3cb371);
-background: linear-gradient(-45deg, #ffd700, #ff8c00, #ffd700, #ff8c00);
-/* Градиентный фон с анимацией */
-.animated-gradient {
-  background: linear-gradient(-45deg, #ffd700, #ff8c00, #ffd700, #ff8c00);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-/* Градиентный фон с анимацией */
-.animated-gradient {
-  background: linear-gradient(-45deg, #ffd700, #ff8c00, #ffd700, #ff8c00);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-}
