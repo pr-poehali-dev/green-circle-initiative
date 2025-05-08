@@ -1,11 +1,5 @@
-
 import { useState } from "react";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
@@ -78,12 +72,12 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-zinc-900 text-white">
       {/* Хедер */}
-      <header className="bg-white shadow-sm py-4 border-b">
+      <header className="bg-zinc-800 shadow-md py-4 border-b border-zinc-700">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-gray-800">Социальные сети</h1>
-          <Button>
+          <h1 className="text-xl font-bold text-white">Социальные сети</h1>
+          <Button className="bg-indigo-600 hover:bg-indigo-700">
             <Icon name="Plus" className="mr-2" size={18} />
             Новый пост
           </Button>
@@ -122,7 +116,9 @@ const Index = () => {
                 Instagram
               </Button>
               <Button
-                variant={selectedPlatform === "facebook" ? "default" : "outline"}
+                variant={
+                  selectedPlatform === "facebook" ? "default" : "outline"
+                }
                 size="sm"
                 onClick={() => setSelectedPlatform("facebook")}
               >
@@ -166,7 +162,9 @@ const Index = () => {
                   <Activity className="h-4 w-4 text-gray-500" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{metrics.engagement}%</div>
+                  <div className="text-2xl font-bold">
+                    {metrics.engagement}%
+                  </div>
                   <p className="text-xs text-red-500 mt-1 flex items-center">
                     <Icon name="TrendingDown" size={14} className="mr-1" />
                     -0.3% за неделю
@@ -182,9 +180,7 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{metrics.posts}</div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    12 в этом месяце
-                  </p>
+                  <p className="text-xs text-gray-500 mt-1">12 в этом месяце</p>
                 </CardContent>
               </Card>
               <Card>
@@ -195,7 +191,9 @@ const Index = () => {
                   <Icon name="Eye" className="h-4 w-4 text-gray-500" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{metrics.impressions}</div>
+                  <div className="text-2xl font-bold">
+                    {metrics.impressions}
+                  </div>
                   <p className="text-xs text-green-500 mt-1 flex items-center">
                     <Icon name="TrendingUp" size={14} className="mr-1" />
                     +5.7% за неделю
@@ -323,7 +321,8 @@ const Index = () => {
                     </div>
                     <div className="p-3">
                       <p className="text-sm line-clamp-2">
-                        Запускаем новую линейку продуктов в этом месяце! Не пропустите!
+                        Запускаем новую линейку продуктов в этом месяце! Не
+                        пропустите!
                       </p>
                       <div className="flex items-center justify-between mt-3 text-xs text-gray-500">
                         <div className="flex items-center">
@@ -341,7 +340,7 @@ const Index = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Пост 2 */}
                   <div className="border rounded-md overflow-hidden">
                     <div className="aspect-square bg-gray-100 relative">
@@ -374,14 +373,14 @@ const Index = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Пост 3 */}
                   <div className="border rounded-md overflow-hidden">
                     <div className="aspect-square bg-gray-100 relative">
                       <img
                         src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=500"
                         alt="Пост"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full.object-cover"
                       />
                       <div className="absolute top-2 left-2 bg-white p-1 rounded-md shadow-sm">
                         <Icon name="Twitter" size={18} />
