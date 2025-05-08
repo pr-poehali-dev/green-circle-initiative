@@ -19,9 +19,6 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        'playfair': ['Playfair Display', 'serif'],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -66,11 +63,22 @@ const config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        purple: {
+          light: "#9b87f5",
+          DEFAULT: "#7E69AB",
+          dark: "#6E59A5"
+        },
+        navy: "#1A1F2C",
+        aqua: "#33C3F0"
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif']
       },
       keyframes: {
         "accordion-down": {
@@ -81,15 +89,25 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(20px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
         },
+        slideUp: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' }
+        },
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.8s ease-out forwards",
+        fadeIn: 'fadeIn 0.5s ease-out forwards',
+        slideUp: 'slideUp 0.5s ease-out forwards',
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
       },
     },
   },
