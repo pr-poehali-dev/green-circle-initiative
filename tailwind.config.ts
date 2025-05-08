@@ -1,14 +1,10 @@
-
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
 
 export default {
   darkMode: ["class"],
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}"
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     container: {
       center: true,
@@ -70,6 +66,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        inter: ["Inter", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
@@ -101,12 +98,12 @@ export default {
     require("tailwindcss-animate"),
     require("@tailwindcss/typography"),
     plugin(({ addVariant }) => {
-      addVariant("radix-state-open", '&[data-state="open"]')
-      addVariant("radix-state-closed", '&[data-state="closed"]')
-      addVariant("radix-state-on", '&[data-state="on"]')
-      addVariant("radix-state-off", '&[data-state="off"]')
-      addVariant("radix-state-checked", '&[data-state="checked"]')
-      addVariant("radix-state-unchecked", '&[data-state="unchecked"]')
+      addVariant("radix-state-open", '&[data-state="open"]');
+      addVariant("radix-state-closed", '&[data-state="closed"]');
+      addVariant("radix-state-on", '&[data-state="on"]');
+      addVariant("radix-state-off", '&[data-state="off"]');
+      addVariant("radix-state-checked", '&[data-state="checked"]');
+      addVariant("radix-state-unchecked", '&[data-state="unchecked"]');
     }),
   ],
 } satisfies Config;
