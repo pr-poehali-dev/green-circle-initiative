@@ -123,6 +123,12 @@
     background: rgba(155, 135, 245, 0.3);
     border-radius: 10px;
   }
+
+  /* Добавляем стили для модального окна с рецептом */
+  .recipe-dialog-content {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
 }
 
 @keyframes fadeIn {
