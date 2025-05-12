@@ -40,7 +40,7 @@ export default function HomePage() {
               <div className="relative w-80 h-80">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#9b87f5]/20 to-[#D6BCFA]/20 rounded-full blur-3xl"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1536935338788-846bb9981813?ixlib=rb-4.0.3&auto=format&fit=crop&q=80&w=1000"
+                  src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&auto=format&fit=crop&q=80&w=1000"
                   alt="Коктейли"
                   className="relative z-10 w-full h-full object-cover rounded-2xl shadow-xl"
                 />
