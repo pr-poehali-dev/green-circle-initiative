@@ -28,15 +28,15 @@ export function DrinkCard({
         <div className="mb-8 w-full flex justify-center">
           <Button
             onClick={onGenerateDrink}
-            className="w-48 h-48 rounded-full bg-gradient-to-br from-white to-gray-100 hover:from-gray-50 hover:to-white shadow-lg transition-all duration-300 hover:shadow-white/20 hover:shadow-xl hover:scale-105 group"
+            className="w-48 h-48 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-300 hover:to-orange-500 shadow-lg transition-all duration-300 hover:shadow-orange-400/20 hover:shadow-xl hover:scale-105 group"
           >
             <div className="flex flex-col items-center">
               <Icon
                 name="Wine"
                 size={48}
-                className="text-gray-800 mb-2 transition-transform duration-300 group-hover:scale-110"
+                className="text-white mb-2 transition-transform duration-300 group-hover:scale-110"
               />
-              <span className="text-xl font-semibold text-gray-800">
+              <span className="text-xl font-semibold text-white">
                 Нажми меня!
               </span>
             </div>
