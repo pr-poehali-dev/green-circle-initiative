@@ -28,7 +28,7 @@ export default function HomePage() {
                 <Link to="/profile">
                   <Button
                     variant="outline"
-                    className="border-[#9b87f5] text-[#D6BCFA] hover:bg-[#9b87f5]/10"
+                    className="border-[#9b87f5] text-[#D6BCFA] hover:bg-[#9b87f5]/10 bg-transparent"
                   >
                     <Icon name="User" className="mr-2" />
                     Войти в аккаунт
