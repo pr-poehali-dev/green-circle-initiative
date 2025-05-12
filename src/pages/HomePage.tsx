@@ -20,7 +20,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/drinks">
-                  <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                  <Button className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-lg">
                     <Icon name="Wine" className="mr-2" />
                     Попробовать генератор
                   </Button>
