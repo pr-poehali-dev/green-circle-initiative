@@ -28,7 +28,7 @@ export function DrinkCard({
         <div className="mb-8 w-full flex justify-center">
           <Button
             onClick={onGenerateDrink}
-            className="w-48 h-48 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 hover:from-yellow-200 hover:to-yellow-400 shadow-lg transition-all duration-300 hover:shadow-yellow-400/30 hover:shadow-xl hover:scale-105 group"
+            className="w-48 h-48 rounded-full bg-gradient-to-br from-white to-gray-100 hover:from-gray-50 hover:to-white border border-gray-200 shadow-lg transition-all duration-300 hover:shadow-white/40 hover:shadow-xl hover:scale-105 group"
           >
             <div className="flex flex-col items-center">
               <Icon
