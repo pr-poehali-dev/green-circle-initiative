@@ -7,8 +7,8 @@ export default function ProfilePage() {
       <h1 className="text-3xl font-bold text-[#D6BCFA] mb-8">Личный кабинет</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Левая колонка: приветствие и преимущества */}
-        <div className="order-1">
+        {/* Левая колонка: приветствие и преимущества - скрыта на мобильных */}
+        <div className="order-1 hidden md:block">
           <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg h-full">
             <h2 className="text-2xl font-bold text-[#D6BCFA] mb-4">
               Добро пожаловать!
@@ -81,8 +81,8 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Правая колонка: форма входа/регистрации */}
-        <div className="order-2">
+        {/* Правая колонка: форма входа/регистрации - полная ширина на мобильных */}
+        <div className="order-2 col-span-1 md:col-span-1 mx-auto w-full max-w-md">
           <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg">
             <AuthTabs />
           </div>
