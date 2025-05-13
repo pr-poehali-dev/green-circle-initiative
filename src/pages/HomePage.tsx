@@ -107,9 +107,7 @@ export default function HomePage() {
       {/* Call to Action */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-[#D6BCFA] mb-6">
-            Готовы начать?
-          </h2>
+          <h2 className="text-3xl font-bold text-[#D6BCFA] mb-6">Начнём!</h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
             Присоединяйтесь к нашему сообществу любителей вкусных напитков и
             откройте для себя новые вкусовые ощущения.
