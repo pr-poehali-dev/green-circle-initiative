@@ -19,7 +19,7 @@ export function DrinkCard({
 }: DrinkCardProps) {
   return (
     <Card className="w-full max-w-md bg-[#2B3144] border-[#9b87f5]/20 shadow-xl">
-      <CardHeader className="text-center pb-2">
+      <CardHeader className="text-center pb-6">
         <CardTitle className="text-3xl font-bold text-[#D6BCFA]">
           DrinkGenerator
         </CardTitle>
