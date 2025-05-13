@@ -40,8 +40,8 @@ export default function HomePage() {
               <div className="relative w-80 h-80">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#9b87f5]/20 to-[#D6BCFA]/20 rounded-full blur-3xl"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Коктейли в винтажных бокалах с пряными гарнирами"
+                  src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                  alt="Экзотические коктейли со свежими фруктами в антураже тропического бара"
                   className="relative z-10 w-full h-full object-cover rounded-2xl shadow-xl"
                 />
               </div>
