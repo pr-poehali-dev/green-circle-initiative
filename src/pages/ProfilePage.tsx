@@ -7,15 +7,8 @@ export default function ProfilePage() {
       <h1 className="text-3xl font-bold text-[#D6BCFA] mb-8">Личный кабинет</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Левая колонка: форма входа/регистрации */}
-        <div className="order-2 md:order-1">
-          <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg">
-            <AuthTabs />
-          </div>
-        </div>
-
-        {/* Правая колонка: приветствие и преимущества */}
-        <div className="order-1 md:order-2">
+        {/* Левая колонка: приветствие и преимущества */}
+        <div className="order-1">
           <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg h-full">
             <h2 className="text-2xl font-bold text-[#D6BCFA] mb-4">
               Добро пожаловать!
@@ -85,6 +78,13 @@ export default function ProfilePage() {
                 </div>
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Правая колонка: форма входа/регистрации */}
+        <div className="order-2">
+          <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg">
+            <AuthTabs />
           </div>
         </div>
       </div>
