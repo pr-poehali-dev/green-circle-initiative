@@ -54,7 +54,7 @@ export default function HomePage() {
       <section className="py-16 bg-[#1E2434] px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-[#D6BCFA] mb-12">
-            О нашем проекте
+            О нас
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
