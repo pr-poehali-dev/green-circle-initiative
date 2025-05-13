@@ -21,7 +21,7 @@ export function DrinkCard({
     <Card className="w-full max-w-md bg-[#2B3144] border-[#9b87f5]/20 shadow-xl">
       <CardHeader className="text-center pb-2">
         <CardTitle className="text-3xl font-bold text-[#D6BCFA]">
-          Генератор напитков
+          DrinkGenerator
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col items-center">
