@@ -9,7 +9,11 @@ export default function AdminPage() {
 
       <div className="flex justify-center items-center min-h-[400px] text-center">
         <div>
-          <Icon name="Settings" size={64} className="text-white mx-auto mb-4" />
+          <Icon
+            name="Settings"
+            size={64}
+            className="text-green-500 mx-auto mb-4"
+          />
           <h2 className="text-xl font-semibold text-[#D6BCFA] mb-2">
             Доступ ограничен
           </h2>
