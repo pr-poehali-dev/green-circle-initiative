@@ -12,7 +12,7 @@ export default function AdminPage() {
           <Icon
             name="Settings"
             size={64}
-            className="text-green-500 mx-auto mb-4"
+            className="text-red-500 mx-auto mb-4"
           />
           <h2 className="text-xl font-semibold text-[#D6BCFA] mb-2">
             Доступ ограничен
