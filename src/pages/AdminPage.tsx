@@ -9,11 +9,14 @@ export default function AdminPage() {
 
       <div className="flex justify-center items-center min-h-[400px] text-center">
         <div>
-          <Icon
-            name="Settings"
-            size={64}
-            className="text-red-500 mx-auto mb-4"
-          />
+          <div className="relative mx-auto mb-4 w-16 h-16 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-purple-600 to-indigo-500 rounded-full blur opacity-50"></div>
+            <Icon
+              name="Settings"
+              size={64}
+              className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600 relative animate-pulse"
+            />
+          </div>
           <h2 className="text-xl font-semibold text-[#D6BCFA] mb-2">
             Доступ ограничен
           </h2>
