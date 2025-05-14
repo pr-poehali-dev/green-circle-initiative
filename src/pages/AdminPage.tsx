@@ -16,7 +16,7 @@ export default function AdminPage() {
             <Icon
               name="Settings"
               size={64}
-              className="relative z-10 stroke-purple-500 stroke-[1.5] fill-transparent"
+              className="relative z-10 stroke-purple-500 stroke-[0.75] fill-transparent"
             />
           </div>
           <h2 className="text-xl font-semibold text-[#D6BCFA] mb-2">
