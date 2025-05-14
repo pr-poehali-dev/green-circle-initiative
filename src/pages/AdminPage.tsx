@@ -10,11 +10,13 @@ export default function AdminPage() {
       <div className="flex justify-center items-center min-h-[400px] text-center">
         <div>
           <div className="relative mx-auto mb-4 w-16 h-16 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-purple-600 to-indigo-500 rounded-full blur opacity-50"></div>
+            {/* Фоновое свечение */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-purple-600 to-indigo-500 rounded-full blur-md opacity-40"></div>
+            {/* Четкая иконка поверх свечения */}
             <Icon
               name="Settings"
               size={64}
-              className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600 relative animate-pulse"
+              className="relative z-10 text-purple-500"
             />
           </div>
           <h2 className="text-xl font-semibold text-[#D6BCFA] mb-2">
