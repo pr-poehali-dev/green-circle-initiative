@@ -38,12 +38,15 @@ export default function HomePage() {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="relative w-80 h-80">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#9b87f5]/20 to-[#D6BCFA]/20 rounded-full blur-3xl"></div>
-                <img
-                  src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Экзотические коктейли со свежими фруктами в антураже тропического бара"
-                  className="relative z-10 w-full h-full object-cover rounded-2xl shadow-xl"
-                />
+                {/* Заменяем изображение на стилизованную иконку */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/40 via-[#D6BCFA]/30 to-[#9b87f5]/40 rounded-full blur-xl opacity-40"></div>
+                <div className="relative z-10 w-full h-full flex items-center justify-center">
+                  <Icon
+                    name="GlassWater"
+                    size={180}
+                    className="stroke-purple-500 stroke-[0.75] fill-transparent"
+                  />
+                </div>
               </div>
             </div>
           </div>
