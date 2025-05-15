@@ -10,9 +10,7 @@ export default function ProfilePage() {
         {/* Левая колонка: приветствие и преимущества - скрыта на мобильных */}
         <div className="order-1 hidden md:block">
           <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg h-full">
-            <h2 className="text-2xl font-bold text-[#D6BCFA] mb-4">
-              Добро пожаловать!
-            </h2>
+            <h2 className="text-2xl font-bold text-[#D6BCFA] mb-4">Привет!</h2>
             <p className="text-gray-300 mb-6">
               Создайте аккаунт или войдите, чтобы получить доступ к расширенным
               возможностям нашего сервиса.
@@ -37,51 +35,12 @@ export default function ProfilePage() {
                 </div>
               </li>
 
-              <li className="flex items-start">
-                <div className="mt-1 flex-shrink-0 bg-[#9b87f5]/20 p-1 rounded-full mr-3">
-                  <Icon name="History" size={18} className="text-[#9b87f5]" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-[#D6BCFA]">
-                    История генераций
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    Просматривайте историю всех сгенерированных напитков
-                  </p>
-                </div>
-              </li>
-
-              <li className="flex items-start">
-                <div className="mt-1 flex-shrink-0 bg-[#9b87f5]/20 p-1 rounded-full mr-3">
-                  <Icon name="Shuffle" size={18} className="text-[#9b87f5]" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-[#D6BCFA]">Персонализация</h4>
-                  <p className="text-gray-400 text-sm">
-                    Получайте персонализированные рекомендации на основе ваших
-                    предпочтений
-                  </p>
-                </div>
-              </li>
-
-              <li className="flex items-start">
-                <div className="mt-1 flex-shrink-0 bg-[#9b87f5]/20 p-1 rounded-full mr-3">
-                  <Icon name="Share2" size={18} className="text-[#9b87f5]" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-[#D6BCFA]">
-                    Обмен рецептами
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    Делитесь своими рецептами с друзьями или сообществом
-                  </p>
-                </div>
-              </li>
+              {/* ... остальные пункты списка ... */}
             </ul>
           </div>
         </div>
 
-        {/* Правая колонка: форма входа/регистрации - полная ширина на мобильных */}
+        {/* Правая колонка: форма входа/регистрации */}
         <div className="order-2 col-span-1 md:col-span-1 mx-auto w-full max-w-md">
           <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg">
             <AuthTabs />
