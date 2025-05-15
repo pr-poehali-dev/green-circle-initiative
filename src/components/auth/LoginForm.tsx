@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,26 +27,26 @@ export function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-red-400">
+        <Label htmlFor="email" className="text-green-400">
           Email
         </Label>
         <Input
           id="email"
           type="email"
           placeholder="email@example.com"
-          className="bg-red-900/30 border-red-500/50 text-white focus-visible:ring-red-500"
+          className="bg-green-900/30 border-green-500/50 text-white focus-visible:ring-green-500"
           required
         />
       </div>
 
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <Label htmlFor="password" className="text-red-400">
+          <Label htmlFor="password" className="text-green-400">
             Пароль
           </Label>
           <Button
             variant="link"
-            className="text-red-400 p-0 h-auto text-xs"
+            className="text-green-400 p-0 h-auto text-xs"
             onClick={() =>
               toast({
                 title: "Функция в разработке",
@@ -60,7 +61,7 @@ export function LoginForm() {
           id="password"
           type="password"
           placeholder="••••••••"
-          className="bg-red-900/30 border-red-500/50 text-white focus-visible:ring-red-500"
+          className="bg-green-900/30 border-green-500/50 text-white focus-visible:ring-green-500"
           required
         />
       </div>
@@ -68,18 +69,18 @@ export function LoginForm() {
       <div className="flex items-center space-x-2 my-4">
         <Checkbox
           id="remember"
-          className="border-red-500 data-[state=checked]:bg-red-600"
+          className="border-green-500 data-[state=checked]:bg-green-600"
         />
         <label
           htmlFor="remember"
-          className="text-sm text-red-300 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          className="text-sm text-green-300 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           Запомнить меня
         </label>
       </div>
 
       <Button
-        className="w-full bg-red-600 hover:bg-red-700 text-white"
+        className="w-full bg-green-600 hover:bg-green-700 text-white"
         disabled={isLoading}
         type="submit"
       >
