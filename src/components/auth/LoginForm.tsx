@@ -79,7 +79,7 @@ export function LoginForm() {
       </div>
 
       <Button
-        className="w-full bg-red-600 hover:bg-red-700 text-white"
+        className="w-full bg-green-600 hover:bg-green-700 text-white"
         disabled={isLoading}
         type="submit"
       >
