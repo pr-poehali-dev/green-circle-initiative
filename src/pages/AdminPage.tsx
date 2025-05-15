@@ -11,12 +11,12 @@ export default function AdminPage() {
         <div>
           <div className="relative mx-auto mb-4 w-16 h-16 flex items-center justify-center">
             {/* Фоновое свечение */}
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-yellow-400 to-amber-500 rounded-full blur-md opacity-30"></div>
-            {/* Иконка только с желтым контуром */}
+            <div className="absolute inset-0 bg-gradient-to-br from-green-300 via-green-400 to-emerald-500 rounded-full blur-md opacity-30"></div>
+            {/* Иконка только с зеленым контуром */}
             <Icon
               name="Settings"
               size={64}
-              className="relative z-10 stroke-yellow-500 stroke-[0.75] fill-transparent"
+              className="relative z-10 stroke-green-500 stroke-[0.75] fill-transparent"
             />
           </div>
           <h2 className="text-xl font-semibold text-[#D6BCFA] mb-2">
