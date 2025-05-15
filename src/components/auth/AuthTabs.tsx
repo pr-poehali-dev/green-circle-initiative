@@ -6,16 +6,16 @@ import { SocialAuth } from "./SocialAuth";
 export function AuthTabs() {
   return (
     <Tabs defaultValue="login" className="w-full">
-      <TabsList className="grid w-full grid-cols-2 bg-green-800/50">
+      <TabsList className="grid w-full grid-cols-2 bg-red-800/50">
         <TabsTrigger
           value="login"
-          className="text-green-300 data-[state=active]:bg-green-700/60"
+          className="text-red-300 data-[state=active]:bg-red-700/60"
         >
           Вход
         </TabsTrigger>
         <TabsTrigger
           value="register"
-          className="text-green-300 data-[state=active]:bg-green-700/60"
+          className="text-red-300 data-[state=active]:bg-red-700/60"
         >
           Регистрация
         </TabsTrigger>

@@ -4,7 +4,7 @@ import Icon from "@/components/ui/icon";
 export default function ProfilePage() {
   return (
     <div className="max-w-7xl mx-auto py-12 px-4">
-      <h1 className="text-3xl font-bold text-[#D6BCFA] mb-8">Личный кабинет</h1>
+      <h1 className="text-3xl font-bold text-red-400 mb-8">Личный кабинет</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Левая колонка: приветствие и преимущества - скрыта на мобильных */}
@@ -40,9 +40,9 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Правая колонка: форма входа/регистрации */}
+        {/* Правая колонка: форма входа/регистрации теперь тоже красная */}
         <div className="order-2 col-span-1 md:col-span-1 mx-auto w-full max-w-md">
-          <div className="bg-[#2B3144] border border-[#9b87f5]/20 rounded-xl p-6 shadow-lg">
+          <div className="bg-red-900 border border-red-500/30 rounded-xl p-6 shadow-lg">
             <AuthTabs />
           </div>
         </div>
