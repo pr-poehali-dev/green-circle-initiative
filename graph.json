@@ -1,0 +1,34 @@
+[
+  {
+    "component": "src/components/drinks/DrinkCard.tsx",
+    "count": 4
+  },
+  {
+    "component": "src/components/ui/button.tsx",
+    "count": 4
+  },
+  {
+    "component": "src/components/ui/card.tsx",
+    "count": 4
+  },
+  {
+    "component": "src/components/ui/icon.tsx",
+    "count": 3
+  },
+  {
+    "component": "src/components/drinks/DrinkRecipeDialog.tsx",
+    "count": 3
+  },
+  {
+    "component": "src/lib/utils.ts",
+    "count": 2
+  },
+  {
+    "component": "src/components/drinks/DrinksList.tsx",
+    "count": 2
+  },
+  {
+    "component": "src/data/drinksData.ts",
+    "count": 2
+  }
+]
