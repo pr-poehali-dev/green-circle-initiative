@@ -9,27 +9,27 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Левая колонка: приветствие и преимущества - скрыта на мобильных */}
         <div className="order-1 hidden md:block">
-          <div className="bg-green-900 border border-green-500/30 rounded-xl p-6 shadow-lg h-full">
-            <h2 className="text-2xl font-bold text-green-300 mb-4">Привет!</h2>
-            <p className="text-green-100 mb-6">
+          <div className="bg-red-900 border border-red-500/30 rounded-xl p-6 shadow-lg h-full">
+            <h2 className="text-2xl font-bold text-red-300 mb-4">Привет!</h2>
+            <p className="text-red-100 mb-6">
               Создайте аккаунт или войдите, чтобы получить доступ к расширенным
               возможностям нашего сервиса.
             </p>
 
-            <h3 className="text-lg font-semibold text-green-300 mb-3">
+            <h3 className="text-lg font-semibold text-red-300 mb-3">
               Преимущества аккаунта:
             </h3>
 
             <ul className="space-y-4">
               <li className="flex items-start">
-                <div className="mt-1 flex-shrink-0 bg-green-500/20 p-1 rounded-full mr-3">
-                  <Icon name="Save" size={18} className="text-green-400" />
+                <div className="mt-1 flex-shrink-0 bg-red-500/20 p-1 rounded-full mr-3">
+                  <Icon name="Save" size={18} className="text-red-400" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-green-300">
+                  <h4 className="font-medium text-red-300">
                     Сохранение рецептов
                   </h4>
-                  <p className="text-green-200/70 text-sm">
+                  <p className="text-red-200/70 text-sm">
                     Создавайте собственную коллекцию любимых напитков
                   </p>
                 </div>
