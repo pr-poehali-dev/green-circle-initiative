@@ -39,7 +39,7 @@ export default function HomePage() {
             <div className="md:w-1/2 flex justify-center">
               <div className="relative w-80 h-80">
                 {/* Заменяем изображение на стилизованную иконку */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/40 via-[#D6BCFA]/30 to-[#9b87f5]/40 rounded-full blur-xl opacity-40"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B6B]/40 via-[#FF9999]/30 to-[#FF4040]/40 rounded-full blur-xl opacity-40"></div>
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   <Icon
                     name="GlassWater"
