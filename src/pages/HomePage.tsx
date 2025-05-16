@@ -61,9 +61,9 @@ export default function HomePage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
-              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
-                <Icon name="Wine" size={24} className="text-[#9b87f5]" />
+            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#FF4040]/20">
+              <div className="w-12 h-12 bg-[#FF4040]/20 rounded-full flex items-center justify-center mb-4">
+                <Icon name="Wine" size={24} className="text-[#FF4040]" />
               </div>
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Генератор напитков
@@ -74,9 +74,9 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
-              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
-                <Icon name="BookOpen" size={24} className="text-[#9b87f5]" />
+            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#FF4040]/20">
+              <div className="w-12 h-12 bg-[#FF4040]/20 rounded-full flex items-center justify-center mb-4">
+                <Icon name="BookOpen" size={24} className="text-[#FF4040]" />
               </div>
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Рецепты
@@ -87,12 +87,12 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
-              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#FF4040]/20">
+              <div className="w-12 h-12 bg-[#FF4040]/20 rounded-full flex items-center justify-center mb-4">
                 <Icon
                   name="ShoppingCart"
                   size={24}
-                  className="text-[#9b87f5]"
+                  className="text-[#FF4040]"
                 />
               </div>
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
