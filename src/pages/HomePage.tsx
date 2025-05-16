@@ -44,7 +44,7 @@ export default function HomePage() {
                   <Icon
                     name="GlassWater"
                     size={180}
-                    className="stroke-purple-500 stroke-[0.75] fill-transparent"
+                    className="stroke-red-500 stroke-[0.75] fill-transparent"
                   />
                 </div>
               </div>
