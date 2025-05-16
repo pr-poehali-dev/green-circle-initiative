@@ -68,7 +68,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Генератор напитков
               </h3>
-              <p className="text-gray-300">
+              <p className="text-[#FF4040]">
                 Создавайте уникальные коктейли и безалкогольные напитки с
                 помощью нашего умного генератора.
               </p>
@@ -81,7 +81,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Рецепты
               </h3>
-              <p className="text-gray-300">
+              <p className="text-[#FF4040]">
                 Изучайте подробные рецепты с пошаговыми инструкциями для
                 создания идеальных напитков.
               </p>
@@ -98,7 +98,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Магазин
               </h3>
-              <p className="text-gray-300">
+              <p className="text-[#FF4040]">
                 Приобретайте необходимые ингредиенты и аксессуары для создания
                 профессиональных коктейлей.
               </p>
