@@ -98,7 +98,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Магазин
               </h3>
-              <p className="text-[#FF4040]">
+              <p className="text-[#4CAF50]">
                 Приобретайте необходимые ингредиенты и аксессуары для создания
                 профессиональных коктейлей.
               </p>
