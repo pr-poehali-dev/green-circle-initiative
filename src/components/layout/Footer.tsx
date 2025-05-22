@@ -99,7 +99,7 @@ export function Footer() {
           </Link>
           {" · "}
           <Link
-            to="/privacy"
+            to="/privacy-policy"
             className="text-[#D6BCFA] hover:text-white transition-colors"
           >
             Политика конфиденциальности
