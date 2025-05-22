@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import AlcoholMetabolismChart from "@/components/AlcoholMetabolismChart";
-import TransitionDialog from "@/components/TransitionDialog";
+import PageTransitionLink from "@/components/PageTransitionLink";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
@@ -21,12 +21,13 @@ export default function HomePage() {
                 делитесь своими открытиями с друзьями.
               </p>
               <div className="flex flex-col gap-4">
-                <TransitionDialog
-                  targetPath="/drinks"
-                  buttonText="Попробовать генератор"
+                <PageTransitionLink
+                  to="/drinks"
                   iconName="Wine"
-                  buttonClassName="bg-white/10 backdrop-blur-md border border-[#9b87f5] hover:bg-white/20 text-white px-6 py-2 rounded-lg shadow-lg"
-                />
+                  className="bg-white/10 backdrop-blur-md border border-[#9b87f5] hover:bg-white/20 text-white px-6 py-2 rounded-lg shadow-lg"
+                >
+                  Попробовать генератор
+                </PageTransitionLink>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
