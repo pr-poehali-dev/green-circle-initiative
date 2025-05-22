@@ -1,49 +1,52 @@
-import { useState } from "react";
-import { DrinkCard } from "@/components/drinks/DrinkCard";
-import { DrinkRecipeDialog } from "@/components/drinks/DrinkRecipeDialog";
-import { drinks, drinksData } from "@/data/drinksData";
-import { Footer } from "@/components/layout/Footer";
+import React from "react";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/components/home/Hero";
+import HowItWorks from "@/components/home/HowItWorks";
+import PricingSection from "@/components/home/PricingSection";
 
-export default function Index() {
-  const [generatedDrinks, setGeneratedDrinks] = useState<string[]>([]);
-  const [animationKey, setAnimationKey] = useState(0);
-  const [selectedDrink, setSelectedDrink] = useState<string | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const generateDrink = () => {
-    // Выбираем случайный напиток из списка
-    const randomIndex = Math.floor(Math.random() * drinks.length);
-    const newDrink = drinks[randomIndex];
-
-    // Добавляем напиток в начало списка сгенерированных напитков
-    setGeneratedDrinks([newDrink, ...generatedDrinks]);
-
-    // Обновляем ключ анимации для запуска анимации
-    setAnimationKey((prev) => prev + 1);
-  };
-
-  const handleDrinkClick = (drink: string) => {
-    setSelectedDrink(drink);
-    setIsDialogOpen(true);
-  };
+const HomePage: React.FC = () => {
+  // Данные для секции "Как это работает"
+  const workflowSteps = [
+    {
+      icon: "Upload",
+      title: "Загрузите видео",
+      description: "Просто загрузите ваше видео в любом популярном формате",
+    },
+    {
+      icon: "Languages",
+      title: "Выберите язык",
+      description: "Выберите один из 175+ языков для перевода вашего контента",
+    },
+    {
+      icon: "Download",
+      title: "Скачайте результат",
+      description:
+        "Получите видео с идеальной синхронизацией губ на выбранном языке",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-[#1A1F2C] text-white flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col items-center justify-center p-6">
-        <DrinkCard
-          generatedDrinks={generatedDrinks}
-          animationKey={animationKey}
-          onGenerateDrink={generateDrink}
-          onDrinkClick={handleDrinkClick}
-        />
+    <div className="flex flex-col min-h-screen">
+      <Header />
 
-        <DrinkRecipeDialog
-          isOpen={isDialogOpen}
-          onOpenChange={setIsDialogOpen}
-          selectedDrink={selectedDrink}
-          drinksData={drinksData}
-        />
-      </div>
+      <main className="flex-grow">
+        <section id="home" className="w-full">
+          <Hero />
+        </section>
+
+        <section id="how-it-works" className="w-full py-20 bg-gray-100">
+          <HowItWorks steps={workflowSteps} />
+        </section>
+
+        <section id="pricing" className="w-full py-20 bg-white">
+          <PricingSection />
+        </section>
+      </main>
+
+      <Footer />
     </div>
   );
-}
+};
+
+export default HomePage;

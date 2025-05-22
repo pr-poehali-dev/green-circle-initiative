@@ -2,43 +2,62 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ScrollToTop } from "./components/ui/ScrollToTop";
-import { Layout } from "./components/layout/Layout";
-import HomePage from "./pages/HomePage";
-import DrinksPage from "./pages/DrinksPage";
-import CartPage from "./pages/CartPage";
-import ProfilePage from "./pages/ProfilePage";
-import OfertaPage from "./pages/OfertaPage";
-import AdminPage from "./pages/AdminPage";
-import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { LanguageProvider } from "./context/LanguageContext";
+import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import OrderProcess from "./pages/OrderProcess";
+import OfferPage from "./pages/OfferPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import ConfidentialityPage from "./pages/ConfidentialityPage";
+
+// Компонент для отслеживания изменений маршрута и автоматической прокрутки вверх
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Используем небольшую задержку, чтобы скролл сработал после отрисовки нового контента
+    const timeoutId = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
+  }, [pathname]);
+
+  return null;
+};
 
 const queryClient = new QueryClient();
 
+const AppRoutes = () => {
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/order" element={<OrderProcess />} />
+        <Route path="/offer" element={<OfferPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/confidentiality" element={<ConfidentialityPage />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <div className="page-content-wrapper">
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/drinks" element={<DrinksPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/oferta" element={<OfertaPage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/admin" element={<AdminPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </TooltipProvider>
+    <LanguageProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </TooltipProvider>
+    </LanguageProvider>
   </QueryClientProvider>
 );
 

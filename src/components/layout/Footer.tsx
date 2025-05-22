@@ -1,113 +1,134 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
-export function Footer() {
+const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Функция для прокрутки к секции на главной странице
+  const scrollToSection = (id: string) => {
+    // Если мы не на главной странице, сначала переходим на неё
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Задержка для загрузки страницы перед скроллом
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      // Если уже на главной, просто скроллим
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  // Обработчик для перехода по ссылкам с возвратом наверх страницы
+  const handleNavigate = (path: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="w-full bg-[#2B3144] border-t border-[#9b87f5]/20 py-6 px-4 md:px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h3 className="text-lg font-bold text-[#D6BCFA] mb-3">
-            Мир Напитков
-          </h3>
-          <p className="text-gray-300 text-sm">
-            Откройте для себя мир вкуса с нашими уникальными напитками и
-            рецептами.
-          </p>
-        </div>
+    <footer className="w-full mt-auto pt-10">
+      <div className="container mx-auto px-4 md:px-0 w-full max-w-[66rem]">
+        <div className="rounded-t-2xl border border-gray-200 shadow-xl backdrop-blur-md bg-gray-100">
+          <div className="p-6 pb-10 relative min-h-[140px]">
+            <div
+              className="flex items-center absolute top-6 left-6 cursor-pointer"
+              onClick={() => {
+                navigate("/");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <Icon name="Mic2" size={32} className="text-[#0070F3] mr-3" />
+              <div className="flex flex-col">
+                <span className="text-xl font-semibold text-black leading-tight">
+                  ГолосОК
+                </span>
+                <p className="text-sm text-black/70 leading-tight">
+                  © {currentYear}
+                </p>
+              </div>
+            </div>
 
-        <div>
-          <h3 className="text-lg font-bold text-[#D6BCFA] mb-3">Навигация</h3>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <Link
-                to="/"
-                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
-              >
-                Главная
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/drinks"
-                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
-              >
-                Генератор напитков
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/profile"
-                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
-              >
-                Личный кабинет
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/cart"
-                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
-              >
-                Корзина
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/oferta"
-                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
-              >
-                Публичная оферта
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/privacy-policy"
-                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
-              >
-                Политика конфиденциальности
-              </Link>
-            </li>
-          </ul>
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 md:ml-auto md:w-3/5">
+              <div className="flex flex-col mt-20 md:mt-0">
+                <h3 className="text-black text-sm font-medium mb-3">
+                  Навигация
+                </h3>
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="/"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate("/");
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="text-sm text-black/70 hover:text-black transition-colors"
+                  >
+                    Главная
+                  </a>
+                  <a
+                    href="/order"
+                    onClick={handleNavigate("/order")}
+                    className="text-sm text-black/70 hover:text-black transition-colors"
+                  >
+                    Заказать
+                  </a>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.jivo_api?.open();
+                    }}
+                    className="text-sm text-black/70 hover:text-black transition-colors"
+                  >
+                    Поддержка
+                  </a>
+                </div>
+              </div>
 
-        <div>
-          <h3 className="text-lg font-bold text-[#D6BCFA] mb-3">Контакты</h3>
-          <div className="space-y-2 text-sm">
-            <p className="flex items-center text-gray-300">
-              <Icon name="Mail" size={16} className="mr-2 text-[#9b87f5]" />
-              info@mirnapitkov.ru
-            </p>
-            <p className="flex items-center text-gray-300">
-              <Icon name="Phone" size={16} className="mr-2 text-[#9b87f5]" />
-              +7 (495) 123-45-67
-            </p>
-            <p className="flex items-center text-gray-300">
-              <Icon name="MapPin" size={16} className="mr-2 text-[#9b87f5]" />
-              г. Москва, ул. Напитковая, 42
-            </p>
+              <div className="flex flex-col md:mt-0">
+                <h3 className="text-black text-sm font-medium mb-3">
+                  Документы
+                </h3>
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="/offer"
+                    onClick={handleNavigate("/offer")}
+                    className="text-sm text-black/70 hover:text-black transition-colors"
+                  >
+                    Оферта
+                  </a>
+                  <a
+                    href="/privacy"
+                    onClick={handleNavigate("/privacy")}
+                    className="text-sm text-black/70 hover:text-black transition-colors"
+                  >
+                    Обработка ПД
+                  </a>
+                  <a
+                    href="/confidentiality"
+                    onClick={handleNavigate("/confidentiality")}
+                    className="text-sm text-black/70 hover:text-black transition-colors"
+                  >
+                    Конфиденциальность
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div className="mt-8 pt-4 border-t border-[#9b87f5]/20 text-center text-xs text-gray-400">
-        <p className="mb-2">© 2025 Мир Напитков. Все права защищены.</p>
-        <p>
-          <Link
-            to="/oferta"
-            className="text-[#D6BCFA] hover:text-white transition-colors"
-          >
-            Публичная оферта
-          </Link>
-          {" · "}
-          <Link
-            to="/privacy-policy"
-            className="text-[#D6BCFA] hover:text-white transition-colors"
-          >
-            Политика конфиденциальности
-          </Link>
-        </p>
-      </div>
     </footer>
   );
-}
+};
 
 export default Footer;
