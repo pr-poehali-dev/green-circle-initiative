@@ -50,6 +50,22 @@ export function Footer() {
                 Корзина
               </Link>
             </li>
+            <li>
+              <Link
+                to="/oferta"
+                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
+              >
+                Публичная оферта
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/privacy-policy"
+                className="text-gray-300 hover:text-[#D6BCFA] transition-colors"
+              >
+                Политика конфиденциальности
+              </Link>
+            </li>
           </ul>
         </div>
 
