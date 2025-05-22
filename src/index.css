@@ -199,6 +199,31 @@
     from {
       opacity: 0;
     }
+  }
+}
+
+/* Page transitions */
+.page-transition-active {
+  animation: fade-transition 0.3s ease-out;
+}
+
+@keyframes fade-transition {
+  0% {
+    opacity: 0;
+    transform: translateY(0); /* Prevent vertical movement */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Keep it in place */
+  }
+}
+
+/* Ensure body doesn't shift during transitions */
+body {
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+    }
     to {
       opacity: 1;
     }
