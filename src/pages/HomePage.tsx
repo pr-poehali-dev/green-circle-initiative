@@ -42,9 +42,9 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/40 via-[#81C784]/30 to-[#2E7D32]/40 rounded-full blur-xl opacity-40"></div>
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   <img
-                    src="/placeholder.svg"
-                    alt="Логотип напитков"
-                    className="w-64 h-64 object-contain"
+                    src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1064&auto=format&fit=crop"
+                    alt="Коллекция напитков"
+                    className="w-64 h-64 object-contain rounded-lg"
                   />
                 </div>
               </div>
