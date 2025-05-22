@@ -34,10 +34,10 @@ const alcoholMetabolismData: AlcoholData[] = [
 export default function AlcoholMetabolismChart() {
   return (
     <div className="w-full h-96 bg-gradient-to-br from-[#2B3144] to-[#3A3D60] p-6 rounded-xl border-2 border-[#9b87f5]/50 shadow-lg">
-      <h3 className="text-xl font-bold text-white mb-6 text-center">
+      <h3 className="text-xl font-bold text-white mb-4 text-center">
         График выветривания алкоголя
       </h3>
-      <div className="text-xs text-gray-300 mb-6">
+      <div className="text-xs text-gray-300 mb-4">
         <p className="mb-2">
           <span className="inline-block w-3 h-3 bg-[#9b87f5] mr-2 rounded-full"></span>
           Легкое опьянение: 1-2 бокала вина (0.5‰)
@@ -51,14 +51,14 @@ export default function AlcoholMetabolismChart() {
           Сильное опьянение: более 5 бокалов вина (2.0‰)
         </p>
       </div>
-      <ResponsiveContainer width="100%" height="70%">
+      <ResponsiveContainer width="100%" height="75%">
         <LineChart
           data={alcoholMetabolismData}
           margin={{
             top: 5,
             right: 30,
             left: 20,
-            bottom: 5,
+            bottom: 25,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#444" opacity={0.3} />
@@ -95,7 +95,10 @@ export default function AlcoholMetabolismChart() {
             labelFormatter={(hour) => `Через ${hour} часов`}
           />
           <Legend
-            wrapperStyle={{ color: "white" }}
+            wrapperStyle={{ color: "white", paddingTop: "10px" }}
+            verticalAlign="bottom"
+            align="center"
+            height={36}
             formatter={(value) => (
               <span style={{ color: "#D6BCFA" }}>
                 {value === "light"
