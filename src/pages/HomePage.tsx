@@ -44,14 +44,16 @@ export default function HomePage() {
                   {/* Добавляем "ручку" кружки */}
                   <div className="absolute right-2 w-8 h-20 border-4 border-[#9b87f5]/60 rounded-r-full z-20"></div>
                   <div
-                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 bounce-animation cursor-pointer"
+                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 bounce-animation heartbeat-animation cursor-pointer"
                     onClick={(e) => {
                       const target = e.currentTarget;
                       target.classList.add("rotate-animation");
-                      setTimeout(
-                        () => target.classList.remove("rotate-animation"),
-                        1000,
-                      );
+                      // Временно отключаем пульсацию при вращении
+                      target.classList.remove("heartbeat-animation");
+                      setTimeout(() => {
+                        target.classList.remove("rotate-animation");
+                        target.classList.add("heartbeat-animation");
+                      }, 1000);
                     }}
                   >
                     <img
