@@ -137,6 +137,6 @@ export default function OfertaPage() {
   );
 }
 
-<iters-left>7</iters-left>;
+// Удаляем лишние строки
 
 export default OfertaPage;
