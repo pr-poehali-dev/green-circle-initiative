@@ -4,7 +4,7 @@ import Icon from "@/components/ui/icon";
 
 export default function OfertaPage() {
   return (
-    <div className="container max-w-4xl mx-auto py-12 px-4">
+    <div className="container max-w-4xl mx-auto py-12 pt-24 px-4">
       <div className="mb-8">
         <Link
           to="/"
