@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import AlcoholMetabolismChart from "@/components/AlcoholMetabolismChart";
 
 export default function HomePage() {
   return (
@@ -90,6 +91,24 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Alcohol Metabolism Chart Section */}
+      <section className="py-16 bg-[#1A1F2C] px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-[#D6BCFA] mb-8">
+            Полезная информация
+          </h2>
+          <p className="text-lg text-gray-300 text-center max-w-2xl mx-auto mb-12">
+            Узнайте, как долго алкоголь остается в организме в зависимости от
+            количества выпитого
+          </p>
+          <AlcoholMetabolismChart />
+          <p className="text-sm text-gray-400 mt-4 text-center">
+            * График показывает примерные значения. Метаболизм алкоголя зависит
+            от индивидуальных особенностей организма.
+          </p>
         </div>
       </section>
 
