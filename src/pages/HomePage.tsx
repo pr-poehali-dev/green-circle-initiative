@@ -54,45 +54,37 @@ export default function HomePage() {
             О нас
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-[#2B3144] p-4 rounded-xl border border-[#9b87f5]/20">
-              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
-                <Icon name="Wine" size={24} className="text-[#9b87f5]" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-[#2B3144] to-[#3A3D60] p-6 rounded-xl border-2 border-[#9b87f5]/50 shadow-lg shadow-[#9b87f5]/20 hover:shadow-[#9b87f5]/30 hover:translate-y-[-5px] transition-all duration-300">
+              <div className="w-14 h-14 bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA] rounded-full flex items-center justify-center mb-5 shadow-md">
+                <Icon name="Wine" size={26} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
+              <h3 className="text-xl font-bold text-white mb-3">
                 Генератор напитков
               </h3>
-              <p className="text-[#D6BCFA]">
+              <p className="text-gray-200">
                 Создавайте уникальные коктейли и безалкогольные напитки с
                 помощью нашего умного генератора.
               </p>
             </div>
 
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
-              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
-                <Icon name="BookOpen" size={24} className="text-[#9b87f5]" />
+            <div className="bg-gradient-to-br from-[#2B3144] to-[#404C78] p-6 rounded-xl border-2 border-[#9b87f5]/50 shadow-lg shadow-[#9b87f5]/20 hover:shadow-[#9b87f5]/30 hover:translate-y-[-5px] transition-all duration-300">
+              <div className="w-14 h-14 bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA] rounded-full flex items-center justify-center mb-5 shadow-md">
+                <Icon name="BookOpen" size={26} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
-                Рецепты
-              </h3>
-              <p className="text-[#D6BCFA]">
+              <h3 className="text-xl font-bold text-white mb-3">Рецепты</h3>
+              <p className="text-gray-200">
                 Изучайте подробные рецепты с пошаговыми инструкциями для
                 создания идеальных напитков.
               </p>
             </div>
 
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
-              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
-                <Icon
-                  name="ShoppingCart"
-                  size={24}
-                  className="text-[#9b87f5]"
-                />
+            <div className="bg-gradient-to-br from-[#2B3144] to-[#3D355A] p-6 rounded-xl border-2 border-[#9b87f5]/50 shadow-lg shadow-[#9b87f5]/20 hover:shadow-[#9b87f5]/30 hover:translate-y-[-5px] transition-all duration-300">
+              <div className="w-14 h-14 bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA] rounded-full flex items-center justify-center mb-5 shadow-md">
+                <Icon name="ShoppingCart" size={26} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
-                Магазин
-              </h3>
-              <p className="text-[#D6BCFA]">
+              <h3 className="text-xl font-bold text-white mb-3">Магазин</h3>
+              <p className="text-gray-200">
                 Приобретайте необходимые ингредиенты и аксессуары для создания
                 профессиональных коктейлей.
               </p>
