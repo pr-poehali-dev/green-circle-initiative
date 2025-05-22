@@ -132,7 +132,7 @@
 
   body.page-transition-active {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: scale(0.98);
     pointer-events: none;
   }
 }
