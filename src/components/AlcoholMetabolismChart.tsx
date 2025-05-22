@@ -66,9 +66,11 @@ export default function AlcoholMetabolismChart() {
             dataKey="hour"
             label={{
               value: "Время (часы)",
-              position: "insideBottomRight",
-              offset: -10,
+              position: "insideBottom",
+              offset: 0,
               fill: "#D6BCFA",
+              fontSize: 12,
+              dy: 10,
             }}
             tick={{ fill: "#D6BCFA" }}
           />
@@ -78,6 +80,8 @@ export default function AlcoholMetabolismChart() {
               angle: -90,
               position: "insideLeft",
               fill: "#D6BCFA",
+              fontSize: 12,
+              dx: -10,
             }}
             tick={{ fill: "#D6BCFA" }}
           />
