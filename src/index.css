@@ -161,13 +161,13 @@
     transform: scale(1);
   }
   14% {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
   28% {
     transform: scale(1);
   }
   42% {
-    transform: scale(1.15);
+    transform: scale(1.07);
   }
   70% {
     transform: scale(1);
