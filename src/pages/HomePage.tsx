@@ -7,7 +7,7 @@ export default function HomePage() {
     <div className="text-white">
       {/* Hero Section */}
       <section className="py-16 md:py-24 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
               <h1 className="text-4xl md:text-5xl font-bold text-[#D6BCFA] mb-6 leading-tight">
