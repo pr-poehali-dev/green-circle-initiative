@@ -75,44 +75,44 @@ export default function HomePage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#4CAF50]/20">
-              <div className="w-12 h-12 bg-[#4CAF50]/20 rounded-full flex items-center justify-center mb-4">
-                <Icon name="Wine" size={24} className="text-[#4CAF50]" />
+            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
+              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
+                <Icon name="Wine" size={24} className="text-[#9b87f5]" />
               </div>
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Генератор напитков
               </h3>
-              <p className="text-[#4CAF50]">
+              <p className="text-[#D6BCFA]">
                 Создавайте уникальные коктейли и безалкогольные напитки с
                 помощью нашего умного генератора.
               </p>
             </div>
 
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#4CAF50]/20">
-              <div className="w-12 h-12 bg-[#4CAF50]/20 rounded-full flex items-center justify-center mb-4">
-                <Icon name="BookOpen" size={24} className="text-[#4CAF50]" />
+            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
+              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
+                <Icon name="BookOpen" size={24} className="text-[#9b87f5]" />
               </div>
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Рецепты
               </h3>
-              <p className="text-[#4CAF50]">
+              <p className="text-[#D6BCFA]">
                 Изучайте подробные рецепты с пошаговыми инструкциями для
                 создания идеальных напитков.
               </p>
             </div>
 
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#4CAF50]/20">
-              <div className="w-12 h-12 bg-[#4CAF50]/20 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
+              <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
                 <Icon
                   name="ShoppingCart"
                   size={24}
-                  className="text-[#4CAF50]"
+                  className="text-[#9b87f5]"
                 />
               </div>
               <h3 className="text-xl font-semibold text-[#D6BCFA] mb-3">
                 Магазин
               </h3>
-              <p className="text-[#4CAF50]">
+              <p className="text-[#D6BCFA]">
                 Приобретайте необходимые ингредиенты и аксессуары для создания
                 профессиональных коктейлей.
               </p>
