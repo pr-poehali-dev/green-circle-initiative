@@ -1,52 +1,22 @@
 import React from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import Hero from "@/components/home/Hero";
-import HowItWorks from "@/components/home/HowItWorks";
-import PricingSection from "@/components/home/PricingSection";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import GiftCardGrid from "@/components/GiftCardGrid";
+import InstructionsSection from "@/components/InstructionsSection";
+import Footer from "@/components/Footer";
 
-const HomePage: React.FC = () => {
-  // Данные для секции "Как это работает"
-  const workflowSteps = [
-    {
-      icon: "Upload",
-      title: "Загрузите видео",
-      description: "Просто загрузите ваше видео в любом популярном формате",
-    },
-    {
-      icon: "Languages",
-      title: "Выберите язык",
-      description: "Выберите один из 175+ языков для перевода вашего контента",
-    },
-    {
-      icon: "Download",
-      title: "Скачайте результат",
-      description:
-        "Получите видео с идеальной синхронизацией губ на выбранном языке",
-    },
-  ];
-
+const Index: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-
       <main className="flex-grow">
-        <section id="home" className="w-full">
-          <Hero />
-        </section>
-
-        <section id="how-it-works" className="w-full py-20 bg-gray-100">
-          <HowItWorks steps={workflowSteps} />
-        </section>
-
-        <section id="pricing" className="w-full py-20 bg-white">
-          <PricingSection />
-        </section>
+        <Hero />
+        <GiftCardGrid />
+        <InstructionsSection />
       </main>
-
       <Footer />
     </div>
   );
 };
 
-export default HomePage;
+export default Index;
