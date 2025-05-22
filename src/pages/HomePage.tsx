@@ -39,12 +39,12 @@ export default function HomePage() {
             <div className="md:w-1/2 flex justify-center">
               <div className="relative w-80 h-80">
                 {/* Создаем круглый контейнер в виде кружки */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/40 via-[#81C784]/30 to-[#2E7D32]/40 rounded-full blur-xl opacity-40"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/40 via-[#D6BCFA]/30 to-[#9b87f5]/40 rounded-full blur-xl opacity-40"></div>
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   {/* Добавляем "ручку" кружки */}
-                  <div className="absolute right-2 w-8 h-20 border-4 border-[#4CAF50]/60 rounded-r-full z-20"></div>
+                  <div className="absolute right-2 w-8 h-20 border-4 border-[#9b87f5]/60 rounded-r-full z-20"></div>
                   <div
-                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#4CAF50]/60 bounce-animation cursor-pointer"
+                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 bounce-animation cursor-pointer"
                     onClick={(e) => {
                       const target = e.currentTarget;
                       target.classList.add("rotate-animation");
