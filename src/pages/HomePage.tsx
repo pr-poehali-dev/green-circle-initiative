@@ -104,9 +104,9 @@ export default function HomePage() {
       {/* Call to Action */}
       <section className="pt-32 pb-24 md:pt-48 md:pb-36 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <h2 className="text-3xl font-bold text-[#D6BCFA] mb-6">Начнём!</h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+          <div className="flex flex-col items-center text-center gap-8">
+            <h2 className="text-3xl font-bold text-[#D6BCFA]">Начнём!</h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Присоединяйтесь к нашему сообществу любителей вкусных напитков и
               откройте для себя новые вкусовые ощущения.
             </p>
