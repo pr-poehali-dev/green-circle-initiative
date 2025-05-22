@@ -75,8 +75,8 @@ export default function HomePage() {
             О нас
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#2B3144] p-6 rounded-xl border border-[#9b87f5]/20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-[#2B3144] p-4 rounded-xl border border-[#9b87f5]/20">
               <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-4">
                 <Icon name="Wine" size={24} className="text-[#9b87f5]" />
               </div>
