@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <div className="text-white">
       {/* Hero Section */}
-      <section className="py-24 md:py-36 px-4">
+      <section className="pt-32 pb-24 md:pt-48 md:pb-36 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
@@ -114,7 +114,7 @@ export default function HomePage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-24 md:py-36 px-4">
+      <section className="pt-32 pb-24 md:pt-48 md:pb-36 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <h2 className="text-3xl font-bold text-[#D6BCFA] mb-6">Начнём!</h2>
