@@ -7,7 +7,7 @@ export function Navbar() {
     <nav className="w-full bg-[#2B3144] border-b border-[#9b87f5]/20 py-3 px-4 md:px-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center">
-          <Icon name="GlassWater" size={24} className="text-yellow-400 mr-2" />
+          <Icon name="GlassWater" size={24} className="text-[#9b87f5] mr-2" />
           <span className="text-xl font-bold text-[#D6BCFA]">Мир Напитков</span>
         </Link>
 

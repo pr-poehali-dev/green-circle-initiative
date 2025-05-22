@@ -98,20 +98,20 @@
   body {
     @apply bg-background text-foreground;
   }
+}
 
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+/* Анимация вращения на 360 градусов */
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-  .bounce-animation {
-    animation: bounce 3s ease-in-out infinite;
-  }
+.rotate-animation {
+  animation: rotate360 1s ease;
 }
 
 @layer utilities {

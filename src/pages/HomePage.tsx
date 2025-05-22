@@ -43,7 +43,17 @@ export default function HomePage() {
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   {/* Добавляем "ручку" кружки */}
                   <div className="absolute right-2 w-8 h-20 border-4 border-[#4CAF50]/60 rounded-r-full z-20"></div>
-                  <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#4CAF50]/60 bounce-animation">
+                  <div
+                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#4CAF50]/60 bounce-animation cursor-pointer"
+                    onClick={(e) => {
+                      const target = e.currentTarget;
+                      target.classList.add("rotate-animation");
+                      setTimeout(
+                        () => target.classList.remove("rotate-animation"),
+                        1000,
+                      );
+                    }}
+                  >
                     <img
                       src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1064&auto=format&fit=crop"
                       alt="Коллекция напитков"
