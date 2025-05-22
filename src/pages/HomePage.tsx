@@ -70,7 +70,7 @@ export default function HomePage() {
 
       {/* Features Section */}
       <section className="py-16 bg-[#1E2434] px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-[#D6BCFA] mb-12">
             О нас
           </h2>
@@ -123,8 +123,9 @@ export default function HomePage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-16 md:py-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-12">
           <h2 className="text-3xl font-bold text-[#D6BCFA] mb-6">Начнём!</h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
             Присоединяйтесь к нашему сообществу любителей вкусных напитков и
