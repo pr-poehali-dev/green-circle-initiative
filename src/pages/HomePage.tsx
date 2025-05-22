@@ -38,14 +38,18 @@ export default function HomePage() {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="relative w-80 h-80">
-                {/* Заменяем иконку на изображение логотипа */}
+                {/* Создаем круглый контейнер в виде кружки */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/40 via-[#81C784]/30 to-[#2E7D32]/40 rounded-full blur-xl opacity-40"></div>
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
-                  <img
-                    src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1064&auto=format&fit=crop"
-                    alt="Коллекция напитков"
-                    className="w-64 h-64 object-contain rounded-lg"
-                  />
+                  {/* Добавляем "ручку" кружки */}
+                  <div className="absolute right-2 w-8 h-20 border-4 border-[#4CAF50]/60 rounded-r-full z-20"></div>
+                  <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#4CAF50]/60 bounce-animation">
+                    <img
+                      src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1064&auto=format&fit=crop"
+                      alt="Коллекция напитков"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
