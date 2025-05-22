@@ -38,13 +38,13 @@ export default function HomePage() {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="relative w-80 h-80">
-                {/* Заменяем изображение на стилизованную иконку */}
+                {/* Заменяем иконку на изображение логотипа */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/40 via-[#81C784]/30 to-[#2E7D32]/40 rounded-full blur-xl opacity-40"></div>
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
-                  <Icon
-                    name="GlassWater"
-                    size={180}
-                    className="stroke-green-500 stroke-[0.75] fill-transparent"
+                  <img
+                    src="/placeholder.svg"
+                    alt="Логотип напитков"
+                    className="w-64 h-64 object-contain"
                   />
                 </div>
               </div>
