@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import AlcoholMetabolismChart from "@/components/AlcoholMetabolismChart";
+import TransitionDialog from "@/components/TransitionDialog";
 
 export default function HomePage() {
   return (
@@ -20,12 +20,12 @@ export default function HomePage() {
                 делитесь своими открытиями с друзьями.
               </p>
               <div className="flex flex-col gap-4">
-                <Link to="/drinks">
-                  <Button className="bg-white/10 backdrop-blur-md border border-[#9b87f5] hover:bg-white/20 text-white px-6 py-2 rounded-lg shadow-lg">
-                    <Icon name="Wine" className="mr-2" />
-                    Попробовать генератор
-                  </Button>
-                </Link>
+                <TransitionDialog
+                  targetPath="/drinks"
+                  buttonText="Попробовать генератор"
+                  iconName="Wine"
+                  buttonClassName="bg-white/10 backdrop-blur-md border border-[#9b87f5] hover:bg-white/20 text-white px-6 py-2 rounded-lg shadow-lg"
+                />
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
