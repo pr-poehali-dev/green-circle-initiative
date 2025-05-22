@@ -34,15 +34,13 @@ export default function HomePage() {
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   {/* Удаляем "ручку" кружки */}
                   <div
-                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 bounce-animation heartbeat-animation cursor-pointer"
+                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 bounce-animation cursor-pointer"
                     onClick={(e) => {
                       const target = e.currentTarget;
                       target.classList.add("rotate-animation");
-                      // Временно отключаем пульсацию при вращении
-                      target.classList.remove("heartbeat-animation");
+                      // Удаляем упоминание о пульсации в комментарии тоже
                       setTimeout(() => {
                         target.classList.remove("rotate-animation");
-                        target.classList.add("heartbeat-animation");
                       }, 1000);
                     }}
                   >
