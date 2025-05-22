@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import AlcoholMetabolismChart from "@/components/AlcoholMetabolismChart";
 import TransitionDialog from "@/components/TransitionDialog";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
