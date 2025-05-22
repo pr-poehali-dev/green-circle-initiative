@@ -98,6 +98,30 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Анимация вращения изображения */
+  @keyframes recordSpin {
+    0% {
+      transform: rotate(0deg);
+    }
+    5% {
+      /* Плавное ускорение в начале */
+      transform: rotate(30deg);
+    }
+    85% {
+      /* Стабильное вращение большую часть времени */
+      transform: rotate(1080deg);
+    }
+    100% {
+      /* Замедление в конце */
+      transform: rotate(1150deg);
+    }
+  }
+
+  .record-spin-animation {
+    animation: recordSpin 20s ease-in-out infinite;
+    transform-origin: center center;
+  }
 }
 
 /* Анимация вращения на 360 градусов */
@@ -176,37 +200,4 @@
 
 .heartbeat-animation {
   animation: heartbeat 1.5s infinite ease-in-out;
-}
-
-@keyframes record-spin {
-  /* Фаза разгона: 0-10% */
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(180deg);
-  }
-
-  /* Фаза стабильного вращения: 10-80% */
-  20% {
-    transform: rotate(720deg);
-  }
-  40% {
-    transform: rotate(1440deg);
-  }
-  60% {
-    transform: rotate(2160deg);
-  }
-  80% {
-    transform: rotate(2880deg);
-  }
-
-  /* Фаза замедления: 80-100% */
-  100% {
-    transform: rotate(3060deg);
-  }
-}
-
-.record-spin-animation {
-  animation: record-spin 20s cubic-bezier(0.2, 0.1, 0.3, 1) forwards;
 }

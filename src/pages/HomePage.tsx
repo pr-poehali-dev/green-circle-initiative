@@ -33,18 +33,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/40 via-[#D6BCFA]/30 to-[#9b87f5]/40 rounded-full blur-xl opacity-40"></div>
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   {/* Создаем круглый контейнер в виде кружки с эффектом пластинки */}
-                  <div
-                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60"
-                    onClick={(e) => {
-                      const target = e.currentTarget;
-                      // Добавляем класс для запуска анимации
-                      target.classList.add("record-spin-animation");
-                      // Убираем класс после завершения анимации
-                      setTimeout(() => {
-                        target.classList.remove("record-spin-animation");
-                      }, 20000); // 20 секунд - полная длительность анимации
-                    }}
-                  >
+                  <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 record-spin-animation">
                     <img
                       src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1064&auto=format&fit=crop"
                       alt="Коллекция напитков"
