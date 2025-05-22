@@ -177,3 +177,29 @@
 .heartbeat-animation {
   animation: heartbeat 1.5s infinite ease-in-out;
 }
+
+@keyframes record-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(72deg);
+  }
+  40% {
+    transform: rotate(180deg);
+  }
+  60% {
+    transform: rotate(324deg);
+  }
+  80% {
+    transform: rotate(504deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+.record-spin-animation {
+  animation: record-spin 15s cubic-bezier(0.1, 0.3, 0.5, 1) infinite;
+  transform-origin: center center;
+}

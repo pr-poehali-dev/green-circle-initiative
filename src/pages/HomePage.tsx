@@ -32,9 +32,9 @@ export default function HomePage() {
                 {/* Создаем круглый контейнер в виде кружки */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/40 via-[#D6BCFA]/30 to-[#9b87f5]/40 rounded-full blur-xl opacity-40"></div>
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
-                  {/* Удаляем "ручку" кружки */}
+                  {/* Создаем круглый контейнер в виде кружки с эффектом пластинки */}
                   <div
-                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 bounce-animation cursor-pointer"
+                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 record-spin-animation"
                     onClick={(e) => {
                       const target = e.currentTarget;
                       target.classList.add("rotate-animation");
