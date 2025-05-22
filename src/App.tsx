@@ -6,9 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ui/ScrollToTop";
 import { Layout } from "./components/layout/Layout";
 import HomePage from "./pages/HomePage";
-import Index from "./pages/Index";
+import DrinksPage from "./pages/DrinksPage";
 import CartPage from "./pages/CartPage";
 import ProfilePage from "./pages/ProfilePage";
+import OfertaPage from "./pages/OfertaPage";
 import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
 
@@ -25,9 +26,10 @@ const App = () => (
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<HomePage />} />
-              <Route path="/drinks" element={<Index />} />
+              <Route path="/drinks" element={<DrinksPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/oferta" element={<OfertaPage />} />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
