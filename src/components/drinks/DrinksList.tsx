@@ -41,7 +41,7 @@ export function DrinksList({
               {index === 0 && (
                 <span
                   key={animationKey}
-                  className="ml-auto text-[#D6BCFA] font-normal text-sm animate-pulse"
+                  className="ml-auto text-[#D6BCFA] font-normal text-sm"
                 >
                   Новый!
                 </span>
