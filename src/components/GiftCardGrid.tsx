@@ -29,7 +29,7 @@ const giftCards: GiftCard[] = [
     id: "5000",
     amount: 5000,
     image:
-      "https://images.unsplash.com/photo-1574920162309-0ecdebcc5c1b?w=400&h=300&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop&auto=format",
     description: "Премиальный подарок для истинных ценителей Apple.",
   },
 ];
