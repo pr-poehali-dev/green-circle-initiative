@@ -94,21 +94,7 @@ export default function AlcoholMetabolismChart() {
             formatter={(value: number) => [`${value}‰`, ""]}
             labelFormatter={(hour) => `Через ${hour} часов`}
           />
-          <Legend
-            wrapperStyle={{ color: "white", paddingTop: "10px" }}
-            verticalAlign="bottom"
-            align="center"
-            height={36}
-            formatter={(value) => (
-              <span style={{ color: "#D6BCFA" }}>
-                {value === "light"
-                  ? "Легкое опьянение"
-                  : value === "moderate"
-                    ? "Среднее опьянение"
-                    : "Сильное опьянение"}
-              </span>
-            )}
-          />
+          {/* Легенда снизу убрана, так как достаточно верхней легенды */}
           <Line
             type="monotone"
             dataKey="light"
