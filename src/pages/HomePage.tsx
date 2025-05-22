@@ -34,14 +34,15 @@ export default function HomePage() {
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   {/* Создаем круглый контейнер в виде кружки с эффектом пластинки */}
                   <div
-                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60 record-spin-animation"
+                    className="w-64 h-64 rounded-full overflow-hidden border-4 border-[#9b87f5]/60"
                     onClick={(e) => {
                       const target = e.currentTarget;
-                      target.classList.add("rotate-animation");
-                      // Удаляем упоминание о пульсации в комментарии тоже
+                      // Добавляем класс для запуска анимации
+                      target.classList.add("record-spin-animation");
+                      // Убираем класс после завершения анимации
                       setTimeout(() => {
-                        target.classList.remove("rotate-animation");
-                      }, 1000);
+                        target.classList.remove("record-spin-animation");
+                      }, 20000); // 20 секунд - полная длительность анимации
                     }}
                   >
                     <img
