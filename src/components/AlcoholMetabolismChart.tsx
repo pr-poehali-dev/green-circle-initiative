@@ -51,14 +51,14 @@ export default function AlcoholMetabolismChart() {
           Сильное опьянение: более 5 бокалов вина (2.0‰)
         </p>
       </div>
-      <ResponsiveContainer width="100%" height="75%">
+      <ResponsiveContainer width="100%" height="70%">
         <LineChart
           data={alcoholMetabolismData}
           margin={{
             top: 5,
             right: 30,
             left: 20,
-            bottom: 25,
+            bottom: 45,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#444" opacity={0.3} />
