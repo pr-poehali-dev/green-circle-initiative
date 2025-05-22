@@ -137,6 +137,4 @@ export default function OfertaPage() {
   );
 }
 
-// Удаляем лишние строки
-
 export default OfertaPage;
