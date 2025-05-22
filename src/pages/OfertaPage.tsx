@@ -127,6 +127,13 @@ export default function OfertaPage() {
           Адрес: г. Москва, ул. Напитковая, 42
           <br />
           Телефон: +7 (495) 123-45-67
+          <br />
+          <Link
+            to="/privacy-policy"
+            className="text-[#9b87f5] hover:text-[#7E69AB] transition-colors"
+          >
+            Политика конфиденциальности
+          </Link>
         </p>
 
         <Button className="mt-8 bg-[#9b87f5] hover:bg-[#7E69AB]" asChild>
