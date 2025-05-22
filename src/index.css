@@ -223,11 +223,6 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 }
 
 @keyframes fadeIn {
