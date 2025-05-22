@@ -44,7 +44,6 @@ export default function Index() {
           drinksData={drinksData}
         />
       </div>
-      <Footer />
     </div>
   );
 }
