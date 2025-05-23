@@ -217,6 +217,46 @@ const MoscowPresentation = () => {
     );
   };
 
+  const renderSlideContent = () => {
+    if (slide.id === "intro") {
+      return (
+        <div
+          className="relative min-h-screen flex items-center justify-center text-white"
+          style={slide.style}
+        >
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="relative z-10 text-center max-w-4xl px-6">
+            <h1 className="text-6xl md:text-8xl font-bold mb-4">
+              {slide.title}
+            </h1>
+            <h2 className="text-2xl md:text-3xl mb-6 opacity-90">
+              {slide.subtitle}
+            </h2>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-80">
+              {slide.description}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 font-montserrat">
+          {slide.title}
+        </h1>
+        {slide.description && (
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            {slide.description}
+          </p>
+        )}
+        {slide.content && (
+          <p className="text-xl text-amber-300 mt-4">{slide.content}</p>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex flex-col">
       {/* Header with progress */}
@@ -254,19 +294,7 @@ const MoscowPresentation = () => {
           </div>
 
           {/* Slide content */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 font-montserrat">
-              {slide.title}
-            </h1>
-            {slide.description && (
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-                {slide.description}
-              </p>
-            )}
-            {slide.content && (
-              <p className="text-xl text-amber-300 mt-4">{slide.content}</p>
-            )}
-          </div>
+          {renderSlideContent()}
 
           {/* Stats, charts, achievements */}
           {renderStats()}
