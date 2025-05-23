@@ -25,8 +25,10 @@ const slides = [
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
-      height: "100vh",
+      height: "100%",
+      maxHeight: "100vh",
       width: "100%",
+      overflow: "hidden",
     },
   },
   {
