@@ -18,10 +18,10 @@ const slides = [
     description:
       "От пожара 1812 года до цифровой столицы — история величайших трансформаций города",
     background:
-      "https://images.unsplash.com/photo-1520637836862-4d197d17c38a?q=80&w=2000",
+      "https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=2000",
     style: {
       backgroundImage:
-        "url('https://images.unsplash.com/photo-1520637836862-4d197d17c38a?q=80&w=2000')",
+        "url('https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=2000')",
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
