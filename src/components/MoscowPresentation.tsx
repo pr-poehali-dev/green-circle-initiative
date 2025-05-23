@@ -19,6 +19,13 @@ const slides = [
       "От пожара 1812 года до цифровой столицы — история величайших трансформаций города",
     background:
       "https://images.unsplash.com/photo-1520637836862-4d197d17c38a?q=80&w=2000",
+    style: {
+      backgroundImage:
+        "url('https://images.unsplash.com/photo-1520637836862-4d197d17c38a?q=80&w=2000')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    },
   },
   {
     id: "19th-overview",
