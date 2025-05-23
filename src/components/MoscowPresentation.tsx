@@ -225,8 +225,12 @@ const MoscowPresentation = () => {
     if (slide.id === "intro") {
       return (
         <div
-          className="relative min-h-screen flex items-center justify-center text-white"
-          style={slide.style}
+          className="absolute inset-0 flex items-center justify-center text-white"
+          style={{
+            backgroundImage: slide.style?.backgroundImage,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="relative z-10 text-center max-w-4xl px-6">
@@ -245,7 +249,7 @@ const MoscowPresentation = () => {
     }
 
     return (
-      <div className="text-center mb-12">
+      <div className="text-center mb-8">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 font-montserrat">
           {slide.title}
         </h1>
@@ -262,75 +266,81 @@ const MoscowPresentation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex flex-col">
-      {/* Header with progress */}
-      <div className="p-6 bg-slate-900/50">
-        <div className="max-w-4xl mx-auto">
-          <Progress
-            value={(currentSlide / (slides.length - 1)) * 100}
-            className="mb-4"
-          />
-          <div className="flex justify-between items-center text-sm text-slate-400">
-            <span>
-              Слайд {currentSlide + 1} из {slides.length}
-            </span>
-            <span>{slide.subtitle}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main content */}
-      <div className="flex-1 px-6 py-12">
-        <div className="max-w-4xl mx-auto">
-          {/* Slide indicators */}
-          <div className="flex justify-center gap-2 mb-8">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentSlide
-                    ? "bg-amber-300 scale-125"
-                    : "bg-slate-600 hover:bg-slate-500"
-                }`}
+    <div className="h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex flex-col overflow-hidden">
+      {slide.id === "intro" ? (
+        <div className="relative flex-1">{renderSlideContent()}</div>
+      ) : (
+        <>
+          {/* Header with progress */}
+          <div className="p-4 bg-slate-900/50 flex-shrink-0">
+            <div className="max-w-4xl mx-auto">
+              <Progress
+                value={(currentSlide / (slides.length - 1)) * 100}
+                className="mb-2"
               />
-            ))}
+              <div className="flex justify-between items-center text-sm text-slate-400">
+                <span>
+                  Слайд {currentSlide + 1} из {slides.length}
+                </span>
+                <span>{slide.subtitle}</span>
+              </div>
+            </div>
           </div>
 
-          {/* Slide content */}
-          {renderSlideContent()}
+          {/* Main content */}
+          <div className="flex-1 px-6 py-4 overflow-y-auto">
+            <div className="max-w-4xl mx-auto">
+              {/* Slide indicators */}
+              <div className="flex justify-center gap-2 mb-6">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      index === currentSlide
+                        ? "bg-amber-300 scale-125"
+                        : "bg-slate-600 hover:bg-slate-500"
+                    }`}
+                  />
+                ))}
+              </div>
 
-          {/* Stats, charts, achievements */}
-          {renderStats()}
-          {renderChart()}
-          {renderAchievements()}
-        </div>
-      </div>
+              {/* Slide content */}
+              {renderSlideContent()}
 
-      {/* Navigation */}
-      <div className="p-6 bg-slate-900/50">
-        <div className="max-w-4xl mx-auto flex justify-between">
-          <Button
-            onClick={prevSlide}
-            variant="outline"
-            disabled={currentSlide === 0}
-            className="border-slate-600 text-slate-300 hover:bg-slate-700"
-          >
-            <Icon name="ChevronLeft" size={20} />
-            Назад
-          </Button>
+              {/* Stats, charts, achievements */}
+              {renderStats()}
+              {renderChart()}
+              {renderAchievements()}
+            </div>
+          </div>
 
-          <Button
-            onClick={nextSlide}
-            variant="outline"
-            disabled={currentSlide === slides.length - 1}
-            className="border-slate-600 text-slate-300 hover:bg-slate-700"
-          >
-            Далее
-            <Icon name="ChevronRight" size={20} />
-          </Button>
-        </div>
-      </div>
+          {/* Navigation */}
+          <div className="p-4 bg-slate-900/50 flex-shrink-0">
+            <div className="max-w-4xl mx-auto flex justify-between">
+              <Button
+                onClick={prevSlide}
+                variant="outline"
+                disabled={currentSlide === 0}
+                className="border-slate-600 text-slate-300 hover:bg-slate-700"
+              >
+                <Icon name="ChevronLeft" size={20} />
+                Назад
+              </Button>
+
+              <Button
+                onClick={nextSlide}
+                variant="outline"
+                disabled={currentSlide === slides.length - 1}
+                className="border-slate-600 text-slate-300 hover:bg-slate-700"
+              >
+                Далее
+                <Icon name="ChevronRight" size={20} />
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
