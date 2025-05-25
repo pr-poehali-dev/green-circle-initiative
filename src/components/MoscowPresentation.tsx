@@ -234,7 +234,7 @@ const MoscowPresentation = () => {
         >
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="relative z-10 text-center max-w-4xl px-6">
-            <h1 className="text-6xl md:text-8xl font-bold mb-4">
+            <h1 className="text-6xl md:text-8xl font-bold mb-4 bg-yellow-500 text-black px-4 py-2 rounded-lg inline-block">
               {slide.title}
             </h1>
             <h2 className="text-2xl md:text-3xl mb-6 opacity-90">
