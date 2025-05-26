@@ -236,7 +236,7 @@ const MoscowPresentation = () => {
           <div className="relative z-10 text-center max-w-4xl px-6">
             <div className="flex items-center justify-center gap-4 mb-4">
               <img
-                src="https://images.unsplash.com/photo-1520637836862-4d197d17c13a?w=200&h=200&fit=crop&crop=center"
+                src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=200&h=200&fit=crop&crop=center"
                 alt="Герб Москвы"
                 className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white p-2 object-cover"
               />
