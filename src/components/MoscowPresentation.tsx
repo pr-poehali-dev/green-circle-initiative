@@ -234,9 +234,16 @@ const MoscowPresentation = () => {
         >
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="relative z-10 text-center max-w-4xl px-6">
-            <h1 className="text-6xl md:text-8xl font-bold mb-4 bg-yellow-500 text-black px-4 py-2 rounded-lg inline-block">
-              {slide.title}
-            </h1>
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Coat_of_Arms_of_Moscow.svg/200px-Coat_of_Arms_of_Moscow.svg.png"
+                alt="Герб Москвы"
+                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white p-2"
+              />
+              <h1 className="text-6xl md:text-8xl font-bold bg-yellow-500 text-black px-4 py-2 rounded-lg">
+                {slide.title}
+              </h1>
+            </div>
             <h2 className="text-2xl md:text-3xl mb-6 opacity-90">
               {slide.subtitle}
             </h2>
