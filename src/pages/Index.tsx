@@ -1,7 +1,63 @@
 import MoscowPresentation from "@/components/MoscowPresentation";
 
 const Index = () => {
-  return <MoscowPresentation />;
+  return (
+    <div className="min-h-screen bg-gray-50 p-8">
+      <h1 className="text-4xl font-bold text-blue-600 mb-4">
+        Главный заголовок H1
+      </h1>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+        Подзаголовок H2
+      </h2>
+      <h3 className="text-xl font-medium text-gray-700 mb-2">
+        Заголовок третьего уровня H3
+      </h3>
+
+      <p className="text-gray-600 mb-4 leading-relaxed">
+        Это обычный параграф с текстом. Здесь можно тестировать редактирование
+        содержимого параграфа.
+      </p>
+
+      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+        <span className="text-purple-500 font-bold">Цветной span</span> внутри
+        div блока
+      </div>
+
+      <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded mr-4">
+        Кнопка для тестов
+      </button>
+
+      <a href="#" className="text-blue-500 underline mr-4">
+        Ссылка для проверки
+      </a>
+
+      <img
+        src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300&h=200&fit=crop"
+        alt="Тестовое изображение"
+        className="w-64 h-40 object-cover rounded mb-4"
+      />
+
+      <ul className="list-disc list-inside mb-4">
+        <li>Первый элемент списка</li>
+        <li>Второй элемент</li>
+        <li>Третий элемент</li>
+      </ul>
+
+      <section className="bg-yellow-100 p-4 rounded mb-4">
+        <strong>Секция с жирным текстом</strong> и <em>курсивом</em>
+      </section>
+
+      <article className="border-l-4 border-red-500 pl-4 mb-4">
+        <small className="text-gray-500">Маленький текст в article</small>
+      </article>
+
+      <blockquote className="italic text-gray-600 border-l-2 border-gray-300 pl-4 mb-6">
+        Цитата для тестирования blockquote элемента
+      </blockquote>
+
+      <MoscowPresentation />
+    </div>
+  );
 };
 
 export default Index;
