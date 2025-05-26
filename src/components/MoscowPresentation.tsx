@@ -236,9 +236,9 @@ const MoscowPresentation = () => {
           <div className="relative z-10 text-center max-w-4xl px-6">
             <div className="flex items-center justify-center gap-4 mb-4">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Coat_of_Arms_of_Moscow.svg/200px-Coat_of_Arms_of_Moscow.svg.png"
+                src="https://images.unsplash.com/photo-1520637836862-4d197d17c13a?w=200&h=200&fit=crop&crop=center"
                 alt="Герб Москвы"
-                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white p-2"
+                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white p-2 object-cover"
               />
               <h1 className="text-6xl md:text-8xl font-bold bg-yellow-500 text-black px-4 py-2 rounded-lg">
                 {slide.title}
