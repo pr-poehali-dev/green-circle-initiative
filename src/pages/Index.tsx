@@ -27,15 +27,15 @@ const Index = () => {
       </p>
 
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <span className="text-purple-500 font-bold">Цветной span</span> внутри
-        div блока
+        <span className="font-bold text-lime-600">Цветной span</span> внутри div
+        блока
       </div>
 
-      <button className="hover:bg-red-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-gray-700">
+      <button className="hover:bg-red-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-gray-700 py-[37px] px-16 text-2xl">
         Кнопка для тестов
       </button>
 
-      <a href="#" className="underline mr-4 text-amber-400">
+      <a href="#" className="underline mr-4 text-amber-400 py-2.5">
         Ссылка для проверки
       </a>
 
