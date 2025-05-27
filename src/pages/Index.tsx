@@ -1,9 +1,17 @@
+import { useState } from "react";
 import MoscowPresentation from "@/components/MoscowPresentation";
 
 const Index = () => {
+  const [isBlue, setIsBlue] = useState(true);
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
-      <h1 className="text-4xl font-bold text-blue-600 mb-4">
+      <h1
+        className={`text-4xl font-bold mb-4 cursor-pointer transition-colors duration-200 ${
+          isBlue ? "text-blue-600" : "text-green-600"
+        }`}
+        onClick={() => setIsBlue(!isBlue)}
+      >
         Главный заголовок H1
       </h1>
       <h2 className="text-2xl font-semibold text-gray-800 mb-3">

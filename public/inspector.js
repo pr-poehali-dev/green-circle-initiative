@@ -82,10 +82,10 @@
     // Пытаемся получить информацию о расположении в коде
     let sourceLocation = null;
 
-    // Проверяем data-lov-id формат (path:line:col)
-    const lovId = element.getAttribute("data-lov-id");
-    if (lovId) {
-      const [filePath, line, col] = lovId.split(":");
+    // Проверяем data-pp-id формат (path:line:col)
+    const ppId = element.getAttribute("data-pp-id");
+    if (ppId) {
+      const [filePath, line, col] = ppId.split(":");
       sourceLocation = {
         filePath,
         line: parseInt(line || "0"),
