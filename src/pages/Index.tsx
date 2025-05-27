@@ -14,7 +14,7 @@ const Index = () => {
       >
         Главный заголовок H1
       </h1>
-      <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+      <h2 className="text-2xl font-semibold text-gray-800 my-[33px]">
         Подзаголовок H2
       </h2>
       <h3 className="text-xl font-medium text-gray-700 mb-2">
@@ -31,7 +31,7 @@ const Index = () => {
         блока
       </div>
 
-      <button className="hover:bg-red-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-gray-700 py-[37px] px-16 text-2xl">
+      <button className="hover:bg-red-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-gray-700 text-2xl py-[11px] px-[17px]">
         Кнопка для тестов
       </button>
 
