@@ -51,7 +51,7 @@ const Index = () => {
         <li>Третий элемент</li>
       </ul>
 
-      <section className="bg-yellow-100 p-4 rounded mb-4">
+      <section className="p-4 rounded mb-4 bg-red-800">
         <strong>Секция с жирным текстом</strong> и <em>курсивом</em>
       </section>
 
