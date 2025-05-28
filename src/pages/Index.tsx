@@ -1,76 +1,100 @@
 import { useState } from "react";
-import MoscowPresentation from "@/components/MoscowPresentation";
+import Icon from "@/components/ui/icon";
 
 const Index = () => {
-  const [isBlue, setIsBlue] = useState(true);
-
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <h1
-        className={`text-4xl font-bold mb-4 cursor-pointer transition-colors duration-200 ${
-          isBlue ? "text-blue-600" : "text-green-600"
-        }`}
-        onClick={() => setIsBlue(!isBlue)}
-      >
-        Привет!kljl
-      </h1>
-      <h2 className="text-gray-800 mb-3 font-800 text-4xl py-3 mx-[50px] text-right px-0">
-        Подзаголовок H2kjh
-      </h2>
-      <h3 className="text-xl font-medium text-gray-700 mb-2 text-center">
-        Заголовок третьего уровня H3
-      </h3>
-
-      <p className="mb-4 leading-relaxed text-gray-900">
-        Это обычный параграф с текстом. Здесь можно тестировать редактирование
-        содержимого параграфа.
-      </p>
-
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <span className="font-bold text-5xl text-gray-200">
-          Цветной spanоо-vanopano
-        </span>{" "}
-        внутри div блока
-      </div>
-
-      <button className="hover:bg-purple-600 shadow-md hover:shadow-lg transition-all duration-200 mr-4 font-800 bg-gray-200 text-lime-700 px-[34px] py-[46px] text-lg rounded-full">
-        Кнопка для тестовasdf
-        <br />
-        фыаыфва фывафыва
-      </button>
-
-      <a
-        href="#"
-        className="underline mr-4 font-900 rounded-3xl text-slate-600 text-xl"
-      >
-        Ссылка для проверки
-      </a>
-
-      <img
-        src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300&h=200&fit=crop"
-        alt="Тестовое изображение"
-        className="w-64 h-40 object-cover rounded my-[23px] rounded-full mx-0 py-[17px] px-0"
-      />
-
-      <ul className="list-disc list-inside mb-4">
-        <li>Хаххаха первый элемент!!</li>
-        <li>Второй элемент</li>
-        <li>Третий элемент</li>
-      </ul>
-
-      <section className="bg-yellow-100 p-4 rounded mb-4 rounded-full">
-        <strong>Секция с жирным текстом</strong> и <em>курсивом</em>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="text-center py-20 px-6">
+        <h1 className="text-6xl md:text-7xl font-light text-gray-900 mb-6 tracking-tight">
+          Поехали!
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto font-light">
+          Создавайте красивые веб-приложения с элегантностью и простотой
+        </p>
+        <button className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+          Начать создавать
+        </button>
       </section>
 
-      <article className="border-l-4 border-red-500 pl-4 mb-4">
-        <small className="text-gray-500">Маленький текст в article</small>
-      </article>
+      {/* Features Grid */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-light text-center text-gray-900 mb-16">
+            Просто. Элегантно. Мощно.
+          </h2>
 
-      <blockquote className="italic border-l-2 border-gray-300 pl-4 mb-6 text-slate-50 bg-slate-600">
-        Цитата для тестирования blockquote элемента
-      </blockquote>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                <Icon name="Zap" size={24} className="text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Быстрый старт
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                Начните работу за секунды с нашими готовыми компонентами и
+                шаблонами
+              </p>
+            </div>
 
-      <MoscowPresentation />
+            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
+              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
+                <Icon name="Palette" size={24} className="text-green-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Красивый дизайн
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                Современные компоненты с вниманием к деталям и пользовательскому
+                опыту
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                <Icon name="Code" size={24} className="text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Чистый код
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                TypeScript, React и современные технологии для надёжной
+                разработки
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
+            Готовы начать?
+          </h2>
+          <p className="text-xl text-gray-600 mb-12 font-light">
+            Присоединяйтесь к тысячам разработчиков, которые уже создают с нами
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-gray-900 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-all duration-200">
+              Попробовать бесплатно
+            </button>
+            <button className="border border-gray-300 text-gray-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 transition-all duration-200">
+              Узнать больше
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-gray-500 text-sm">
+            © 2025 Поехали! Все права защищены.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
