@@ -7,12 +7,12 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center relative pt-16">
+      <section className="min-h-screen flex items-center relative pt-16 bg-slate-100">
         <div className="container mx-auto px-8 flex items-center justify-center bg-slate-100">
           {/* Content */}
           <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-6">
-              <h1 className="text-6xl lg:text-7xl tracking-tight leading-none text-slate-800 font-500">
+              <h1 className="text-6xl lg:text-7xl tracking-tight leading-none text-slate-800 font-500 text-center">
                 iPhone 16 Pro
               </h1>
               <p className="text-2xl lg:text-3xl leading-tight text-slate-700 font-400">
