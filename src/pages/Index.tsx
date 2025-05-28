@@ -12,7 +12,7 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Главный заголовок H1
+        Главный{" "}
       </h1>
       <h2 className="text-2xl font-semibold text-gray-800 my-[33px]">
         Подзаголовок H2
