@@ -12,7 +12,7 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Привет народ!
+        Привет, Костя Голик!!!
       </h1>
       <h2 className="text-2xl font-semibold text-gray-800 mb-3">
         Подзаголовок H2
