@@ -13,10 +13,10 @@ const Index = () => {
           <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-2">
               <h1 className="lg:text-7xl tracking-tight leading-none text-slate-800 text-center font-extrabold text-4xl">
-                iPhone 16 Pro
+                АйБло 16 Pro
               </h1>
               <p className="text-2xl lg:text-3xl leading-tight text-slate-700 font-400 my-1.5">
-                Титановый. Мощный. Pro.
+                Покупайте на горбушке.
               </p>
             </div>
 
