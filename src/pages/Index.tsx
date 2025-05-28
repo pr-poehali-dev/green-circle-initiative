@@ -12,7 +12,7 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Привет!
+        Привет!asdf
       </h1>
       <h2 className="text-gray-800 mb-3 text-5xl font-800 text-center">
         Подзаголовок H2
