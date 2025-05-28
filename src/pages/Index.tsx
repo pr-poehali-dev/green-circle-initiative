@@ -7,18 +7,26 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center relative pt-16 bg-slate-100">
-        <div className="container mx-auto px-8 flex items-center justify-center bg-slate-100">
+      <section className="min-h-screen flex items-center relative pt-16 bg-black">
+        <div className="container mx-auto px-8 flex items-center justify-center">
           {/* Content */}
           <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-2">
-              <h1 className="lg:text-7xl tracking-tight leading-none text-slate-800 text-center text-4.5xl font-extrabold text-4xl"></h1>
-              <p className="lg:text-3xl leading-tight text-slate-700 my-1.5 text-center text-lg font-normal"></p>
+              <h1 className="lg:text-7xl tracking-tight leading-none text-white text-center text-4xl font-extrabold">
+                iPhone 15 Pro
+              </h1>
+              <p className="lg:text-3xl leading-tight text-gray-300 my-1.5 text-center text-lg font-normal">
+                Титановый. Мощный. Pro.
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className=""></button>
-              <button className="">Подробнее</button>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200">
+                Купить
+              </button>
+              <button className="border border-gray-600 text-gray-300 hover:text-white hover:border-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200">
+                Подробнее
+              </button>
             </div>
           </div>
         </div>
