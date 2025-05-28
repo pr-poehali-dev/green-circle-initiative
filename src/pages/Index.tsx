@@ -14,7 +14,7 @@ const Index = () => {
       >
         Привет, Костя Голик!!!
       </h1>
-      <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+      <h2 className="text-gray-800 mb-3 text-5xl font-800 text-center">
         Подзаголовок H2
       </h2>
       <h3 className="text-xl font-medium text-gray-700 mb-2 text-center">
@@ -53,7 +53,7 @@ const Index = () => {
         <li>Третий элемент</li>
       </ul>
 
-      <section className="bg-yellow-100 p-4 rounded mb-4">
+      <section className="bg-yellow-100 p-4 rounded mb-4 rounded-full">
         <strong>Секция с жирным текстом</strong> и <em>курсивом</em>
       </section>
 
