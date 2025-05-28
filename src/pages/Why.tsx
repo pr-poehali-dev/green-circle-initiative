@@ -32,10 +32,10 @@ export default function Why() {
         <div className="container mx-auto px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-light mb-6">
-              Почему iPhone 15 Pr
+              Почему iPhone 15
             </h2>
             <p className="text-xl text-gray-300 font-light max-w-2xl mx-auto text-right">
-              Три причины выбрать самый продвинутый iPh
+              Три причины выбрать самый продвинуты
             </p>
           </div>
 
