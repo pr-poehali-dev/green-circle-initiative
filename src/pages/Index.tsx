@@ -12,7 +12,7 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Главный заголовок H1
+        Привет народ! Как дела?
       </h1>
       <h2 className="text-2xl font-semibold text-gray-800 mb-3">
         Подзаголовок H2
