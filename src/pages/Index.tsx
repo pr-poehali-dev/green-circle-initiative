@@ -61,7 +61,7 @@ const Index = () => {
         <small className="text-gray-500">Маленький текст в article</small>
       </article>
 
-      <blockquote className="italic border-l-2 border-gray-300 pl-4 mb-6 bg-slate-700 text-slate-50">
+      <blockquote className="italic border-l-2 border-gray-300 pl-4 mb-6 text-slate-50 bg-slate-600">
         Цитата для тестирования blockquote элемента
       </blockquote>
 
