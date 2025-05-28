@@ -1,73 +1,93 @@
-import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Hero Section */}
-      <section className="text-center py-20 px-6">
-        <div className="mb-8">
-          <img
-            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&auto=format"
-            alt="Современные технологии"
-            className="w-full max-w-4xl shadow-2xl h-64 md:h-80 mx-0 px-0 rounded-full py-0 object-none"
-          />
+      <section className="min-h-screen flex items-center relative">
+        <div className="container mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="space-y-8 max-w-xl">
+            <div className="space-y-6">
+              <h1 className="text-6xl lg:text-7xl font-light tracking-tight leading-none">
+                iPhone 15 Pro
+              </h1>
+              <p className="text-2xl lg:text-3xl font-light text-gray-300 leading-tight">
+                Титановый. Мощный. Pro.
+              </p>
+              <p className="text-lg text-gray-400 font-light leading-relaxed max-w-md">
+                Создан из титана авиакосмического класса с чипом A17 Pro для
+                невероятной производительности.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <p className="text-xl font-light">
+                От <span className="text-white">99 990 ₽</span>
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
+                  Купить
+                </button>
+                <button className="border border-blue-600 text-blue-400 hover:text-white hover:bg-blue-600 px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Image */}
+          <div className="relative flex justify-center lg:justify-end">
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=800&fit=crop&auto=format"
+                alt="iPhone 15 Pro"
+                className="w-80 lg:w-96 h-auto object-contain"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-blue-500/20 rounded-3xl"></div>
+            </div>
+          </div>
         </div>
-        <h1 className="text-6xl md:text-7xl mb-6 tracking-tight text-sky-600 font-500">
-          Поехали!
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto font-light">
-          Создавайте красивые веб-приложения с элегантностью и простотой
-        </p>
-        <button className="text-white px-8 py-4 text-lg font-medium hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl bg-gray-600 rounded-sm">
-          Начать создавать
-        </button>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-light text-center text-gray-900 mb-16">
-            Просто. Элегантно. Мощно.
-          </h2>
+      {/* Features Section */}
+      <section className="py-24 bg-gray-950">
+        <div className="container mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-light mb-6">
+              Почему iPhone 15 Pro
+            </h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                <Icon name="Zap" size={24} className="text-blue-600" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            <div className="text-center space-y-6">
+              <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto">
+                <Icon name="Cpu" size={28} className="text-blue-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                Быстрый старт
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Начните работу за секунды с нашими готовыми компонентами и
-                шаблонами
+              <h3 className="text-2xl font-light">A17 Pro чип</h3>
+              <p className="text-gray-400 font-light">
+                Самый мощный чип в истории iPhone для игр консольного уровня
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                <Icon name="Palette" size={24} className="text-green-600" />
+            <div className="text-center space-y-6">
+              <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto">
+                <Icon name="Camera" size={28} className="text-blue-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                Красивый дизайн
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Современные компоненты с вниманием к деталям и пользовательскому
-                опыту
+              <h3 className="text-2xl font-light">Pro камеры</h3>
+              <p className="text-gray-400 font-light">
+                Система камер с 5-кратным зумом для невероятных снимков
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
-                <Icon name="Code" size={24} className="text-purple-600" />
+            <div className="text-center space-y-6">
+              <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto">
+                <Icon name="Smartphone" size={28} className="text-blue-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                Чистый код
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                TypeScript, React и современные технологии для надёжной
-                разработки
+              <h3 className="text-2xl font-light">Титановый корпус</h3>
+              <p className="text-gray-400 font-light">
+                Самый прочный и лёгкий дизайн в истории iPhone
               </p>
             </div>
           </div>
@@ -75,30 +95,33 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-            Готовы начать?
-          </h2>
-          <p className="text-xl text-gray-600 mb-12 font-light">
-            Присоединяйтесь к тысячам разработчиков, которые уже создают с нами
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gray-900 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-all duration-200">
-              Попробовать бесплатно
-            </button>
-            <button className="border border-gray-300 text-gray-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 transition-all duration-200">
-              Узнать больше
-            </button>
+      <section className="py-24 bg-black">
+        <div className="container mx-auto px-8 text-center">
+          <div className="max-w-3xl mx-auto space-y-8">
+            <h2 className="text-4xl lg:text-5xl font-light leading-tight">
+              Переходи на iPhone 15 Pro
+            </h2>
+            <p className="text-xl text-gray-300 font-light">
+              Обмени свой старый iPhone и получи скидку до 50 000 ₽
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-200">
+                Купить iPhone 15 Pro
+              </button>
+              <button className="border border-gray-600 text-gray-300 hover:text-white hover:border-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-200">
+                Сравнить модели
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-gray-200">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-500 text-sm">
-            © 2025 Поехали! Все права защищены.
+      <footer className="py-12 border-t border-gray-800">
+        <div className="container mx-auto px-8 text-center">
+          <p className="text-gray-500 text-sm font-light">
+            Copyright © 2025 Apple Inc. Все права защищены.
           </p>
         </div>
       </footer>
