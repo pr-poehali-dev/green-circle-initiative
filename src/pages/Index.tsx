@@ -18,13 +18,13 @@ const Index = () => {
                 iPhone 15 Proиии
               </h1>
               <p className="lg:text-3xl leading-tight text-lg font-normal text-teal-400 my-[55px] text-left">
-                Титановый. Мощный. Pro.
+                Титановый. Мощный. Pro.s
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center bg-gray-600">
               <button className="hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 bg-gray-700">
-                Купиммии
+                Купи!
               </button>
               <Button
                 size="lg"
