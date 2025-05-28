@@ -31,7 +31,7 @@ const Index = () => {
         внутри div блока
       </div>
 
-      <button className="hover:bg-purple-600 px-6 shadow-md hover:shadow-lg transition-all duration-200 mr-4 rounded-2xl text-5xl font-800 bg-gray-200 text-lime-700 py-[31px]">
+      <button className="hover:bg-purple-600 shadow-md hover:shadow-lg transition-all duration-200 mr-4 rounded-2xl text-5xl font-800 bg-gray-200 text-lime-700 px-[34px] py-[46px]">
         Кнопка для тестовasdf
         <br />
         фыаыфва фывафыва
