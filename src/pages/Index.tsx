@@ -12,10 +12,10 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Привет!
+        Привет!kljl
       </h1>
-      <h2 className="text-gray-800 mb-3 font-800 text-center text-4xl">
-        Подзаголовок H2
+      <h2 className="text-gray-800 mb-3 font-800 text-4xl py-3 mx-[50px] text-right px-0">
+        Подзаголовок H2kjh
       </h2>
       <h3 className="text-xl font-medium text-gray-700 mb-2 text-center">
         Заголовок третьего уровня H3
