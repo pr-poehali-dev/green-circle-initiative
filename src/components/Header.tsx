@@ -27,14 +27,12 @@ const Header = () => {
               href="#"
               className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
             >
-              iPad
+              КОки
             </a>
             <a
               href="#"
               className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
-            >
-              iPhone
-            </a>
+            ></a>
             <a
               href="#"
               className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
