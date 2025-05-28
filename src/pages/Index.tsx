@@ -37,14 +37,14 @@ const Index = () => {
         фыаыфва фывафыва
       </button>
 
-      <a href="#" className="underline mr-4 text-red-800">
+      <a href="#" className="underline mr-4 text-[#0b0b09] text-5xl font-900">
         Ссылка для проверки
       </a>
 
       <img
         src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300&h=200&fit=crop"
         alt="Тестовое изображение"
-        className="w-64 h-40 object-cover rounded mb-4 rounded-full px-[22px] py-3"
+        className="w-64 h-40 object-cover rounded mx-[19px] my-[23px] py-[29px] px-[37px] rounded-full"
       />
 
       <ul className="list-disc list-inside mb-4">
