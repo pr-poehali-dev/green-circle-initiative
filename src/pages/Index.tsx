@@ -27,7 +27,7 @@ const Index = () => {
       </p>
 
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <span className="text-purple-500 font-bold">Цветной span</span> внутри
+        <span className="font-bold text-gray-700">Цветной spanоо</span> внутри
         div блока
       </div>
 
