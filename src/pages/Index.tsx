@@ -21,7 +21,7 @@ const Index = () => {
         Заголовок третьего уровня H3
       </h3>
 
-      <p className="text-gray-600 mb-4 leading-relaxed">
+      <p className="mb-4 leading-relaxed text-gray-900">
         Это обычный параграф с текстом. Здесь можно тестировать редактирование
         содержимого параграфа.
       </p>
