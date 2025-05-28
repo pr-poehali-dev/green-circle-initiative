@@ -10,7 +10,7 @@ const Index = () => {
           <img
             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&auto=format"
             alt="Современные технологии"
-            className="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl h-64 md:h-80 object-contain"
+            className="w-full max-w-4xl shadow-2xl h-64 md:h-80 mx-0 px-0 rounded-full py-0 object-none"
           />
         </div>
         <h1 className="text-6xl md:text-7xl mb-6 tracking-tight text-sky-600 font-500">
