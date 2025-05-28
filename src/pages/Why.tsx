@@ -32,10 +32,10 @@ export default function Why() {
         <div className="container mx-auto px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-light mb-6">
-              Почему iPhone 15 Pro
+              Почему iPhone 15 Pr
             </h2>
-            <p className="text-xl text-gray-300 font-light max-w-2xl mx-auto">
-              Три причины выбрать самый продвинутый iPhone
+            <p className="text-xl text-gray-300 font-light max-w-2xl mx-auto text-right">
+              Три причины выбрать самый продвинутый iPh
             </p>
           </div>
 
@@ -74,7 +74,7 @@ export default function Why() {
                 >
                   {feature.title}
                 </h3>
-                <p className="text-gray-400 font-light">
+                <p className="text-gray-400 font-light text-left">
                   {feature.description}
                 </p>
               </div>
