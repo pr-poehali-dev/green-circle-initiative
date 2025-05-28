@@ -13,13 +13,13 @@ const Index = () => {
             className="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl h-64 md:h-80 object-contain"
           />
         </div>
-        <h1 className="text-6xl md:text-7xl font-light mb-6 tracking-tight text-red-700">
+        <h1 className="text-6xl md:text-7xl mb-6 tracking-tight text-sky-600 font-500">
           Поехали!
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto font-light">
           Создавайте красивые веб-приложения с элегантностью и простотой
         </p>
-        <button className="text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl bg-gray-600">
+        <button className="text-white px-8 py-4 text-lg font-medium hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl bg-gray-600 rounded-sm">
           Начать создавать
         </button>
       </section>
