@@ -37,7 +37,7 @@ const Index = () => {
         фыаыфва фывафыва
       </button>
 
-      <a href="#" className="text-blue-500 underline mr-4">
+      <a href="#" className="underline mr-4 text-red-800">
         Ссылка для проверки
       </a>
 
