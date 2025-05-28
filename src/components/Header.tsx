@@ -8,11 +8,11 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Icon
-              name="Zap"
+              name="Apple"
               size={24}
               className="text-gray-900 hidden md:block"
             />
-            <Icon name="Zap" size={20} className="text-gray-900 md:hidden" />
+            <Icon name="Apple" size={20} className="text-gray-900 md:hidden" />
           </div>
 
           {/* Navigation */}
@@ -49,25 +49,12 @@ const Header = () => {
             </a>
           </div>
 
-          {/* Mobile Menu and Desktop Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Mobile Menu Icon */}
+          {/* Mobile menu button */}
+          <div className="md:hidden">
             <Icon
-              name="AlignJustify"
+              name="Menu"
               size={24}
-              className="text-gray-600 hover:text-gray-900 cursor-pointer transition-colors md:hidden"
-            />
-
-            {/* Desktop Icons */}
-            <Icon
-              name="Search"
-              size={18}
-              className="text-gray-600 hover:text-gray-900 cursor-pointer transition-colors hidden md:block"
-            />
-            <Icon
-              name="ShoppingBag"
-              size={18}
-              className="text-gray-600 hover:text-gray-900 cursor-pointer transition-colors hidden md:block"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
             />
           </div>
         </nav>
