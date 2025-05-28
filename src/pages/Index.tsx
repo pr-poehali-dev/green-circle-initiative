@@ -12,7 +12,7 @@ const Index = () => {
               <h1 className="text-6xl lg:text-7xl tracking-tight leading-none text-slate-800 font-500 text-left">
                 iPhone 16 Pro
               </h1>
-              <p className="text-2xl lg:text-3xl font-light leading-tight text-slate-700 text-left">
+              <p className="text-2xl lg:text-3xl leading-tight text-slate-700 text-left font-400">
                 Титановый. Мощный. Pro.
               </p>
               <p className="text-lg font-light leading-relaxed max-w-md text-slate-700 text-left">
