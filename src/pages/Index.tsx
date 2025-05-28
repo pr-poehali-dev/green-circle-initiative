@@ -27,9 +27,7 @@ const Index = () => {
         блока
       </div>
 
-      <button className="hover:bg-red-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-gray-700 text-2xl py-[11px] px-[17px]">
-        Кнопка для тестов
-      </button>
+      <button className="">Кнопка для тестовХАХАХАХ</button>
 
       <a href="#" className="underline mr-4 py-2.5 text-amber-400">
         Ссылка для проверки
