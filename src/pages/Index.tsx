@@ -28,7 +28,7 @@ const Index = () => {
               </button>
               <Button
                 size="lg"
-                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-medium transition-colors"
+                className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-medium transition-colors"
                 asChild
               >
                 <Link to="/why">Подробнее</Link>
