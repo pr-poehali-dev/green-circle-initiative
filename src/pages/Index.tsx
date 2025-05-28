@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 
 const Index = () => {
@@ -24,9 +26,13 @@ const Index = () => {
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200">
                 Купить
               </button>
-              <button className="border border-gray-600 text-gray-300 hover:text-white hover:border-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200">
-                Подробнее
-              </button>
+              <Button
+                size="lg"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-medium transition-colors"
+                asChild
+              >
+                <Link to="/why">Подробнее</Link>
+              </Button>
             </div>
           </div>
         </div>
