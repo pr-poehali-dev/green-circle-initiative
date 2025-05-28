@@ -40,7 +40,7 @@ const Index = () => {
               </div>
               <h3 className="text-2xl font-light">A17 Pro чип</h3>
               <p className="text-gray-400 font-light">
-                Самый мощный чип в истории iPhone для игр консольного уровня
+                Самый мощный чип в истории iPhone для игр консольного ур
               </p>
             </div>
 
