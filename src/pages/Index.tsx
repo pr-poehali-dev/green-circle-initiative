@@ -12,9 +12,9 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Главный заголовок H1asdf
+        Главный заголовок H1
       </h1>
-      <h2 className="font-semibold text-gray-800 mb-3 text-5xl px-[13px]">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-3">
         Подзаголовок H2
       </h2>
       <h3 className="text-xl font-medium text-gray-700 mb-2">
@@ -31,7 +31,9 @@ const Index = () => {
         div блока
       </div>
 
-      <button className="">Кнопка для тестоas</button>
+      <button className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4">
+        Кнопка для тестов
+      </button>
 
       <a href="#" className="text-blue-500 underline mr-4">
         Ссылка для проверки
