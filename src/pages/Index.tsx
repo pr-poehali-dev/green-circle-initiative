@@ -13,7 +13,7 @@ const Index = () => {
             className="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl object-cover h-64 md:h-80"
           />
         </div>
-        <h1 className="text-6xl md:text-7xl font-light text-gray-900 mb-6 tracking-tight">
+        <h1 className="text-6xl md:text-7xl font-light mb-6 tracking-tight text-red-700">
           Поехали!
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto font-light">
