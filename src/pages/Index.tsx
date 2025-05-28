@@ -44,7 +44,7 @@ const Index = () => {
       <img
         src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300&h=200&fit=crop"
         alt="Тестовое изображение"
-        className="w-64 h-40 object-cover rounded mb-4 rounded-full px-0 py-0"
+        className="w-64 h-40 object-cover rounded mb-4 px-0 py-0 rounded-3xl"
       />
 
       <ul className="list-disc list-inside mb-4">
