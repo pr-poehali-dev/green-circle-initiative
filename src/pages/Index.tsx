@@ -12,10 +12,10 @@ const Index = () => {
           {/* Content */}
           <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-2">
-              <h1 className="lg:text-7xl tracking-tight leading-none text-slate-800 text-center font-extrabold text-4xl">
+              <h1 className="lg:text-7xl tracking-tight leading-none text-slate-800 text-center font-extrabold text-5xl">
                 АйБло 16 Pro
               </h1>
-              <p className="text-2xl lg:text-3xl leading-tight text-slate-700 font-400 my-1.5">
+              <p className="lg:text-3xl leading-tight text-slate-700 font-400 my-1.5 text-center text-2xl">
                 Покупайте на горбушке.
               </p>
             </div>
