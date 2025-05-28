@@ -4,6 +4,17 @@ import {
   ChevronRight,
   CheckCircle,
   CircleAlert,
+  Zap,
+  Menu,
+  Home,
+  Users,
+  Settings,
+  Star,
+  Heart,
+  Search,
+  Plus,
+  Minus,
+  X,
   LucideProps,
 } from "lucide-react";
 
@@ -17,6 +28,17 @@ const iconMap: Record<string, FC<LucideProps>> = {
   ChevronRight,
   CheckCircle,
   CircleAlert,
+  Zap,
+  Menu,
+  Home,
+  Users,
+  Settings,
+  Star,
+  Heart,
+  Search,
+  Plus,
+  Minus,
+  X,
 };
 
 const Icon: FC<IconProps> = ({ name, fallback = "CircleAlert", ...props }) => {
