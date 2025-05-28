@@ -15,9 +15,7 @@ const Index = () => {
         Главный{" "}
       </h1>
       <h2 className="">Подзаголо</h2>
-      <h3 className="text-xl font-medium text-gray-700 mb-2">
-        Заголовок третьего уровня H3
-      </h3>
+      <h3 className="">Заголовок третьегоkl;k;lk;lk</h3>
 
       <p className="text-gray-600 mb-4 leading-relaxed">
         Это обычный параграф с текстом. Здесь можно тестировать редактирование
