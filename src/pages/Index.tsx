@@ -14,7 +14,7 @@ const Index = () => {
           {/* Content */}
           <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-2">
-              <h1 className="lg:text-7xl tracking-tight leading-none text-white text-center text-4xl font-extrabold">
+              <h1 className="lg:text-7xl tracking-tight leading-none text-center text-4xl font-extrabold text-red-800">
                 iPhone 15 Pro
               </h1>
               <p className="lg:text-3xl leading-tight text-gray-300 my-1.5 text-center text-lg font-normal">
@@ -23,7 +23,7 @@ const Index = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200">
+              <button className="hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 bg-gray-700">
                 Купи
               </button>
               <Button
