@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
 import Index from "@/pages/Index";
 import Booking from "@/pages/Booking";
+import Why from "@/pages/Why";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/why" element={<Why />} />
         </Routes>
         <Toaster />
       </div>
