@@ -24,7 +24,7 @@ const Index = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200">
-                Купить
+                Купи
               </button>
               <Button
                 size="lg"
