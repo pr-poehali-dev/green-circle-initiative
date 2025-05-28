@@ -31,7 +31,7 @@ const Index = () => {
         внутри div блока
       </div>
 
-      <button className="hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-orange-700">
+      <button className="hover:bg-purple-600 px-6 py-3 shadow-md hover:shadow-lg transition-all duration-200 mr-4 rounded-2xl text-5xl font-800 bg-gray-200 text-lime-700">
         Кнопка для тестовasdf
         <br />
         фыаыфва фывафыва
@@ -44,7 +44,7 @@ const Index = () => {
       <img
         src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300&h=200&fit=crop"
         alt="Тестовое изображение"
-        className="w-64 h-40 object-cover rounded mx-[19px] my-[23px] py-[29px] px-[37px] rounded-full"
+        className="w-64 h-40 object-cover rounded my-[23px] rounded-full mx-0 px-[13px] py-2.5"
       />
 
       <ul className="list-disc list-inside mb-4">
