@@ -10,7 +10,7 @@ const Index = () => {
           <img
             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&auto=format"
             alt="Современные технологии"
-            className="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl object-cover h-64 md:h-80"
+            className="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl h-64 md:h-80 object-contain"
           />
         </div>
         <h1 className="text-6xl md:text-7xl font-light mb-6 tracking-tight text-red-700">
@@ -19,7 +19,7 @@ const Index = () => {
         <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto font-light">
           Создавайте красивые веб-приложения с элегантностью и простотой
         </p>
-        <button className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+        <button className="text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl bg-gray-600">
           Начать создавать
         </button>
       </section>
