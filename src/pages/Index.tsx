@@ -1,51 +1,32 @@
 import Icon from "@/components/ui/icon";
+import Header from "@/components/Header";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
+      <Header />
+
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center relative">
-        <div className="container mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-slate-100">
-          {/* Left Content */}
-          <div className="space-y-8 max-w-xl">
+      <section className="min-h-screen flex items-center relative pt-16">
+        <div className="container mx-auto px-8 flex items-center justify-center bg-slate-100">
+          {/* Content */}
+          <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-6">
-              <h1 className="text-6xl lg:text-7xl tracking-tight leading-none text-slate-800 font-500 text-left">
+              <h1 className="text-6xl lg:text-7xl tracking-tight leading-none text-slate-800 font-500">
                 iPhone 16 Pro
               </h1>
-              <p className="text-2xl lg:text-3xl leading-tight text-slate-700 text-left font-400">
+              <p className="text-2xl lg:text-3xl leading-tight text-slate-700 font-400">
                 Титановый. Мощный. Pro.
               </p>
-              <p className="text-lg font-light leading-relaxed max-w-md text-slate-700 text-left">
-                Создан из титана авиакосмического класса с чипом A17 Pro для
-                невероятной производительности.
-              </p>
             </div>
 
-            <div className="space-y-4">
-              <p className="text-xl font-light text-slate-700 text-left">
-                От <span className="text-slate-700">99 990 ₽</span>
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
-                  Купить
-                </button>
-                <button className="border border-blue-600 text-blue-400 hover:text-white hover:bg-blue-600 px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
-                  Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Image */}
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=800&fit=crop&auto=format"
-                alt="iPhone 15 Pro"
-                className="w-80 lg:w-96 h-auto object-contain"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-blue-500/20 rounded-3xl"></div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
+                Купить
+              </button>
+              <button className="border border-blue-600 text-blue-400 hover:text-white hover:bg-blue-600 px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
+                Подробнее
+              </button>
             </div>
           </div>
         </div>
