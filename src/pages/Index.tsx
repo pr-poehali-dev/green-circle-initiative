@@ -14,7 +14,7 @@ const Index = () => {
             <div className="space-y-2">
               <h1 className="lg:text-7xl tracking-tight leading-none text-slate-800 text-center text-4.5xl font-extrabold text-4xl"></h1>
               <p className="lg:text-3xl leading-tight text-slate-700 font-400 my-1.5 text-center text-lg">
-                Покупайте на горбушке.
+                ДА!
               </p>
             </div>
 
