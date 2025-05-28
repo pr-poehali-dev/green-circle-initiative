@@ -27,7 +27,9 @@ const Index = () => {
       </p>
 
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <span className="font-bold text-gray-700">Цветной spanоо-vanopano</span>{" "}
+        <span className="font-bold text-gray-700 text-6xl">
+          Цветной spanоо-vanopano
+        </span>{" "}
         внутри div блока
       </div>
 
@@ -37,7 +39,10 @@ const Index = () => {
         фыаыфва фывафыва
       </button>
 
-      <a href="#" className="underline mr-4 text-[#0b0b09] font-900 text-3xl">
+      <a
+        href="#"
+        className="underline mr-4 text-[#0b0b09] font-900 text-3xl rounded-3xl"
+      >
         Ссылка для проверки
       </a>
 
