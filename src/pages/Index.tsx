@@ -20,9 +20,7 @@ const Index = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className=""></button>
-              <button className="border border-slate-800 hover:text-white hover:bg-blue-600 px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px] text-slate-800">
-                Подробнее
-              </button>
+              <button className="">Подробнее</button>
             </div>
           </div>
         </div>
