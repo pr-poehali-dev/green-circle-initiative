@@ -12,7 +12,7 @@ const Index = () => {
           {/* Content */}
           <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-6">
-              <h1 className="text-6xl lg:text-7xl tracking-tight leading-none text-slate-800 font-500 text-center">
+              <h1 className="lg:text-7xl tracking-tight leading-none text-slate-800 font-500 text-center text-5xl">
                 iPhone 16 Pro
               </h1>
               <p className="text-2xl lg:text-3xl leading-tight text-slate-700 font-400">
@@ -24,7 +24,7 @@ const Index = () => {
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
                 Купить
               </button>
-              <button className="border border-blue-600 text-blue-400 hover:text-white hover:bg-blue-600 px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px]">
+              <button className="border border-slate-800 hover:text-white hover:bg-blue-600 px-8 py-3 rounded-full text-lg font-medium transition-all duration-200 min-w-[160px] text-slate-800">
                 Подробнее
               </button>
             </div>
