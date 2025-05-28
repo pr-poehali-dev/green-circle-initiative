@@ -16,6 +16,9 @@ import {
   Minus,
   X,
   Apple,
+  Cpu,
+  Camera,
+  Smartphone,
   LucideProps,
 } from "lucide-react";
 
@@ -41,6 +44,9 @@ const iconMap: Record<string, FC<LucideProps>> = {
   Minus,
   X,
   Apple,
+  Cpu,
+  Camera,
+  Smartphone,
 };
 
 const Icon: FC<IconProps> = ({ name, fallback = "CircleAlert", ...props }) => {
