@@ -32,7 +32,9 @@ const Index = () => {
       </div>
 
       <button className="hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-orange-700">
-        Кнопка для тестовasdfфыаыфва фывафыва
+        Кнопка для тестовasdf
+        <br />
+        фыаыфва фывафыва
       </button>
 
       <a href="#" className="text-blue-500 underline mr-4">
