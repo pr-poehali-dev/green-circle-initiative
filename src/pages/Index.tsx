@@ -12,7 +12,7 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Привет народ! Как дела? Все ли хорошечно???
+        Привет народ!
       </h1>
       <h2 className="text-2xl font-semibold text-gray-800 mb-3">
         Подзаголовок H2
@@ -61,7 +61,7 @@ const Index = () => {
         <small className="text-gray-500">Маленький текст в article</small>
       </article>
 
-      <blockquote className="italic text-gray-600 border-l-2 border-gray-300 pl-4 mb-6">
+      <blockquote className="italic border-l-2 border-gray-300 pl-4 mb-6 bg-slate-700 text-slate-50">
         Цитата для тестирования blockquote элемента
       </blockquote>
 
