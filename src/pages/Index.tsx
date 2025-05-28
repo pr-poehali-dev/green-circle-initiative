@@ -14,7 +14,7 @@ const Index = () => {
       >
         Привет!asdfasdf
       </h1>
-      <h2 className="text-gray-800 mb-3 font-800 text-center text-8xl">
+      <h2 className="text-gray-800 mb-3 font-800 text-center text-4xl">
         Подзаголовок H2
       </h2>
       <h3 className="text-xl font-medium text-gray-700 mb-2 text-center">
