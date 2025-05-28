@@ -11,7 +11,7 @@ const Index = () => {
         <div className="container mx-auto px-8 flex items-center justify-center bg-slate-100">
           {/* Content */}
           <div className="space-y-8 max-w-xl text-center">
-            <div className="space-y-6">
+            <div className="space-y-2">
               <h1 className="lg:text-7xl tracking-tight leading-none text-slate-800 text-center text-4xl font-extrabold">
                 iPhone 16 Pro
               </h1>
