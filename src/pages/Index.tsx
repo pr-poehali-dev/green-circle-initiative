@@ -48,7 +48,7 @@ const Index = () => {
       />
 
       <ul className="list-disc list-inside mb-4">
-        <li>Первый элемент списка</li>
+        <li>Хаххаха первый элемент!!</li>
         <li>Второй элемент</li>
         <li>Третий элемент</li>
       </ul>
