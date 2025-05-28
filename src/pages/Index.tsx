@@ -14,9 +14,7 @@ const Index = () => {
       >
         Главный{" "}
       </h1>
-      <h2 className="text-2xl font-semibold text-gray-800 my-[33px]">
-        Подзаголовок H2
-      </h2>
+      <h2 className="">Подзаголо</h2>
       <h3 className="text-xl font-medium text-gray-700 mb-2">
         Заголовок третьего уровня H3
       </h3>
