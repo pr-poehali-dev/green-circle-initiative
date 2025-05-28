@@ -14,7 +14,7 @@ const Index = () => {
           {/* Content */}
           <div className="space-y-8 max-w-xl text-center">
             <div className="space-y-2">
-              <h1 className="tracking-tight leading-none text-center text-emerald-700 font-light text-7xl">
+              <h1 className="tracking-tight leading-none text-center text-emerald-700 text-7xl font-bold">
                 iPhone 15 Proиии
               </h1>
               <p className="lg:text-3xl leading-tight text-gray-300 my-1.5 text-center text-lg font-normal">
