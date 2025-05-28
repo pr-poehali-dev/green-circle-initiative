@@ -33,7 +33,7 @@ const Index = () => {
         внутри div блока
       </div>
 
-      <button className="hover:bg-purple-600 shadow-md hover:shadow-lg transition-all duration-200 mr-4 rounded-2xl text-5xl font-800 bg-gray-200 text-lime-700 px-[34px] py-[46px]">
+      <button className="hover:bg-purple-600 shadow-md hover:shadow-lg transition-all duration-200 mr-4 font-800 bg-gray-200 text-lime-700 px-[34px] py-[46px] text-lg rounded-full">
         Кнопка для тестовasdf
         <br />
         фыаыфва фывафыва
@@ -41,7 +41,7 @@ const Index = () => {
 
       <a
         href="#"
-        className="underline mr-4 text-[#0b0b09] font-900 text-3xl rounded-3xl"
+        className="underline mr-4 font-900 rounded-3xl text-slate-600 text-xl"
       >
         Ссылка для проверки
       </a>
