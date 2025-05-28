@@ -12,10 +12,14 @@ const Index = () => {
         }`}
         onClick={() => setIsBlue(!isBlue)}
       >
-        Главный{" "}
+        Главный заголовок H1
       </h1>
-      <h2 className="">Подзаголо</h2>
-      <h3 className="">Заголовок третьегоkl;k;lk;lk</h3>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+        Подзаголовок H2
+      </h2>
+      <h3 className="text-xl font-medium text-gray-700 mb-2">
+        Заголовок третьего уровня H3
+      </h3>
 
       <p className="text-gray-600 mb-4 leading-relaxed">
         Это обычный параграф с текстом. Здесь можно тестировать редактирование
@@ -23,20 +27,22 @@ const Index = () => {
       </p>
 
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <span className="font-bold text-lime-600">Цветной span</span> внутри div
-        блока
+        <span className="text-purple-500 font-bold">Цветной span</span> внутри
+        div блока
       </div>
 
-      <button className="">Кнопка для тестовХАХАХАХ</button>
+      <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded mr-4">
+        Кнопка для тестов
+      </button>
 
-      <a href="#" className="underline mr-4 py-2.5 text-amber-400">
+      <a href="#" className="text-blue-500 underline mr-4">
         Ссылка для проверки
       </a>
 
       <img
         src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300&h=200&fit=crop"
         alt="Тестовое изображение"
-        className="w-64 h-40 object-cover rounded mb-4 rounded-full px-[18px] py-[13px]"
+        className="w-64 h-40 object-cover rounded mb-4"
       />
 
       <ul className="list-disc list-inside mb-4">
@@ -45,7 +51,7 @@ const Index = () => {
         <li>Третий элемент</li>
       </ul>
 
-      <section className="p-4 rounded mb-4 bg-red-800 rounded-full">
+      <section className="bg-yellow-100 p-4 rounded mb-4">
         <strong>Секция с жирным текстом</strong> и <em>курсивом</em>
       </section>
 
