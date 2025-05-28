@@ -5,25 +5,25 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Hero Section */}
       <section className="min-h-screen flex items-center relative">
-        <div className="container mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-slate-100">
           {/* Left Content */}
           <div className="space-y-8 max-w-xl">
             <div className="space-y-6">
-              <h1 className="text-6xl lg:text-7xl font-light tracking-tight leading-none">
-                iPhone 15 Pro
+              <h1 className="text-6xl lg:text-7xl tracking-tight leading-none text-slate-800 font-500 text-left">
+                iPhone 16 Pro
               </h1>
-              <p className="text-2xl lg:text-3xl font-light text-gray-300 leading-tight">
+              <p className="text-2xl lg:text-3xl font-light leading-tight text-slate-700 text-left">
                 Титановый. Мощный. Pro.
               </p>
-              <p className="text-lg text-gray-400 font-light leading-relaxed max-w-md">
+              <p className="text-lg font-light leading-relaxed max-w-md text-slate-700 text-left">
                 Создан из титана авиакосмического класса с чипом A17 Pro для
                 невероятной производительности.
               </p>
             </div>
 
             <div className="space-y-4">
-              <p className="text-xl font-light">
-                От <span className="text-white">99 990 ₽</span>
+              <p className="text-xl font-light text-slate-700 text-left">
+                От <span className="text-slate-700">99 990 ₽</span>
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
