@@ -27,8 +27,8 @@ const Index = () => {
       </p>
 
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <span className="font-bold text-gray-700">Цветной spanоо</span> внутри
-        div блока
+        <span className="font-bold text-gray-700">Цветной spanоо-vanopano</span>{" "}
+        внутри div блока
       </div>
 
       <button className="hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 mr-4 bg-orange-700">
