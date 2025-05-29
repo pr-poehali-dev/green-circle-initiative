@@ -12,94 +12,71 @@ const Index = () => {
       <section className="pt-24 pb-20">
         <div className="container mx-auto px-8 text-center">
           <div className="max-w-4xl mx-auto space-y-8">
+            <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-8 flex items-center justify-center">
+              <Icon name="User" size={48} className="text-white" />
+            </div>
+
             <h1 className="text-6xl lg:text-7xl font-thin text-gray-900 tracking-tight">
-              Apple Gift Card
+              Иван Петров
             </h1>
             <p className="text-xl lg:text-2xl text-gray-600 font-light max-w-2xl mx-auto">
-              Подарите возможность выбора. Используйте для покупок в App Store,
-              iTunes Store и Apple Store.
+              Full-Stack разработчик с 5+ годами опыта в создании современных
+              веб-приложений
             </p>
 
-            <div className="pt-8">
+            <div className="pt-8 flex gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-full text-lg font-medium"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-medium"
                 asChild
               >
-                <Link to="/products">Купить Gift Card</Link>
+                <Link to="/experience">Опыт работы</Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-8 py-4 rounded-full text-lg font-medium"
+                asChild
+              >
+                <Link to="/contacts">Связаться</Link>
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Skills Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
             <div className="text-center space-y-6">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                <Icon name="Smartphone" size={28} className="text-blue-600" />
+                <Icon name="Code" size={28} className="text-blue-600" />
               </div>
-              <h3 className="text-xl font-medium text-gray-900">App Store</h3>
+              <h3 className="text-xl font-medium text-gray-900">Frontend</h3>
               <p className="text-gray-600 font-light">
-                Покупайте приложения, игры и подписки
+                React, TypeScript, Vue.js, современные CSS фреймворки
               </p>
             </div>
 
             <div className="text-center space-y-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                <Icon name="Music" size={28} className="text-blue-600" />
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <Icon name="Server" size={28} className="text-green-600" />
               </div>
-              <h3 className="text-xl font-medium text-gray-900">
-                iTunes Store
-              </h3>
+              <h3 className="text-xl font-medium text-gray-900">Backend</h3>
               <p className="text-gray-600 font-light">
-                Музыка, фильмы и телешоу
+                Node.js, Python, PostgreSQL, API разработка
               </p>
             </div>
 
             <div className="text-center space-y-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                <Icon name="Store" size={28} className="text-blue-600" />
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto">
+                <Icon name="Zap" size={28} className="text-purple-600" />
               </div>
-              <h3 className="text-xl font-medium text-gray-900">Apple Store</h3>
+              <h3 className="text-xl font-medium text-gray-900">DevOps</h3>
               <p className="text-gray-600 font-light">
-                Устройства и аксессуары Apple
+                Docker, CI/CD, облачные платформы
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-8 text-center">
-          <div className="max-w-3xl mx-auto space-y-8">
-            <h2 className="text-4xl lg:text-5xl font-thin text-gray-900">
-              Идеальный подарок
-            </h2>
-            <p className="text-xl text-gray-600 font-light">
-              Доступны номиналы 1000, 2500 и 5000 рублей. Мгновенная доставка на
-              email.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-              <Button
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full font-medium"
-                asChild
-              >
-                <Link to="/products">Выбрать номинал</Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-gray-300 text-gray-700 hover:bg-gray-50 px-10 py-4 rounded-full font-medium"
-                asChild
-              >
-                <Link to="/instructions">Как использовать</Link>
-              </Button>
             </div>
           </div>
         </div>

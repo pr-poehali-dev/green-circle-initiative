@@ -7,8 +7,11 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-8">
         <nav className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <Icon name="Apple" size={24} className="text-gray-900" />
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <Icon name="User" size={16} className="text-white" />
+            </div>
+            <span className="font-medium text-gray-900">Портфолио</span>
           </Link>
 
           {/* Navigation */}
@@ -20,16 +23,22 @@ const Header = () => {
               Главная
             </Link>
             <Link
-              to="/products"
+              to="/experience"
               className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
             >
-              Gift Cards
+              Опыт работы
             </Link>
             <Link
-              to="/instructions"
+              to="/summary"
               className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
             >
-              Инструкции
+              Сводка
+            </Link>
+            <Link
+              to="/contacts"
+              className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
+            >
+              Контакты
             </Link>
           </div>
 
