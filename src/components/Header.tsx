@@ -6,9 +6,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Header = () => {
+const Header = ({
+  onCategoriesToggle,
+  isCategoriesOpen,
+}: {
+  onCategoriesToggle: () => void;
+  isCategoriesOpen: boolean;
+}) => {
   const navigate = useNavigate();
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const categories = {
@@ -36,7 +41,7 @@ const Header = () => {
   };
 
   const toggleCategories = () => {
-    setIsCategoriesOpen(!isCategoriesOpen);
+    onCategoriesToggle();
     setSelectedCategory(null);
   };
 

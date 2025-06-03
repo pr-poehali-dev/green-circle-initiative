@@ -14,6 +14,11 @@ import { useState } from "react";
 const NewMarketplace = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [isCategoriesMenuOpen, setIsCategoriesMenuOpen] = useState(false);
+
+  const toggleCategoriesMenu = () => {
+    setIsCategoriesMenuOpen(!isCategoriesMenuOpen);
+  };
 
   const productCategories = {
     Электроника: ["Смартфоны", "Ноутбуки", "Планшеты", "Наушники", "Камеры"],
@@ -311,7 +316,38 @@ const NewMarketplace = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header
+        onCategoriesToggle={toggleCategoriesMenu}
+        isCategoriesOpen={isCategoriesMenuOpen}
+      />
+
+      {/* Categories section - показывается при клике на лого */}
+      {isCategoriesMenuOpen && (
+        <div className="bg-white border-b border-gray-200 py-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {Object.entries(productCategories).map(
+                ([category, subcategories]) => (
+                  <div key={category} className="space-y-3">
+                    <h3 className="font-semibold text-gray-900">{category}</h3>
+                    <div className="space-y-2">
+                      {subcategories.slice(0, 4).map((subcategory) => (
+                        <a
+                          key={subcategory}
+                          href="#"
+                          className="block text-sm text-gray-600 hover:text-blue-600"
+                        >
+                          {subcategory}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Categories Button Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
