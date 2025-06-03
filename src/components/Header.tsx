@@ -85,14 +85,12 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo and breadcrumb */}
           <div className="flex items-center space-x-6">
-            <div className="flex items-center">
+            <div
+              className="flex items-center cursor-pointer"
+              onClick={toggleCategories}
+            >
               <Icon name="Grid3X3" size={24} className="text-blue-600 mr-2" />
-              <h1
-                className="text-2xl font-bold text-blue-600 cursor-pointer"
-                onClick={toggleCategories}
-              >
-                POTIONSHOP
-              </h1>
+              <h1 className="text-2xl font-bold text-blue-600">POTIONSHOP</h1>
             </div>
             <div className="flex items-center text-sm text-gray-600">
               <Icon name="Globe" size={16} className="text-yellow-500 mr-1" />
