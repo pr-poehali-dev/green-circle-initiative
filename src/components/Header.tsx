@@ -14,31 +14,47 @@ const Header = () => {
         <nav className="flex items-center justify-start h-16">
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center space-x-2 hover:bg-gray-50 rounded-lg px-2 py-1 transition-colors">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <Icon name="User" size={16} className="text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <Icon name="User" size={20} className="text-white" />
               </div>
               <span className="font-medium text-gray-900">Портфолио</span>
               <Icon name="ChevronDown" size={16} className="text-gray-600" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem asChild>
-                <Link to="/" className="w-full cursor-pointer">
-                  Главная
+                <Link
+                  to="/"
+                  className="w-full cursor-pointer flex items-center space-x-2"
+                >
+                  <span>🏠</span>
+                  <span>Главная</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/experience" className="w-full cursor-pointer">
-                  Опыт работы
+                <Link
+                  to="/experience"
+                  className="w-full cursor-pointer flex items-center space-x-2"
+                >
+                  <span>💼</span>
+                  <span>Опыт работы</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/summary" className="w-full cursor-pointer">
-                  Сводка
+                <Link
+                  to="/summary"
+                  className="w-full cursor-pointer flex items-center space-x-2"
+                >
+                  <span>📋</span>
+                  <span>Сводка</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/contacts" className="w-full cursor-pointer">
-                  Контакты
+                <Link
+                  to="/contacts"
+                  className="w-full cursor-pointer flex items-center space-x-2"
+                >
+                  <span>📞</span>
+                  <span>Контакты</span>
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
