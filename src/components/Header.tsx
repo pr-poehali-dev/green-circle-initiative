@@ -1,5 +1,11 @@
 import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   return (
@@ -14,32 +20,36 @@ const Header = () => {
             <span className="font-medium text-gray-900">Портфолио</span>
           </Link>
 
-          {/* Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
-            >
-              Главная
-            </Link>
-            <Link
-              to="/experience"
-              className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
-            >
-              Опыт работы
-            </Link>
-            <Link
-              to="/summary"
-              className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
-            >
-              Сводка
-            </Link>
-            <Link
-              to="/contacts"
-              className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
-            >
-              Контакты
-            </Link>
+          {/* Navigation Dropdown */}
+          <div className="hidden md:block">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">
+                <span>Навигация</span>
+                <Icon name="ChevronDown" size={16} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link to="/" className="w-full cursor-pointer">
+                    Главная
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/experience" className="w-full cursor-pointer">
+                    Опыт работы
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/summary" className="w-full cursor-pointer">
+                    Сводка
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/contacts" className="w-full cursor-pointer">
+                    Контакты
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile menu button */}
