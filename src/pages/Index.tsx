@@ -27,7 +27,7 @@ const Index = () => {
             <div className="pt-8 flex gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-medium"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium"
                 asChild
               >
                 <Link to="/experience">Опыт работы</Link>
@@ -35,7 +35,7 @@ const Index = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="px-8 py-4 rounded-full text-lg font-medium"
+                className="px-8 py-4 rounded-lg text-lg font-medium"
                 asChild
               >
                 <Link to="/contacts">Связаться</Link>
