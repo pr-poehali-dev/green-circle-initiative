@@ -4,6 +4,7 @@ import Index from "@/pages/Index";
 import Experience from "@/pages/Experience";
 import Summary from "@/pages/Summary";
 import Contacts from "@/pages/Contacts";
+import Footer from "@/components/Footer";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
         </Routes>
         <Toaster />
+        <Footer />
       </div>
     </Router>
   );
