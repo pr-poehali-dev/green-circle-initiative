@@ -55,7 +55,7 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-medium text-gray-900">Frontend</h3>
               <p className="text-gray-600 font-light">
-                React, TypeScript, Vue.js, современные CSS фреймворки
+                React, TypeScript, Vue.js, современные CSS фреймво
               </p>
             </div>
 
