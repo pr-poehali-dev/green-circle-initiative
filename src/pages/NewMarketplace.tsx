@@ -2,10 +2,26 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
 const NewMarketplace = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+  const productCategories = {
+    Электроника: ["Смартфоны", "Ноутбуки", "Планшеты", "Наушники", "Камеры"],
+    Одежда: ["Мужская", "Женская", "Детская", "Обувь", "Аксессуары"],
+    "Дом и сад": ["Мебель", "Декор", "Кухня", "Инструменты", "Растения"],
+    Автотовары: ["Запчасти", "Аксессуары", "Шины", "Масла", "Электроника"],
+    Спорт: ["Фитнес", "Футбол", "Теннис", "Плавание", "Велосипеды"],
+  };
 
   const banners = [
     {
@@ -300,7 +316,58 @@ const NewMarketplace = () => {
       {/* Categories Button Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between mb-4">
-          <Icon name="Menu" size={20} showCategoriesButton={true} />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg"
+              >
+                <Icon name="Menu" size={20} />
+                <span className="text-sm font-medium">Категории</span>
+                <Icon name="ChevronDown" size={16} />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-64" align="start">
+              {Object.entries(productCategories).map(
+                ([mainCategory, subcategories]) => (
+                  <div key={mainCategory}>
+                    <DropdownMenuItem
+                      className="flex items-center justify-between cursor-pointer"
+                      onClick={() => {
+                        setExpandedCategory(
+                          expandedCategory === mainCategory
+                            ? null
+                            : mainCategory,
+                        );
+                      }}
+                    >
+                      <span>{mainCategory}</span>
+                      <Icon
+                        name="ChevronRight"
+                        size={16}
+                        className={`transition-transform ${
+                          expandedCategory === mainCategory ? "rotate-90" : ""
+                        }`}
+                      />
+                    </DropdownMenuItem>
+                    {expandedCategory === mainCategory && (
+                      <>
+                        {subcategories.map((subcategory) => (
+                          <DropdownMenuItem
+                            key={subcategory}
+                            className="pl-6 text-gray-600 cursor-pointer hover:text-gray-900"
+                          >
+                            {subcategory}
+                          </DropdownMenuItem>
+                        ))}
+                        <DropdownMenuSeparator />
+                      </>
+                    )}
+                  </div>
+                ),
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <div className="text-sm text-gray-500">Найдено товаров: 25,000+</div>
         </div>
       </div>
