@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import ProjectsSection from "@/components/ProjectsSection";
 
 const Index = () => {
   return (
@@ -45,8 +46,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className="py-20 bg-white">
+      <ProjectsSection />
         <div className="container mx-auto px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-thin text-gray-900 mb-4">Проекты</h2>
