@@ -58,15 +58,24 @@ const Header = ({
               </div>
             </div>
             <div className="flex items-center space-x-6 text-gray-600">
-              <a href="#" className="hover:text-blue-600">
+              <button
+                onClick={() => navigate("/create-store")}
+                className="hover:text-blue-600"
+              >
                 Создать магазин
-              </a>
-              <a href="#" className="hover:text-blue-600">
+              </button>
+              <button
+                onClick={() => navigate("/store-management")}
+                className="hover:text-blue-600"
+              >
                 Управление магазином
-              </a>
-              <a href="#" className="hover:text-blue-600">
+              </button>
+              <button
+                onClick={() => navigate("/new-products")}
+                className="hover:text-blue-600"
+              >
                 Новинки
-              </a>
+              </button>
               <a href="#" className="hover:text-blue-600">
                 Для поставщиков
               </a>

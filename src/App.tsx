@@ -4,6 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import CreateStore from "./pages/CreateStore";
+import StoreManagement from "./pages/StoreManagement";
+import NewProducts from "./pages/NewProducts";
 import Marketplace from "./pages/Marketplace";
 import ProductPage from "./pages/ProductPage";
 import Login from "./pages/Login";
@@ -33,30 +36,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<NewMarketplace />} />
+          <Route path="/create-store" element={<CreateStore />} />
+          <Route path="/store-management" element={<StoreManagement />} />
+          <Route path="/new-products" element={<NewProducts />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/buyer/profile" element={<BuyerProfile />} />
-          <Route path="/marketplace" element={<NewMarketplace />} />
-          <Route
-            path="/marketplace/category/:category"
-            element={<NewMarketplace />}
-          />
-          <Route path="/product/:productId" element={<ProductPage />} />
-          <Route path="/seller/:sellerId" element={<SellerPage />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/register" element={<AdminRegister />} />
-          <Route path="/admin" element={<AdminDashboard />}>
-            <Route index element={<AdminOverview />} />
-            <Route path="/admin/overview" element={<AdminOverview />} />
-            <Route path="/admin/profile" element={<SellerProfile />} />
-            <Route path="/admin/products" element={<AdminProducts />} />
-            <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="analytics" element={<AdminAnalytics />} />
-            <Route path="finance" element={<AdminFinance />} />
-          </Route>
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
