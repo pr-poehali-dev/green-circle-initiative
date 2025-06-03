@@ -22,10 +22,9 @@ const Header = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center space-x-2 hover:bg-gray-50 rounded-lg px-2 py-1 transition-colors">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <Icon name="User" size={20} className="text-white" />
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <Icon name="User" size={16} className="text-white" />
               </div>
-              <span className="font-medium text-gray-900">Портфолио</span>
               <Icon name="ChevronDown" size={16} className="text-gray-600" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-48">
