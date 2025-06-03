@@ -1,3 +1,3 @@
-# family-roots-visual
+# iden-market-prototype
 
-Initial repository setup for pr-poehali-dev/family-roots-visual
+Initial repository setup for pr-poehali-dev/iden-market-prototype

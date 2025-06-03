@@ -1,74 +1,100 @@
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
-import { Link } from "react-router-dom";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
-      <div className="container mx-auto px-4 md:px-8">
-        <nav className="flex items-center justify-start h-16">
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-2 hover:bg-gray-50 rounded-lg px-2 py-1 transition-colors">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <Icon name="User" size={20} className="text-white" />
-              </div>
-              <span className="font-medium text-gray-900">Портфолио</span>
-              <Icon name="ChevronDown" size={16} className="text-gray-600" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem asChild>
-                <Link
-                  to="/"
-                  className="w-full cursor-pointer flex items-center space-x-2"
-                >
-                  <span>🏠</span>
-                  <span>Главная</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link
-                  to="/experience"
-                  className="w-full cursor-pointer flex items-center space-x-2"
-                >
-                  <span>💼</span>
-                  <span>Опыт работы</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link
-                  to="/summary"
-                  className="w-full cursor-pointer flex items-center space-x-2"
-                >
-                  <span>📋</span>
-                  <span>Сводка</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link
-                  to="/contacts"
-                  className="w-full cursor-pointer flex items-center space-x-2"
-                >
-                  <span>📞</span>
-                  <span>Контакты</span>
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+  const navigate = useNavigate();
 
-          {/* Mobile menu button */}
-          <div className="md:hidden ml-4">
-            <Icon
-              name="Menu"
-              size={24}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-            />
+  return (
+    <header className="bg-white border-b border-gray-200">
+      {/* Top navigation bar */}
+      <div className="bg-gray-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-10 text-sm">
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center text-gray-600">
+                <Icon name="MapPin" size={14} className="mr-1" />
+                Россия
+              </div>
+            </div>
+            <div className="flex items-center space-x-6 text-gray-600">
+              <a href="#" className="hover:text-blue-600">
+                Создать магазин
+              </a>
+              <a href="#" className="hover:text-blue-600">
+                Управление магазином
+              </a>
+              <a href="#" className="hover:text-blue-600">
+                Новинки
+              </a>
+              <a href="#" className="hover:text-blue-600">
+                Для поставщиков
+              </a>
+              <a href="#" className="hover:text-blue-600">
+                Помощь
+              </a>
+              <a href="#" className="hover:text-blue-600">
+                Поддержка
+              </a>
+              <div className="flex items-center">
+                <span className="w-2 h-2 bg-yellow-400 rounded-full mr-1"></span>
+                <span>Светлая</span>
+              </div>
+            </div>
           </div>
-        </nav>
+        </div>
+      </div>
+
+      {/* Main header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo and breadcrumb */}
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center">
+              <Icon name="Grid3X3" size={24} className="text-blue-600 mr-2" />
+              <h1
+                className="text-2xl font-bold text-blue-600 cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                POTIONSHOP
+              </h1>
+            </div>
+            <div className="flex items-center text-sm text-gray-600">
+              <Icon name="Globe" size={16} className="text-yellow-500 mr-1" />
+              <span>Везде</span>
+              <Icon name="ChevronRight" size={16} className="mx-1" />
+              <span>Искать на PotionMarket...</span>
+            </div>
+          </div>
+
+          {/* Right side icons */}
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="sm" className="p-2">
+              <Icon name="Search" size={20} />
+            </Button>
+            <Button variant="ghost" size="sm" className="p-2">
+              <Icon name="Heart" size={20} />
+            </Button>
+            <Button variant="ghost" size="sm" className="p-2">
+              <Icon name="Package" size={20} />
+            </Button>
+            <Button variant="ghost" size="sm" className="p-2">
+              <Icon name="MessageCircle" size={20} />
+            </Button>
+            <Button variant="ghost" size="sm" className="p-2 relative">
+              <Icon name="ShoppingCart" size={20} />
+              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                1
+              </span>
+            </Button>
+            <div className="flex items-center bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
+              <span>АП</span>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );

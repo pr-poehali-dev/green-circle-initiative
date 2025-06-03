@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
 
-const Index = () => {
+const NewMarketplace = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const banners = [
@@ -297,6 +297,14 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
+      {/* Categories Button Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between mb-4">
+          <Icon name="Menu" size={20} showCategoriesButton={true} />
+          <div className="text-sm text-gray-500">Найдено товаров: 25,000+</div>
+        </div>
+      </div>
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Banner Slider */}
         <div className="relative mb-8">
@@ -487,4 +495,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default NewMarketplace;
