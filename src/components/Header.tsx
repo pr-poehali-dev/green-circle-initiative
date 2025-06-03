@@ -20,37 +20,40 @@ const Header = () => {
             <span className="font-medium text-gray-900">Портфолио</span>
           </Link>
 
-          {/* Navigation Dropdown */}
-          <div className="hidden md:block">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">
-                <span>Навигация</span>
-                <Icon name="ChevronDown" size={16} />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem asChild>
-                  <Link to="/" className="w-full cursor-pointer">
-                    Главная
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/experience" className="w-full cursor-pointer">
-                    Опыт работы
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/summary" className="w-full cursor-pointer">
-                    Сводка
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/contacts" className="w-full cursor-pointer">
-                    Контакты
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center space-x-2 hover:bg-gray-50 rounded-lg px-2 py-1 transition-colors">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <Icon name="User" size={20} className="text-white" />
+              </div>
+              <span className="font-medium text-gray-900">Портфолио</span>
+              <Icon name="ChevronDown" size={16} className="text-gray-600" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-48">
+              <DropdownMenuItem asChild>
+                <Link to="/" className="w-full cursor-pointer">
+                  Главная
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/experience" className="w-full cursor-pointer">
+                  Опыт работы
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/summary" className="w-full cursor-pointer">
+                  Сводка
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/contacts" className="w-full cursor-pointer">
+                  Контакты
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Navigation Dropdown - старый код удален */}
+          <div className="hidden md:block"></div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
