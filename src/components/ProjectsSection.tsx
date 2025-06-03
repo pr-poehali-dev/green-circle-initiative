@@ -116,7 +116,7 @@ const ProjectsSection = () => {
               <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-4 justify-center">
                 {project.tags.map((tag, tagIndex) => (
                   <span
                     key={tagIndex}
