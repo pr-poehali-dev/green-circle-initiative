@@ -106,7 +106,7 @@ const ProjectsSection = () => {
               className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow"
             >
               <div
-                className={`w-12 h-12 ${getIconColorClasses(project.iconColor)} rounded-lg flex items-center justify-center mb-4`}
+                className={`w-12 h-12 ${getIconColorClasses(project.iconColor)} rounded-lg flex items-center justify-center mb-4 mx-auto`}
               >
                 <Icon name={project.icon as any} size={24} />
               </div>
