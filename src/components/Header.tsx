@@ -4,9 +4,41 @@ import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const categories = {
+    Электроника: [
+      "Смартфоны",
+      "Ноутбуки",
+      "Телевизоры",
+      "Наушники",
+      "Аксессуары",
+    ],
+    Одежда: ["Мужская", "Женская", "Детская", "Обувь", "Аксессуары"],
+    "Дом и сад": [
+      "Мебель",
+      "Декор",
+      "Освещение",
+      "Садовый инвентарь",
+      "Текстиль",
+    ],
+    Автотовары: ["Шины", "Масла", "Автохимия", "Запчасти", "Аксессуары"],
+    Спорт: ["Фитнес", "Туризм", "Командные виды", "Водные виды", "Зимние виды"],
+  };
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(selectedCategory === category ? null : category);
+  };
+
+  const toggleCategories = () => {
+    setIsCategoriesOpen(!isCategoriesOpen);
+    setSelectedCategory(null);
+  };
 
   return (
     <header className="bg-white border-b border-gray-200">
@@ -57,7 +89,7 @@ const Header = () => {
               <Icon name="Grid3X3" size={24} className="text-blue-600 mr-2" />
               <h1
                 className="text-2xl font-bold text-blue-600 cursor-pointer"
-                onClick={() => navigate("/")}
+                onClick={toggleCategories}
               >
                 POTIONSHOP
               </h1>
@@ -96,6 +128,62 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {/* Categories dropdown menu */}
+      {isCategoriesOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex">
+              {/* Main categories */}
+              <div className="w-1/4 border-r border-gray-200 py-4">
+                {Object.keys(categories).map((category) => (
+                  <div
+                    key={category}
+                    className={`px-4 py-2 cursor-pointer hover:bg-gray-50 flex items-center justify-between ${
+                      selectedCategory === category
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-gray-700"
+                    }`}
+                    onClick={() => handleCategoryClick(category)}
+                  >
+                    <span className="font-medium">{category}</span>
+                    <Icon name="ChevronRight" size={16} />
+                  </div>
+                ))}
+              </div>
+
+              {/* Subcategories */}
+              <div className="flex-1 py-4">
+                {selectedCategory && (
+                  <div className="px-6">
+                    <h3 className="font-semibold text-gray-900 mb-3">
+                      {selectedCategory}
+                    </h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {categories[
+                        selectedCategory as keyof typeof categories
+                      ].map((subcategory) => (
+                        <a
+                          key={subcategory}
+                          href="#"
+                          className="text-gray-600 hover:text-blue-600 py-1 px-2 rounded hover:bg-gray-50"
+                        >
+                          {subcategory}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {!selectedCategory && (
+                  <div className="px-6 text-gray-500 text-center py-8">
+                    Выберите категорию для просмотра подкатегорий
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
