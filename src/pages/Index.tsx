@@ -18,7 +18,7 @@ const Index = () => {
         <Button
           onClick={handleClick}
           size="lg"
-          className="bg-yellow-500 hover:bg-yellow-600 shadow-lg hover:shadow-xl transition-all duration-300"
+          className="bg-blue-500 hover:bg-blue-600 shadow-lg hover:shadow-xl transition-all duration-300"
         >
           <Icon name="Rocket" size={20} />
           Поехали!
