@@ -43,6 +43,7 @@ function FloatingPaths({ position }: { position: number }) {
               repeat: Number.POSITIVE_INFINITY,
               ease: "linear",
             }}
+            title="Добро пожаловать бобры"
           />
         ))}
       </svg>
