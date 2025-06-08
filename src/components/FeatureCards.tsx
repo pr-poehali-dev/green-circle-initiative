@@ -36,7 +36,7 @@ const FeatureCards = () => {
               className="group relative p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 animate-fade-in"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 items-center">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white text-center">
