@@ -27,30 +27,29 @@ const TextTagsDemo = () => {
               Заголовокхихиххи
             </h3>
             <h4 className="text-xl font-medium text-neutral-700 dark:text-neutral-300">
-              Заголовок H4
+              Заголовок АХАХХА
             </h4>
             <h5 className="text-lg font-medium text-neutral-600 dark:text-neutral-400">
-              Заголовок H5
+              Заголовок УХУХХУ
             </h5>
             <h6 className="text-base font-medium text-neutral-500 dark:text-neutral-500">
-              Заголовок H6
+              Заголовок ЫЫЫЫ
             </h6>
           </div>
 
           {/* Параграфы и текст */}
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 border-b border-white/20 pb-2">
-              Текстовые блоки
+              Текстовые Коки
             </h3>
             <p className="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
-              Это обычный параграф текста. Вы можете редактировать его
-              содержимое и видеть изменения в реальном времени.
+              Обычный кок
             </p>
             <p className="text-lg text-neutral-800 dark:text-neutral-200 font-light">
-              Параграф с увеличенным размером шрифта и облегченным начертанием.
+              Большой коок
             </p>
             <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-              Span элемент как бейдж
+              Спан кок
             </span>
           </div>
 
