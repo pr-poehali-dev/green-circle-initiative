@@ -43,7 +43,7 @@ const Header = () => {
           {/* Кнопки действий */}
           <div className="hidden md:flex items-center space-x-3">
             <Button variant="ghost" size="sm">
-              Войти
+              Дада войди!
             </Button>
             <Button
               size="sm"
