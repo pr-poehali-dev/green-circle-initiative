@@ -118,16 +118,14 @@ const TextTagsDemo = () => {
               Специальные элементы
             </h3>
             <address className="not-italic text-neutral-700 dark:text-neutral-300 bg-gray-50 dark:bg-gray-800/50 p-3 rounded border-l-4 border-green-500">
-              Адрес: г. Москва, ул. Примерная, д. 123
-              <br />
-              Email: info@poehali.dev
+              информационный кок
             </address>
             <time className="text-neutral-600 dark:text-neutral-400 font-mono bg-yellow-100 dark:bg-yellow-900/30 px-2 py-1 rounded">
               2024-12-08
             </time>
             <div className="bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded p-3">
               <mark className="bg-yellow-300 dark:bg-yellow-600 px-1 rounded">
-                Выделенный текст
+                выделенный кок
               </mark>{" "}
               в информационном блоке
             </div>
