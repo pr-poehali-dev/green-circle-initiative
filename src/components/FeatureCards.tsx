@@ -23,7 +23,7 @@ const FeatureCards = () => {
   return (
     <section className="relative z-20 py-16 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
           {features.map((feature, index) => (
             <div
               key={index}
