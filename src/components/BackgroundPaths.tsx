@@ -119,14 +119,12 @@ export function BackgroundPaths({
                             hover:shadow-md dark:hover:shadow-neutral-800/50"
             >
               <span className="opacity-90 group-hover:opacity-100 transition-opacity">
-                Поехали!
+                Пое
               </span>
               <span
                 className="ml-3 opacity-70 group-hover:opacity-100 hover:translate-x-1.5 
                                 transition-all duration-300"
-              >
-                🚀
-              </span>
+              ></span>
             </Button>
           </div>
         </div>
