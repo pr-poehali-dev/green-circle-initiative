@@ -49,7 +49,7 @@ const Header = () => {
               size="sm"
               className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
             >
-              Рега
+              жопич
             </Button>
           </div>
 
