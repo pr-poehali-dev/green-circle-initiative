@@ -72,22 +72,21 @@ const TextTagsDemo = () => {
             <p className="text-neutral-700 dark:text-neutral-300">
               Код:{" "}
               <code className="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono text-red-600 dark:text-red-400">
-                console.log('Привет!')
+                лог кок
               </code>
             </p>
             <small className="text-sm text-neutral-500 dark:text-neutral-400 block">
-              Мелкий текст для дополнительной информации
+              Мелкий кок
             </small>
           </div>
 
           {/* Цитаты */}
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 border-b border-white/20 pb-2">
-              Цитаты
+              ЦитатыХАХА
             </h3>
             <blockquote className="border-l-4 border-blue-500 pl-4 italic text-neutral-700 dark:text-neutral-300 bg-blue-50/50 dark:bg-blue-900/10 p-4 rounded-r-lg">
-              "Создание сайтов должно быть простым и доступным каждому.
-              Технологии должны служить людям, а не наоборот."
+              Цитирующий кок
             </blockquote>
             <cite className="text-sm text-neutral-500 dark:text-neutral-400 block text-right">
               — Команда Поехали!
