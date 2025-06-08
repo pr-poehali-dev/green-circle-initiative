@@ -77,7 +77,7 @@ export function BackgroundPaths({
             style={{
               backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
             }}
-            className="absolute inset-auto right-1/2 h-56 overflow-visible w-full bg-gradient-conic from-cyan-500/40 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
+            className="absolute inset-auto right-1/2 h-56 overflow-visible w-full bg-gradient-conic from-yellow-500/40 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
           >
             <div className="absolute w-[100%] left-0 bg-white/90 dark:bg-neutral-950/90 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
             <div className="absolute w-40 h-[100%] left-0 bg-white/90 dark:bg-neutral-950/90 bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
@@ -93,13 +93,13 @@ export function BackgroundPaths({
             style={{
               backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
             }}
-            className="absolute inset-auto left-1/2 h-56 w-full bg-gradient-conic from-transparent via-transparent to-cyan-500/40 text-white [--conic-position:from_290deg_at_center_top]"
+            className="absolute inset-auto left-1/2 h-56 w-full bg-gradient-conic from-transparent via-transparent to-yellow-500/40 text-white [--conic-position:from_290deg_at_center_top]"
           >
             <div className="absolute w-40 h-[100%] right-0 bg-white/90 dark:bg-neutral-950/90 bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
             <div className="absolute w-[100%] right-0 bg-white/90 dark:bg-neutral-950/90 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
           </motion.div>
           <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-white/80 dark:bg-neutral-950/80 blur-2xl"></div>
-          <div className="absolute inset-auto z-50 h-36 w-full -translate-y-1/2 rounded-full bg-cyan-500/30 opacity-50 blur-3xl"></div>
+          <div className="absolute inset-auto z-50 h-36 w-full -translate-y-1/2 rounded-full bg-yellow-500/30 opacity-50 blur-3xl"></div>
           <motion.div
             initial={{ width: "8rem" }}
             whileInView={{ width: "80%" }}
@@ -108,7 +108,7 @@ export function BackgroundPaths({
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="absolute inset-auto z-30 h-36 w-[80%] -translate-y-[6rem] rounded-full bg-cyan-400/40 blur-2xl"
+            className="absolute inset-auto z-30 h-36 w-[80%] -translate-y-[6rem] rounded-full bg-yellow-400/40 blur-2xl"
           ></motion.div>
           <motion.div
             initial={{ width: "15rem" }}
@@ -118,7 +118,7 @@ export function BackgroundPaths({
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="absolute inset-auto z-50 h-0.5 w-full -translate-y-[7rem] bg-cyan-400/60"
+            className="absolute inset-auto z-50 h-0.5 w-full -translate-y-[7rem] bg-yellow-400/60"
           ></motion.div>
           <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-white/90 dark:bg-neutral-950/90"></div>
         </div>
