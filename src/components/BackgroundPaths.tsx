@@ -43,7 +43,6 @@ function FloatingPaths({ position }: { position: number }) {
               repeat: Number.POSITIVE_INFINITY,
               ease: "linear",
             }}
-            title="добро пожажа"
           />
         ))}
       </svg>
@@ -52,7 +51,7 @@ function FloatingPaths({ position }: { position: number }) {
 }
 
 export function BackgroundPaths({
-  title = "добро пожажа",
+  title = "Добро пожаловать!",
 }: {
   title?: string;
 }) {
