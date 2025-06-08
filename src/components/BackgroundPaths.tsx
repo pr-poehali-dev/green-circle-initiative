@@ -51,7 +51,7 @@ function FloatingPaths({ position }: { position: number }) {
 }
 
 export function BackgroundPaths({
-  title = "добро не жаловать на проде",
+  title = "Добро не жаловать",
 }: {
   title?: string;
 }) {
