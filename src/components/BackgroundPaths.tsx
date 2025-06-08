@@ -118,7 +118,7 @@ export function BackgroundPaths({
                             hover:-translate-y-0.5 border border-black/10 dark:border-white/10
                             hover:shadow-md dark:hover:shadow-neutral-800/50"
             >
-              <span className="opacity-90 group-hover:opacity-100 transition-opacity text-gray-200">
+              <span className="opacity-90 group-hover:opacity-100 transition-opacity text-slate-600">
                 Пое
               </span>
               <span
