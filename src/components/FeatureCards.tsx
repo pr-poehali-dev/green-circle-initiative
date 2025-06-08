@@ -39,7 +39,7 @@ const FeatureCards = () => {
               <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white">
+              <h3 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white text-center">
                 {feature.title}
               </h3>
               <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
