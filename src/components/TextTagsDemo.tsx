@@ -18,13 +18,13 @@ const TextTagsDemo = () => {
               Заголовки
             </h3>
             <h1 className="text-4xl font-bold text-neutral-900 dark:text-white">
-              Заголовок H1
+              Заголовоыыыы
             </h1>
             <h2 className="text-3xl font-semibold text-neutral-900 dark:text-white">
-              Заголовок H2
+              Заголовохехехех
             </h2>
             <h3 className="text-2xl font-medium text-neutral-800 dark:text-neutral-200">
-              Заголовок H3
+              Заголовокхихиххи
             </h3>
             <h4 className="text-xl font-medium text-neutral-700 dark:text-neutral-300">
               Заголовок H4
