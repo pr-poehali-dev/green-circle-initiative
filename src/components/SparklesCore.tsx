@@ -32,6 +32,14 @@ export const SparklesCore = (props: ParticlesProps) => {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
+    const initParticlesEngine = async (
+      callback: (engine: any) => Promise<void>,
+    ) => {
+      await callback(
+        await import("@tsparticles/slim").then((mod) => mod.loadSlim),
+      );
+    };
+
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => {
