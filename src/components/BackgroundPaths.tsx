@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { SparklesCore } from "@/components/SparklesCore";
 
@@ -27,22 +26,15 @@ function FloatingPaths({ position }: { position: number }) {
       >
         <title>Background Paths</title>
         {paths.map((path) => (
-          <motion.path
+          <path
             key={path.id}
             d={path.d}
             stroke="currentColor"
             strokeWidth={path.width}
             strokeOpacity={0.1 + path.id * 0.03}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
+            className="animate-pulse"
+            style={{
+              animation: `pathDraw ${20 + Math.random() * 10}s linear infinite`,
             }}
           />
         ))}
@@ -66,71 +58,34 @@ export function BackgroundPaths({
       {/* Лампа как фоновый элемент */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
-          <motion.div
-            initial={{ opacity: 0.3, width: "15rem" }}
-            whileInView={{ opacity: 0.6, width: "100%" }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
+          <div
             style={{
               backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
             }}
-            className="absolute inset-auto right-1/2 h-56 overflow-visible w-full bg-gradient-conic from-cyan-500/40 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
+            className="absolute inset-auto right-1/2 h-56 overflow-visible w-full bg-gradient-conic from-cyan-500/40 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top] animate-fade-in"
           >
             <div className="absolute w-[100%] left-0 bg-white/90 dark:bg-neutral-950/90 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
             <div className="absolute w-40 h-[100%] left-0 bg-white/90 dark:bg-neutral-950/90 bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0.3, width: "15rem" }}
-            whileInView={{ opacity: 0.6, width: "100%" }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
+          </div>
+          <div
             style={{
               backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
             }}
-            className="absolute inset-auto left-1/2 h-56 w-full bg-gradient-conic from-transparent via-transparent to-cyan-500/40 text-white [--conic-position:from_290deg_at_center_top]"
+            className="absolute inset-auto left-1/2 h-56 w-full bg-gradient-conic from-transparent via-transparent to-cyan-500/40 text-white [--conic-position:from_290deg_at_center_top] animate-fade-in"
           >
             <div className="absolute w-40 h-[100%] right-0 bg-white/90 dark:bg-neutral-950/90 bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
             <div className="absolute w-[100%] right-0 bg-white/90 dark:bg-neutral-950/90 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-          </motion.div>
+          </div>
           <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-white/80 dark:bg-neutral-950/80 blur-2xl"></div>
           <div className="absolute inset-auto z-50 h-36 w-full -translate-y-1/2 rounded-full bg-cyan-500/30 opacity-50 blur-3xl"></div>
-          <motion.div
-            initial={{ width: "8rem" }}
-            whileInView={{ width: "80%" }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
-            className="absolute inset-auto z-30 h-36 w-[80%] -translate-y-[6rem] rounded-full bg-cyan-400/40 blur-2xl"
-          ></motion.div>
-          <motion.div
-            initial={{ width: "15rem" }}
-            whileInView={{ width: "100%" }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
-            className="absolute inset-auto z-50 h-0.5 w-full -translate-y-[7rem] bg-cyan-400/60"
-          ></motion.div>
+          <div className="absolute inset-auto z-30 h-36 w-[80%] -translate-y-[6rem] rounded-full bg-cyan-400/40 blur-2xl animate-scale-in"></div>
+          <div className="absolute inset-auto z-50 h-0.5 w-full -translate-y-[7rem] bg-cyan-400/60 animate-fade-in"></div>
           <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-white/90 dark:bg-neutral-950/90"></div>
         </div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          className="max-w-4xl mx-auto"
-        >
+        <div className="max-w-4xl mx-auto animate-fade-in">
           <div className="relative mb-8">
             <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 relative z-20">
               {title}
@@ -160,21 +115,21 @@ export function BackgroundPaths({
               className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
                             bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 
                             text-black dark:text-white transition-all duration-300 
-                            group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
+                            hover:-translate-y-0.5 border border-black/10 dark:border-white/10
                             hover:shadow-md dark:hover:shadow-neutral-800/50"
             >
               <span className="opacity-90 group-hover:opacity-100 transition-opacity">
                 Поехали!
               </span>
               <span
-                className="ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
+                className="ml-3 opacity-70 group-hover:opacity-100 hover:translate-x-1.5 
                                 transition-all duration-300"
               >
                 🚀
               </span>
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
