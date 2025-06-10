@@ -79,7 +79,7 @@ export function BackgroundPaths({
           <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-white/80 dark:bg-neutral-950/80 blur-2xl"></div>
           <div className="absolute inset-auto z-50 h-36 w-full -translate-y-1/2 rounded-full bg-cyan-500/30 opacity-50 blur-3xl"></div>
           <div className="absolute inset-auto z-30 h-36 w-[80%] -translate-y-[6rem] rounded-full bg-cyan-400/40 blur-2xl animate-scale-in"></div>
-          <div className="absolute inset-auto z-50 h-0.5 w-full -translate-y-[7rem] bg-cyan-400/60 animate-fade-in"></div>
+
           <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-white/90 dark:bg-neutral-950/90"></div>
         </div>
       </div>
