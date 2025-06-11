@@ -18,38 +18,39 @@ const TextTagsDemo = () => {
               Заголовки
             </h3>
             <h1 className="text-4xl font-bold text-neutral-900 dark:text-white">
-              Заголовоыыыы
+              Главный заголовок
             </h1>
             <h2 className="text-3xl font-semibold text-neutral-900 dark:text-white">
-              Заголовохехехех
+              Заголовок второго уровня
             </h2>
             <h3 className="text-2xl font-medium text-neutral-800 dark:text-neutral-200">
-              Заголовокхихиххи
+              Заголовок третьего уровня
             </h3>
             <h4 className="text-xl font-medium text-neutral-700 dark:text-neutral-300">
-              Заголовок АХАХХА
+              Заголовок четвертого уровня
             </h4>
             <h5 className="text-lg font-medium text-neutral-600 dark:text-neutral-400">
-              Заголовок УХУХХУ
+              Заголовок пятого уровня
             </h5>
             <h6 className="text-base font-medium text-neutral-500 dark:text-neutral-500">
-              Заголовок ЫЫЫЫ
+              Заголовок шестого уровня
             </h6>
           </div>
 
           {/* Параграфы и текст */}
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 border-b border-white/20 pb-2">
-              Текстовые Коки
+              Текстовые элементы
             </h3>
             <p className="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
-              Обычный кок
+              Обычный абзац с текстом для демонстрации стандартного
+              форматирования.
             </p>
             <p className="text-lg text-neutral-800 dark:text-neutral-200 font-light">
-              Большой коок
+              Абзац с увеличенным размером шрифта и облегченным начертанием.
             </p>
             <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-              Спан кок
+              Текст в span элементе
             </span>
           </div>
 
@@ -72,24 +73,24 @@ const TextTagsDemo = () => {
             <p className="text-neutral-700 dark:text-neutral-300">
               Код:{" "}
               <code className="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono text-red-600 dark:text-red-400">
-                лог кок
+                console.log('Hello, World!')
               </code>
             </p>
             <small className="text-sm text-neutral-500 dark:text-neutral-400 block">
-              Мелкий кок
+              Мелкий текст для дополнительной информации
             </small>
           </div>
 
           {/* Цитаты */}
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 border-b border-white/20 pb-2">
-              ЦитатыХАХА
+              Цитаты
             </h3>
             <blockquote className="border-l-4 border-blue-500 pl-4 italic text-neutral-700 dark:text-neutral-300 bg-blue-50/50 dark:bg-blue-900/10 p-4 rounded-r-lg">
-              Цитирующий кок
+              "Инновации отличают лидера от последователя."
             </blockquote>
             <cite className="text-sm text-neutral-500 dark:text-neutral-400 block text-right">
-              — Команда Поехали!
+              — Стив Джобс
             </cite>
           </div>
 
@@ -118,14 +119,18 @@ const TextTagsDemo = () => {
               Специальные элементы
             </h3>
             <address className="not-italic text-neutral-700 dark:text-neutral-300 bg-gray-50 dark:bg-gray-800/50 p-3 rounded border-l-4 border-green-500">
-              информационный кок
+              г. Москва, ул. Примерная, д. 123
+              <br />
+              Телефон: +7 (495) 123-45-67
+              <br />
+              Email: info@example.com
             </address>
             <time className="text-neutral-600 dark:text-neutral-400 font-mono bg-yellow-100 dark:bg-yellow-900/30 px-2 py-1 rounded">
               2024-12-08
             </time>
             <div className="bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded p-3">
               <mark className="bg-yellow-300 dark:bg-yellow-600 px-1 rounded">
-                выделенный кок
+                выделенный текст
               </mark>{" "}
               в информационном блоке
             </div>
