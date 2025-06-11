@@ -58,12 +58,13 @@ function ElegantShape({
         <div
           className={cn(
             "absolute inset-0 rounded-full",
-            "bg-gradient-to-r to-transparent",
+            "bg-gradient-to-r from-transparent/50 to-transparent/20",
             gradient,
-            "backdrop-blur-[2px] border-2 border-gray-200/[0.5]",
-            "shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]",
+            "backdrop-blur-[4px] border-5 border-gray-700/95",
+            "shadow-[0_12px_48px_0_rgba(0,0,0,0.20)]",
             "after:absolute after:inset-0 after:rounded-full",
-            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.03),transparent_70%)]",
+            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.12),transparent_70%)]",
+            "ring-5 ring-gray-600/90 ring-offset-4",
           )}
         />
       </motion.div>
@@ -103,7 +104,7 @@ function HeroGeometric({
           width={600}
           height={140}
           rotate={12}
-          gradient="from-indigo-500/[0.12]"
+          gradient="from-indigo-500/[0.20]"
           className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
         />
 
@@ -112,7 +113,7 @@ function HeroGeometric({
           width={500}
           height={120}
           rotate={-15}
-          gradient="from-rose-500/[0.12]"
+          gradient="from-rose-500/[0.20]"
           className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
         />
 
@@ -121,7 +122,7 @@ function HeroGeometric({
           width={300}
           height={80}
           rotate={-8}
-          gradient="from-violet-500/[0.12]"
+          gradient="from-violet-500/[0.20]"
           className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
         />
 
@@ -130,7 +131,7 @@ function HeroGeometric({
           width={200}
           height={60}
           rotate={20}
-          gradient="from-amber-500/[0.12]"
+          gradient="from-amber-500/[0.20]"
           className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
         />
 
@@ -139,7 +140,7 @@ function HeroGeometric({
           width={150}
           height={40}
           rotate={-25}
-          gradient="from-cyan-500/[0.12]"
+          gradient="from-cyan-500/[0.20]"
           className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
         />
       </div>
