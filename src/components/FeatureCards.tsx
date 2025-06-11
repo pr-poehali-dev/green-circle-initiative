@@ -4,20 +4,7 @@ interface Feature {
   icon: string;
 }
 
-const features: Feature[] = [
-  {
-    title: "Быстрая разработка",
-    description:
-      "Создавайте сайты в 30 раз быстрее обычного с помощью ИИ-ассистента",
-    icon: "🚀",
-  },
-  {
-    title: "Без программирования",
-    description:
-      "Описывайте задачи на русском языке — код генерируется автоматически",
-    icon: "💬",
-  },
-];
+const features: Feature[] = [];
 
 const FeatureCards = () => {
   return (
