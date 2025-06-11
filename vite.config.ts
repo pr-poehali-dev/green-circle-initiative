@@ -10,12 +10,27 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      onwarn: (warning, warn) => {
+        if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+          return;
+        }
+        warn(warning);
+      },
+    },
+    sourcemap: false,
+    minify: "terser",
+  },
+  esbuild: {
+    logOverride: { "this-is-undefined-in-esm": "silent" },
+  },
   server: {
     host: "0.0.0.0",
     port: 5173,
     allowedHosts: true,
     hmr: {
-      overlay: false, // Disables the error overlay if you only want console errors
+      overlay: false,
     },
   },
 }));
