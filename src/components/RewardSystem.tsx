@@ -15,21 +15,21 @@ const RewardSystem = () => {
       revenue: "до 50 000₽/мес",
       bonus: "базовая ставка",
       icon: "Star",
-      color: "text-gray-600",
+      color: "text-gray-900",
     },
     {
       level: "Серебряный партнер",
       revenue: "50 000 - 200 000₽/мес",
       bonus: "+5% к ставке",
       icon: "Award",
-      color: "text-gray-400",
+      color: "text-gray-800",
     },
     {
       level: "Золотой партнер",
       revenue: "от 200 000₽/мес",
       bonus: "+10% к ставке",
       icon: "Crown",
-      color: "text-yellow-500",
+      color: "text-yellow-800",
     },
   ];
 
@@ -40,7 +40,7 @@ const RewardSystem = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
             Прогрессивная система вознаграждений
           </h2>
-          <p className="text-xl text-gray-600 text-center mb-12">
+          <p className="text-xl text-gray-900 text-center mb-12">
             Чем больше зарабатываете, тем выше ваш процент
           </p>
 
@@ -48,11 +48,15 @@ const RewardSystem = () => {
             <Table>
               <TableHeader>
                 <TableRow className="bg-gray-50">
-                  <TableHead className="font-semibold">Уровень</TableHead>
-                  <TableHead className="font-semibold">
+                  <TableHead className="font-semibold text-gray-900">
+                    Уровень
+                  </TableHead>
+                  <TableHead className="font-semibold text-gray-900">
                     Оборот в месяц
                   </TableHead>
-                  <TableHead className="font-semibold">Бонус</TableHead>
+                  <TableHead className="font-semibold text-gray-900">
+                    Бонус
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -65,12 +69,14 @@ const RewardSystem = () => {
                           size={20}
                           className={level.color}
                         />
-                        <span>{level.level}</span>
+                        <span className="text-gray-900">{level.level}</span>
                       </div>
                     </TableCell>
-                    <TableCell>{level.revenue}</TableCell>
+                    <TableCell className="text-gray-900">
+                      {level.revenue}
+                    </TableCell>
                     <TableCell>
-                      <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent font-semibold">
+                      <span className="text-gray-900 font-semibold">
                         {level.bonus}
                       </span>
                     </TableCell>
