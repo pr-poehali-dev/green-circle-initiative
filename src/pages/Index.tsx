@@ -1,4 +1,4 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   return (
@@ -7,9 +7,14 @@ const Index = () => {
         <h1 className="text-4xl font-bold mb-4 color-black text-black">
           Добро поебаловать
         </h1>
-        <p className="text-xl text-gray-600">
+        <p className="text-xl text-gray-600 mb-8">
           тут будет отображаться ваш проект
         </p>
+        <div className="flex gap-4 justify-center">
+          <Button variant="default">Начать</Button>
+          <Button variant="outline">Узнать больше</Button>
+          <Button variant="secondary">Связаться с нами</Button>
+        </div>
       </div>
     </div>
   );
