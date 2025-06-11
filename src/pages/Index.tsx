@@ -18,36 +18,6 @@ const Index = () => {
               </span>
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0"></span>
             </button>
-            <button className="relative neon-green px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 ease-in-out hover:scale-105 hover:brightness-110 active:scale-95 flex-shrink-0 min-w-[150px] snap-center inline-block cursor-pointer group overflow-hidden">
-              <span className="block group-hover:tracking-wider transition-all duration-300 relative z-10">
-                Узнать больше
-              </span>
-              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0"></span>
-            </button>
-            <button className="relative neon-blue px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 ease-in-out hover:scale-105 hover:brightness-110 active:scale-95 flex-shrink-0 min-w-[150px] snap-center inline-block cursor-pointer group overflow-hidden">
-              <span className="block group-hover:tracking-wider transition-all duration-300 relative z-10">
-                Связаться с нами
-              </span>
-              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0"></span>
-            </button>
-            <button className="relative neon-purple px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 ease-in-out hover:scale-105 hover:brightness-110 active:scale-95 flex-shrink-0 min-w-[150px] snap-center inline-block cursor-pointer group overflow-hidden">
-              <span className="block group-hover:tracking-wider transition-all duration-300 relative z-10">
-                Примеры
-              </span>
-              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0"></span>
-            </button>
-            <button className="relative neon-orange px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 ease-in-out hover:scale-105 hover:brightness-110 active:scale-95 flex-shrink-0 min-w-[150px] snap-center inline-block cursor-pointer group overflow-hidden">
-              <span className="block group-hover:tracking-wider transition-all duration-300 relative z-10">
-                Портфолио
-              </span>
-              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0"></span>
-            </button>
-            <button className="relative neon-cyan px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 ease-in-out hover:scale-105 hover:brightness-110 active:scale-95 flex-shrink-0 min-w-[150px] snap-center inline-block cursor-pointer group overflow-hidden">
-              <span className="block group-hover:tracking-wider transition-all duration-300 relative z-10">
-                Блог
-              </span>
-              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0"></span>
-            </button>
           </div>
         </div>
 
