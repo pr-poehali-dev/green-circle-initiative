@@ -81,7 +81,7 @@ const Games = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
-            Популярные игры
+            🎮 Популярные игры
           </h2>
           <p className="text-xl text-gray-600 text-center mb-12">
             Лучшие игры для всех платформ
