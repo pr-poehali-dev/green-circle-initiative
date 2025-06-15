@@ -20,46 +20,31 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">🚀</span>
+              <span className="text-white font-bold text-lg">💻</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">Poehali.dev</span>
+            <span className="text-xl font-bold text-gray-900">Юра.dev</span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection("how-it-works")}
+              onClick={() => scrollToSection("projects")}
               className="text-gray-600 hover:text-purple-600 transition-colors"
             >
-              Как работает
+              Проекты
             </button>
             <button
-              onClick={() => scrollToSection("conditions")}
+              onClick={() => scrollToSection("portfolio")}
               className="text-gray-600 hover:text-purple-600 transition-colors"
             >
-              Условия
+              Портфолио
             </button>
             <button
-              onClick={() => scrollToSection("calculator")}
+              onClick={() => scrollToSection("contacts")}
               className="text-gray-600 hover:text-purple-600 transition-colors"
             >
-              Калькулятор
+              Контакты
             </button>
-            <button
-              onClick={() => scrollToSection("faq")}
-              className="text-gray-600 hover:text-purple-600 transition-colors"
-            >
-              FAQ
-            </button>
-            <Button variant="outline" size="sm">
-              Вход для партнеров
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-purple-600 to-blue-600"
-            >
-              Стать партнером
-            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -76,39 +61,30 @@ const Header = () => {
           <div className="md:hidden mt-4 pb-4 border-t pt-4 animate-fade-in">
             <div className="flex flex-col space-y-4">
               <button
-                onClick={() => scrollToSection("how-it-works")}
+                onClick={() => scrollToSection("projects")}
                 className="text-gray-600 hover:text-purple-600 transition-colors text-left"
               >
-                Как работает
+                Проекты
               </button>
               <button
-                onClick={() => scrollToSection("conditions")}
+                onClick={() => scrollToSection("portfolio")}
                 className="text-gray-600 hover:text-purple-600 transition-colors text-left"
               >
-                Условия
+                Портфолио
               </button>
               <button
-                onClick={() => scrollToSection("calculator")}
+                onClick={() => scrollToSection("contacts")}
                 className="text-gray-600 hover:text-purple-600 transition-colors text-left"
               >
-                Калькулятор
-              </button>
-              <button
-                onClick={() => scrollToSection("faq")}
-                className="text-gray-600 hover:text-purple-600 transition-colors text-left"
-              >
-                FAQ
+                Контакты
               </button>
               <div className="flex flex-col space-y-2 pt-2">
-                <Button variant="outline" size="sm">
-                  Вход для партнеров
-                </Button>
-                <Button
-                  size="sm"
-                  className="bg-gradient-to-r from-purple-600 to-blue-600"
+                <a
+                  href="mailto:yura@dev.example"
+                  className="text-center py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
                 >
-                  Стать партнером
-                </Button>
+                  Написать письмо
+                </a>
               </div>
             </div>
           </div>
