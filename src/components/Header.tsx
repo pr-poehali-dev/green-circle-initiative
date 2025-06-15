@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 
 const Header = () => {
@@ -18,40 +17,38 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-gray-800 to-gray-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">🍎</span>
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl flex items-center justify-center">
+              <Icon name="Gamepad2" size={20} className="text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">
-              Apple Gift Cards
-            </span>
+            <span className="text-xl font-bold text-gray-900">GameSub</span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection("products")}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
+              onClick={() => scrollToSection("subscriptions")}
+              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
             >
-              Карты
+              Подписки
+            </button>
+            <button
+              onClick={() => scrollToSection("games")}
+              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+            >
+              Игры
             </button>
             <button
               onClick={() => scrollToSection("faq")}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
             >
               FAQ
             </button>
             <button
               onClick={() => scrollToSection("support")}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
             >
               Поддержка
-            </button>
-            <button
-              onClick={() => scrollToSection("payment")}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Оплата
             </button>
           </nav>
 
@@ -69,28 +66,28 @@ const Header = () => {
           <div className="md:hidden mt-4 pb-4 border-t pt-4 animate-fade-in">
             <div className="flex flex-col space-y-4">
               <button
-                onClick={() => scrollToSection("products")}
-                className="text-gray-600 hover:text-gray-900 transition-colors text-left"
+                onClick={() => scrollToSection("subscriptions")}
+                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
               >
-                Карты
+                Подписки
+              </button>
+              <button
+                onClick={() => scrollToSection("games")}
+                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
+              >
+                Игры
               </button>
               <button
                 onClick={() => scrollToSection("faq")}
-                className="text-gray-600 hover:text-gray-900 transition-colors text-left"
+                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
               >
                 FAQ
               </button>
               <button
                 onClick={() => scrollToSection("support")}
-                className="text-gray-600 hover:text-gray-900 transition-colors text-left"
+                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
               >
                 Поддержка
-              </button>
-              <button
-                onClick={() => scrollToSection("payment")}
-                className="text-gray-600 hover:text-gray-900 transition-colors text-left"
-              >
-                Оплата
               </button>
             </div>
           </div>
