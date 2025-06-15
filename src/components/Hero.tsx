@@ -17,9 +17,9 @@ const Hero = () => {
             <div className="w-24 h-24 bg-gradient-to-r from-purple-600 to-purple-800 rounded-3xl flex items-center justify-center mx-auto mb-6">
               <Icon name="Zap" size={40} className="text-white" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-orange-600 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-red-600 mb-6">
               Подписки и{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-700">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">
                 Игры
               </span>
             </h1>
