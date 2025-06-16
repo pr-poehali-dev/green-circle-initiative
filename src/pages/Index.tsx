@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
 import Products from "@/components/Products";
 import Verification from "@/components/Verification";
 import FAQ from "@/components/FAQ";
@@ -11,10 +10,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Header />
-      <Hero />
-      <div className="relative -mt-96">
+      <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-100/50 to-indigo-100/50 blur-3xl transform -rotate-6 scale-110"></div>
-        <div className="relative pt-96">
+        <div className="relative pt-24">
           <Products />
           <Verification />
         </div>
