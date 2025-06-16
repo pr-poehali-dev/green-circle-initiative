@@ -12,9 +12,9 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Header />
       <Hero />
-      <div className="relative">
+      <div className="relative -mt-96">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-100/50 to-indigo-100/50 blur-3xl transform -rotate-6 scale-110"></div>
-        <div className="relative">
+        <div className="relative pt-96">
           <Products />
           <Verification />
         </div>

@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import Icon from "@/components/ui/icon";
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -11,10 +11,10 @@ const Hero = () => {
   };
 
   return (
-    <section className="pt-24 pb-16 bg-gradient-to-br from-purple-50 to-white">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8">
+    <div className="flex flex-col overflow-hidden">
+      <ContainerScroll
+        titleComponent={
+          <div className="text-center">
             <div className="w-24 h-24 bg-gradient-to-r from-purple-600 to-purple-800 rounded-3xl flex items-center justify-center mx-auto mb-6">
               <Icon name="Zap" size={40} className="text-white" />
             </div>
@@ -31,9 +31,6 @@ const Hero = () => {
               Откройте мир премиум-контента: от музыки и фильмов до топовых игр.
               Быстрая активация, надежная поддержка, честные цены.
             </p>
-          </div>
-
-          <div className="flex justify-center">
             <RainbowButton
               onClick={() => scrollToSection("subscriptions")}
               className="text-lg px-10 py-3"
@@ -42,9 +39,16 @@ const Hero = () => {
               Начать сейчас
             </RainbowButton>
           </div>
-        </div>
-      </div>
-    </section>
+        }
+      >
+        <img
+          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1400&h=720&fit=crop&crop=center"
+          alt="Цифровые развлечения"
+          className="mx-auto rounded-2xl object-cover h-full object-center"
+          draggable={false}
+        />
+      </ContainerScroll>
+    </div>
   );
 };
 
