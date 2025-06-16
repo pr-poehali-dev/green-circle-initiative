@@ -1,141 +1,103 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Icon from "@/components/ui/icon";
+import { motion } from "framer-motion";
+import { Check, Star, Zap } from "lucide-react";
 
 const Products = () => {
-  const products = [
+  const subscriptions = [
     {
-      denomination: "500₽",
-      price: "550₽",
-      originalPrice: "580₽",
-      discount: "5%",
+      name: "Apple Music",
+      description: "Музыка и подкасты",
+      price: "169₽",
+      period: "/месяц",
       popular: false,
+      features: ["60+ млн песен", "Офлайн прослушивание", "Lossless качество"],
     },
     {
-      denomination: "1000₽",
-      price: "1100₽",
-      originalPrice: "1150₽",
-      discount: "4%",
+      name: "Netflix Premium",
+      description: "Фильмы и сериалы 4K",
+      price: "599₽",
+      period: "/месяц",
       popular: true,
+      features: ["4K Ultra HD", "4 экрана одновременно", "Загрузка контента"],
     },
     {
-      denomination: "3000₽",
-      price: "3200₽",
-      originalPrice: "3350₽",
-      discount: "4%",
+      name: "Spotify Premium",
+      description: "Музыка без рекламы",
+      price: "199₽",
+      period: "/месяц",
       popular: false,
+      features: ["Без рекламы", "Офлайн режим", "Высокое качество"],
     },
   ];
 
-  const handleBuyClick = (denomination: string) => {
-    // В реальном проекте здесь будет переход к оплате
-    console.log(`Покупка карты ${denomination}`);
-  };
-
   return (
-    <section id="products" className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
-            Подарочные карты Apple
+    <section className="py-24 px-4">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Популярные подписки
           </h2>
-          <p className="text-xl text-gray-600 text-center mb-12">
-            Выберите номинал карты
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Экономьте до 70% на любимых сервисах
           </p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {products.map((product, index) => (
-              <Card
-                key={index}
-                className={`hover-scale relative ${
-                  product.popular
-                    ? "border-2 border-gray-800 shadow-lg"
-                    : "border"
+        <div className="grid md:grid-cols-3 gap-8">
+          {subscriptions.map((sub, index) => (
+            <motion.div
+              key={sub.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`relative p-8 border-2 rounded-3xl bg-white ${
+                sub.popular
+                  ? "border-purple-500 shadow-2xl scale-105"
+                  : "border-gray-200 hover:border-purple-300"
+              } transition-all duration-300`}
+            >
+              {sub.popular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-6 py-2 rounded-full text-sm font-semibold">
+                  Популярный
+                </div>
+              )}
+
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {sub.name}
+                </h3>
+                <p className="text-gray-600 mb-4">{sub.description}</p>
+                <div className="flex items-end justify-center gap-1">
+                  <span className="text-4xl font-bold text-purple-600">
+                    {sub.price}
+                  </span>
+                  <span className="text-gray-500 mb-1">{sub.period}</span>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
+                {sub.features.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                className={`w-full py-4 px-6 rounded-2xl text-lg font-semibold transition-all duration-300 ${
+                  sub.popular
+                    ? "bg-purple-600 text-white hover:bg-purple-700 shadow-lg"
+                    : "bg-gray-100 text-gray-900 hover:bg-purple-100 hover:text-purple-700"
                 }`}
               >
-                {product.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gray-800 text-white px-4 py-1 rounded-full text-sm font-medium">
-                      Популярный
-                    </span>
-                  </div>
-                )}
-
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-gray-800 to-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Icon name="Gift" size={28} className="text-white" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-gray-900">
-                    {product.denomination}
-                  </CardTitle>
-                  <div className="text-sm text-gray-500">
-                    Подарочная карта Apple
-                  </div>
-                </CardHeader>
-
-                <CardContent className="text-center">
-                  <div className="mb-6">
-                    <div className="text-3xl font-bold text-gray-900 mb-2">
-                      {product.price}
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <span className="text-gray-500 line-through text-sm">
-                        {product.originalPrice}
-                      </span>
-                      <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
-                        -{product.discount}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 mb-6 text-sm text-gray-600">
-                    <div className="flex items-center justify-center gap-2">
-                      <Icon
-                        name="Shield"
-                        size={16}
-                        className="text-green-600"
-                      />
-                      <span>Гарантия подлинности</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <Icon name="Zap" size={16} className="text-blue-600" />
-                      <span>Мгновенная доставка</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <Icon
-                        name="CheckCircle"
-                        size={16}
-                        className="text-green-600"
-                      />
-                      <span>Проверенный продавец</span>
-                    </div>
-                  </div>
-
-                  <Button
-                    onClick={() => handleBuyClick(product.denomination)}
-                    className={`w-full ${
-                      product.popular
-                        ? "bg-gray-800 hover:bg-gray-700"
-                        : "bg-gray-600 hover:bg-gray-700"
-                    }`}
-                    size="lg"
-                  >
-                    <Icon name="ShoppingCart" className="mr-2" size={18} />
-                    Купить сейчас
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center gap-2 bg-gray-50 px-6 py-3 rounded-lg">
-              <Icon name="Info" size={16} className="text-gray-600" />
-              <span className="text-sm text-gray-600">
-                Все карты проходят проверку подлинности перед продажей
-              </span>
-            </div>
-          </div>
+                Купить
+              </button>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
