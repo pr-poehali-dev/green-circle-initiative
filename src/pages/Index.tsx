@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Products from "@/components/Products";
-import Verification from "@/components/Verification";
 import FAQ from "@/components/FAQ";
 import Support from "@/components/Support";
 import Payment from "@/components/Payment";
@@ -14,7 +13,6 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-purple-100/50 to-indigo-100/50 blur-3xl transform -rotate-6 scale-110"></div>
         <div className="relative pt-24">
           <Products />
-          <Verification />
         </div>
       </div>
       <FAQ />
