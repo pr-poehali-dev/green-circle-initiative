@@ -2,35 +2,50 @@ import { motion } from "framer-motion";
 import { Check, Star, Zap } from "lucide-react";
 
 const Products = () => {
-  const subscriptions = [
+  const books = [
     {
-      name: "Apple Music",
-      description: "Музыка и подкасты",
-      price: "169₽",
-      period: "/месяц",
-      popular: false,
-      features: ["60+ млн песен", "Офлайн прослушивание", "Lossless качество"],
-    },
-    {
-      name: "Netflix Premium",
-      description: "Фильмы и сериалы 4K",
-      price: "599₽",
-      period: "/месяц",
+      title: "Война и мир",
+      author: "Лев Толстой",
+      price: "899₽",
+      originalPrice: "1299₽",
+      rating: 4.8,
+      reviews: 2547,
+      genre: "Классика",
+      cover:
+        "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&h=400&fit=crop",
       popular: true,
-      features: ["4K Ultra HD", "4 экрана одновременно", "Загрузка контента"],
+      discount: "-31%",
     },
     {
-      name: "Spotify Premium",
-      description: "Музыка без рекламы",
-      price: "199₽",
-      period: "/месяц",
+      title: "Атомные привычки",
+      author: "Джеймс Клир",
+      price: "649₽",
+      originalPrice: "799₽",
+      rating: 4.9,
+      reviews: 1823,
+      genre: "Психология",
+      cover:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop",
+      popular: true,
+      discount: "-19%",
+    },
+    {
+      title: "Дюна",
+      author: "Фрэнк Герберт",
+      price: "599₽",
+      originalPrice: null,
+      rating: 4.7,
+      reviews: 3241,
+      genre: "Фантастика",
+      cover:
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=400&fit=crop",
       popular: false,
-      features: ["Без рекламы", "Офлайн режим", "Высокое качество"],
+      discount: null,
     },
   ];
 
   return (
-    <section className="py-24 px-4">
+    <section id="catalog" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,63 +54,100 @@ const Products = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Популярные подписки
+            Популярные книги
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Экономьте до 70% на любимых сервисах
+            Лучшие предложения с доставкой по всей России
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {subscriptions.map((sub, index) => (
+          {books.map((book, index) => (
             <motion.div
-              key={sub.name}
+              key={book.title}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative p-8 border-2 rounded-3xl bg-white ${
-                sub.popular
-                  ? "border-purple-500 shadow-2xl scale-105"
-                  : "border-gray-200 hover:border-purple-300"
-              } transition-all duration-300`}
+              className={`relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${
+                book.popular
+                  ? "border-2 border-amber-300 scale-105"
+                  : "border border-gray-200"
+              }`}
             >
-              {sub.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-6 py-2 rounded-full text-sm font-semibold">
-                  Популярный
+              {book.popular && (
+                <div className="absolute top-4 left-4 z-10 bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  Хит продаж
                 </div>
               )}
 
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {sub.name}
-                </h3>
-                <p className="text-gray-600 mb-4">{sub.description}</p>
-                <div className="flex items-end justify-center gap-1">
-                  <span className="text-4xl font-bold text-purple-600">
-                    {sub.price}
-                  </span>
-                  <span className="text-gray-500 mb-1">{sub.period}</span>
+              {book.discount && (
+                <div className="absolute top-4 right-4 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  {book.discount}
                 </div>
+              )}
+
+              <div className="aspect-[3/4] bg-gray-100">
+                <img
+                  src={book.cover}
+                  alt={book.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
-              <ul className="space-y-3 mb-8">
-                {sub.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="p-6">
+                <div className="mb-2">
+                  <span className="text-sm text-amber-600 font-medium bg-amber-50 px-2 py-1 rounded">
+                    {book.genre}
+                  </span>
+                </div>
 
-              <button
-                className={`w-full py-4 px-6 rounded-2xl text-lg font-semibold transition-all duration-300 ${
-                  sub.popular
-                    ? "bg-purple-600 text-white hover:bg-purple-700 shadow-lg"
-                    : "bg-gray-100 text-gray-900 hover:bg-purple-100 hover:text-purple-700"
-                }`}
-              >
-                Купить
-              </button>
+                <h3 className="text-xl font-bold text-gray-900 mb-1 line-clamp-2">
+                  {book.title}
+                </h3>
+
+                <p className="text-gray-600 mb-3">{book.author}</p>
+
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < Math.floor(book.rating)
+                            ? "text-yellow-400 fill-current"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm text-gray-600">
+                    {book.rating} ({book.reviews})
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl font-bold text-gray-900">
+                      {book.price}
+                    </span>
+                    {book.originalPrice && (
+                      <span className="text-lg text-gray-500 line-through">
+                        {book.originalPrice}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <button
+                  className={`w-full py-3 px-4 rounded-2xl text-lg font-semibold transition-all duration-300 ${
+                    book.popular
+                      ? "bg-amber-600 text-white hover:bg-amber-700 shadow-lg"
+                      : "bg-gray-100 text-gray-900 hover:bg-amber-100 hover:text-amber-700"
+                  }`}
+                >
+                  В корзину
+                </button>
+              </div>
             </motion.div>
           ))}
         </div>

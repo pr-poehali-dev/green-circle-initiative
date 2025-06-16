@@ -9,13 +9,13 @@ const Footer = () => {
             {/* Brand */}
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl flex items-center justify-center">
-                  <Icon name="Gamepad2" size={20} className="text-white" />
+                <div className="w-10 h-10 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl flex items-center justify-center">
+                  <Icon name="BookOpen" size={20} className="text-white" />
                 </div>
-                <span className="text-xl font-bold">GameSub</span>
+                <span className="text-xl font-bold">BookStore</span>
               </div>
               <p className="text-gray-400 mb-4">
-                Премиальные подписки и игры по выгодным ценам
+                Лучшие книги для развития и удовольствия
               </p>
               <div className="flex space-x-4">
                 <Icon
@@ -31,37 +31,37 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Quick Links */}
+            {/* Catalog */}
             <div>
-              <h3 className="font-bold mb-4">Быстрые ссылки</h3>
+              <h3 className="font-bold mb-4">Каталог</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <a
-                    href="#subscriptions"
+                    href="#catalog"
                     className="hover:text-white transition-colors"
                   >
-                    Подписки
+                    Все книги
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#games"
+                    href="#bestsellers"
                     className="hover:text-white transition-colors"
                   >
-                    Игры
+                    Бестселлеры
                   </a>
                 </li>
                 <li>
-                  <a href="#faq" className="hover:text-white transition-colors">
-                    FAQ
+                  <a href="#new" className="hover:text-white transition-colors">
+                    Новинки
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#support"
+                    href="#sale"
                     className="hover:text-white transition-colors"
                   >
-                    Поддержка
+                    Скидки
                   </a>
                 </li>
               </ul>
@@ -69,17 +69,17 @@ const Footer = () => {
 
             {/* Support */}
             <div>
-              <h3 className="font-bold mb-4">Поддержка</h3>
+              <h3 className="font-bold mb-4">Контакты</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>📧 support@gamesub.ru</li>
-                <li>📞 +7 (999) 123-45-67</li>
-                <li>⏰ 24/7 онлайн поддержка</li>
+                <li>📧 info@bookstore.ru</li>
+                <li>📞 +7 (495) 123-45-67</li>
+                <li>🚚 Доставка по всей России</li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 GameSub. Все права защищены.</p>
+            <p>&copy; 2024 BookStore. Все права защищены.</p>
           </div>
         </div>
       </div>

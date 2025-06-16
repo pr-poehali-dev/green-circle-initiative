@@ -18,37 +18,54 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl flex items-center justify-center">
-              <Icon name="Gamepad2" size={20} className="text-white" />
+            <div className="w-10 h-10 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl flex items-center justify-center">
+              <Icon name="BookOpen" size={20} className="text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">GameSub</span>
+            <span className="text-xl font-bold text-gray-900">BookStore</span>
+          </div>
+
+          {/* Search Bar */}
+          <div className="hidden md:flex flex-1 max-w-md mx-8">
+            <div className="relative w-full">
+              <Icon
+                name="Search"
+                size={18}
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              />
+              <input
+                type="text"
+                placeholder="Поиск книг, авторов..."
+                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              />
+            </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             <button
-              onClick={() => scrollToSection("subscriptions")}
-              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              onClick={() => scrollToSection("catalog")}
+              className="text-gray-600 hover:text-amber-600 transition-colors font-medium"
             >
-              Подписки
+              Каталог
             </button>
             <button
-              onClick={() => scrollToSection("games")}
-              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              onClick={() => scrollToSection("bestsellers")}
+              className="text-gray-600 hover:text-amber-600 transition-colors font-medium"
             >
-              Игры
+              Бестселлеры
+            </button>
+            <button className="flex items-center space-x-1 text-gray-600 hover:text-amber-600 transition-colors font-medium">
+              <Icon name="ShoppingCart" size={18} />
+              <span>Корзина</span>
+              <span className="bg-amber-500 text-white text-xs px-2 py-1 rounded-full">
+                3
+              </span>
             </button>
             <button
-              onClick={() => scrollToSection("faq")}
-              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              onClick={() => scrollToSection("contacts")}
+              className="text-gray-600 hover:text-amber-600 transition-colors font-medium"
             >
-              FAQ
-            </button>
-            <button
-              onClick={() => scrollToSection("support")}
-              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
-            >
-              Поддержка
+              Контакты
             </button>
           </nav>
 
@@ -66,28 +83,26 @@ const Header = () => {
           <div className="md:hidden mt-4 pb-4 border-t pt-4 animate-fade-in">
             <div className="flex flex-col space-y-4">
               <button
-                onClick={() => scrollToSection("subscriptions")}
-                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
+                onClick={() => scrollToSection("catalog")}
+                className="text-gray-600 hover:text-amber-600 transition-colors text-left font-medium"
               >
-                Подписки
+                Каталог
               </button>
               <button
-                onClick={() => scrollToSection("games")}
-                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
+                onClick={() => scrollToSection("bestsellers")}
+                className="text-gray-600 hover:text-amber-600 transition-colors text-left font-medium"
               >
-                Игры
+                Бестселлеры
+              </button>
+              <button className="flex items-center space-x-2 text-gray-600 hover:text-amber-600 transition-colors text-left font-medium">
+                <Icon name="ShoppingCart" size={18} />
+                <span>Корзина (3)</span>
               </button>
               <button
-                onClick={() => scrollToSection("faq")}
-                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
+                onClick={() => scrollToSection("contacts")}
+                className="text-gray-600 hover:text-amber-600 transition-colors text-left font-medium"
               >
-                FAQ
-              </button>
-              <button
-                onClick={() => scrollToSection("support")}
-                className="text-gray-600 hover:text-purple-600 transition-colors text-left font-medium"
-              >
-                Поддержка
+                Контакты
               </button>
             </div>
           </div>
