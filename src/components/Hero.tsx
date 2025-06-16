@@ -17,18 +17,18 @@ const Hero = () => {
             <div className="w-24 h-24 bg-gradient-to-r from-purple-600 to-purple-800 rounded-3xl flex items-center justify-center mx-auto mb-6">
               <Icon name="Zap" size={40} className="text-white" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-orange-600 mb-6">
-              Подписки и{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-700">
-                Игры
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Цифровые{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+                Развлечения
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8">
-              Премиальные подписки и популярные игры
+              Лучшие подписки и игры в одном месте
             </p>
             <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
-              Получите доступ к лучшим сервисам и играм по выгодным ценам.
-              Мгновенная активация, гарантия качества.
+              Откройте мир премиум-контента: от музыки и фильмов до топовых игр.
+              Быстрая активация, надежная поддержка, честные цены.
             </p>
           </div>
 
