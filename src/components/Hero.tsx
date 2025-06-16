@@ -33,7 +33,7 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center">
             <RainbowButton
               onClick={() => scrollToSection("subscriptions")}
               className="text-lg px-10 py-3"
@@ -41,15 +41,6 @@ const Hero = () => {
               <Icon name="Zap" className="mr-2" size={20} />
               Начать сейчас
             </RainbowButton>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => scrollToSection("games")}
-              className="border-purple-200 text-purple-600 hover:bg-purple-50 hover-scale"
-            >
-              <Icon name="Gamepad2" className="mr-2" size={20} />
-              Игры
-            </Button>
           </div>
         </div>
       </div>
