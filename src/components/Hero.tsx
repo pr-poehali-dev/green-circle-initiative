@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import Icon from "@/components/ui/icon";
 
 const Hero = () => {
@@ -33,14 +34,13 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
+            <RainbowButton
               onClick={() => scrollToSection("subscriptions")}
-              size="lg"
-              className="bg-purple-600 hover:bg-purple-700 hover-scale"
+              className="text-lg px-10 py-3"
             >
-              <Icon name="Play" className="mr-2" size={20} />
-              Подписки
-            </Button>
+              <Icon name="Zap" className="mr-2" size={20} />
+              Начать сейчас
+            </RainbowButton>
             <Button
               variant="outline"
               size="lg"
