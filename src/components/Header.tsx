@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import { useCart } from "@/contexts/CartContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getCartCount } = useCart();
+  const cartCount = getCartCount();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -58,7 +61,7 @@ const Header = () => {
               <Icon name="ShoppingCart" size={18} />
               <span>Корзина</span>
               <span className="bg-amber-500 text-white text-xs px-2 py-1 rounded-full">
-                3
+                {cartCount}
               </span>
             </button>
             <button
@@ -96,7 +99,7 @@ const Header = () => {
               </button>
               <button className="flex items-center space-x-2 text-gray-600 hover:text-amber-600 transition-colors text-left font-medium">
                 <Icon name="ShoppingCart" size={18} />
-                <span>Корзина (3)</span>
+                <span>Корзина ({cartCount})</span>
               </button>
               <button
                 onClick={() => scrollToSection("contacts")}

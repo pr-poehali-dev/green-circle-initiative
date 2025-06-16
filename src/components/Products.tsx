@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Check, Star, Zap } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const Products = () => {
+  const { addToCart } = useCart();
+
   const books = [
     {
       title: "Война и мир",
@@ -139,6 +142,14 @@ const Products = () => {
                 </div>
 
                 <button
+                  onClick={() =>
+                    addToCart({
+                      title: book.title,
+                      author: book.author,
+                      price: book.price,
+                      cover: book.cover,
+                    })
+                  }
                   className={`w-full py-3 px-4 rounded-2xl text-lg font-semibold transition-all duration-300 ${
                     book.popular
                       ? "bg-amber-600 text-white hover:bg-amber-700 shadow-lg"
