@@ -22,9 +22,9 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl flex items-center justify-center">
-              <Icon name="BookOpen" size={20} className="text-white" />
+              <Icon name="Cookie" size={20} className="text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">BookStore</span>
+            <span className="text-xl font-bold text-gray-900">Мир Пышек</span>
           </div>
 
           {/* Search Bar */}
@@ -37,7 +37,7 @@ const Header = () => {
               />
               <input
                 type="text"
-                placeholder="Поиск книг, авторов..."
+                placeholder="Поиск пышек, начинок..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
               />
             </div>
@@ -55,7 +55,7 @@ const Header = () => {
               onClick={() => scrollToSection("bestsellers")}
               className="text-gray-600 hover:text-amber-600 transition-colors font-medium"
             >
-              Бестселлеры
+              Популярные
             </button>
             <button className="flex items-center space-x-1 text-gray-600 hover:text-amber-600 transition-colors font-medium">
               <Icon name="ShoppingCart" size={18} />

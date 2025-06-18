@@ -10,13 +10,11 @@ const Footer = () => {
             <div>
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl flex items-center justify-center">
-                  <Icon name="BookOpen" size={20} className="text-white" />
+                  <Icon name="Cookie" size={20} className="text-white" />
                 </div>
-                <span className="text-xl font-bold">BookStore</span>
+                <span className="text-xl font-bold">Мир Пышек</span>
               </div>
-              <p className="text-gray-400 mb-4">
-                Лучшие книги для развития и удовольствия
-              </p>
+              <p className="text-gray-400 mb-4">Лучшие пышки для души и тела</p>
               <div className="flex space-x-4">
                 <Icon
                   name="Mail"
@@ -40,7 +38,7 @@ const Footer = () => {
                     href="#catalog"
                     className="hover:text-white transition-colors"
                   >
-                    Все книги
+                    Все пышки
                   </a>
                 </li>
                 <li>
@@ -48,7 +46,7 @@ const Footer = () => {
                     href="#bestsellers"
                     className="hover:text-white transition-colors"
                   >
-                    Бестселлеры
+                    Популярные
                   </a>
                 </li>
                 <li>
