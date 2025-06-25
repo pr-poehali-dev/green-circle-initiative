@@ -22,7 +22,7 @@ const Hero = () => {
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">
-                мимишки
+                мимимишки
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8">
