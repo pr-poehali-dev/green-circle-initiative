@@ -1,26 +1,16 @@
-import Header from "@/components/Header";
-import Products from "@/components/Products";
-import FAQ from "@/components/FAQ";
-import Support from "@/components/Support";
-import Payment from "@/components/Payment";
-import Footer from "@/components/Footer";
+// Update this page (the content is just a fallback if you fail to update the page)
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <Header />
-      <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-100/50 to-indigo-100/50 blur-3xl transform -rotate-6 scale-110"></div>
-        <div className="relative pt-24">
-          <Products />
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4 color-black text-black">
+          Привет
+        </h1>
+        <p className="text-xl text-gray-600">
+          тут будет отображаться ваш проект
+        </p>
       </div>
-      <FAQ />
-      <div className="bg-gradient-to-t from-gray-50 to-white">
-        <Support />
-        <Payment />
-      </div>
-      <Footer />
     </div>
   );
 };
