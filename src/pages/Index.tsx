@@ -1,11 +1,19 @@
+import AuroraBackground from "@/components/AuroraBackground";
+
 const Index = () => {
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center">
-      <div className="text-center text-white">
-        <h1 className="text-6xl font-bold mb-4 opacity-80">🚀 ПОЕХАЛИ!</h1>
-        <p className="text-2xl opacity-60">Создаём будущее вместе</p>
+    <AuroraBackground>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center text-white">
+          <h1 className="text-6xl font-bold mb-4 opacity-90 drop-shadow-lg">
+            🚀 ПОЕХАЛИ!
+          </h1>
+          <p className="text-2xl opacity-70 drop-shadow-md">
+            Создаём будущее вместе
+          </p>
+        </div>
       </div>
-    </div>
+    </AuroraBackground>
   );
 };
 
