@@ -1,4 +1,4 @@
-import StarWars from "react-star-wars-crawl";
+import StarWars from "@liorpo/react-star-wars-crawl";
 
 const Index = () => {
   return (
