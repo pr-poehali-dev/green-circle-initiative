@@ -11,7 +11,7 @@ const Index = () => {
             className="mx-auto rounded-lg shadow-2xl w-96 h-64 object-cover"
           />
           <h1 className="color-black text-8xl font-black text-yellow-400 mt-8">
-            Валли.
+            Валле.
           </h1>
         </div>
         <p className="text-xl text-gray-600">
