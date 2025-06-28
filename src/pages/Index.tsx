@@ -4,7 +4,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="text-center">
-        <h1 className="color-black my-[47px] text-8xl text-teal-700 font-normal">
+        <h1 className="color-black my-[47px] text-8xl text-teal-700 font-black">
           Вал
         </h1>
         <p className="text-xl text-gray-600">
