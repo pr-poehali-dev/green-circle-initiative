@@ -2,7 +2,7 @@
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-900">
+    <div className="min-h-screen flex items-center justify-center bg-neutral-900 relative overflow-hidden">
       <div className="text-center">
         <div className="mb-8">
           <h1 className="color-black text-8xl font-black text-yellow-400 mb-8">
@@ -18,6 +18,30 @@ const Index = () => {
           тут будет отображаться ваш проектикус
         </p>
       </div>
+
+      {/* Анимированный робот внизу */}
+      <div className="fixed bottom-4 left-0 animate-slide-robot">
+        <div className="text-6xl transform hover:scale-110 transition-transform duration-300 cursor-pointer">
+          🤖
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes slideRobot {
+          0% {
+            transform: translateX(-100px);
+          }
+          50% {
+            transform: translateX(calc(100vw - 100px));
+          }
+          100% {
+            transform: translateX(-100px);
+          }
+        }
+        .animate-slide-robot {
+          animation: slideRobot 8s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };
