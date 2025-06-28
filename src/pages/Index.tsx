@@ -22,8 +22,8 @@ const Index = () => {
       {/* Анимированный ВАЛЛИ внизу */}
       <div className="fixed bottom-4 left-0 animate-slide-robot">
         <div className="walle-robot">
-          {/* Тело робота */}
-          <div className="walle-body">
+          {/* Голова робота */}
+          <div className="walle-head">
             {/* Глаза */}
             <div className="walle-eyes">
               <div className="walle-eye left animate-blink">
@@ -33,9 +33,13 @@ const Index = () => {
                 <div className="eye-lens"></div>
               </div>
             </div>
-            {/* Шея */}
-            <div className="walle-neck"></div>
           </div>
+
+          {/* Шея */}
+          <div className="walle-neck"></div>
+
+          {/* Треугольное тело */}
+          <div className="walle-body-triangle"></div>
 
           {/* Гусеницы */}
           <div className="walle-tracks">
@@ -68,18 +72,42 @@ const Index = () => {
       <style jsx>{`
         .walle-robot {
           width: 80px;
-          height: 100px;
+          height: 120px;
           position: relative;
         }
 
-        .walle-body {
+        .walle-head {
           width: 60px;
-          height: 50px;
+          height: 40px;
           background: linear-gradient(145deg, #8b7355, #6b5b47);
           border-radius: 8px;
           position: relative;
           border: 2px solid #4a4035;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .walle-body-triangle {
+          width: 0;
+          height: 0;
+          border-left: 25px solid transparent;
+          border-right: 25px solid transparent;
+          border-top: 35px solid #6b5b47;
+          position: relative;
+          top: 8px;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+          margin: 0 auto;
+        }
+
+        .walle-body-triangle::before {
+          content: "";
+          position: absolute;
+          top: -35px;
+          left: -23px;
+          width: 0;
+          height: 0;
+          border-left: 23px solid transparent;
+          border-right: 23px solid transparent;
+          border-top: 33px solid #8b7355;
         }
 
         .walle-eyes {
@@ -112,13 +140,13 @@ const Index = () => {
 
         .walle-neck {
           width: 8px;
-          height: 12px;
+          height: 8px;
           background: #6b5b47;
-          position: absolute;
-          bottom: -12px;
+          position: relative;
           left: 50%;
           transform: translateX(-50%);
-          border-radius: 0 0 4px 4px;
+          border-radius: 4px;
+          margin: 2px 0;
         }
 
         .walle-tracks {
