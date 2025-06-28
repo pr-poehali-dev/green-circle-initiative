@@ -4,6 +4,13 @@ const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-neutral-900">
       <div className="text-center">
+        <div className="mb-8">
+          <img
+            src="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            alt="WALL-E робот"
+            className="mx-auto rounded-lg shadow-2xl w-96 h-64 object-cover"
+          />
+        </div>
         <h1 className="color-black text-8xl font-black text-yellow-400 my-[70px]">
           Валли.
         </h1>
