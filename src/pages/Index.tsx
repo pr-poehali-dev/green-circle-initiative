@@ -91,7 +91,7 @@ const Index = () => {
           height: 0;
           border-left: 25px solid transparent;
           border-right: 25px solid transparent;
-          border-top: 35px solid #6b5b47;
+          border-bottom: 35px solid #6b5b47;
           position: relative;
           top: 8px;
           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
@@ -101,13 +101,13 @@ const Index = () => {
         .walle-body-triangle::before {
           content: "";
           position: absolute;
-          top: -35px;
+          bottom: -35px;
           left: -23px;
           width: 0;
           height: 0;
           border-left: 23px solid transparent;
           border-right: 23px solid transparent;
-          border-top: 33px solid #8b7355;
+          border-bottom: 33px solid #8b7355;
         }
 
         .walle-eyes {
@@ -151,32 +151,32 @@ const Index = () => {
 
         .walle-tracks {
           position: absolute;
-          bottom: -25px;
+          bottom: -30px;
           left: 0;
           width: 100%;
-          height: 20px;
+          height: 28px;
           display: flex;
           justify-content: space-between;
         }
 
         .track {
-          width: 35px;
-          height: 20px;
+          width: 45px;
+          height: 28px;
           background: #374151;
-          border-radius: 10px;
+          border-radius: 14px;
           position: relative;
           overflow: hidden;
           border: 2px solid #1f2937;
         }
 
         .track-segment {
-          width: 8px;
-          height: 4px;
+          width: 10px;
+          height: 6px;
           background: #4b5563;
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          border-radius: 2px;
+          border-radius: 3px;
         }
 
         @keyframes slideRobot {
@@ -193,10 +193,10 @@ const Index = () => {
 
         @keyframes trackRoll {
           0% {
-            transform: translateX(-10px) translateY(-50%);
+            transform: translateX(-12px) translateY(-50%);
           }
           100% {
-            transform: translateX(40px) translateY(-50%);
+            transform: translateX(50px) translateY(-50%);
           }
         }
 
