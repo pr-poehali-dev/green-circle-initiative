@@ -11,10 +11,7 @@ const Hero = () => {
             <span className="text-primary block">VIP-линейки</span>
           </h1>
 
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Эксклюзивные номера телефонов от всех операторов России. Подберем
-            идеальный номер для вас или вашего бизнеса.
-          </p>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">sdfsdf</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 py-6">
