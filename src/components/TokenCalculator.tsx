@@ -168,19 +168,6 @@ const TokenCalculator = () => {
                 200K context window • 50% скидка при batch processing
               </p>
             </div>
-
-            <div className="bg-muted/50 p-4 rounded-lg">
-              <h4 className="font-semibold mb-2 flex items-center gap-2">
-                <Icon name="Info" size={16} />
-                Справка
-              </h4>
-              <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• Входящие токены: токены в вашем запросе</li>
-                <li>• Исходящие токены: токены в ответе Claude</li>
-                <li>• Запись в кэш: запись в кэш промпта</li>
-                <li>• Чтение из кэша: чтение из кэша промпта × итерации</li>
-              </ul>
-            </div>
           </CardContent>
         </Card>
       </div>
