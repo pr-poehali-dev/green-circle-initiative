@@ -57,13 +57,15 @@ const TokenCalculator = () => {
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="max-w-2xl w-full">
         <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2">
-              <Icon name="Calculator" size={24} />
+          <CardHeader className="text-center bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-t-lg">
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
+                <Icon name="Calculator" size={24} className="text-white" />
+              </div>
               Калькулятор токенов Claude Sonnet 4
             </CardTitle>
-            <CardDescription>
-              Рассчитайте стоимость использования Claude Sonnet 4
+            <CardDescription className="text-lg mt-3 text-gray-600 dark:text-gray-300">
+              ✨ Рассчитайте стоимость использования Claude Sonnet 4 ✨
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
