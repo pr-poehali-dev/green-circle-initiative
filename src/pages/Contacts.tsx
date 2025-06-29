@@ -29,7 +29,7 @@ const Contacts = () => {
                 <Icon name="MapPin" size={24} className="text-blue-300" />
                 <div>
                   <h3 className="font-semibold">Адрес</h3>
-                  <p className="text-gray-300">Москва, Россия</p>
+                  <p className="text-gray-300">Владикавказ, Россия</p>
                 </div>
               </div>
 
