@@ -27,7 +27,7 @@ const Header = ({ currentPage, onNavigate }: HeaderProps) => {
                 currentPage === "home" ? "bg-blue-600/30 text-blue-300" : ""
               }`}
             >
-              Главная
+              🏠 Главная
             </button>
             <button
               onClick={() => onNavigate("contacts")}
@@ -35,7 +35,7 @@ const Header = ({ currentPage, onNavigate }: HeaderProps) => {
                 currentPage === "contacts" ? "bg-blue-600/30 text-blue-300" : ""
               }`}
             >
-              Контакты
+              📞 Контакты
             </button>
           </nav>
 
@@ -61,7 +61,7 @@ const Header = ({ currentPage, onNavigate }: HeaderProps) => {
                   currentPage === "home" ? "bg-blue-600/30 text-blue-300" : ""
                 }`}
               >
-                Главная
+                🏠 Главная
               </button>
               <button
                 onClick={() => {
@@ -74,7 +74,7 @@ const Header = ({ currentPage, onNavigate }: HeaderProps) => {
                     : ""
                 }`}
               >
-                Контакты
+                📞 Контакты
               </button>
             </nav>
           </div>
