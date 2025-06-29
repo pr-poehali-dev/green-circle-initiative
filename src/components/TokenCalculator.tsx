@@ -17,6 +17,7 @@ const TokenCalculator = () => {
   const [outputTokens, setOutputTokens] = useState<string>("");
   const [cachingWriteTokens, setCachingWriteTokens] = useState<string>("");
   const [cachingReadTokens, setCachingReadTokens] = useState<string>("");
+  const [cacheReadIterations, setCacheReadIterations] = useState<string>("1");
 
   const rates = {
     input: 3,
@@ -30,15 +31,19 @@ const TokenCalculator = () => {
     return ((tokenCount * rate) / 1000000).toFixed(4);
   };
 
+  const calculateCacheRead = () => {
+    const tokens = parseFloat(cachingReadTokens) || 0;
+    const iterations = parseFloat(cacheReadIterations) || 1;
+    return ((tokens * iterations * rates.cachingRead) / 1000000).toFixed(4);
+  };
+
   const totalCost = () => {
     const inputCost = parseFloat(calculate(inputTokens, rates.input));
     const outputCost = parseFloat(calculate(outputTokens, rates.output));
     const cachingWriteCost = parseFloat(
       calculate(cachingWriteTokens, rates.cachingWrite),
     );
-    const cachingReadCost = parseFloat(
-      calculate(cachingReadTokens, rates.cachingRead),
-    );
+    const cachingReadCost = parseFloat(calculateCacheRead());
 
     return (
       inputCost +
@@ -126,15 +131,27 @@ const TokenCalculator = () => {
                   $0.30/MTok
                 </Badge>
               </Label>
-              <Input
-                id="caching-read-tokens"
-                type="number"
-                placeholder="0"
-                value={cachingReadTokens}
-                onChange={(e) => setCachingReadTokens(e.target.value)}
-              />
+              <div className="flex gap-2">
+                <Input
+                  id="caching-read-tokens"
+                  type="number"
+                  placeholder="0"
+                  value={cachingReadTokens}
+                  onChange={(e) => setCachingReadTokens(e.target.value)}
+                />
+                <div className="flex items-center gap-1 text-sm text-muted-foreground whitespace-nowrap">
+                  ×
+                </div>
+                <Input
+                  type="number"
+                  placeholder="1"
+                  value={cacheReadIterations}
+                  onChange={(e) => setCacheReadIterations(e.target.value)}
+                  className="w-20"
+                />
+              </div>
               <p className="text-sm text-muted-foreground">
-                ${calculate(cachingReadTokens, rates.cachingRead)}
+                ${calculateCacheRead()}
               </p>
             </div>
           </div>
@@ -160,7 +177,7 @@ const TokenCalculator = () => {
               <li>• Input tokens: токены в вашем запросе</li>
               <li>• Output tokens: токены в ответе Claude</li>
               <li>• Prompt Caching Write: запись в кэш промпта</li>
-              <li>• Prompt Caching Read: чтение из кэша промпта</li>
+              <li>• Prompt Caching Read: чтение из кэша промпта × итерации</li>
             </ul>
           </div>
         </CardContent>
