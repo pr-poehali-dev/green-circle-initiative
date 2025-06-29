@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
 const Offer = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="py-8">
       <div className="container mx-auto px-4">
