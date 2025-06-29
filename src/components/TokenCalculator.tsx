@@ -175,12 +175,10 @@ const TokenCalculator = () => {
                 Справка
               </h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• Input tokens: токены в вашем запросе</li>
-                <li>• Output tokens: токены в ответе Claude</li>
-                <li>• Prompt Caching Write: запись в кэш промпта</li>
-                <li>
-                  • Prompt Caching Read: чтение из кэша промпта × итерации
-                </li>
+                <li>• Входящие токены: токены в вашем запросе</li>
+                <li>• Исходящие токены: токены в ответе Claude</li>
+                <li>• Запись в кэш: запись в кэш промпта</li>
+                <li>• Чтение из кэша: чтение из кэша промпта × итерации</li>
               </ul>
             </div>
           </CardContent>
