@@ -160,7 +160,7 @@ const TokenCalculator = () => {
 
           <div className="text-center space-y-2">
             <h3 className="text-lg font-semibold">Общая стоимость</h3>
-            <div className="text-3xl font-bold text-green-600">
+            <div className="text-3xl font-bold text-green-600 my-3">
               ${totalCost()}
             </div>
             <p className="text-sm text-muted-foreground">
