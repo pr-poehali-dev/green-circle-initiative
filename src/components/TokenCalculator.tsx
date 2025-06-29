@@ -70,7 +70,7 @@ const TokenCalculator = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="input-tokens">
-                  Input Tokens
+                  Входящие токены
                   <Badge variant="secondary" className="ml-2">
                     $3/MTok
                   </Badge>
@@ -89,7 +89,7 @@ const TokenCalculator = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="output-tokens">
-                  Output Tokens
+                  Исходящие токены
                   <Badge variant="secondary" className="ml-2">
                     $15/MTok
                   </Badge>
@@ -108,7 +108,7 @@ const TokenCalculator = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="caching-write-tokens">
-                  Prompt Caching Write
+                  Запись в кэш
                   <Badge variant="secondary" className="ml-2">
                     $3.75/MTok
                   </Badge>
@@ -127,7 +127,7 @@ const TokenCalculator = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="caching-read-tokens">
-                  Prompt Caching Read
+                  Чтение из кэша
                   <Badge variant="secondary" className="ml-2">
                     $0.30/MTok
                   </Badge>
