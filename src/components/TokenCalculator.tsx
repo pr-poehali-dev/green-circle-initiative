@@ -60,7 +60,7 @@ const TokenCalculator = () => {
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2">
               <Icon name="Calculator" size={24} />
-              Claude Sonnet 4 Token Calculator
+              Калькулятор токенов Claude Sonnet 4
             </CardTitle>
             <CardDescription>
               Рассчитайте стоимость использования Claude Sonnet 4
