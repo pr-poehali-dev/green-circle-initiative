@@ -13,7 +13,7 @@ const Contacts = () => {
                 <Icon name="Mail" size={24} className="text-blue-300" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-300">info@example.com</p>
+                  <p className="text-gray-300">support@poehali.dev</p>
                 </div>
               </div>
 
@@ -37,7 +37,7 @@ const Contacts = () => {
                 <Icon name="Clock" size={24} className="text-blue-300" />
                 <div>
                   <h3 className="font-semibold">Время работы</h3>
-                  <p className="text-gray-300">Пн-Пт: 9:00 - 18:00</p>
+                  <p className="text-gray-300">Круглосуточно 24/7</p>
                 </div>
               </div>
             </div>
