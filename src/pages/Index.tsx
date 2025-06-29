@@ -21,7 +21,7 @@ const Index = () => {
 
       {/* Анимированный ВАЛЛИ внизу */}
       <div className="fixed bottom-4 left-0 animate-slide-robot">
-        <div className="walle-robot">
+        <div className="walle-robot my-[52px] py-1.5 bg-gray-700">
           {/* Голова робота */}
           <div className="walle-head">
             {/* Глаза */}
