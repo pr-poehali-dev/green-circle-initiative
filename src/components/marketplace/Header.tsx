@@ -10,7 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
-import { HelpCircle, Shield, Heart, MessagesSquareIcon, Package, ShoppingCart } from "lucide-react";
+import {
+  HelpCircle,
+  Shield,
+  Heart,
+  MessagesSquareIcon,
+  Package,
+  ShoppingCart,
+} from "lucide-react";
 import DropdownCartContent from "../customcomponent/DropdownCartContent";
 import { CategoryMenu } from "../customcomponent/CategoryMenu";
 import { ExpandableTabs } from "@/lib/expandable-tabs";
@@ -23,12 +30,24 @@ const Header = () => {
   const [clickedCategory, setClickedCategory] = useState<number | null>(null);
 
   const tabs = [
-    { title: "Избранное", icon: Heart},
-    { title: "Сообщения", icon: MessagesSquareIcon, action: () => navigate("/profile/messages") },
-    { title: "Заказы", icon: Package, action: () => navigate("/profile/orders") },
+    { title: "Избранное", icon: Heart },
+    {
+      title: "Сообщения",
+      icon: MessagesSquareIcon,
+      action: () => navigate("/profile/messages"),
+    },
+    {
+      title: "Заказы",
+      icon: Package,
+      action: () => navigate("/profile/orders"),
+    },
     { title: "Корзина", icon: ShoppingCart, content: <DropdownCartContent /> },
     { type: "separator" },
-    { title: "Поддержка", icon: HelpCircle, action: () => navigate("/profile/messages") },
+    {
+      title: "Поддержка",
+      icon: HelpCircle,
+      action: () => navigate("/profile/messages"),
+    },
     { title: "О нас", icon: Shield, action: () => navigate("/help") },
   ];
 
@@ -157,12 +176,33 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-8 text-gray-600">
-                <a className="hover:text-blue-600" onClick={() => navigate("/admin/register")}>Создать магазин</a>
-                <a className="hover:text-blue-600" onClick={() => navigate("/admin")}>Управление магазином</a>
-                <a href="#" className="hover:text-blue-600">Новинки</a>
-                <a href="#" className="hover:text-blue-600">Для поставщиков</a>
-                <a className="hover:text-blue-600" onClick={() => navigate("/help")}>Помощь</a>
-                <a href="#" className="hover:text-blue-600">Поддержка</a>
+                <a
+                  className="hover:text-blue-600"
+                  onClick={() => navigate("/admin/register")}
+                >
+                  Создать магазин
+                </a>
+                <a
+                  className="hover:text-blue-600"
+                  onClick={() => navigate("/admin")}
+                >
+                  Управление магазином
+                </a>
+                <a href="#" className="hover:text-blue-600">
+                  Новинки
+                </a>
+                <a href="#" className="hover:text-blue-600">
+                  Для поставщиков
+                </a>
+                <a
+                  className="hover:text-blue-600"
+                  onClick={() => navigate("/help")}
+                >
+                  Помощь
+                </a>
+                <a href="#" className="hover:text-blue-600">
+                  Поддержка
+                </a>
                 <div className="flex items-center">
                   <span className="w-2 h-2 bg-yellow-400 rounded-full mr-1" />
                   <span>Светлая</span>
@@ -179,7 +219,11 @@ const Header = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <div className="p-1 hover:bg-gray-100 rounded-lg cursor-pointer transition">
-                      <Icon name="Grid3X3" size={25} className="text-blue-600" />
+                      <Icon
+                        name="Grid3X3"
+                        size={25}
+                        className="text-blue-600"
+                      />
                     </div>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
@@ -199,26 +243,33 @@ const Header = () => {
                   onClick={() => navigate("/")}
                 >
                   <FancyText
-                    gradient={{ from: "#7589C2", to: "#8BC2FC", type: "linear" }}
+                    gradient={{
+                      from: "#7589C2",
+                      to: "#8BC2FC",
+                      type: "linear",
+                    }}
                     animateTo={{ from: "#0045FF", to: "#7580C2" }}
                     animateDuration={2000}
                   >
-                    TRIVOMARKET
+                    ПриветМаркет
                   </FancyText>
                 </h1>
 
-                <Badge variant="secondary" className="ml-3 text-sm px-3 py-1">beta</Badge>
+                <Badge variant="secondary" className="ml-3 text-sm px-3 py-1">
+                  beta
+                </Badge>
               </div>
             </div>
 
             {/* Центр: Поиск */}
             <div className="flex-1 px-10">
               <div className="relative w-full">
-                <Button variant="ghost" size="icon" className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-                  <Icon
-                    name="Search"
-                    size={20}
-                  />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                >
+                  <Icon name="Search" size={20} />
                 </Button>
 
                 <input
@@ -243,15 +294,24 @@ const Header = () => {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
-                  <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer">
+                  <DropdownMenuItem
+                    onClick={() => navigate("/profile")}
+                    className="cursor-pointer"
+                  >
                     <Icon name="User" size={16} className="mr-2" />
                     Профиль
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate("/profile?tab=orders")} className="cursor-pointer">
+                  <DropdownMenuItem
+                    onClick={() => navigate("/profile?tab=orders")}
+                    className="cursor-pointer"
+                  >
                     <Icon name="Package" size={16} className="mr-2" />
                     Заказы
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate("/profile?tab=reviews")} className="cursor-pointer">
+                  <DropdownMenuItem
+                    onClick={() => navigate("/profile?tab=reviews")}
+                    className="cursor-pointer"
+                  >
                     <Icon name="MessageCircle" size={16} className="mr-2" />
                     Мои отзывы
                   </DropdownMenuItem>
