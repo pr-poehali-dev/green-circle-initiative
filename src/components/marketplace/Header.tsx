@@ -251,7 +251,7 @@ const Header = () => {
                     animateTo={{ from: "#0045FF", to: "#7580C2" }}
                     animateDuration={2000}
                   >
-                    ПриветМаркет
+                    ХааайМаркет
                   </FancyText>
                 </h1>
 
