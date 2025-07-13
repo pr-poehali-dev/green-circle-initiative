@@ -1,5 +1,5 @@
 const Hero = () => {
-  const numbers = [1, -2, -3, -4, -5, -6, -7, -8, -9, -0];
+  const numbers = [1, 2, -3, -4, -5, -6, -7, -8, -9, -0];
 
   return (
     <section className="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-20 relative overflow-hidden min-h-screen flex items-center">
