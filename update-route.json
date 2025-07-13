@@ -1,0 +1,20 @@
+{
+  "virtual_hosts": [{
+    "name": "default-host",
+    "authority": ["*"],
+    "routes": [{
+      "name": "default-route",
+      "http": {
+        "match": {
+          "path": {
+            "prefix_match": "/"
+          }
+        },
+        "route": {
+          "backend_group_id": "ds7skilaurbp74misd4j",
+          "upgrade_types": ["websocket"]
+        }
+      }
+    }]
+  }]
+}

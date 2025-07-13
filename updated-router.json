@@ -1,0 +1,43 @@
+{
+  "id": "ds7obo6qlkst2s2khpm8",
+  "name": "poehali-router",
+  "description": "HTTP router for all domains",
+  "folder_id": "b1gkv608kv9ggq4evi46",
+  "virtual_hosts": [
+    {
+      "name": "default-host",
+      "authority": [
+        "*"
+      ],
+      "routes": [
+        {
+          "name": "default-route",
+          "http": {
+            "match": {
+              "path": {
+                "prefix_match": "/"
+              }
+            },
+            "route": {
+              "backend_group_id": "ds7skilaurbp74misd4j",
+              "upgrade_types": [
+                "websocket"
+              ]
+            }
+          }
+        }
+      ],
+      "modify_request_headers": [
+        {
+          "name": "X-Forwarded-Proto",
+          "replace": "https"
+        },
+        {
+          "name": "X-Real-IP",
+          "replace": "$remote_addr"
+        }
+      ]
+    }
+  ],
+  "created_at": "2025-07-12T01:28:29.317485941Z"
+}
