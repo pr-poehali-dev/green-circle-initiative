@@ -44,7 +44,7 @@ const ProductsSection = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-4 font-sans">
-            Наши продукты
+            Наши продукты{" "}
           </h2>
           <p className="text-sm md:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto font-sans">
             Полная линейка сетевого оборудования для построения надежной
