@@ -1,57 +1,24 @@
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import HeroContent from "./hero/HeroContent";
-import HeroImage from "./hero/HeroImage";
-
 const Hero = () => {
-  const { scrollY } = useScroll();
-
-  // Parallax эффекты
-  const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
-
-  // Функция плавного скролла к секции продуктов
-  const scrollToProducts = () => {
-    const productsSection = document.getElementById("products");
-    if (productsSection) {
-      productsSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
-    <section className="bg-gradient-hero text-white py-12 md:py-16 lg:py-20 xl:py-24 relative overflow-hidden min-h-[95vh] flex items-center">
-      {/* Простой градиентный фон */}
-      <motion.div
-        className="absolute inset-0 z-0 bg-gradient-hero"
-        style={{ y: backgroundY }}
-      />
-
-      <motion.div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10 w-full">
-        <motion.div
-          className="grid lg:grid-cols-2 gap-16 items-center min-h-[600px]"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Левая колонка - контент */}
-          <HeroContent onScrollToProducts={scrollToProducts} />
-
-          {/* Правая колонка - изображение/панель */}
-          <HeroImage />
-        </motion.div>
-      </motion.div>
+    <section className="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-20 relative overflow-hidden min-h-screen flex items-center">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 relative z-10 w-full text-center">
+        <h1 className="text-5xl md:text-6xl font-bold mb-8">
+          Числа от 1 до 10
+        </h1>
+        
+        <div className="grid grid-cols-5 gap-6 max-w-2xl mx-auto">
+          {numbers.map((number) => (
+            <div
+              key={number}
+              className="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/30 transition-all duration-300 hover:scale-105"
+            >
+              <span className="text-3xl font-bold">{number}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
