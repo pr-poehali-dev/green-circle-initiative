@@ -47,8 +47,7 @@ const ProductsSection = () => {
             Наши продукты{" "}
           </h2>
           <p className="text-sm md:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto font-sans">
-            Полная линейка сетевого оборудования для построения надежной
-            корпоративной инфраструктуры
+            Сетевое оборудование для корпоративной инфраструктуры
           </p>
         </div>
 
