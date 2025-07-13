@@ -70,12 +70,14 @@ const Partners = () => {
                 </h3>
                 <p className="text-gray-600 mb-4">{partner.description}</p>
                 
-                {hoveredPartner === index && (
-                  <div className="flex items-center justify-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors">
-                    <Icon name="ExternalLink" size={16} />
-                    <span className="text-sm font-medium">{partner.website}</span>
-                  </div>
-                )}
+                <div className="h-6 flex items-center justify-center">
+                  {hoveredPartner === index && (
+                    <div className="flex items-center justify-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors">
+                      <Icon name="ExternalLink" size={16} />
+                      <span className="text-sm font-medium">{partner.website}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))}
