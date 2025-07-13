@@ -1,3 +1,3 @@
-# iden-market-prototype
+# network-solutions-project
 
-Initial repository setup for pr-poehali-dev/iden-market-prototype
+Initial repository setup for pr-poehali-dev/network-solutions-project

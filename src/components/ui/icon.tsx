@@ -1,21 +1,37 @@
+// src/components/ui/icon.tsx
+import React from "react";
 import * as LucideIcons from "lucide-react";
+import type { LucideProps } from "lucide-react";
 
-interface IconProps {
+export interface IconProps extends LucideProps {
+  /** Имя иконки из lucide-react */
   name: keyof typeof LucideIcons;
-  size?: number;
-  className?: string;
+  /** Запасная иконка, если основную не нашли */
   fallback?: keyof typeof LucideIcons;
+  /** SVG title (для a11y и тултипа при наведении) */
+  title?: string;
 }
 
-const Icon = ({
+const Icon: React.FC<IconProps> = ({
   name,
-  size = 24,
-  className = "",
   fallback = "CircleAlert",
-}: IconProps) => {
-  const IconComponent = LucideIcons[name] || LucideIcons[fallback];
+  title,
+  children,
+  ...props
+}) => {
+  // Определяем компонент-иконку
+  const IconComponent =
+    (LucideIcons[name] as React.FC<LucideProps>) ||
+    (LucideIcons[fallback] as React.FC<LucideProps>) ||
+    (() => <svg {...props} />);
 
-  return <IconComponent size={size} className={className} />;
+  // Встраиваем <title> внутрь SVG если передан
+  return (
+    <IconComponent {...props}>
+      {title ? <title>{title}</title> : null}
+      {children}
+    </IconComponent>
+  );
 };
 
 export default Icon;
