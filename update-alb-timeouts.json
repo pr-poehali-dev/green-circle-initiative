@@ -1,0 +1,24 @@
+{
+  "httpRouterId": "ds7obo6qlkst2s2khpm8",
+  "updateMask": "virtualHosts",
+  "virtualHosts": [{
+    "name": "default-host",
+    "authority": ["*"],
+    "routes": [{
+      "name": "default-route",
+      "http": {
+        "match": {
+          "path": {
+            "prefixMatch": "/"
+          }
+        },
+        "route": {
+          "backendGroupId": "ds7skilaurbp74misd4j",
+          "upgradeTypes": ["websocket"],
+          "timeout": "3600s",
+          "idleTimeout": "3600s"
+        }
+      }
+    }]
+  }]
+}
