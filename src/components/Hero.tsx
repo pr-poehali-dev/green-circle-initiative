@@ -1,11 +1,11 @@
 const Hero = () => {
-  const numbers = [1, 2, -3, -4, -5, -6, -7, -8, -9, -0];
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <section className="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-20 relative overflow-hidden min-h-screen flex items-center">
       <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 relative z-10 w-full text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-8">
-          Однозначные отрицательные числа
+          Положительные числа
         </h1>
         
         <div className="grid grid-cols-5 gap-6 max-w-2xl mx-auto">
