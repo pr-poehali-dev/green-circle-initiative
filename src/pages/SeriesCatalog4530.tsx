@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import SeriesCatalog4530Component from "@/components/SeriesCatalog4530";
 
 const SeriesCatalog4530 = () => {
@@ -10,7 +9,7 @@ const SeriesCatalog4530 = () => {
       <main>
         <SeriesCatalog4530Component />
       </main>
-      <Footer />
+
     </div>
   );
 };

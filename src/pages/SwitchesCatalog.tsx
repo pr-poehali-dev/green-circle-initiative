@@ -2,7 +2,6 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import CatalogNavigation from "@/components/CatalogNavigation";
 import {
   Breadcrumb,
@@ -455,7 +454,7 @@ const SwitchesCatalog = () => {
           </div>
         </div>
       </div>
-      <Footer />
+
     </div>
   );
 };
