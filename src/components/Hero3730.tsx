@@ -6,16 +6,16 @@ import { useEffect } from "react";
 // Краткие фичи для правого блока
 const featuresRight = [
   {
-    icon: "Layers3", // или Stack, если такой есть
-    label: "Стек до 8 устройств (10G SFP+)",
+    icon: "Layers3",
+    label: "Интеллектуальная кластеризация до 8 устройств",
   },
   {
     icon: "Zap",
-    label: "PoE/PoE+ для питания устройств",
+    label: "Умное распределение питания PoE/PoE+",
   },
   {
     icon: "Repeat",
-    label: "Высокая доступность: STP, RSTP, MSTP",
+    label: "Непрерывная работа без простоев 24/7",
   },
 ];
 
@@ -60,7 +60,7 @@ const Hero3730 = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Корпоративные коммутаторы доступа и агрегации
+              Интеллектуальные решения для сетей будущего
             </motion.p>
             <motion.h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-2 md:mb-3 leading-tight"
@@ -89,7 +89,7 @@ const Hero3730 = () => {
                   className="text-blue-300 flex-shrink-0"
                 />
                 <span className="text-sm sm:text-base md:text-base lg:text-lg">
-                  Динамическая и статическая маршрутизация: RIP, OSPF, BGP, ISIS
+                  Продвинутая маршрутизация для масштабируемых сетей
                 </span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3 text-blue-100">
@@ -100,7 +100,7 @@ const Hero3730 = () => {
                   className="text-blue-300 flex-shrink-0"
                 />
                 <span className="text-sm sm:text-base md:text-base lg:text-lg">
-                  Безопасность: 802.1X, ACL, MPLS, управление SNMP/SSH
+                  Корпоративная защита данных нового поколения
                 </span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3 text-blue-100">
@@ -111,7 +111,7 @@ const Hero3730 = () => {
                   className="text-blue-300 flex-shrink-0"
                 />
                 <span className="text-sm sm:text-base md:text-base lg:text-lg">
-                  Поддержка IPv4/IPv6, QoS (8 очередей), ZTP
+                  Готовность к сетям будущего с IPv6 и автоматизацией
                 </span>
               </div>
             </motion.div>
@@ -228,7 +228,7 @@ const Hero3730 = () => {
                   />
                 </div>
                 <span className="text-white font-medium text-xs sm:text-sm relative z-10 leading-tight">
-                  Лёгкая интеграция в корпоративные и промышленные сети, поддержка кольцевых топологий, автоматизация и удалённое управление
+                  Мгновенная интеграция, интеллектуальное управление и полная автоматизация развёртывания в любых масштабах
                 </span>
               </motion.div>
             </div>
