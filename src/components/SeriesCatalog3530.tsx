@@ -130,7 +130,7 @@ const SeriesCatalog3530Component = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
-                  — надёжные L2+/L3-коммутаторы
+                  — умные коммутаторы нового поколения
                 </motion.span>
               </motion.h1>
               <motion.p
@@ -139,7 +139,7 @@ const SeriesCatalog3530Component = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                для распределённых корпоративных сетей
+                для цифровой трансформации вашего бизнеса
               </motion.p>
               <motion.p
                 className="text-sm md:text-base lg:text-lg xl:text-xl mb-4 md:mb-6 lg:mb-8 text-blue-100 leading-relaxed max-w-3xl"
@@ -147,8 +147,8 @@ const SeriesCatalog3530Component = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
               >
-                До 760 Вт PoE+, модульные блоки питания, uplink 10G — всё в
-                одной платформе
+                Максимальная мощность 760 Вт PoE+, горячая замена блоков питания,
+                скоростные uplink 10G — будущее сетевой инфраструктуры уже здесь
               </motion.p>
               <motion.div
                 className="flex flex-col sm:flex-row gap-2 md:gap-3 lg:gap-4"
@@ -209,7 +209,7 @@ const SeriesCatalog3530Component = () => {
               Модели серии IDS3530
             </h2>
             <p className="text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 font-sans mb-8">
-              Выберите оптимальную конфигурацию для ваших задач
+              Найдите идеальное решение под масштабы вашего проекта
             </p>
 
             <FilterButtons activeFilter={filter} onFilterChange={setFilter} />
