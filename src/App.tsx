@@ -12,7 +12,7 @@ import SeriesCatalog6010 from "./pages/SeriesCatalog6010";
 import SwitchesCatalog from "./pages/SwitchesCatalog";
 import ModelIDS3530_24P_6X from "./pages/ModelIDS3530_24P_6X";
 import Partners from "./pages/Partners";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFound2";
 
 const queryClient = new QueryClient();
 
