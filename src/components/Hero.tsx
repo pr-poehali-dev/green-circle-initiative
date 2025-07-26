@@ -9,6 +9,14 @@ const Hero = () => {
           <span className="bg-gradient-to-r from-cyan-300 via-blue-200 to-purple-300 bg-clip-text text-transparent animate-pulse">Космические числа!!</span>
         </h1>
         
+        <div className="mb-12">
+          <img 
+            src="https://cdn.poehali.dev/files/cca2c3c7-f026-49ad-915e-bbf6dded08d5.png" 
+            alt="Зеленый фон" 
+            className="w-full max-w-md mx-auto rounded-xl shadow-2xl"
+          />
+        </div>
+
         <div className="grid grid-cols-5 gap-6 max-w-2xl mx-auto">
           {numbers.map((number) => (
             <div
