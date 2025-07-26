@@ -19,7 +19,7 @@ const queryClient = new QueryClient();
 // Логотипы партнеров для предварительной загрузки
 const PARTNER_LOGOS = [
   "https://cdn.poehali.dev/files/71f08bb6-26da-4283-8bca-5f89f31db427.png", // Инфосэл
-  "https://cdn.poehali.dev/files/8bc26615-50dc-4cf3-944f-5ee56b4eada8.png", // Инлайн ГРУП
+  "https://cdn.poehali.dev/files/орлорл8bc26615-50dc-4cf3-944f-5ee56b4eada8.png", // Инлайн ГРУП
   "https://cdn.poehali.dev/files/76dacccf-6833-4e57-9f96-4c08f84f93fa.png", // КРОК
 ];
 
