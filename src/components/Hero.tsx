@@ -16,11 +16,25 @@ const Hero = () => {
               alt="Зеленый фон" 
               className="w-full rounded-xl shadow-2xl"
             />
-            <img 
-              src="https://cdn.poehali.dev/files/3d23f715-4ae5-4c0a-aaa8-d340f3e77c1f.jpg" 
-              alt="Porsche 911" 
-              className="w-full rounded-xl shadow-2xl"
-            />
+            <div className="space-y-6">
+              <img 
+                src="https://cdn.poehali.dev/files/3d23f715-4ae5-4c0a-aaa8-d340f3e77c1f.jpg" 
+                alt="Porsche 911" 
+                className="w-full rounded-xl shadow-2xl"
+              />
+              <div className="grid grid-cols-2 gap-4">
+                <img 
+                  src="https://cdn.poehali.dev/files/5f6447d5-0798-4a0d-bcf8-b1e38ccb276e.png" 
+                  alt="SIM-карта оранжевая" 
+                  className="w-full rounded-xl shadow-lg"
+                />
+                <img 
+                  src="https://cdn.poehali.dev/files/99ad77f2-53d6-4924-aa06-d9b84229768a.jpg" 
+                  alt="SIM-карта фиолетовая" 
+                  className="w-full rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
