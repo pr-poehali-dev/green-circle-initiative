@@ -1,4 +1,3 @@
-// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 export default {
@@ -7,7 +6,7 @@ export default {
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}"
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -18,87 +17,77 @@ export default {
         "2xl": "1400px",
       },
     },
-    fontFamily: {
-      sans: ["Inter", "sans-serif"],
-      montserrat: ["Montserrat", "sans-serif"],
-    },
     extend: {
-      fontSize: {
-        "clamp-xs": "clamp(0.75rem, 2vw, 0.875rem)",
-        "clamp-sm": "clamp(0.875rem, 2.5vw, 1rem)",
-        "clamp-base": "clamp(1rem, 3vw, 1.125rem)",
-        "clamp-lg": "clamp(1.125rem, 3.5vw, 1.25rem)",
-        "clamp-xl": "clamp(1.25rem, 4vw, 1.5rem)",
-        "clamp-2xl": "clamp(1.5rem, 5vw, 2rem)",
-        "clamp-3xl": "clamp(1.875rem, 6vw, 2.5rem)",
-        "clamp-4xl": "clamp(2.25rem, 7vw, 3rem)",
-        "clamp-5xl": "clamp(3rem, 8vw, 4rem)",
-        "39px": "39px",
-        "20px": "20px",
-      },
-      maxWidth: {
-        "text-mobile": "90%",
-        "text-desktop": "70%",
-      },
       colors: {
-        idata: {
-          primary: "#1A2980",
-          blue:    "#0065B3",
-          teal:    "#00B5AD",
-          text:    "#1A1A1A",
-          active:  "#00B5AD",
-        },
-        brand: {
-          primary:   "#0065B3",
-          secondary: "#0078D7",
-          accent:    "#0097B2",
-          blue: {
-            deep: "#0063B2",
-            main: "#0088C5",
-          },
-        },
-        border:      "hsl(var(--border))",
-        input:       "hsl(var(--input))",
-        ring:        "hsl(var(--ring))",
-        background:  "hsl(var(--background))",
-        foreground:  "hsl(var(--foreground))",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT:    "hsl(var(--primary))",
+          DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT:    "hsl(var(--secondary))",
+          DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT:    "hsl(var(--destructive))",
+          DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT:    "hsl(var(--muted))",
+          DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT:    "hsl(var(--accent))",
+          DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT:    "hsl(var(--popover))",
+          DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT:    "hsl(var(--card))",
+          DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
         sidebar: {
-          DEFAULT:              "hsl(var(--sidebar-background))",
-          foreground:           "hsl(var(--sidebar-foreground))",
-          primary:              "hsl(var(--sidebar-primary))",
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
           "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent:               "hsl(var(--sidebar-accent))",
-          "accent-foreground":  "hsl(var(--sidebar-accent-foreground))",
-          border:               "hsl(var(--sidebar-border))",
-          ring:                 "hsl(var(--sidebar-ring))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
+        // МОТОТюмень colors
+        orange: {
+          DEFAULT: "#FF6B35",
+          50: "#FFF4F0",
+          100: "#FFE8DC",
+          200: "#FFD1B8",
+          300: "#FFB48A",
+          400: "#FF8A5B",
+          500: "#FF6B35",
+          600: "#E8521A",
+          700: "#C43E0F",
+          800: "#9F3512",
+          900: "#7A2B0F",
+        },
+        dark: {
+          DEFAULT: "#1A1A1A",
+          50: "#F5F5F5",
+          100: "#E8E8E8",
+          200: "#D1D1D1",
+          300: "#B8B8B8",
+          400: "#6B6B6B",
+          500: "#4A4A4A",
+          600: "#363636",
+          700: "#2B2B2B",
+          800: "#1F1F1F",
+          900: "#1A1A1A",
         },
       },
       borderRadius: {
@@ -106,36 +95,37 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      backgroundImage: {
-        "idata-gradient":    "linear-gradient(to right, #1e3a8a, #0891b2)",
-        "gradient-brand":    "linear-gradient(90deg, #1A2980, #0065B3, #00B5AD)",
-        "gradient-brand-dark":"linear-gradient(90deg, #1A2980, #0065B3, #00B5AD)",
-        "gradient-hero":     "linear-gradient(90deg, #1A2980, #0065B3, #00B5AD)",
-        "gradient-icon":     "linear-gradient(90deg, #1A2980, #0065B3, #00B5AD)",
-        "gradient-footer":   "linear-gradient(to right, #0f172a, #1e293b, #334155)",
-        // вот наш паттерн сетки:
-        "grid-pattern": `
-          linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-        `,
-      },
-      // размер «ячейки» в паттерне
-      backgroundSize: {
-        "grid-20": "20px 20px",
-      },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to:   { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to:   { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up":   "accordion-up 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.3s ease-out",
+        "scale-in": "scale-in 0.2s ease-out",
       },
     },
   },

@@ -1,3 +1,3 @@
-# network-solutions-project
+# mototumen-community-site
 
-Initial repository setup for pr-poehali-dev/network-solutions-project
+Initial repository setup for pr-poehali-dev/mototumen-community-site
