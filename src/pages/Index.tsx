@@ -2,7 +2,7 @@
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <div className="w-16 h-16 bg-purple-500 rounded-full shadow-lg"></div>
     </div>
   );
