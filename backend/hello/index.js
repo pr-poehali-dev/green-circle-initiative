@@ -1,5 +1,8 @@
+const _ = require('lodash');
+
 exports.handler = async (event, context) => {
-    const timestamp = new Date().toISOString();
+    const messages = ['К звёздам готов!', 'Поехали!', 'Космос зовёт!', 'Орбита свободна!'];
+    const randomMessage = _.sample(messages);
     
     return {
         statusCode: 200,
@@ -8,8 +11,8 @@ exports.handler = async (event, context) => {
             'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify({ 
-            message: 'К звёздам готов!',
-            timestamp: timestamp
+            message: randomMessage,
+            timestamp: new Date().toISOString()
         })
     };
 };
