@@ -5,6 +5,6 @@ exports.handler = async (event, context) => {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({ message: 'Космос ждёт!' })
+        body: JSON.stringify({ message: 'Орбита свободна!' })
     };
 };
