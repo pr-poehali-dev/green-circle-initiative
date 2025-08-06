@@ -1,0 +1,10 @@
+{
+  "name": "hello2-function",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "dayjs": "^1.11.10",
+    "pp-tagger": "^2.0.0"
+  }
+}
