@@ -16,14 +16,37 @@ interface Animal {
     name: string;
     description: string;
     habitat: string;
-    abilities: string[];
-    rarity: string;
+    diet: string;
+    size: string;
+    special_ability: string;
 }
 
 export async function handler(event: Event): Promise<Response> {
     try {
-        const animal = generateFantasyAnimal();
+        // Массивы частей для создания выдуманных животных
+        const firstParts = ['Радуж', 'Кристалл', 'Звёзд', 'Облач', 'Огнен', 'Ледян', 'Вихре', 'Молние', 'Туман', 'Свето'];
+        const secondParts = ['ный', 'овый', 'ский', 'ческий', 'ляр', 'ист', 'он', 'ук', 'ель', 'яш'];
+        const animalTypes = ['тигр', 'медведь', 'лис', 'волк', 'заяц', 'енот', 'барсук', 'рысь', 'олень', 'белка'];
         
+        const habitats = ['магические леса', 'хрустальные пещеры', 'облачные вершины', 'радужные долины', 'звёздные равнины', 'туманные болота', 'ледяные замки', 'огненные вулканы'];
+        const diets = ['питается росой и лунным светом', 'ест кристаллы и минералы', 'охотится на призрачных бабочек', 'собирает звёздную пыль', 'питается радужными ягодами', 'ловит облачных рыбок'];
+        const sizes = ['размером с кота', 'величиной с собаку', 'ростом с пони', 'крошечный как хомяк', 'большой как медведь'];
+        const abilities = ['может становиться невидимым', 'умеет летать на короткие расстояния', 'создаёт иллюзии', 'управляет погодой', 'читает мысли', 'предсказывает будущее', 'исцеляет раны', 'меняет цвет шерсти'];
+
+        // Генерируем случайное животное
+        const randomFirst = firstParts[Math.floor(Math.random() * firstParts.length)];
+        const randomSecond = secondParts[Math.floor(Math.random() * secondParts.length)];
+        const randomAnimal = animalTypes[Math.floor(Math.random() * animalTypes.length)];
+        
+        const animal: Animal = {
+            name: `${randomFirst}${randomSecond} ${randomAnimal}`,
+            description: `Удивительное создание с переливающейся шерстью и магическими способностями`,
+            habitat: habitats[Math.floor(Math.random() * habitats.length)],
+            diet: diets[Math.floor(Math.random() * diets.length)],
+            size: sizes[Math.floor(Math.random() * sizes.length)],
+            special_ability: abilities[Math.floor(Math.random() * abilities.length)]
+        };
+
         return {
             statusCode: 200,
             headers: {
@@ -32,9 +55,10 @@ export async function handler(event: Event): Promise<Response> {
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type'
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 success: true,
-                animal 
+                animal: animal,
+                generated_at: new Date().toISOString()
             })
         };
     } catch (error) {
@@ -44,39 +68,10 @@ export async function handler(event: Event): Promise<Response> {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 success: false,
-                error: 'Ошибка создания животного' 
+                error: 'Не удалось создать магическое животное'
             })
         };
     }
-}
-
-function generateFantasyAnimal(): Animal {
-    const prefixes = ['Огненный', 'Ледяной', 'Теневой', 'Радужный', 'Электрический', 'Кристальный', 'Призрачный', 'Золотой'];
-    const animals = ['Волк', 'Медведь', 'Лиса', 'Орёл', 'Дракон', 'Тигр', 'Пантера', 'Единорог', 'Олень', 'Рысь'];
-    const habitats = ['Магический лес', 'Кристальные пещеры', 'Облачные горы', 'Лунные поля', 'Огненные долины', 'Ледяные плато'];
-    const abilities = [
-        'Управление стихиями', 'Телепортация', 'Невидимость', 'Исцеление', 
-        'Предсказание будущего', 'Чтение мыслей', 'Полёт', 'Изменение формы',
-        'Контроль над временем', 'Создание иллюзий'
-    ];
-    const rarities = ['Обычный', 'Редкий', 'Эпический', 'Легендарный', 'Мифический'];
-    
-    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-    const animal = animals[Math.floor(Math.random() * animals.length)];
-    const habitat = habitats[Math.floor(Math.random() * habitats.length)];
-    const rarity = rarities[Math.floor(Math.random() * rarities.length)];
-    
-    // Выбираем 2-3 способности
-    const shuffledAbilities = abilities.sort(() => 0.5 - Math.random());
-    const selectedAbilities = shuffledAbilities.slice(0, Math.floor(Math.random() * 2) + 2);
-    
-    return {
-        name: `${prefix} ${animal}`,
-        description: `Удивительное существо, сочетающее в себе мощь ${animal.toLowerCase()}а и магию ${prefix.toLowerCase()}ого элемента.`,
-        habitat,
-        abilities: selectedAbilities,
-        rarity
-    };
 }
