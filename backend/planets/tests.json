@@ -1,0 +1,18 @@
+{
+  "tests": [
+    {
+      "name": "Generate magical planet",
+      "request": {
+        "httpMethod": "GET",
+        "path": "/",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "expected": {
+        "statusCode": 200,
+        "body_contains": ["success", "planet", "generated_at"]
+      }
+    }
+  ]
+}
