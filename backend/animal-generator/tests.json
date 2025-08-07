@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "Get random animal",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "animal": {
+          "name": "string",
+          "description": "string",
+          "habitat": "string",
+          "diet": "string",
+          "size": "string",
+          "special_ability": "string",
+          "appearance": "string",
+          "sound": "string"
+        },
+        "generated_at": "string"
+      }
+    },
+    {
+      "name": "Method not allowed",
+      "method": "POST",
+      "path": "/",
+      "expectedStatus": 405,
+      "expectedResponse": {
+        "success": false,
+        "error": "Method not allowed"
+      }
+    }
+  ]
+}

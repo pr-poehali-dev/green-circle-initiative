@@ -1,45 +1,45 @@
 import { useState, useEffect } from 'react';
 
-interface Planet {
+interface Animal {
   name: string;
   description: string;
-  atmosphere: string;
-  surface: string;
-  temperature: string;
-  gravity: string;
-  magical_property: string;
-  inhabitants: string;
+  habitat: string;
+  diet: string;
+  size: string;
+  special_ability: string;
+  appearance: string;
+  sound: string;
 }
 
-interface PlanetResponse {
+interface AnimalResponse {
   success: boolean;
-  planet: Planet;
+  animal: Animal;
   generated_at: string;
 }
 
 const Index = () => {
-  const [planet, setPlanet] = useState<Planet | null>(null);
+  const [animal, setAnimal] = useState<Animal | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<string>('');
 
-  const fetchPlanet = async () => {
+  const fetchAnimal = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('https://functions.yandexcloud.net/d4efclr9kbhbp2kefno2');
-      const data: PlanetResponse = await response.json();
+      const response = await fetch('https://functions.yandexcloud.net/d4eam5tjsgqakvc5n7p6');
+      const data: AnimalResponse = await response.json();
       
       if (data.success) {
-        setPlanet(data.planet);
+        setAnimal(data.animal);
         setLastUpdate(new Date().toLocaleTimeString());
       } else {
-        setError('Ошибка при создании планеты');
+        setError('Ошибка при создании животного');
       }
       
     } catch (err) {
-      setError('Ошибка при загрузке планеты');
+      setError('Ошибка при загрузке животного');
       console.error(err);
     } finally {
       setLoading(false);
@@ -47,29 +47,29 @@ const Index = () => {
   };
 
   useEffect(() => {
-    // Загружаем первую планету сразу
-    fetchPlanet();
+    // Загружаем первое животное сразу
+    fetchAnimal();
     
     // Устанавливаем интервал на 5 секунд
     const interval = setInterval(() => {
-      fetchPlanet();
+      fetchAnimal();
     }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-900 via-teal-900 to-blue-900 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">
-            🌌 Генератор Магических Планет
+            🐾 Генератор Выдуманных Животных
           </h1>
-          <p className="text-purple-200">
-            Открывай новые удивительные миры каждые 5 секунд!
+          <p className="text-green-200">
+            Открывай уникальных гибридных существ каждые 5 секунд!
           </p>
           {lastUpdate && (
-            <p className="text-purple-300 text-sm mt-2">
+            <p className="text-green-300 text-sm mt-2">
               Последнее обновление: {lastUpdate}
             </p>
           )}
@@ -79,7 +79,7 @@ const Index = () => {
           {loading && (
             <div className="text-center">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-              <p className="text-white mt-2">Создаём новую магическую планету...</p>
+              <p className="text-white mt-2">Создаём новое магическое существо...</p>
             </div>
           )}
 
@@ -89,70 +89,70 @@ const Index = () => {
             </div>
           )}
 
-          {planet && !loading && (
+          {animal && !loading && (
             <div className="space-y-6">
               <div className="text-center">
-                <div className="text-6xl mb-4">🪐</div>
+                <div className="text-6xl mb-4">🦄</div>
                 <h2 className="text-3xl font-bold text-white mb-2">
-                  {planet.name}
+                  {animal.name}
                 </h2>
-                <div className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-purple-500/30 text-purple-200">
-                  Магическая планета
+                <div className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-green-500/30 text-green-200">
+                  Гибридное существо
                 </div>
               </div>
 
-              <div className="border-2 rounded-xl p-6 border-purple-400/50 bg-white/5">
-                <p className="text-purple-100 text-lg mb-6 text-center font-medium">
-                  {planet.description}
+              <div className="border-2 rounded-xl p-6 border-green-400/50 bg-white/5">
+                <p className="text-green-100 text-lg mb-6 text-center font-medium">
+                  {animal.description}
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div>
                       <h3 className="text-white font-semibold mb-2 flex items-center">
-                        🌬️ Атмосфера
+                        🏔️ Место обитания
                       </h3>
-                      <p className="text-purple-200 text-sm">{planet.atmosphere}</p>
+                      <p className="text-green-200 text-sm">{animal.habitat}</p>
                     </div>
 
                     <div>
                       <h3 className="text-white font-semibold mb-2 flex items-center">
-                        🏔️ Поверхность
+                        🍃 Питание
                       </h3>
-                      <p className="text-purple-200 text-sm">{planet.surface}</p>
+                      <p className="text-green-200 text-sm">{animal.diet}</p>
                     </div>
 
                     <div>
                       <h3 className="text-white font-semibold mb-2 flex items-center">
-                        🌡️ Температура
+                        📏 Размер
                       </h3>
-                      <p className="text-purple-200 text-sm">{planet.temperature}</p>
+                      <p className="text-green-200 text-sm">{animal.size}</p>
                     </div>
 
                     <div>
                       <h3 className="text-white font-semibold mb-2 flex items-center">
-                        🌍 Гравитация
+                        🎵 Звуки
                       </h3>
-                      <p className="text-purple-200 text-sm">{planet.gravity}</p>
+                      <p className="text-green-200 text-sm">{animal.sound}</p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <div>
                       <h3 className="text-white font-semibold mb-2 flex items-center">
-                        ✨ Магическое свойство
+                        ✨ Особая способность
                       </h3>
-                      <div className="bg-indigo-500/30 text-indigo-200 p-3 rounded-lg text-sm border border-indigo-400/30">
-                        {planet.magical_property}
+                      <div className="bg-teal-500/30 text-teal-200 p-3 rounded-lg text-sm border border-teal-400/30">
+                        {animal.special_ability}
                       </div>
                     </div>
 
                     <div>
                       <h3 className="text-white font-semibold mb-2 flex items-center">
-                        👥 Обитатели
+                        🌈 Внешность
                       </h3>
-                      <div className="bg-pink-500/30 text-pink-200 p-3 rounded-lg text-sm border border-pink-400/30">
-                        {planet.inhabitants}
+                      <div className="bg-blue-500/30 text-blue-200 p-3 rounded-lg text-sm border border-blue-400/30">
+                        {animal.appearance}
                       </div>
                     </div>
                   </div>
@@ -161,19 +161,19 @@ const Index = () => {
 
               <div className="text-center">
                 <button
-                  onClick={fetchPlanet}
+                  onClick={fetchAnimal}
                   disabled={loading}
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-6 py-3 rounded-full transition-all transform hover:scale-105"
+                  className="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-6 py-3 rounded-full transition-all transform hover:scale-105"
                 >
-                  🎲 Создать новую планету
+                  🎲 Создать новое существо
                 </button>
               </div>
             </div>
           )}
         </div>
 
-        <div className="text-center mt-8 text-purple-300 text-sm">
-          <p>🚀 Новая планета появляется автоматически каждые 5 секунд</p>
+        <div className="text-center mt-8 text-green-300 text-sm">
+          <p>🚀 Новое существо появляется автоматически каждые 5 секунд</p>
           <p className="mt-1">Или нажми кнопку, чтобы создать прямо сейчас!</p>
         </div>
       </div>
