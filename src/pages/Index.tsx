@@ -34,20 +34,37 @@ const Index = () => {
     }
     
     setIsTyping(true);
-    setDisplayedName('');
     
-    let index = 0;
-    typewriterRef.current = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedName(prev => prev + text[index]);
-        index++;
+    // Сначала стираем текст
+    const currentText = displayedName;
+    let eraseIndex = currentText.length;
+    
+    const eraseTimer = setInterval(() => {
+      if (eraseIndex > 0) {
+        setDisplayedName(currentText.substring(0, eraseIndex - 1));
+        eraseIndex--;
       } else {
-        setIsTyping(false);
-        if (typewriterRef.current) {
-          clearInterval(typewriterRef.current);
-        }
+        clearInterval(eraseTimer);
+        
+        // Пауза перед печатанием
+        setTimeout(() => {
+          let typeIndex = 0;
+          
+          // Теперь печатаем новый текст
+          typewriterRef.current = setInterval(() => {
+            if (typeIndex < text.length) {
+              setDisplayedName(text.substring(0, typeIndex + 1));
+              typeIndex++;
+            } else {
+              setIsTyping(false);
+              if (typewriterRef.current) {
+                clearInterval(typewriterRef.current);
+              }
+            }
+          }, 80);
+        }, 300);
       }
-    }, 100);
+    }, 60);
   };
 
   const fetchAnimal = async () => {
