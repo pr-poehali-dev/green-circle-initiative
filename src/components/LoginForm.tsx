@@ -7,9 +7,9 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useAuth();
+  const { login, isLoading } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
@@ -18,7 +18,7 @@ export default function LoginForm() {
       return;
     }
 
-    const success = login(username, password);
+    const success = await login(username, password);
     if (!success) {
       setError('Неверный логин или пароль');
     }
@@ -93,16 +93,26 @@ export default function LoginForm() {
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 flex items-center justify-center gap-2"
+            disabled={isLoading}
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Icon name="LogIn" size={20} />
-            Войти
+            {isLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                Вход...
+              </>
+            ) : (
+              <>
+                <Icon name="LogIn" size={20} />
+                Войти
+              </>
+            )}
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-purple-200 text-sm">
-            Тестовые данные: admin / 1234
+            Введите ваши учетные данные для входа
           </p>
         </div>
       </div>

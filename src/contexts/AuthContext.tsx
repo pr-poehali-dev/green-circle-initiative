@@ -7,31 +7,57 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
-  login: (username: string, password: string) => boolean;
+  login: (username: string, password: string) => Promise<boolean>;
   logout: () => void;
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Хардкодные креды (позже перенесем в БД)
-const ADMIN_CREDENTIALS = {
-  username: 'admin',
-  password: '1234'
-};
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const login = (username: string, password: string): boolean => {
-    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-      setUser({
-        username,
-        isAuthenticated: true
+  const login = async (username: string, password: string): Promise<boolean> => {
+    setIsLoading(true);
+    
+    try {
+      // Получаем URL для функции auth из func2url.json
+      const response = await fetch('/backend/func2url.json');
+      const urls = await response.json();
+      const authUrl = urls.auth;
+      
+      if (!authUrl) {
+        console.error('Auth URL not found');
+        return false;
+      }
+
+      const authResponse = await fetch(authUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       });
-      return true;
+
+      const result = await authResponse.json();
+
+      if (result.success) {
+        setUser({
+          username: result.username,
+          isAuthenticated: true
+        });
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
+    } finally {
+      setIsLoading(false);
     }
-    return false;
   };
 
   const logout = () => {
@@ -41,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAuthenticated = !!user?.isAuthenticated;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

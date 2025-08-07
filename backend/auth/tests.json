@@ -1,0 +1,73 @@
+{
+  "tests": [
+    {
+      "name": "Successful login with valid credentials",
+      "method": "POST",
+      "path": "/",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "username": "admin",
+        "password": "1234"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "username": "admin"
+      }
+    },
+    {
+      "name": "Failed login with invalid credentials",
+      "method": "POST",
+      "path": "/",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "username": "admin",
+        "password": "wrong"
+      },
+      "expectedStatus": 401,
+      "expectedResponse": {
+        "success": false,
+        "message": "Invalid credentials"
+      }
+    },
+    {
+      "name": "Failed login with missing credentials",
+      "method": "POST",
+      "path": "/",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "username": "admin"
+      },
+      "expectedStatus": 400,
+      "expectedResponse": {
+        "success": false,
+        "message": "Username and password are required"
+      }
+    },
+    {
+      "name": "Method not allowed for GET",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 405,
+      "expectedResponse": {
+        "success": false,
+        "message": "Method not allowed"
+      }
+    },
+    {
+      "name": "CORS preflight request",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "message": "OK"
+      }
+    }
+  ]
+}
