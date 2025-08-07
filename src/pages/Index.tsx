@@ -139,11 +139,7 @@ const Index = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
 
-          {lastUpdate && (
-            <p className="text-purple-300 text-sm mt-2">
-              Последнее обновление: {lastUpdate}
-            </p>
-          )}
+
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl min-h-[600px]">
