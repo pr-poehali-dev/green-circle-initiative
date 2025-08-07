@@ -1,13 +1,14 @@
 {
   "tests": [
     {
-      "name": "Get random animal",
+      "name": "Get random animal with dependencies",
       "method": "GET",
       "path": "/",
       "expectedStatus": 200,
       "expectedResponse": {
         "success": true,
         "animal": {
+          "id": "string",
           "name": "string",
           "description": "string",
           "habitat": "string",
@@ -15,7 +16,9 @@
           "size": "string",
           "special_ability": "string",
           "appearance": "string",
-          "sound": "string"
+          "sound": "string",
+          "rarity": "string",
+          "discovery_year": "number"
         },
         "generated_at": "string"
       }

@@ -1,0 +1,9 @@
+{
+  "name": "animal-generator",
+  "version": "1.0.0",
+  "description": "Генератор выдуманных животных с UUID и цветным логированием",
+  "main": "index.ts",
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
+}
