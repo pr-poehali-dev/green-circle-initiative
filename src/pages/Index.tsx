@@ -172,7 +172,7 @@ const Index = () => {
                 <div className="h-12 mb-2">
                   <h2 className="text-3xl font-bold text-white inline-block">
                     {displayedName}
-                    {isTyping && <span className="animate-pulse border-r-2 border-white ml-1">|</span>}
+                    {isTyping && <span className="border-r-2 border-white ml-1"></span>}
                   </h2>
                 </div>
                 <div className="transition-opacity duration-300" style={{ opacity: isTyping ? 0.5 : 1 }}>
