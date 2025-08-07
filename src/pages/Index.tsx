@@ -138,9 +138,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <p className="text-purple-200">
-            Открывай удивительных гибридов реальных животных каждые 5 секунд!
-          </p>
+
           {lastUpdate && (
             <p className="text-purple-300 text-sm mt-2">
               Последнее обновление: {lastUpdate}
