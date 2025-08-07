@@ -135,7 +135,7 @@ const Index = () => {
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl min-h-[600px]">
-          {loading && (
+          {loading && !animal && (
             <div className="text-center">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
               <p className="text-white mt-2">Создаём нового гибридного животного...</p>
@@ -148,7 +148,7 @@ const Index = () => {
             </div>
           )}
 
-          {animal && !loading && (
+          {animal && (
             <div className="space-y-6">
               <div className="text-center">
                 <div className="text-6xl mb-4">🦄</div>
