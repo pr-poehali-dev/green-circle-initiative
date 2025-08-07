@@ -86,8 +86,8 @@ const Index = () => {
           // Если животное уже есть и имя изменилось, запускаем печатающую машинку
           typewriterEffect(newAnimal.name);
         } else if (!animal) {
-          // Первая загрузка - сразу показываем имя
-          setDisplayedName(newAnimal.name);
+          // Первая загрузка - тоже запускаем печатающую машинку
+          typewriterEffect(newAnimal.name);
         }
         
         setAnimal(newAnimal);
