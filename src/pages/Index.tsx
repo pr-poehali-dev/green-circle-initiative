@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import Icon from '@/components/ui/icon';
 
 interface HybridAnimal {
   name: string;
@@ -20,6 +22,7 @@ interface AnimalResponse {
 }
 
 const Index = () => {
+  const { logout, user } = useAuth();
   const [animal, setAnimal] = useState<HybridAnimal | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -137,9 +140,18 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-6">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-
-
+        <div className="flex justify-between items-center mb-8">
+          <div></div>
+          <div className="flex items-center gap-4">
+            <span className="text-white/70">Добро пожаловать, {user?.username}</span>
+            <button
+              onClick={logout}
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors"
+            >
+              <Icon name="LogOut" size={18} />
+              Выйти
+            </button>
+          </div>
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl min-h-[600px]">
