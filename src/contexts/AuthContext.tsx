@@ -22,41 +22,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (username: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     
-    try {
-      // Получаем URL для функции auth из func2url.json
-      const response = await fetch('/backend/func2url.json');
-      const urls = await response.json();
-      const authUrl = urls.auth;
-      
-      if (!authUrl) {
-        console.error('Auth URL not found');
-        return false;
-      }
-
-      const authResponse = await fetch(authUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+    // Имитируем задержку сети
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Простая заглушка для авторизации
+    if (username === 'admin' && password === '1234') {
+      setUser({
+        username,
+        isAuthenticated: true
       });
-
-      const result = await authResponse.json();
-
-      if (result.success) {
-        setUser({
-          username: result.username,
-          isAuthenticated: true
-        });
-        return true;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      return false;
-    } finally {
       setIsLoading(false);
+      return true;
+    } else {
+      setIsLoading(false);
+      return false;
     }
   };
 

@@ -112,7 +112,7 @@ export default function LoginForm() {
 
         <div className="mt-6 text-center">
           <p className="text-purple-200 text-sm">
-            Введите ваши учетные данные для входа
+            Тестовые данные: admin / 1234
           </p>
         </div>
       </div>
