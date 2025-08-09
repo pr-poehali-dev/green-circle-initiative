@@ -146,10 +146,22 @@ export default function LoginForm() {
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center space-y-3">
           <p className="text-purple-200 text-sm">
             Тестовые данные: admin / 1234
           </p>
+          
+          <button
+            onClick={async () => {
+              const response = await fetch('/backend/func2url.json');
+              const urls = await response.json();
+              if (urls.debug) window.open(urls.debug, '_blank');
+            }}
+            className="flex items-center gap-2 mx-auto px-3 py-2 bg-gray-600/30 hover:bg-gray-600/50 rounded-lg text-white/70 hover:text-white text-sm transition-colors"
+          >
+            <Icon name="Bug" size={16} />
+            Открыть Debug
+          </button>
         </div>
         </div>
       )}
