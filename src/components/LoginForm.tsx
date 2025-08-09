@@ -6,34 +6,34 @@ export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [compliment, setCompliment] = useState('Вы прекрасны! ✨');
-  const [isComplimentLoaded, setIsComplimentLoaded] = useState(false);
+  const [motivationalPhrase, setMotivationalPhrase] = useState('Вы прекрасны! ✨');
+  const [isPhraseLoaded, setIsPhraseLoaded] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading } = useAuth();
 
   useEffect(() => {
-    const fetchCompliment = async () => {
+    const fetchMotivationalPhrase = async () => {
       try {
         const response = await fetch('/backend/func2url.json');
         const urls = await response.json();
-        const complimentUrl = urls.compliments;
+        const motivateUrl = urls.motivate;
         
-        if (complimentUrl) {
-          const complimentResponse = await fetch(complimentUrl);
-          const result = await complimentResponse.json();
-          setCompliment(result.compliment);
+        if (motivateUrl) {
+          const phraseResponse = await fetch(motivateUrl);
+          const result = await phraseResponse.json();
+          setMotivationalPhrase(result.phrase);
         }
       } catch (error) {
-        console.log('Не удалось загрузить комплимент, используем стандартный');
+        console.log('Не удалось загрузить мотивирующую фразу, используем стандартную');
       } finally {
         // Даём немного времени для плавного появления
         setTimeout(() => {
-          setIsComplimentLoaded(true);
+          setIsPhraseLoaded(true);
         }, 100);
       }
     };
     
-    fetchCompliment();
+    fetchMotivationalPhrase();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,7 +53,7 @@ export default function LoginForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-6">
-      {!isComplimentLoaded ? (
+      {!isPhraseLoaded ? (
         // Лоадер
         <div className="flex flex-col items-center gap-4">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-white/20 border-t-white"></div>
@@ -61,14 +61,14 @@ export default function LoginForm() {
         </div>
       ) : (
         <div className={`bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl max-w-md w-full transition-all duration-700 ${
-          isComplimentLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          isPhraseLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}>
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <Icon name="Lock" size={32} className="text-white" />
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">
-            {compliment}
+            {motivationalPhrase}
           </h1>
           <p className="text-purple-200">
             Введите ваши учетные данные

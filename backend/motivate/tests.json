@@ -1,0 +1,25 @@
+{
+  "tests": [
+    {
+      "name": "Get motivational phrase",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "phrase": "string",
+        "request_id": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "POST request also works",
+      "method": "POST", 
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "phrase": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
