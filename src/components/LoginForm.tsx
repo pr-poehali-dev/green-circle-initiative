@@ -6,28 +6,28 @@ export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [greeting, setGreeting] = useState('Вход в систему');
+  const [compliment, setCompliment] = useState('Вы прекрасны! ✨');
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading } = useAuth();
 
   useEffect(() => {
-    const fetchGreeting = async () => {
+    const fetchCompliment = async () => {
       try {
         const response = await fetch('/backend/func2url.json');
         const urls = await response.json();
-        const greetingUrl = urls.greeting;
+        const complimentUrl = urls.compliments;
         
-        if (greetingUrl) {
-          const greetingResponse = await fetch(greetingUrl);
-          const result = await greetingResponse.json();
-          setGreeting(result.greeting);
+        if (complimentUrl) {
+          const complimentResponse = await fetch(complimentUrl);
+          const result = await complimentResponse.json();
+          setCompliment(result.compliment);
         }
       } catch (error) {
-        console.log('Не удалось загрузить приветствие, используем стандартное');
+        console.log('Не удалось загрузить комплимент, используем стандартный');
       }
     };
     
-    fetchGreeting();
+    fetchCompliment();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,7 +53,7 @@ export default function LoginForm() {
             <Icon name="Lock" size={32} className="text-white" />
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">
-            {greeting}
+            {compliment}
           </h1>
           <p className="text-purple-200">
             Введите ваши учетные данные

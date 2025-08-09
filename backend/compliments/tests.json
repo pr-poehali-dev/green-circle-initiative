@@ -1,0 +1,17 @@
+{
+  "tests": [
+    {
+      "name": "Get random compliment",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "POST also works",
+      "method": "POST", 
+      "path": "/",
+      "body": {},
+      "expectedStatus": 200
+    }
+  ]
+}
