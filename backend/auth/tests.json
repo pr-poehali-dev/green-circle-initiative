@@ -1,0 +1,51 @@
+{
+  "tests": [
+    {
+      "name": "Get available users info",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "available_users": [],
+        "usage": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Valid admin login",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "admin",
+        "password": "1234"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "message": "string",
+        "token": "string",
+        "user": {
+          "username": "admin",
+          "name": "string",
+          "role": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Invalid login credentials",
+      "method": "POST", 
+      "path": "/",
+      "body": {
+        "username": "wrong",
+        "password": "wrong"
+      },
+      "expectedStatus": 401,
+      "expectedBody": {
+        "success": false,
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface User {
   username: string;
+  name: string;
+  role: string;
   isAuthenticated: boolean;
 }
 
@@ -22,18 +24,51 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (username: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     
-    // Имитируем задержку сети
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Простая заглушка для авторизации
-    if (username === 'admin' && password === '1234') {
-      setUser({
-        username,
-        isAuthenticated: true
+    try {
+      // Получаем URL функции аутентификации
+      const response = await fetch('/backend/func2url.json');
+      const urls = await response.json();
+      const authUrl = urls.auth;
+      
+      if (!authUrl) {
+        setIsLoading(false);
+        return false;
+      }
+      
+      // Отправляем запрос на аутентификацию
+      const authResponse = await fetch(authUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username,
+          password
+        })
       });
-      setIsLoading(false);
-      return true;
-    } else {
+      
+      const result = await authResponse.json();
+      
+      if (result.success) {
+        setUser({
+          username: result.user.username,
+          name: result.user.name,
+          role: result.user.role,
+          isAuthenticated: true
+        });
+        
+        // Сохраняем токен в localStorage для будущих запросов
+        localStorage.setItem('auth_token', result.token);
+        
+        setIsLoading(false);
+        return true;
+      } else {
+        setIsLoading(false);
+        return false;
+      }
+      
+    } catch (error) {
+      console.error('Ошибка аутентификации:', error);
       setIsLoading(false);
       return false;
     }
@@ -41,6 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('auth_token');
   };
 
   const isAuthenticated = !!user?.isAuthenticated;
