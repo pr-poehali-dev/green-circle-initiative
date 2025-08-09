@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Icon from '@/components/ui/icon';
 
@@ -6,8 +6,29 @@ export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [greeting, setGreeting] = useState('Вход в систему');
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading } = useAuth();
+
+  useEffect(() => {
+    const fetchGreeting = async () => {
+      try {
+        const response = await fetch('/backend/func2url.json');
+        const urls = await response.json();
+        const greetingUrl = urls.greeting;
+        
+        if (greetingUrl) {
+          const greetingResponse = await fetch(greetingUrl);
+          const result = await greetingResponse.json();
+          setGreeting(result.greeting);
+        }
+      } catch (error) {
+        console.log('Не удалось загрузить приветствие, используем стандартное');
+      }
+    };
+    
+    fetchGreeting();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +53,7 @@ export default function LoginForm() {
             <Icon name="Lock" size={32} className="text-white" />
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">
-            Вход в систему
+            {greeting}
           </h1>
           <p className="text-purple-200">
             Введите ваши учетные данные

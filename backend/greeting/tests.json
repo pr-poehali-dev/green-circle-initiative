@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Получение случайного приветствия",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "greeting": "*"
+      },
+      "expectedHeaders": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}
