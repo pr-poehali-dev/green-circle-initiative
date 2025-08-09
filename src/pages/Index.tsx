@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Icon from '@/components/ui/icon';
+import DebugViewer from '@/components/DebugViewer';
 
 interface HybridAnimal {
   name: string;
@@ -23,6 +24,7 @@ interface AnimalResponse {
 
 const Index = () => {
   const { logout, user } = useAuth();
+  const [showDebug, setShowDebug] = useState(false);
   const [animal, setAnimal] = useState<HybridAnimal | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -143,6 +145,13 @@ const Index = () => {
         <div className="flex justify-between items-center mb-8">
           <div></div>
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => setShowDebug(!showDebug)}
+              className="flex items-center gap-2 px-3 py-2 bg-gray-600/50 hover:bg-gray-600/70 rounded-lg text-white text-sm transition-colors"
+            >
+              <Icon name="Bug" size={16} />
+              Debug
+            </button>
             <span className="text-white/70">Добро пожаловать, {user?.username}</span>
             <button
               onClick={logout}
@@ -279,6 +288,12 @@ const Index = () => {
           <p>🧬 Новое гибридное животное появляется автоматически каждые 5 секунд</p>
           <p className="mt-1">Или нажми кнопку, чтобы создать прямо сейчас!</p>
         </div>
+        
+        {showDebug && (
+          <div className="mt-8">
+            <DebugViewer />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "name": "GET request returns HTML debug page",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "POST request returns JSON debug info",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "test": "data",
+        "number": 123
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "event": {},
+        "context_info": {},
+        "event_keys": []
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
