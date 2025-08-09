@@ -7,6 +7,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [compliment, setCompliment] = useState('Вы прекрасны! ✨');
+  const [isComplimentLoaded, setIsComplimentLoaded] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading } = useAuth();
 
@@ -24,6 +25,11 @@ export default function LoginForm() {
         }
       } catch (error) {
         console.log('Не удалось загрузить комплимент, используем стандартный');
+      } finally {
+        // Даём немного времени для плавного появления
+        setTimeout(() => {
+          setIsComplimentLoaded(true);
+        }, 100);
       }
     };
     
@@ -47,7 +53,16 @@ export default function LoginForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-6">
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl max-w-md w-full">
+      {!isComplimentLoaded ? (
+        // Лоадер
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-white/20 border-t-white"></div>
+          <p className="text-white/70 text-sm">Загружаем...</p>
+        </div>
+      ) : (
+        <div className={`bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl max-w-md w-full transition-all duration-700 ${
+          isComplimentLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        }`}>
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <Icon name="Lock" size={32} className="text-white" />
@@ -136,7 +151,8 @@ export default function LoginForm() {
             Тестовые данные: admin / 1234
           </p>
         </div>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
