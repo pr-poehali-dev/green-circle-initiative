@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Icon from '@/components/ui/icon';
 import DebugViewer from '@/components/DebugViewer';
 import ReviewsWidget from '@/components/ReviewsWidget';
+import AuthModal from '@/components/AuthModal';
 
 interface HybridAnimal {
   name: string;
@@ -35,6 +36,10 @@ const Index = () => {
   const [testLoading, setTestLoading] = useState(false);
   const [dbResult, setDbResult] = useState<object | null>(null);
   const [dbLoading, setDbLoading] = useState(false);
+  
+  // Auth state
+  const [user, setUser] = useState<{id: number, username: string, email: string, name: string} | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const typewriterEffect = (text: string) => {
     if (typewriterRef.current) {
@@ -190,8 +195,34 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <div></div>
+          <div>
+            <h1 className="text-3xl font-bold text-white">Добро пожаловать!</h1>
+            {user && <p className="text-purple-300">Привет, {user.name}! 👋</p>}
+          </div>
           <div className="flex items-center gap-4">
+            {user ? (
+              <div className="flex items-center gap-3">
+                <div className="text-white text-sm">
+                  <div className="font-medium">{user.name}</div>
+                  <div className="text-white/70 text-xs">@{user.username}</div>
+                </div>
+                <button
+                  onClick={() => setUser(null)}
+                  className="flex items-center gap-2 px-3 py-2 bg-red-600/50 hover:bg-red-600/70 rounded-lg text-white text-sm transition-colors"
+                >
+                  <Icon name="LogOut" size={16} />
+                  Выйти
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowAuthModal(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600/50 hover:bg-purple-600/70 rounded-lg text-white text-sm transition-colors"
+              >
+                <Icon name="User" size={16} />
+                Войти
+              </button>
+            )}
             <button
               onClick={() => setShowDebug(!showDebug)}
               className="flex items-center gap-2 px-3 py-2 bg-gray-600/50 hover:bg-gray-600/70 rounded-lg text-white text-sm transition-colors"
@@ -199,7 +230,6 @@ const Index = () => {
               <Icon name="Bug" size={16} />
               Debug
             </button>
-            <span className="text-white/70">Тест бэкенд-систем</span>
           </div>
         </div>
 
@@ -266,6 +296,15 @@ const Index = () => {
           </div>
         )}
       </div>
+
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onLoginSuccess={(userData) => {
+          setUser(userData);
+          setShowAuthModal(false);
+        }}
+      />
     </div>
   );
 };

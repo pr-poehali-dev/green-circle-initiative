@@ -1,4 +1,6 @@
 {
+  "login": "https://functions.yandexcloud.net/d4e90daonuoc1a6ujvg8",
+  "register": "https://functions.yandexcloud.net/d4enrloj9mnnvkju7ar9",
   "get-reviews": "https://functions.yandexcloud.net/d4ejatogf4t0gf7dl6b8",
   "db-tables": "https://functions.yandexcloud.net/d4e1i9v478qu3afp947l",
   "debug": "https://functions.yandexcloud.net/d4ee6i5hjma6q6fpsc1g",
