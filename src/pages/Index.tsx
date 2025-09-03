@@ -114,11 +114,20 @@ const Index = () => {
   const testBackend = async () => {
     setTestLoading(true);
     try {
-      const response = await fetch('https://functions.yandexcloud.net/d4er2v1m1mb9tupls4l2');
+      // Используем рабочую debug функцию
+      const response = await fetch('https://functions.yandexcloud.net/d4e137fgkriia4jq3fb1');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       setTestResult(data);
     } catch (err) {
-      setTestResult({ error: 'Ошибка вызова функции' });
+      setTestResult({ 
+        error: 'Ошибка вызова функции',
+        details: err instanceof Error ? err.message : 'Неизвестная ошибка'
+      });
     } finally {
       setTestLoading(false);
     }
@@ -306,7 +315,7 @@ const Index = () => {
               disabled={testLoading}
               className="bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white px-4 py-2 rounded-lg transition-colors"
             >
-              {testLoading ? 'Тестируем...' : 'Протестировать SIMPLE_TEST'}
+              {testLoading ? 'Тестируем...' : 'Протестировать Debug функцию'}
             </button>
           </div>
           {testResult && (

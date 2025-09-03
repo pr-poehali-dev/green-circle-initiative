@@ -10,33 +10,28 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     Returns: HTTP response with API key status
     '''
     
-    method: str = event.get('httpMethod', 'GET')
+    # Get SIMPLE_TEST from environment
+    test_var = os.environ.get('SIMPLE_TEST', 'Not found')
     
-    if method == 'GET':
-        # Get SIMPLE_TEST from environment
-        test_var = os.environ.get('SIMPLE_TEST', 'Not found')
-        
-        result = {
-            'message': 'Simple test successful!',
-            'test_var_status': 'Found' if test_var != 'Not found' else 'Not found',
-            'test_var_value': test_var,
-            'var_length': len(test_var),
-            'status': 'success',
-            'request_id': context.request_id
-        }
-        
-        return {
-            'statusCode': 200,
-            'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            'isBase64Encoded': False,
-            'body': json.dumps(result)
-        }
+    result = {
+        'message': 'Simple test successful!',
+        'test_var_status': 'Found' if test_var != 'Not found' else 'Not found',
+        'test_var_value': test_var,
+        'var_length': len(test_var),
+        'status': 'success',
+        'timestamp': '2025-09-03T12:00:00Z',
+        'request_id': getattr(context, 'request_id', 'unknown'),
+        'function_name': getattr(context, 'function_name', 'unknown')
+    }
     
     return {
-        'statusCode': 405,
-        'headers': {'Content-Type': 'application/json'},
-        'body': json.dumps({'error': 'Method not allowed'})
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        'isBase64Encoded': False,
+        'body': json.dumps(result, indent=2, ensure_ascii=False, default=str)
     }
