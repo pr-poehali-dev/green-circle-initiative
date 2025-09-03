@@ -13,13 +13,14 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     method: str = event.get('httpMethod', 'GET')
     
     if method == 'GET':
-        # Get BACKEND_TEST from environment
-        test_var_value = os.environ.get('BACKEND_TEST', 'Variable not found')
+        # Get API_KEY_1 from environment
+        api_key_value = os.environ.get('API_KEY_1', 'Variable not found')
         
         result = {
-            'test_var': test_var_value,
+            'api_key': api_key_value[:10] + '...' if len(api_key_value) > 10 else api_key_value,
+            'key_length': len(api_key_value),
             'status': 'success',
-            'message': 'Environment variable retrieved successfully'
+            'message': 'API key retrieved successfully'
         }
         
         return {

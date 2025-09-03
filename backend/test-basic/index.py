@@ -3,7 +3,7 @@ from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Simple test endpoint that returns current timestamp and status
+    Business: Basic test endpoint without environment variables
     Args: event - dict with HTTP request data
           context - object with request metadata  
     Returns: HTTP response with test data
@@ -12,12 +12,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     method: str = event.get('httpMethod', 'GET')
     
     if method == 'GET':
-        import datetime
-        
         result = {
-            'message': 'Backend function is working!',
-            'timestamp': datetime.datetime.now().isoformat(),
+            'message': 'Backend function working!',
             'status': 'success',
+            'function_name': context.function_name,
             'request_id': context.request_id
         }
         

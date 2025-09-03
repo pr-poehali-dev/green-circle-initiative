@@ -1,0 +1,15 @@
+{
+  "tests": [
+    {
+      "name": "Basic test endpoint",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "message": "Backend function working!",
+        "status": "success"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
