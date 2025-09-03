@@ -32,6 +32,8 @@ const Index = () => {
   const [displayedName, setDisplayedName] = useState<string>('');
   const [isTyping, setIsTyping] = useState(false);
   const typewriterRef = useRef<NodeJS.Timeout | null>(null);
+  const [testResult, setTestResult] = useState<object | null>(null);
+  const [testLoading, setTestLoading] = useState(false);
 
   const typewriterEffect = (text: string) => {
     if (typewriterRef.current) {
@@ -108,6 +110,19 @@ const Index = () => {
       if (isFirstLoad) {
         setLoading(false);
       }
+    }
+  };
+
+  const testBackend = async () => {
+    setTestLoading(true);
+    try {
+      const response = await fetch('https://functions.yandexcloud.net/d4er2v1m1mb9tupls4l2');
+      const data = await response.json();
+      setTestResult(data);
+    } catch (err) {
+      setTestResult({ error: 'Ошибка вызова функции' });
+    } finally {
+      setTestLoading(false);
     }
   };
 
@@ -289,6 +304,29 @@ const Index = () => {
           <p className="mt-1">Или нажми кнопку, чтобы создать прямо сейчас!</p>
         </div>
         
+        <div className="mt-8 bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+          <h3 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
+            <Icon name="Server" size={24} />
+            Тест бэкенд-функции
+          </h3>
+          <div className="flex items-center gap-4 mb-4">
+            <button
+              onClick={testBackend}
+              disabled={testLoading}
+              className="bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              {testLoading ? 'Тестируем...' : 'Протестировать SIMPLE_TEST'}
+            </button>
+          </div>
+          {testResult && (
+            <div className="bg-gray-900/50 p-4 rounded-lg">
+              <pre className="text-green-300 text-sm overflow-auto">
+                {JSON.stringify(testResult, null, 2)}
+              </pre>
+            </div>
+          )}
+        </div>
+
         {showDebug && (
           <div className="mt-8">
             <DebugViewer />
