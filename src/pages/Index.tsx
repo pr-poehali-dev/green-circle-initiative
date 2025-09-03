@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Icon from '@/components/ui/icon';
 import DebugViewer from '@/components/DebugViewer';
+import ReviewsWidget from '@/components/ReviewsWidget';
 
 interface HybridAnimal {
   name: string;
@@ -211,9 +212,7 @@ const Index = () => {
           )}
 
           {error && (
-            <div className="text-center text-red-400 bg-red-400/20 p-4 rounded-lg">
-              {error}
-            </div>
+            <ReviewsWidget />
           )}
 
           {animal && (
