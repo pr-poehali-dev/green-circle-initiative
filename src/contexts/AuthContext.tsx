@@ -48,6 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
       
       const result = await authResponse.json();
+      console.log('Login response:', result);
       
       if (result.success) {
         setUser({
