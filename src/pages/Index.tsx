@@ -212,7 +212,9 @@ const Index = () => {
           )}
 
           {error && (
-            <ReviewsWidget />
+            <div className="text-center text-red-400 bg-red-400/20 p-4 rounded-lg">
+              {error}
+            </div>
           )}
 
           {animal && (
@@ -325,6 +327,11 @@ const Index = () => {
         <div className="text-center mt-8 text-purple-300 text-sm">
           <p>🧬 Новое гибридное животное появляется автоматически каждые 5 секунд</p>
           <p className="mt-1">Или нажми кнопку, чтобы создать прямо сейчас!</p>
+        </div>
+        
+        {/* Виджет отзывов */}
+        <div className="mt-8">
+          <ReviewsWidget />
         </div>
         
         <div className="mt-8 bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">

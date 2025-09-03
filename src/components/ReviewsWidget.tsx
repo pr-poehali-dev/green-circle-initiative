@@ -33,6 +33,7 @@ const ReviewsWidget = () => {
       
       if (data.status === 'success' && data.reviews.length > 0) {
         setReviews(data.reviews);
+        setCurrentIndex(0); // Сбрасываем индекс при новых отзывах
         setError(null);
       } else {
         setError('Отзывы не найдены');
@@ -52,9 +53,10 @@ const ReviewsWidget = () => {
     if (reviews.length === 0) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = prevIndex + 1;
+        return nextIndex >= reviews.length ? 0 : nextIndex;
+      });
     }, 4000); // Смена каждые 4 секунды
 
     return () => clearInterval(interval);
