@@ -32,6 +32,8 @@ const Index = () => {
   const typewriterRef = useRef<NodeJS.Timeout | null>(null);
   const [testResult, setTestResult] = useState<object | null>(null);
   const [testLoading, setTestLoading] = useState(false);
+  const [dbResult, setDbResult] = useState<object | null>(null);
+  const [dbLoading, setDbLoading] = useState(false);
 
   const typewriterEffect = (text: string) => {
     if (typewriterRef.current) {
@@ -130,6 +132,28 @@ const Index = () => {
       });
     } finally {
       setTestLoading(false);
+    }
+  };
+
+  const testDatabase = async () => {
+    setDbLoading(true);
+    try {
+      // Используем функцию для получения списка таблиц
+      const response = await fetch('https://functions.yandexcloud.net/d4e1i9v478qu3afp947l');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      setDbResult(data);
+    } catch (err) {
+      setDbResult({ 
+        error: 'Ошибка подключения к базе данных',
+        details: err instanceof Error ? err.message : 'Неизвестная ошибка'
+      });
+    } finally {
+      setDbLoading(false);
     }
   };
 
@@ -309,7 +333,7 @@ const Index = () => {
             <Icon name="Server" size={24} />
             Тест бэкенд-функции
           </h3>
-          <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center gap-4 mb-4 flex-wrap">
             <button
               onClick={testBackend}
               disabled={testLoading}
@@ -317,12 +341,33 @@ const Index = () => {
             >
               {testLoading ? 'Тестируем...' : 'Протестировать SIMPLE_TEST'}
             </button>
+            <button
+              onClick={testDatabase}
+              disabled={dbLoading}
+              className="bg-green-500 hover:bg-green-600 disabled:opacity-50 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              {dbLoading ? 'Загружаем...' : 'Показать таблицы БД'}
+            </button>
           </div>
           {testResult && (
-            <div className="bg-gray-900/50 p-4 rounded-lg">
-              <pre className="text-green-300 text-sm overflow-auto">
-                {JSON.stringify(testResult, null, 2)}
-              </pre>
+            <div className="mb-4">
+              <h4 className="text-white font-semibold mb-2">Результат SIMPLE_TEST:</h4>
+              <div className="bg-gray-900/50 p-4 rounded-lg">
+                <pre className="text-green-300 text-sm overflow-auto">
+                  {JSON.stringify(testResult, null, 2)}
+                </pre>
+              </div>
+            </div>
+          )}
+          
+          {dbResult && (
+            <div>
+              <h4 className="text-white font-semibold mb-2">Таблицы в базе данных:</h4>
+              <div className="bg-gray-900/50 p-4 rounded-lg">
+                <pre className="text-blue-300 text-sm overflow-auto">
+                  {JSON.stringify(dbResult, null, 2)}
+                </pre>
+              </div>
             </div>
           )}
         </div>
