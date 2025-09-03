@@ -1,4 +1,5 @@
 import json
+import os
 from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -12,8 +13,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     method: str = event.get('httpMethod', 'GET')
     
     if method == 'GET':
+        # Get API_KEY_1 from environment
+        api_key = os.environ.get('API_KEY_1', 'Not found')
+        
         result = {
             'message': 'Backend function working!',
+            'api_key_status': 'Found' if api_key != 'Not found' else 'Not found',
+            'api_key_length': len(api_key) if api_key != 'Not found' else 0,
             'status': 'success',
             'function_name': context.function_name,
             'request_id': context.request_id
