@@ -25,10 +25,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     
     try {
-      // Получаем URL функции аутентификации
+      // Получаем URL функции логина
       const response = await fetch('/backend/func2url.json');
       const urls = await response.json();
-      const authUrl = urls.auth;
+      const authUrl = urls.login;
       
       if (!authUrl) {
         setIsLoading(false);
