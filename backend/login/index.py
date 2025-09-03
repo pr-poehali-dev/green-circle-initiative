@@ -12,6 +12,18 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     Returns: HTTP response with authentication result and user data
     '''
     
+    # Handle CORS preflight
+    if event.get('httpMethod') == 'OPTIONS':
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+            },
+            'body': ''
+        }
+    
     if event.get('httpMethod') != 'POST':
         return {
             'statusCode': 405,
