@@ -6,37 +6,21 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import LoginForm from "./components/LoginForm";
 
 const queryClient = new QueryClient();
-
-function AppRoutes() {
-  const { isAuthenticated } = useAuth();
-
-  if (!isAuthenticated) {
-    return <LoginForm />;
-  }
-
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );

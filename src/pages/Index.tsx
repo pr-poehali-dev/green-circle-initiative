@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
 import Icon from '@/components/ui/icon';
 import DebugViewer from '@/components/DebugViewer';
 
@@ -23,7 +22,6 @@ interface AnimalResponse {
 }
 
 const Index = () => {
-  const { logout, user } = useAuth();
   const [showDebug, setShowDebug] = useState(false);
   const [animal, setAnimal] = useState<HybridAnimal | null>(null);
   const [loading, setLoading] = useState(false);
@@ -167,14 +165,7 @@ const Index = () => {
               <Icon name="Bug" size={16} />
               Debug
             </button>
-            <span className="text-white/70">Добро пожаловать, {user?.username}</span>
-            <button
-              onClick={logout}
-              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors"
-            >
-              <Icon name="LogOut" size={18} />
-              Выйти
-            </button>
+            <span className="text-white/70">Тест бэкенд-систем</span>
           </div>
         </div>
 
