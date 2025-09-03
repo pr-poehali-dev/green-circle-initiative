@@ -1,0 +1,28 @@
+{
+  "tests": [
+    {
+      "name": "Test SIMPLE_TEST variable",
+      "method": "GET", 
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "status": "success",
+        "message": "Backend function working!",
+        "simple_test": {
+          "found": "boolean"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test POST method",
+      "method": "POST",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "status": "success"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

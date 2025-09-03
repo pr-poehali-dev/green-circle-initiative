@@ -114,8 +114,8 @@ const Index = () => {
   const testBackend = async () => {
     setTestLoading(true);
     try {
-      // Используем рабочую debug функцию
-      const response = await fetch('https://functions.yandexcloud.net/d4e137fgkriia4jq3fb1');
+      // Используем новую simple-test функцию
+      const response = await fetch('https://functions.yandexcloud.net/d4es0icfs6g9c0o2fgkd');
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -315,7 +315,7 @@ const Index = () => {
               disabled={testLoading}
               className="bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white px-4 py-2 rounded-lg transition-colors"
             >
-              {testLoading ? 'Тестируем...' : 'Протестировать Debug функцию'}
+              {testLoading ? 'Тестируем...' : 'Протестировать SIMPLE_TEST'}
             </button>
           </div>
           {testResult && (

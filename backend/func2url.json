@@ -1,6 +1,7 @@
 {
-  "test-api": "https://functions.yandexcloud.net/d4er2v1m1mb9tupls4l2",
-  "debug": "https://functions.yandexcloud.net/d4e137fgkriia4jq3fb1",
-  "auth": "https://functions.yandexcloud.net/d4e1644fl3nvqnq94maf",
-  "motivate": "https://functions.yandexcloud.net/d4eup1ffpoq08isd6j29"
+  "debug": "https://functions.yandexcloud.net/d4ee6i5hjma6q6fpsc1g",
+  "simple-test": "https://functions.yandexcloud.net/d4es0icfs6g9c0o2fgkd",
+  "test-env": "https://functions.yandexcloud.net/d4e2ikfj87d839b89pdk",
+  "auth": "https://functions.yandexcloud.net/d4eb0qlo5gigl6ca6cnr",
+  "motivate": "https://functions.yandexcloud.net/d4e3556d9dp4hds8lg16"
 }
