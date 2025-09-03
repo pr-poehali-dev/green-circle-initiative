@@ -1,13 +1,14 @@
 {
   "tests": [
     {
-      "name": "Basic test endpoint",
+      "name": "Test API key access",
       "method": "GET",
       "path": "/",
       "expectedStatus": 200,
       "expectedBody": {
-        "message": "Backend function working!",
-        "status": "success"
+        "message": "API key test successful!",
+        "status": "success",
+        "api_key_status": "string"
       },
       "bodyMatcher": "partial"
     }
