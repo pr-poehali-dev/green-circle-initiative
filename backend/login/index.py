@@ -2,6 +2,8 @@ import json
 import os
 import psycopg2
 import hashlib
+import hmac
+import time
 from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -118,15 +120,28 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 })
             }
         
-        # Return user data (without password)
+        # Generate token
+        SECRET_KEY = "poehali_secret_2024"
+        timestamp = str(int(time.time()))
+        token_payload = f"{user_data[1]}:{timestamp}"  # username:timestamp
+        signature = hmac.new(
+            SECRET_KEY.encode(),
+            token_payload.encode(),
+            hashlib.sha256
+        ).hexdigest()
+        token = f"{token_payload}:{signature}"
+        
+        # Return user data (without password) and token
         result = {
             'success': True,
             'message': 'Авторизация успешна',
+            'token': token,
             'user': {
                 'id': user_data[0],
                 'username': user_data[1],
                 'email': user_data[2],
                 'name': user_data[4],
+                'role': 'user',  # По умолчанию
                 'created_at': user_data[6].isoformat() if user_data[6] else None
             }
         }
