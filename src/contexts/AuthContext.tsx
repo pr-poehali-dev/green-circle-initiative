@@ -22,13 +22,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true); // Изначально true для проверки токена
 
   const login = async (username: string, password: string): Promise<boolean> => {
+    console.log('Login function called with:', username, password);
     setIsLoading(true);
     
     try {
       // Получаем URL функции логина
       const response = await fetch('/backend/func2url.json');
       const urls = await response.json();
+      console.log('URLs loaded:', urls);
       const authUrl = urls.login;
+      console.log('Login URL:', authUrl);
       
       if (!authUrl) {
         setIsLoading(false);
@@ -64,6 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setIsLoading(false);
         return true;
       } else {
+        console.log('Login failed:', result);
         setIsLoading(false);
         return false;
       }
