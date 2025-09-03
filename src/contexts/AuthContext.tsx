@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
   username: string;
@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Изначально true для проверки токена
 
   const login = async (username: string, password: string): Promise<boolean> => {
     setIsLoading(true);
@@ -73,6 +73,63 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return false;
     }
   };
+
+  // Проверяем токен при загрузке приложения
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem('auth_token');
+      
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        // Получаем URL функции аутентификации
+        const response = await fetch('/backend/func2url.json');
+        const urls = await response.json();
+        const authUrl = urls.auth;
+        
+        if (!authUrl) {
+          localStorage.removeItem('auth_token');
+          setIsLoading(false);
+          return;
+        }
+
+        // Проверяем валидность токена
+        const authResponse = await fetch(authUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            action: 'verify_token'
+          })
+        });
+
+        const result = await authResponse.json();
+
+        if (result.success) {
+          setUser({
+            username: result.user.username,
+            name: result.user.name,
+            role: result.user.role,
+            isAuthenticated: true
+          });
+        } else {
+          localStorage.removeItem('auth_token');
+        }
+      } catch (error) {
+        console.error('Ошибка проверки токена:', error);
+        localStorage.removeItem('auth_token');
+      }
+      
+      setIsLoading(false);
+    };
+
+    checkAuth();
+  }, []);
 
   const logout = () => {
     setUser(null);
