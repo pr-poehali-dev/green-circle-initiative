@@ -91,7 +91,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             # Если это проверка токена
             if body_data.get('action') == 'verify_token':
-                auth_header = event.get('headers', {}).get('Authorization', '')
+                headers = event.get('headers', {})
+                # Ищем заголовок Authorization в разных регистрах
+                auth_header = headers.get('Authorization') or headers.get('authorization') or ''
                 if not auth_header.startswith('Bearer '):
                     return {
                         'statusCode': 401,
