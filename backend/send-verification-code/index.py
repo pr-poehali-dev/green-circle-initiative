@@ -149,6 +149,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         # Send email
         send_email(email, code)
         
+        # Временно для тестирования - возвращаем код в ответе
         return {
             'statusCode': 200,
             'headers': {
@@ -157,7 +158,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             },
             'body': json.dumps({
                 'success': True,
-                'message': 'Код подтверждения отправлен на вашу почту'
+                'message': f'Код подтверждения: {code} (показан для тестирования)',
+                'testCode': code  # Временно для тестирования
             })
         }
         
