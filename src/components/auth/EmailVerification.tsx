@@ -39,8 +39,7 @@ export const EmailVerification: React.FC<EmailVerificationProps> = ({ email, onV
 
     setIsVerifying(true);
     try {
-      const apiUrl = (window as unknown as { apiBaseUrls?: Record<string, string> }).apiBaseUrls?.['verify-email-code'] || '/api/verify-email-code';
-      const response = await fetch(apiUrl, {
+      const response = await fetch('https://functions.yandexcloud.net/d4egqtb6t689prrvbmba', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code }),
@@ -75,8 +74,7 @@ export const EmailVerification: React.FC<EmailVerificationProps> = ({ email, onV
   const handleResend = async () => {
     setIsResending(true);
     try {
-      const apiUrl = (window as unknown as { apiBaseUrls?: Record<string, string> }).apiBaseUrls?.['send-verification-code'] || '/api/send-verification-code';
-      const response = await fetch(apiUrl, {
+      const response = await fetch('https://functions.yandexcloud.net/d4enr0qps8ck1pjuc4gq', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
