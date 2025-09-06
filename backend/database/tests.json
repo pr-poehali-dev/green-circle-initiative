@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Execute SELECT query",
+    "input": {
+      "httpMethod": "POST",
+      "body": "{\"query\": \"SELECT * FROM project_489d77e8.users LIMIT 5\"}"
+    },
+    "expected": {
+      "statusCode": 200,
+      "bodyContains": ["success", "columns", "data"]
+    }
+  },
+  {
+    "name": "Handle OPTIONS request",
+    "input": {
+      "httpMethod": "OPTIONS"
+    },
+    "expected": {
+      "statusCode": 200,
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
+  },
+  {
+    "name": "Handle missing query",
+    "input": {
+      "httpMethod": "POST",
+      "body": "{}"
+    },
+    "expected": {
+      "statusCode": 400,
+      "bodyContains": ["SQL query is required"]
+    }
+  }
+]
