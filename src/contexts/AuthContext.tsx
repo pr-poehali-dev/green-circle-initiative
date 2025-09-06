@@ -57,11 +57,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const verifyToken = async (authToken: string) => {
     try {
       console.log('Verifying token:', authToken?.substring(0, 20) + '...');
-      const response = await fetch(`${API_BASE_URL}/?action=verify`, {
-        headers: {
-          'Authorization': `Bearer ${authToken}`
-        }
-      });
+      const response = await fetch(`${API_BASE_URL}/?action=verify&token=${encodeURIComponent(authToken)}`);
       
       console.log('Token verification response:', response.status);
       

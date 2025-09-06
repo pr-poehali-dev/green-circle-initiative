@@ -35,6 +35,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     path = event.get('queryStringParameters', {}).get('action', '')
     headers = event.get('headers', {})
     
+    # Debug logging
+    print(f"Method: {method}, Action: {path}")
+    print(f"Headers: {headers}")
+    
     # Handle OPTIONS request for CORS
     if method == 'OPTIONS':
         return add_cors_headers({
@@ -54,11 +58,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return add_cors_headers({'statusCode': 400, 'body': json.dumps({'error': 'Invalid action'})})
         
         elif method == 'GET' and path == 'verify':
-            token = headers.get('authorization', '').replace('Bearer ', '')
+            # Получаем токен из query параметра или заголовка
+            token = event.get('queryStringParameters', {}).get('token', '')
+            if not token:
+                token = headers.get('authorization', '').replace('Bearer ', '')
             return add_cors_headers(handle_verify(token))
         
         elif method == 'GET' and path == 'users':
-            token = headers.get('authorization', '').replace('Bearer ', '')
+            # Получаем токен из query параметра или заголовка
+            token = event.get('queryStringParameters', {}).get('token', '')
+            if not token:
+                token = headers.get('authorization', '').replace('Bearer ', '')
             return add_cors_headers(handle_get_users(token))
         
         else:

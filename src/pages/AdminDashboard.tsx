@@ -29,11 +29,7 @@ export const AdminDashboard: React.FC = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/?action=users`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const response = await fetch(`${API_BASE_URL}/?action=users&token=${encodeURIComponent(token || '')}`);
 
       const data = await response.json();
       
