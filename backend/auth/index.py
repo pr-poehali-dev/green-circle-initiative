@@ -221,7 +221,7 @@ def handle_login(body: Dict[str, Any]) -> Dict[str, Any]:
     try:
         cur = conn.cursor()
         cur.execute("""
-            SELECT id, email, username, password_hash, name 
+            SELECT id, email, username, password_hash, name, role 
             FROM project_489d77e8.users WHERE email = %s AND is_active = true
         """, (email,))
         
@@ -245,7 +245,7 @@ def handle_login(body: Dict[str, Any]) -> Dict[str, Any]:
             'email': user[1],
             'username': user[2], 
             'name': user[4],
-            'role': 'user'  # По умолчанию, можно расширить
+            'role': user[5]
         }
         
         token = generate_jwt(user_data)
@@ -304,16 +304,18 @@ def handle_get_users(token: str) -> Dict[str, Any]:
             'body': json.dumps({'error': 'Недействительный токен'})
         }
     
-    # Для MVP разрешаем любому авторизованному пользователю
-    # В будущем можно добавить проверку роли admin
-    # if payload.get('role') != 'admin':
-    #     return {'statusCode': 403, 'body': json.dumps({'error': 'Недостаточно прав'})}
+    # Проверяем права администратора
+    if payload.get('role') != 'admin':
+        return {
+            'statusCode': 403, 
+            'body': json.dumps({'error': 'Доступ запрещен. Требуются права администратора'})
+        }
     
     conn = get_db_connection()
     try:
         cur = conn.cursor()
         cur.execute("""
-            SELECT id, email, username, name, created_at, is_active, updated_at
+            SELECT id, email, username, name, created_at, is_active, updated_at, role
             FROM project_489d77e8.users 
             ORDER BY created_at DESC
         """)
@@ -327,7 +329,8 @@ def handle_get_users(token: str) -> Dict[str, Any]:
                 'name': row[3],
                 'created_at': row[4].isoformat() if row[4] else None,
                 'is_active': row[5],
-                'last_login': row[6].isoformat() if row[6] else None
+                'last_login': row[6].isoformat() if row[6] else None,
+                'role': row[7]
             })
         
         return {
