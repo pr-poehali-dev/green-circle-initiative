@@ -48,24 +48,30 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     if (savedToken && savedUser) {
       setToken(savedToken);
       setUser(JSON.parse(savedUser));
-      verifyToken(savedToken);
+      verifyToken(savedToken).finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, []);
 
   const verifyToken = async (authToken: string) => {
     try {
+      console.log('Verifying token:', authToken?.substring(0, 20) + '...');
       const response = await fetch(`${API_BASE_URL}/?action=verify`, {
         headers: {
           'Authorization': `Bearer ${authToken}`
         }
       });
       
+      console.log('Token verification response:', response.status);
+      
       if (!response.ok) {
+        console.log('Token verification failed, logging out');
         logout();
         return false;
       }
       
+      console.log('Token verified successfully');
       return true;
     } catch (error) {
       console.error('Token verification failed:', error);
