@@ -89,28 +89,47 @@ const Index = () => {
     setError(null);
 
     try {
-      const response = await fetch('https://functions.yandexcloud.net/d4euu16ickp3kdj88c5c');
-      const data: AnimalResponse = await response.json();
-      
-      if (data.success) {
-        const newAnimal = data.animal;
-        
-        if (animal && animal.name !== newAnimal.name) {
-          // Если животное уже есть и имя изменилось, запускаем печатающую машинку
-          typewriterEffect(newAnimal.name);
-        } else if (!animal) {
-          // Первая загрузка - тоже запускаем печатающую машинку
-          typewriterEffect(newAnimal.name);
+      // Заглушка - создаём случайное животное локально
+      const mockAnimals = [
+        {
+          name: "Львокот",
+          parents: ["Лев", "Кот"],
+          appearance: "Маленький лев с домашними повадками",
+          size: "Средний (40-60 см)",
+          habitat: "Городские квартиры и саванны",
+          abilities: ["Мурчание", "Охота на мышей", "Царственная походка"],
+          personality: "Гордый, но ласковый",
+          diet: "Корм премиум-класса и газель по выходным",
+          lifespan: "15-20 лет",
+          rarity: "редкий"
+        },
+        {
+          name: "Дракокот",
+          parents: ["Дракон", "Кот"],
+          appearance: "Пушистый кот с небольшими крыльями и рожками",
+          size: "Маленький (30-40 см)",
+          habitat: "Башни магов и подоконники",
+          abilities: ["Полёт на короткие дистанции", "Дышит паром", "Мурчание"],
+          personality: "Магический и игривый",
+          diet: "Рыба и драгоценные камни",
+          lifespan: "50-100 лет",
+          rarity: "легендарный"
         }
-        
-        setAnimal(newAnimal);
-        setLastUpdate(new Date().toLocaleTimeString());
-      } else {
-        setError('Ошибка при создании животного');
+      ];
+      
+      const randomAnimal = mockAnimals[Math.floor(Math.random() * mockAnimals.length)];
+      
+      if (animal && animal.name !== randomAnimal.name) {
+        typewriterEffect(randomAnimal.name);
+      } else if (!animal) {
+        typewriterEffect(randomAnimal.name);
       }
       
+      setAnimal(randomAnimal);
+      setLastUpdate(new Date().toLocaleTimeString());
+      
     } catch (err) {
-      setError('Ошибка при загрузке животного');
+      setError('Ошибка при создании животного');
       console.error(err);
     } finally {
       if (isFirstLoad) {
@@ -233,8 +252,125 @@ const Index = () => {
           </div>
         </div>
 
-
-
+        {/* Карточка животного */}
+        <div className="mt-8 bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+          {loading && (
+            <div className="text-center">
+              <Icon name="Loader2" size={48} className="animate-spin mx-auto text-purple-400 mb-4" />
+              <p className="text-white">Создаём гибридное животное...</p>
+            </div>
+          )}
+          
+          {error && (
+            <div className="text-center text-red-400">
+              <Icon name="AlertCircle" size={48} className="mx-auto mb-4" />
+              <p>{error}</p>
+            </div>
+          )}
+          
+          {animal && !loading && (
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-4xl font-bold text-white mb-2">
+                  {displayedName}
+                  {isTyping && <span className="animate-pulse">|</span>}
+                </h2>
+                <div className="flex justify-center gap-2 mb-4">
+                  {animal.parents.map((parent) => (
+                    <span key={parent} className="bg-blue-500/30 text-blue-200 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                      {parent}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-center">
+                  <span className={`px-4 py-2 rounded-full text-sm border ${getRarityColor(animal.rarity)}`}>
+                    ✨ {animal.rarity}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <Icon name="Eye" size={18} />
+                      Внешний вид
+                    </h3>
+                    <p className="text-purple-200">{animal.appearance}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <Icon name="Ruler" size={18} />
+                      Размер
+                    </h3>
+                    <p className="text-purple-200">{animal.size}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <Icon name="MapPin" size={18} />
+                      Среда обитания
+                    </h3>
+                    <p className="text-purple-200">{animal.habitat}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <Icon name="Heart" size={18} />
+                      Характер
+                    </h3>
+                    <p className="text-purple-200">{animal.personality}</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <Icon name="Zap" size={18} />
+                      Способности
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {animal.abilities.map((ability) => (
+                        <span key={ability} className="bg-green-500/30 text-green-200 px-2 py-1 rounded text-sm border border-green-400/30">
+                          {ability}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <Icon name="Utensils" size={18} />
+                      Питание
+                    </h3>
+                    <p className="text-purple-200">{animal.diet}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <Icon name="Clock" size={18} />
+                      Продолжительность жизни
+                    </h3>
+                    <p className="text-purple-200">{animal.lifespan}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center pt-4 border-t border-white/20">
+                <button
+                  onClick={fetchAnimal}
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                >
+                  Создать новое животное
+                </button>
+                <p className="text-purple-300 text-sm mt-2">
+                  Обновлено: {lastUpdate}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="text-center mt-8 text-purple-300 text-sm">
           <p>🧬 Новое гибридное животное появляется автоматически каждые 5 секунд</p>
