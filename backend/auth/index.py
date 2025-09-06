@@ -35,11 +35,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     path = event.get('queryStringParameters', {}).get('action', '')
     headers = event.get('headers', {})
     
-    # Debug logging
+    # Debug logging (минимальный)
     print(f"Method: {method}, Action: {path}")
-    print(f"Headers: {headers}")
-    print(f"Looking for X-Auth-Token: {headers.get('X-Auth-Token', 'NOT FOUND')}")
-    print(f"Looking for x-auth-token: {headers.get('x-auth-token', 'NOT FOUND')}")
     
     # Handle OPTIONS request for CORS
     if method == 'OPTIONS':
@@ -67,16 +64,20 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         elif method == 'GET' and path == 'verify':
             # Получаем токен из кастомного заголовка (безопаснее чем URL)
-            token = headers.get('x-auth-token', '')
+            token = headers.get('X-Auth-Token', '') or headers.get('x-auth-token', '')
             if not token:
-                token = headers.get('authorization', '').replace('Bearer ', '')
+                token = headers.get('Authorization', '') or headers.get('authorization', '')
+                if token.startswith('Bearer '):
+                    token = token.replace('Bearer ', '')
             return add_cors_headers(handle_verify(token))
         
         elif method == 'GET' and path == 'users':
             # Получаем токен из кастомного заголовка (безопаснее чем URL)
-            token = headers.get('x-auth-token', '')
+            token = headers.get('X-Auth-Token', '') or headers.get('x-auth-token', '')
             if not token:
-                token = headers.get('authorization', '').replace('Bearer ', '')
+                token = headers.get('Authorization', '') or headers.get('authorization', '')
+                if token.startswith('Bearer '):
+                    token = token.replace('Bearer ', '')
             return add_cors_headers(handle_get_users(token))
         
         else:
