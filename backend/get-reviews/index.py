@@ -55,6 +55,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         reviews_data = cursor.fetchall()
         print(f"[LOG] Query executed successfully. Found {len(reviews_data)} reviews")
         
+        if len(reviews_data) == 0:
+            print("[WARNING] No reviews found in database - table might be empty")
+        elif len(reviews_data) >= 50:
+            print("[WARNING] Maximum limit reached (50 reviews) - there might be more data")
+        
         # Convert to list of dictionaries
         print("[LOG] Converting reviews data to JSON format...")
         reviews_list = []
