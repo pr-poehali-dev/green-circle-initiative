@@ -1,159 +1,156 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
+  id: number;
+  email: string;
   username: string;
   name: string;
   role: string;
-  isAuthenticated: boolean;
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (username: string, password: string) => Promise<boolean>;
+  token: string | null;
+  login: (email: string, password: string) => Promise<void>;
+  register: (userData: RegisterData) => Promise<void>;
   logout: () => void;
-  isAuthenticated: boolean;
   isLoading: boolean;
+}
+
+interface RegisterData {
+  email: string;
+  username: string;
+  password: string;
+  name: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true); // Изначально true для проверки токена
-
-  const login = async (username: string, password: string): Promise<boolean> => {
-    console.log('Login function called with:', username, password);
-    setIsLoading(true);
-    
-    try {
-      // Получаем URL функции логина
-      const response = await fetch('/backend/func2url.json');
-      const urls = await response.json();
-      console.log('URLs loaded:', urls);
-      const authUrl = urls.login;
-      console.log('Login URL:', authUrl);
-      
-      if (!authUrl) {
-        setIsLoading(false);
-        return false;
-      }
-      
-      // Отправляем запрос на аутентификацию
-      const authResponse = await fetch(authUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      });
-      
-      const result = await authResponse.json();
-      console.log('Login response:', result);
-      
-      if (result.success) {
-        setUser({
-          username: result.user.username,
-          name: result.user.name,
-          role: result.user.role,
-          isAuthenticated: true
-        });
-        
-        // Сохраняем токен в localStorage для будущих запросов
-        localStorage.setItem('auth_token', result.token);
-        
-        setIsLoading(false);
-        return true;
-      } else {
-        console.log('Login failed:', result);
-        setIsLoading(false);
-        return false;
-      }
-      
-    } catch (error) {
-      console.error('Ошибка аутентификации:', error);
-      setIsLoading(false);
-      return false;
-    }
-  };
-
-  // Проверяем токен при загрузке приложения
-  useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem('auth_token');
-      
-      if (!token) {
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        // Получаем URL функции аутентификации
-        const response = await fetch('/backend/func2url.json');
-        const urls = await response.json();
-        const authUrl = urls.auth;
-        
-        if (!authUrl) {
-          localStorage.removeItem('auth_token');
-          setIsLoading(false);
-          return;
-        }
-
-        // Проверяем валидность токена
-        const authResponse = await fetch(authUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            action: 'verify_token'
-          })
-        });
-
-        const result = await authResponse.json();
-
-        if (result.success) {
-          setUser({
-            username: result.user.username,
-            name: result.user.name,
-            role: result.user.role,
-            isAuthenticated: true
-          });
-        } else {
-          localStorage.removeItem('auth_token');
-        }
-      } catch (error) {
-        console.error('Ошибка проверки токена:', error);
-        localStorage.removeItem('auth_token');
-      }
-      
-      setIsLoading(false);
-    };
-
-    checkAuth();
-  }, []);
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('auth_token');
-  };
-
-  const isAuthenticated = !!user?.isAuthenticated;
-
-  return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, isLoading }}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
-
-export function useAuth() {
+export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
-}
+};
+
+const API_BASE_URL = 'https://functions.yandexcloud.net/d4eb0qlo5gigl6ca6cnr';
+
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('auth_token');
+    const savedUser = localStorage.getItem('auth_user');
+    
+    if (savedToken && savedUser) {
+      setToken(savedToken);
+      setUser(JSON.parse(savedUser));
+      verifyToken(savedToken);
+    }
+    setIsLoading(false);
+  }, []);
+
+  const verifyToken = async (authToken: string) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/?action=verify`, {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      });
+      
+      if (!response.ok) {
+        logout();
+        return false;
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Token verification failed:', error);
+      logout();
+      return false;
+    }
+  };
+
+  const login = async (email: string, password: string) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/?action=login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Ошибка входа');
+      }
+
+      setUser(data.user);
+      setToken(data.token);
+      localStorage.setItem('auth_token', data.token);
+      localStorage.setItem('auth_user', JSON.stringify(data.user));
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const register = async (userData: RegisterData) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/?action=register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Ошибка регистрации');
+      }
+
+      setUser(data.user);
+      setToken(data.token);
+      localStorage.setItem('auth_token', data.token);
+      localStorage.setItem('auth_user', JSON.stringify(data.user));
+    } catch (error) {
+      console.error('Registration failed:', error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const logout = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_user');
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        login,
+        register,
+        logout,
+        isLoading,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};

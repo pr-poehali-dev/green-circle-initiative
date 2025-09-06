@@ -1,224 +1,302 @@
 import json
 import hashlib
-import hmac
-import time
+import secrets
+import jwt
+from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
-from pydantic import BaseModel, Field
-
-class LoginRequest(BaseModel):
-    username: str = Field(..., min_length=1)
-    password: str = Field(..., min_length=1)
-    action: Optional[str] = None
-
-class AuthResponse(BaseModel):
-    success: bool
-    message: str
-    token: Optional[str] = None
-    user: Optional[Dict[str, str]] = None
+import psycopg2
+import os
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Аутентифицирует пользователей и выдает JWT токены
-    Args: event - dict с httpMethod, body для POST запросов логина
-          context - объект с атрибутами request_id, function_name
-    Returns: HTTP response с результатом аутентификации
+    Business: Authentication API - login, register, validate tokens
+    Args: event with httpMethod, body, queryStringParameters, headers
+          context with request_id, function_name
+    Returns: HTTP response with JWT tokens or user data
     '''
     
-    # Handle CORS preflight
-    if event.get('httpMethod') == 'OPTIONS':
+    method = event.get('httpMethod', 'GET')
+    path = event.get('queryStringParameters', {}).get('action', '')
+    headers = event.get('headers', {})
+    
+    try:
+        if method == 'POST':
+            body = json.loads(event.get('body', '{}'))
+            
+            if path == 'register':
+                return handle_register(body)
+            elif path == 'login':
+                return handle_login(body)
+            else:
+                return {'statusCode': 400, 'body': json.dumps({'error': 'Invalid action'})}
+        
+        elif method == 'GET' and path == 'verify':
+            token = headers.get('authorization', '').replace('Bearer ', '')
+            return handle_verify(token)
+        
+        elif method == 'GET' and path == 'users':
+            token = headers.get('authorization', '').replace('Bearer ', '')
+            return handle_get_users(token)
+        
+        else:
+            return {'statusCode': 404, 'body': json.dumps({'error': 'Endpoint not found'})}
+    
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }
+
+def get_db_connection():
+    '''Создает подключение к базе данных'''
+    database_url = os.getenv('DATABASE_URL')
+    if database_url:
+        return psycopg2.connect(database_url)
+    else:
+        return psycopg2.connect(
+            host=os.getenv('DB_HOST', 'localhost'),
+            database=os.getenv('DB_NAME', 'poehali'),
+            user=os.getenv('DB_USER', 'postgres'),
+            password=os.getenv('DB_PASSWORD', ''),
+            port=os.getenv('DB_PORT', '5432')
+        )
+
+def hash_password(password: str) -> str:
+    '''Хеширует пароль с солью'''
+    salt = secrets.token_hex(16)
+    pwd_hash = hashlib.sha256((password + salt).encode()).hexdigest()
+    return f"{salt}:{pwd_hash}"
+
+def verify_password(password: str, hashed: str) -> bool:
+    '''Проверяет пароль против хеша'''
+    if ':' not in hashed:
+        # Старый формат без соли (для совместимости)
+        return hashlib.sha256(password.encode()).hexdigest() == hashed
+    
+    salt, pwd_hash = hashed.split(':')
+    return hashlib.sha256((password + salt).encode()).hexdigest() == pwd_hash
+
+def generate_jwt(user_data: Dict[str, Any]) -> str:
+    '''Генерирует JWT токен'''
+    secret = os.getenv('JWT_SECRET', 'default-secret-key')
+    payload = {
+        'user_id': user_data['id'],
+        'email': user_data['email'],
+        'role': user_data.get('role', 'user'),
+        'exp': datetime.utcnow() + timedelta(days=7)
+    }
+    return jwt.encode(payload, secret, algorithm='HS256')
+
+def verify_jwt(token: str) -> Optional[Dict[str, Any]]:
+    '''Проверяет и декодирует JWT токен'''
+    try:
+        secret = os.getenv('JWT_SECRET', 'default-secret-key')
+        return jwt.decode(token, secret, algorithms=['HS256'])
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+
+def handle_register(body: Dict[str, Any]) -> Dict[str, Any]:
+    '''Регистрация нового пользователя'''
+    email = body.get('email', '').strip().lower()
+    password = body.get('password', '')
+    name = body.get('name', '').strip()
+    username = body.get('username', '').strip()
+    
+    if not email or not password or not name or not username:
+        return {
+            'statusCode': 400, 
+            'body': json.dumps({'error': 'Все поля обязательны'})
+        }
+    
+    if len(password) < 6:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Пароль должен быть минимум 6 символов'})
+        }
+    
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        
+        # Проверяем существование пользователя
+        cur.execute("SELECT id FROM project_489d77e8.users WHERE email = %s OR username = %s", (email, username))
+        if cur.fetchone():
+            return {
+                'statusCode': 409,
+                'body': json.dumps({'error': 'Пользователь с таким email или username уже существует'})
+            }
+        
+        # Создаем пользователя
+        password_hash = hash_password(password)
+        cur.execute("""
+            INSERT INTO project_489d77e8.users (email, username, password_hash, name, created_at) 
+            VALUES (%s, %s, %s, %s, %s) RETURNING id
+        """, (email, username, password_hash, name, datetime.utcnow()))
+        
+        user_id = cur.fetchone()[0]
+        conn.commit()
+        
+        # Получаем данные пользователя
+        cur.execute("SELECT id, email, username, name FROM project_489d77e8.users WHERE id = %s", (user_id,))
+        user = cur.fetchone()
+        
+        user_data = {
+            'id': user[0],
+            'email': user[1], 
+            'username': user[2],
+            'name': user[3],
+            'role': 'user'
+        }
+        
+        token = generate_jwt(user_data)
+        
+        return {
+            'statusCode': 201,
+            'body': json.dumps({
+                'message': 'Регистрация успешна',
+                'user': user_data,
+                'token': token
+            })
+        }
+    
+    finally:
+        conn.close()
+
+def handle_login(body: Dict[str, Any]) -> Dict[str, Any]:
+    '''Вход пользователя'''
+    email = body.get('email', '').strip().lower()
+    password = body.get('password', '')
+    
+    if not email or not password:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Email и пароль обязательны'})
+        }
+    
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT id, email, username, password_hash, name 
+            FROM project_489d77e8.users WHERE email = %s AND is_active = true
+        """, (email,))
+        
+        user = cur.fetchone()
+        if not user or not verify_password(password, user[3]):
+            return {
+                'statusCode': 401,
+                'body': json.dumps({'error': 'Неверный email или пароль'})
+            }
+        
+        # Обновляем время последнего входа (если поле существует)
+        try:
+            cur.execute("UPDATE project_489d77e8.users SET updated_at = %s WHERE id = %s", 
+                       (datetime.utcnow(), user[0]))
+            conn.commit()
+        except:
+            pass  # Игнорируем если поле не существует
+        
+        user_data = {
+            'id': user[0],
+            'email': user[1],
+            'username': user[2], 
+            'name': user[4],
+            'role': 'user'  # По умолчанию, можно расширить
+        }
+        
+        token = generate_jwt(user_data)
+        
         return {
             'statusCode': 200,
-            'headers': {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-            },
-            'body': ''
+            'body': json.dumps({
+                'message': 'Вход выполнен успешно',
+                'user': user_data,
+                'token': token
+            })
         }
     
-    method = event.get('httpMethod', 'GET')
-    
-    # Простая база пользователей (в реальном проекте - база данных)
-    USERS_DB = {
-        'admin': {
-            'password': '1234',  # Используем простые пароли для тестирования
-            'role': 'admin',
-            'name': 'Администратор'
-        },
-        'user': {
-            'password': 'password',
-            'role': 'user', 
-            'name': 'Пользователь'
+    finally:
+        conn.close()
+
+def handle_verify(token: str) -> Dict[str, Any]:
+    '''Проверка валидности токена'''
+    if not token:
+        return {
+            'statusCode': 401,
+            'body': json.dumps({'error': 'Токен не предоставлен'})
         }
-    }
     
-    SECRET_KEY = "poehali_secret_2024"
+    payload = verify_jwt(token)
+    if not payload:
+        return {
+            'statusCode': 401, 
+            'body': json.dumps({'error': 'Недействительный токен'})
+        }
     
-    def verify_token(token: str) -> Optional[str]:
-        """Проверяет валидность токена и возвращает username или None"""
-        try:
-            parts = token.split(':')
-            if len(parts) != 3:
-                return None
-            
-            username, timestamp, signature = parts
-            token_payload = f"{username}:{timestamp}"
-            
-            # Проверяем подпись
-            expected_signature = hmac.new(
-                SECRET_KEY.encode(),
-                token_payload.encode(),
-                hashlib.sha256
-            ).hexdigest()
-            
-            if signature != expected_signature:
-                return None
-                
-            # Проверяем время жизни токена (24 часа)
-            token_time = int(timestamp)
-            current_time = int(time.time())
-            if current_time - token_time > 86400:  # 24 часа
-                return None
-                
-            return username
-            
-        except Exception:
-            return None
-    
-    if method == 'POST':
-        try:
-            body_data = json.loads(event.get('body', '{}'))
-            
-            # Если это проверка токена
-            if body_data.get('action') == 'verify_token':
-                headers = event.get('headers', {})
-                # Ищем заголовок Authorization в разных регистрах
-                auth_header = headers.get('Authorization') or headers.get('authorization') or ''
-                if not auth_header.startswith('Bearer '):
-                    return {
-                        'statusCode': 401,
-                        'headers': {
-                            'Content-Type': 'application/json',
-                            'Access-Control-Allow-Origin': '*'
-                        },
-                        'body': json.dumps({
-                            'success': False,
-                            'message': 'Токен не предоставлен'
-                        })
-                    }
-                
-                token = auth_header[7:]  # Убираем "Bearer "
-                username = verify_token(token)
-                
-                if not username or username not in USERS_DB:
-                    return {
-                        'statusCode': 401,
-                        'headers': {
-                            'Content-Type': 'application/json',
-                            'Access-Control-Allow-Origin': '*'
-                        },
-                        'body': json.dumps({
-                            'success': False,
-                            'message': 'Недействительный токен'
-                        })
-                    }
-                
-                user = USERS_DB[username]
-                return {
-                    'statusCode': 200,
-                    'headers': {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                    'body': json.dumps({
-                        'success': True,
-                        'message': 'Токен действителен',
-                        'user': {
-                            'username': username,
-                            'name': user['name'],
-                            'role': user['role']
-                        }
-                    })
-                }
-            
-            login_req = LoginRequest(**body_data)
-            
-            # Проверяем пользователя
-            user = USERS_DB.get(login_req.username)
-            if not user:
-                return {
-                    'statusCode': 401,
-                    'headers': {'Content-Type': 'application/json'},
-                    'body': json.dumps({
-                        'success': False,
-                        'message': 'Неверный логин или пароль'
-                    })
-                }
-            
-            # Проверяем пароль (простая проверка для демо)
-            if login_req.password != user['password']:
-                return {
-                    'statusCode': 401,
-                    'headers': {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                    'body': json.dumps({
-                        'success': False,
-                        'message': 'Неверный логин или пароль'
-                    })
-                }
-            
-            # Создаем простой токен (в реальном проекте - JWT)
-            timestamp = str(int(time.time()))
-            token_payload = f"{login_req.username}:{timestamp}"
-            signature = hmac.new(
-                SECRET_KEY.encode(),
-                token_payload.encode(),
-                hashlib.sha256
-            ).hexdigest()
-            token = f"{token_payload}:{signature}"
-            
-            return {
-                'statusCode': 200,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({
-                    'success': True,
-                    'message': 'Успешный вход',
-                    'token': token,
-                    'user': {
-                        'username': login_req.username,
-                        'name': user['name'],
-                        'role': user['role']
-                    }
-                })
-            }
-            
-        except Exception as e:
-            return {
-                'statusCode': 400,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({
-                    'success': False,
-                    'message': 'Ошибка обработки запроса'
-                })
-            }
-    
-    # GET запрос - возвращаем информацию о доступных пользователях
     return {
         'statusCode': 200,
-        'headers': {'Content-Type': 'application/json'},
         'body': json.dumps({
-            'available_users': [
-                {'username': 'admin', 'password': '1234', 'name': 'Администратор'},
-                {'username': 'user', 'password': 'password', 'name': 'Пользователь'}
-            ],
-            'usage': 'POST /auth with {"username": "admin", "password": "1234"}'
+            'valid': True,
+            'user': {
+                'id': payload['user_id'],
+                'email': payload['email'],
+                'role': payload.get('role', 'user')
+            }
         })
     }
+
+def handle_get_users(token: str) -> Dict[str, Any]:
+    '''Получение списка пользователей (только для админов)'''
+    if not token:
+        return {
+            'statusCode': 401,
+            'body': json.dumps({'error': 'Требуется авторизация'})
+        }
+    
+    payload = verify_jwt(token)
+    if not payload:
+        return {
+            'statusCode': 401,
+            'body': json.dumps({'error': 'Недействительный токен'})
+        }
+    
+    # Проверяем права админа (пока простая проверка)
+    if payload.get('role') != 'admin' and payload.get('user_id') != 1:
+        return {
+            'statusCode': 403,
+            'body': json.dumps({'error': 'Недостаточно прав'})
+        }
+    
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT id, email, username, name, created_at, is_active, updated_at
+            FROM project_489d77e8.users 
+            ORDER BY created_at DESC
+        """)
+        
+        users = []
+        for row in cur.fetchall():
+            users.append({
+                'id': row[0],
+                'email': row[1],
+                'username': row[2],
+                'name': row[3],
+                'created_at': row[4].isoformat() if row[4] else None,
+                'is_active': row[5],
+                'last_login': row[6].isoformat() if row[6] else None
+            })
+        
+        return {
+            'statusCode': 200,
+            'body': json.dumps({
+                'users': users,
+                'total': len(users)
+            })
+        }
+    
+    finally:
+        conn.close()

@@ -1,49 +1,53 @@
 {
   "tests": [
     {
-      "name": "Get available users info",
-      "method": "GET",
-      "path": "/",
-      "expectedStatus": 200,
-      "expectedBody": {
-        "available_users": [],
-        "usage": "string"
-      },
-      "bodyMatcher": "partial"
-    },
-    {
-      "name": "Valid admin login",
+      "name": "Register new user",
       "method": "POST",
-      "path": "/",
+      "path": "/?action=register",
       "body": {
-        "username": "admin",
-        "password": "1234"
+        "email": "newtest@example.com",
+        "username": "newtestuser",
+        "password": "password123",
+        "name": "New Test User"
       },
-      "expectedStatus": 200,
+      "expectedStatus": 201,
       "expectedBody": {
-        "success": true,
         "message": "string",
-        "token": "string",
         "user": {
-          "username": "admin",
+          "id": "number",
+          "email": "string",
+          "username": "string", 
           "name": "string",
           "role": "string"
-        }
+        },
+        "token": "string"
       },
       "bodyMatcher": "partial"
     },
     {
-      "name": "Invalid login credentials",
+      "name": "Login validation - wrong password",
       "method": "POST", 
-      "path": "/",
+      "path": "/?action=login",
       "body": {
-        "username": "wrong",
-        "password": "wrong"
+        "email": "yaroc.d@gmail.com",
+        "password": "wrongpass"
       },
       "expectedStatus": 401,
       "expectedBody": {
-        "success": false,
-        "message": "string"
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get users list (admin required)",
+      "method": "GET",
+      "path": "/?action=users",
+      "headers": {
+        "authorization": "Bearer test-token"
+      },
+      "expectedStatus": 401,
+      "expectedBody": {
+        "error": "string"
       },
       "bodyMatcher": "partial"
     }
