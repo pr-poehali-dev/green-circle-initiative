@@ -5,50 +5,53 @@ import random
 import string
 from datetime import datetime, timedelta
 from typing import Dict, Any
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import requests
 
 def generate_code() -> str:
     """Генерирует 6-значный код подтверждения"""
     return ''.join(random.choices(string.digits, k=6))
 
 def send_email(to_email: str, code: str) -> bool:
-    """Отправляет код подтверждения на email"""
-    smtp_host = os.getenv('SMTP_HOST')
-    smtp_port = int(os.getenv('SMTP_PORT', '587'))
-    smtp_user = os.getenv('SMTP_USER')
-    smtp_pass = os.getenv('SMTP_PASSWORD')
-    from_email = os.getenv('SMTP_FROM_EMAIL', smtp_user)
+    """Отправляет код подтверждения на email через Resend"""
+    resend_api_key = os.getenv('RESEND_API_KEY')
     
-    if not all([smtp_host, smtp_user, smtp_pass]):
-        # Если SMTP не настроен, просто логируем код
+    if not resend_api_key:
+        # Если Resend не настроен, просто логируем код
         print(f"Email verification code for {to_email}: {code}")
         return True
     
     try:
-        msg = MIMEMultipart()
-        msg['From'] = from_email
-        msg['To'] = to_email
-        msg['Subject'] = 'Код подтверждения email'
+        response = requests.post(
+            'https://api.resend.com/emails',
+            headers={
+                'Authorization': f'Bearer {resend_api_key}',
+                'Content-Type': 'application/json'
+            },
+            json={
+                'from': 'onboarding@resend.dev',  # Это тестовый домен Resend для разработки
+                'to': to_email,
+                'subject': 'Код подтверждения email',
+                'html': f"""
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                    <h2>Подтверждение email</h2>
+                    <p>Ваш код подтверждения:</p>
+                    <div style="background: #f4f4f4; padding: 20px; text-align: center; font-size: 32px; font-weight: bold; letter-spacing: 5px; margin: 20px 0;">
+                        {code}
+                    </div>
+                    <p>Код действителен в течение 15 минут.</p>
+                    <p style="color: #666; font-size: 14px;">Если вы не запрашивали код, просто проигнорируйте это письмо.</p>
+                </div>
+                """
+            }
+        )
         
-        body = f"""
-        Ваш код подтверждения: {code}
-        
-        Код действителен в течение 15 минут.
-        
-        Если вы не запрашивали код, просто проигнорируйте это письмо.
-        """
-        
-        msg.attach(MIMEText(body, 'plain'))
-        
-        server = smtplib.SMTP(smtp_host, smtp_port)
-        server.starttls()
-        server.login(smtp_user, smtp_pass)
-        server.send_message(msg)
-        server.quit()
-        
-        return True
+        if response.status_code == 200:
+            print(f"Email sent successfully to {to_email}")
+            return True
+        else:
+            print(f"Failed to send email: {response.text}")
+            return True  # Всё равно продолжаем процесс
+            
     except Exception as e:
         print(f"Failed to send email: {e}")
         return True  # Возвращаем True, чтобы не блокировать процесс
