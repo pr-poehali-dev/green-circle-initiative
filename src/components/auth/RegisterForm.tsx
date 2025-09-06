@@ -6,7 +6,6 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/components/ui/use-toast';
 import { EmailVerification } from './EmailVerification';
-import { EmailVerification } from './EmailVerification';
 
 interface RegisterFormProps {
   onToggleMode: () => void;
