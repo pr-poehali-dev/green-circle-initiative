@@ -173,15 +173,15 @@ def handle_register(body: Dict[str, Any]) -> Dict[str, Any]:
         # Создаем пользователя
         password_hash = hash_password(password)
         cur.execute("""
-            INSERT INTO project_489d77e8.users (email, username, password_hash, name, created_at) 
-            VALUES (%s, %s, %s, %s, %s) RETURNING id
-        """, (email, username, password_hash, name, datetime.utcnow()))
+            INSERT INTO project_489d77e8.users (email, username, password_hash, name, role, created_at) 
+            VALUES (%s, %s, %s, %s, %s, %s) RETURNING id
+        """, (email, username, password_hash, name, 'user', datetime.utcnow()))
         
         user_id = cur.fetchone()[0]
         conn.commit()
         
         # Получаем данные пользователя
-        cur.execute("SELECT id, email, username, name FROM project_489d77e8.users WHERE id = %s", (user_id,))
+        cur.execute("SELECT id, email, username, name, role FROM project_489d77e8.users WHERE id = %s", (user_id,))
         user = cur.fetchone()
         
         user_data = {
@@ -189,7 +189,7 @@ def handle_register(body: Dict[str, Any]) -> Dict[str, Any]:
             'email': user[1], 
             'username': user[2],
             'name': user[3],
-            'role': 'user'
+            'role': user[4]
         }
         
         token = generate_jwt(user_data)
