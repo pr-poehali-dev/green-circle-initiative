@@ -1,0 +1,14 @@
+{
+  "tests": [{
+    "name": "Get users from database",
+    "method": "GET",
+    "path": "/",
+    "expectedStatus": 200,
+    "expectedBody": {
+      "users": "array",
+      "total": "number",
+      "columns": "array"
+    },
+    "bodyMatcher": "partial"
+  }]
+}
