@@ -37,6 +37,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     # Debug logging (минимальный)
     print(f"Method: {method}, Action: {path}")
+    # Временное детальное логирование заголовков
+    if path == 'users':
+        print(f"All headers: {json.dumps(headers, indent=2)}")
     
     # Handle OPTIONS request for CORS
     if method == 'OPTIONS':
