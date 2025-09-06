@@ -17,8 +17,10 @@ def send_email(to_email: str, code: str) -> bool:
     
     if not resend_api_key:
         # Если Resend не настроен, просто логируем код
-        print(f"Email verification code for {to_email}: {code}")
+        print(f"[WARNING] RESEND_API_KEY not found! Email verification code for {to_email}: {code}")
         return True
+    
+    print(f"[INFO] Attempting to send email to {to_email} using Resend API")
     
     try:
         response = requests.post(
@@ -45,15 +47,19 @@ def send_email(to_email: str, code: str) -> bool:
             }
         )
         
+        print(f"[DEBUG] Resend API response: status={response.status_code}")
+        
         if response.status_code == 200:
-            print(f"Email sent successfully to {to_email}")
+            print(f"[SUCCESS] Email sent successfully to {to_email}")
+            print(f"[DEBUG] Response data: {response.json()}")
             return True
         else:
-            print(f"Failed to send email: {response.text}")
+            print(f"[ERROR] Failed to send email. Status: {response.status_code}")
+            print(f"[ERROR] Response: {response.text}")
             return True  # Всё равно продолжаем процесс
             
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        print(f"[ERROR] Exception while sending email: {type(e).__name__}: {e}")
         return True  # Возвращаем True, чтобы не блокировать процесс
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
