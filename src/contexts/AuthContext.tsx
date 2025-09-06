@@ -56,18 +56,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const verifyToken = async (authToken: string) => {
     try {
-      console.log('Verifying token:', authToken?.substring(0, 20) + '...');
-      const response = await fetch(`${API_BASE_URL}/?action=verify&token=${encodeURIComponent(authToken)}`);
-      
-      console.log('Token verification response:', response.status);
+      const response = await fetch(`${API_BASE_URL}/?action=verify`, {
+        headers: {
+          'X-Auth-Token': authToken
+        }
+      });
       
       if (!response.ok) {
-        console.log('Token verification failed, logging out');
         logout();
         return false;
       }
       
-      console.log('Token verified successfully');
       return true;
     } catch (error) {
       console.error('Token verification failed:', error);

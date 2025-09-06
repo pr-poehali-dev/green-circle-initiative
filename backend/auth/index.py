@@ -12,7 +12,7 @@ def add_cors_headers(response: Dict[str, Any]) -> Dict[str, Any]:
     cors_headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Auth-Token',
         'Content-Type': 'application/json'
     }
     
@@ -58,15 +58,15 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return add_cors_headers({'statusCode': 400, 'body': json.dumps({'error': 'Invalid action'})})
         
         elif method == 'GET' and path == 'verify':
-            # Получаем токен из query параметра или заголовка
-            token = event.get('queryStringParameters', {}).get('token', '')
+            # Получаем токен из кастомного заголовка (безопаснее чем URL)
+            token = headers.get('x-auth-token', '')
             if not token:
                 token = headers.get('authorization', '').replace('Bearer ', '')
             return add_cors_headers(handle_verify(token))
         
         elif method == 'GET' and path == 'users':
-            # Получаем токен из query параметра или заголовка
-            token = event.get('queryStringParameters', {}).get('token', '')
+            # Получаем токен из кастомного заголовка (безопаснее чем URL)
+            token = headers.get('x-auth-token', '')
             if not token:
                 token = headers.get('authorization', '').replace('Bearer ', '')
             return add_cors_headers(handle_get_users(token))
