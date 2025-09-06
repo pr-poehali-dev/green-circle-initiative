@@ -7,6 +7,22 @@ from typing import Dict, Any, Optional
 import psycopg2
 import os
 
+def add_cors_headers(response: Dict[str, Any]) -> Dict[str, Any]:
+    '''Добавляет CORS заголовки к ответу'''
+    cors_headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Content-Type': 'application/json'
+    }
+    
+    if 'headers' in response:
+        response['headers'].update(cors_headers)
+    else:
+        response['headers'] = cors_headers
+    
+    return response
+
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
     Business: Authentication API - login, register, validate tokens
@@ -19,33 +35,40 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     path = event.get('queryStringParameters', {}).get('action', '')
     headers = event.get('headers', {})
     
+    # Handle OPTIONS request for CORS
+    if method == 'OPTIONS':
+        return add_cors_headers({
+            'statusCode': 200,
+            'body': ''
+        })
+    
     try:
         if method == 'POST':
             body = json.loads(event.get('body', '{}'))
             
             if path == 'register':
-                return handle_register(body)
+                return add_cors_headers(handle_register(body))
             elif path == 'login':
-                return handle_login(body)
+                return add_cors_headers(handle_login(body))
             else:
-                return {'statusCode': 400, 'body': json.dumps({'error': 'Invalid action'})}
+                return add_cors_headers({'statusCode': 400, 'body': json.dumps({'error': 'Invalid action'})})
         
         elif method == 'GET' and path == 'verify':
             token = headers.get('authorization', '').replace('Bearer ', '')
-            return handle_verify(token)
+            return add_cors_headers(handle_verify(token))
         
         elif method == 'GET' and path == 'users':
             token = headers.get('authorization', '').replace('Bearer ', '')
-            return handle_get_users(token)
+            return add_cors_headers(handle_get_users(token))
         
         else:
-            return {'statusCode': 404, 'body': json.dumps({'error': 'Endpoint not found'})}
+            return add_cors_headers({'statusCode': 404, 'body': json.dumps({'error': 'Endpoint not found'})})
     
     except Exception as e:
-        return {
+        return add_cors_headers({
             'statusCode': 500,
             'body': json.dumps({'error': str(e)})
-        }
+        })
 
 def get_db_connection():
     '''Создает подключение к базе данных'''
