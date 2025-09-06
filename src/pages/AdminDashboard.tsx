@@ -29,10 +29,11 @@ export const AdminDashboard: React.FC = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/?action=users&token=${encodeURIComponent(token || '')}`, {
+      const response = await fetch(`${API_BASE_URL}/?action=users`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'X-Auth-Token': token || ''
         }
       });
 

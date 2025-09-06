@@ -38,13 +38,21 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     # Debug logging
     print(f"Method: {method}, Action: {path}")
     print(f"Headers: {headers}")
+    print(f"Looking for X-Auth-Token: {headers.get('X-Auth-Token', 'NOT FOUND')}")
+    print(f"Looking for x-auth-token: {headers.get('x-auth-token', 'NOT FOUND')}")
     
     # Handle OPTIONS request for CORS
     if method == 'OPTIONS':
-        return add_cors_headers({
+        return {
             'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Auth-Token',
+                'Access-Control-Max-Age': '86400'  # 24 hours
+            },
             'body': ''
-        })
+        }
     
     try:
         if method == 'POST':
