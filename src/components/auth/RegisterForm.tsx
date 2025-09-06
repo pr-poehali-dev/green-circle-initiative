@@ -5,6 +5,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/components/ui/use-toast';
+import { EmailVerification } from './EmailVerification';
+import { EmailVerification } from './EmailVerification';
 
 interface RegisterFormProps {
   onToggleMode: () => void;
@@ -18,6 +20,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
     name: '',
     confirmPassword: ''
   });
+  const [showVerification, setShowVerification] = useState(false);
   const { register, isLoading } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +52,40 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
     }
     
     try {
+      // Сначала отправляем код подтверждения
+      const apiUrl = (window as unknown as { apiBaseUrls?: Record<string, string> }).apiBaseUrls?.['send-verification-code'] || '/api/send-verification-code';
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast({
+          title: "Код отправлен",
+          description: "Проверьте вашу почту для подтверждения",
+        });
+        setShowVerification(true);
+      } else {
+        toast({
+          title: "Ошибка",
+          description: data.error || "Не удалось отправить код",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка",
+        description: "Не удалось отправить код подтверждения",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleVerified = async () => {
+    try {
       await register({
         email: formData.email,
         username: formData.username,
@@ -67,6 +104,16 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
       });
     }
   };
+
+  if (showVerification) {
+    return (
+      <EmailVerification
+        email={formData.email}
+        onVerified={handleVerified}
+        onBack={() => setShowVerification(false)}
+      />
+    );
+  }
 
   return (
     <Card className="w-full max-w-md mx-auto">

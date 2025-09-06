@@ -1,4 +1,7 @@
 {
+  "send-verification-code": "https://functions.yandexcloud.net/d4enr0qps8ck1pjuc4gq",
+  "verify-email-code": "https://functions.yandexcloud.net/d4egqtb6t689prrvbmba",
+  "db-query": "https://functions.yandexcloud.net/d4en5125u1gfq6ssji34",
   "database": "https://functions.yandexcloud.net/d4ecoiiufjjig7un1s4j",
   "auth": "https://functions.yandexcloud.net/d4eb0qlo5gigl6ca6cnr"
 }

@@ -1,0 +1,17 @@
+{
+  "tests": [{
+    "name": "Verify email code",
+    "method": "POST",
+    "path": "/",
+    "body": {
+      "email": "test@example.com",
+      "code": "123456"
+    },
+    "expectedStatus": 400,
+    "expectedBody": {
+      "success": false,
+      "error": "string"
+    },
+    "bodyMatcher": "partial"
+  }]
+}
