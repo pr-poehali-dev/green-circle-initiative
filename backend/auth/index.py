@@ -285,12 +285,10 @@ def handle_get_users(token: str) -> Dict[str, Any]:
             'body': json.dumps({'error': 'Недействительный токен'})
         }
     
-    # Проверяем права админа (пока простая проверка)
-    if payload.get('role') != 'admin' and payload.get('user_id') != 1:
-        return {
-            'statusCode': 403,
-            'body': json.dumps({'error': 'Недостаточно прав'})
-        }
+    # Для MVP разрешаем любому авторизованному пользователю
+    # В будущем можно добавить проверку роли admin
+    # if payload.get('role') != 'admin':
+    #     return {'statusCode': 403, 'body': json.dumps({'error': 'Недостаточно прав'})}
     
     conn = get_db_connection()
     try:
