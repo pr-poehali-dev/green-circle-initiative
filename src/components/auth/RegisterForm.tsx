@@ -52,8 +52,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
     
     try {
       // Сначала отправляем код подтверждения
-      const apiUrl = (window as unknown as { apiBaseUrls?: Record<string, string> }).apiBaseUrls?.['send-verification-code'] || '/api/send-verification-code';
-      const response = await fetch(apiUrl, {
+      const response = await fetch('https://functions.yandexcloud.net/d4enr0qps8ck1pjuc4gq', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email }),
