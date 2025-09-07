@@ -27,12 +27,22 @@ interface NewProduct {
   image_url: string;
 }
 
+interface UploadResponse {
+  url: string;
+  filename: string;
+  size: number;
+  type: string;
+  message: string;
+}
+
 const AdminProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string>('');
   const { toast } = useToast();
 
   const [newProduct, setNewProduct] = useState<NewProduct>({
@@ -43,6 +53,7 @@ const AdminProducts = () => {
   });
 
   const API_URL = 'https://functions.yandexcloud.net/d4eaolo274np1jugbof9';
+  const UPLOAD_URL = 'https://functions.yandexcloud.net/d4e9duo6cogp3cvb7ead';
 
   const fetchProducts = async () => {
     try {
@@ -70,6 +81,89 @@ const AdminProducts = () => {
     }
   };
 
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Проверяем тип файла
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Ошибка",
+        description: "Выберите файл изображения",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Проверяем размер файла (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "Ошибка",
+        description: "Размер файла не должен превышать 5MB",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsUploading(true);
+
+    try {
+      // Конвертируем файл в base64
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve, reject) => {
+        reader.onload = () => {
+          if (typeof reader.result === 'string') {
+            resolve(reader.result);
+          } else {
+            reject(new Error('Ошибка чтения файла'));
+          }
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      const base64Data = await base64Promise;
+
+      // Отправляем на сервер
+      const response = await fetch(UPLOAD_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          file: base64Data,
+          fileName: file.name,
+          fileType: file.type
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Ошибка загрузки');
+      }
+
+      const uploadResult: UploadResponse = await response.json();
+      
+      setUploadedImageUrl(uploadResult.url);
+      setNewProduct(prev => ({ ...prev, image_url: uploadResult.url }));
+
+      toast({
+        title: "Успешно!",
+        description: "Изображение загружено",
+      });
+
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast({
+        title: "Ошибка загрузки",
+        description: error instanceof Error ? error.message : "Не удалось загрузить изображение",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -85,12 +179,17 @@ const AdminProducts = () => {
     setIsSubmitting(true);
 
     try {
+      const productData = {
+        ...newProduct,
+        image_url: uploadedImageUrl || newProduct.image_url
+      };
+
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newProduct)
+        body: JSON.stringify(productData)
       });
 
       if (!response.ok) {
@@ -107,6 +206,7 @@ const AdminProducts = () => {
 
       setProducts(prev => [data.product, ...prev]);
       setNewProduct({ name: '', description: '', price: 0, image_url: '' });
+      setUploadedImageUrl('');
       setIsAddDialogOpen(false);
 
     } catch (err) {
@@ -263,14 +363,61 @@ const AdminProducts = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="image_url">URL изображения</Label>
-                    <Input
-                      id="image_url"
-                      type="url"
-                      value={newProduct.image_url}
-                      onChange={(e) => setNewProduct(prev => ({ ...prev, image_url: e.target.value }))}
-                      placeholder="https://example.com/image.jpg"
-                    />
+                    <Label>Изображение товара</Label>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Label htmlFor="image_file" className="cursor-pointer">
+                          <div className="flex items-center gap-2 px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-gray-400 transition-colors">
+                            <Icon name={isUploading ? "Loader2" : "Upload"} size={16} className={isUploading ? "animate-spin" : ""} />
+                            <span className="text-sm">
+                              {isUploading ? "Загрузка..." : "Загрузить с компьютера"}
+                            </span>
+                          </div>
+                        </Label>
+                        <input
+                          id="image_file"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                          disabled={isUploading}
+                        />
+                      </div>
+                      
+                      {uploadedImageUrl && (
+                        <div className="relative w-20 h-20">
+                          <img 
+                            src={uploadedImageUrl} 
+                            alt="Превью"
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            size="sm"
+                            className="absolute -top-2 -right-2 h-6 w-6 p-0"
+                            onClick={() => {
+                              setUploadedImageUrl('');
+                              setNewProduct(prev => ({ ...prev, image_url: '' }));
+                            }}
+                          >
+                            <Icon name="X" size={12} />
+                          </Button>
+                        </div>
+                      )}
+                      
+                      <div className="text-xs text-gray-500">
+                        или введите URL изображения:
+                      </div>
+                      
+                      <Input
+                        type="url"
+                        value={newProduct.image_url}
+                        onChange={(e) => setNewProduct(prev => ({ ...prev, image_url: e.target.value }))}
+                        placeholder="https://example.com/image.jpg"
+                        disabled={!!uploadedImageUrl}
+                      />
+                    </div>
                   </div>
                 </div>
                 
