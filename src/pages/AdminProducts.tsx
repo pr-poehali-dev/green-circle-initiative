@@ -173,10 +173,21 @@ const AdminProducts = () => {
     setIsSubmitting(true);
 
     try {
+      // Временно отключаем image_url для тестирования
       const productData = {
-        ...newProduct,
-        image_url: uploadedImageUrl || newProduct.image_url
+        name: newProduct.name,
+        description: newProduct.description,
+        price: newProduct.price,
+        image_url: '' // Пустая строка вместо base64
       };
+
+      console.log('Отправляю товар:', {
+        name: productData.name,
+        description: productData.description,
+        price: productData.price,
+        image_url_length: productData.image_url?.length || 0,
+        image_url_preview: productData.image_url?.substring(0, 100) + '...'
+      });
 
       const response = await fetch(API_URL, {
         method: 'POST',
