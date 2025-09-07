@@ -209,12 +209,21 @@ const AdminProducts = () => {
 
       const data = await response.json();
       
+      console.log('Ответ от сервера:', data);
+      
       toast({
         title: "Успешно!",
         description: data.message || "Товар добавлен в каталог",
       });
 
-      setProducts(prev => [data.product, ...prev]);
+      if (data.product) {
+        console.log('Добавляю товар в список:', data.product);
+        setProducts(prev => [data.product, ...prev]);
+      } else {
+        console.error('Товар не найден в ответе сервера');
+        // Обновляем весь список товаров
+        fetchProducts();
+      }
       setNewProduct({ name: '', description: '', price: 0, image_url: '' });
       setUploadedImageUrl('');
       setIsAddDialogOpen(false);
