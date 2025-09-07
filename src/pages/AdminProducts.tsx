@@ -108,7 +108,7 @@ const AdminProducts = () => {
     setIsUploading(true);
 
     try {
-      // Конвертируем файл в base64
+      // Конвертируем файл в base64 для локального использования
       const reader = new FileReader();
       const base64Promise = new Promise<string>((resolve, reject) => {
         reader.onload = () => {
@@ -123,29 +123,10 @@ const AdminProducts = () => {
       });
 
       const base64Data = await base64Promise;
-
-      // Отправляем на сервер
-      const response = await fetch(UPLOAD_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          file: base64Data,
-          fileName: file.name,
-          fileType: file.type
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Ошибка загрузки');
-      }
-
-      const uploadResult: UploadResponse = await response.json();
       
-      setUploadedImageUrl(uploadResult.url);
-      setNewProduct(prev => ({ ...prev, image_url: uploadResult.url }));
+      // Используем data URL как изображение (временное решение)
+      setUploadedImageUrl(base64Data);
+      setNewProduct(prev => ({ ...prev, image_url: base64Data }));
 
       toast({
         title: "Успешно!",
