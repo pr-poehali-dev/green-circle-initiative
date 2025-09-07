@@ -81,6 +81,42 @@ const AdminProducts = () => {
     }
   };
 
+  const compressImage = (file: File, maxWidth: number = 800, quality: number = 0.7): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = () => {
+        // Вычисляем новые размеры с сохранением пропорций
+        let { width, height } = img;
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width;
+          width = maxWidth;
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Рисуем сжатое изображение
+        ctx?.drawImage(img, 0, 0, width, height);
+        
+        // Конвертируем в base64 с указанным качеством
+        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+        resolve(compressedBase64);
+      };
+      
+      img.onerror = reject;
+      
+      // Загружаем изображение
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        img.src = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -95,11 +131,11 @@ const AdminProducts = () => {
       return;
     }
 
-    // Проверяем размер файла (5MB)
-    if (file.size > 5 * 1024 * 1024) {
+    // Проверяем размер файла (10MB)
+    if (file.size > 10 * 1024 * 1024) {
       toast({
         title: "Ошибка",
-        description: "Размер файла не должен превышать 5MB",
+        description: "Размер файла не должен превышать 10MB",
         variant: "destructive",
       });
       return;
@@ -108,41 +144,42 @@ const AdminProducts = () => {
     setIsUploading(true);
 
     try {
-      // Конвертируем файл в base64 для локального использования
-      const reader = new FileReader();
-      const base64Promise = new Promise<string>((resolve, reject) => {
-        reader.onload = () => {
-          if (typeof reader.result === 'string') {
-            resolve(reader.result);
-          } else {
-            reject(new Error('Ошибка чтения файла'));
-          }
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-
-      const base64Data = await base64Promise;
+      // Сжимаем изображение
+      const compressedBase64 = await compressImage(file, 600, 0.8);
       
-      // Проверяем размер base64 строки (максимум 2MB после кодирования)
-      if (base64Data.length > 2 * 1024 * 1024) {
-        // Если файл слишком большой, используем placeholder
-        const placeholderUrl = `https://via.placeholder.com/400x400/6366f1/ffffff?text=${encodeURIComponent(file.name.substring(0, 10))}`;
-        setUploadedImageUrl(placeholderUrl);
-        setNewProduct(prev => ({ ...prev, image_url: placeholderUrl }));
+      console.log(`Сжатие: ${file.size} байт -> ${compressedBase64.length} символов`);
+      
+      // Проверяем размер после сжатия (максимум 500KB для base64)
+      if (compressedBase64.length > 500 * 1024) {
+        // Если всё ещё слишком большой, сжимаем сильнее
+        const superCompressed = await compressImage(file, 400, 0.5);
         
-        toast({
-          title: "Изображение заменено",
-          description: "Файл слишком большой, использован placeholder. Попробуйте файл меньшего размера.",
-        });
+        if (superCompressed.length > 500 * 1024) {
+          // Используем placeholder если даже максимальное сжатие не помогло
+          const placeholderUrl = `https://via.placeholder.com/400x400/6366f1/ffffff?text=${encodeURIComponent(file.name.substring(0, 10))}`;
+          setUploadedImageUrl(placeholderUrl);
+          setNewProduct(prev => ({ ...prev, image_url: placeholderUrl }));
+          
+          toast({
+            title: "Изображение заменено",
+            description: "Файл слишком большой даже после сжатия, использован placeholder.",
+          });
+        } else {
+          setUploadedImageUrl(superCompressed);
+          setNewProduct(prev => ({ ...prev, image_url: superCompressed }));
+          
+          toast({
+            title: "Сжато и загружено!",
+            description: "Изображение сжато для оптимизации",
+          });
+        }
       } else {
-        // Используем data URL как изображение
-        setUploadedImageUrl(base64Data);
-        setNewProduct(prev => ({ ...prev, image_url: base64Data }));
+        setUploadedImageUrl(compressedBase64);
+        setNewProduct(prev => ({ ...prev, image_url: compressedBase64 }));
         
         toast({
           title: "Успешно!",
-          description: "Изображение загружено",
+          description: "Изображение загружено и оптимизировано",
         });
       }
 
@@ -173,12 +210,9 @@ const AdminProducts = () => {
     setIsSubmitting(true);
 
     try {
-      // Временно отключаем image_url для тестирования
       const productData = {
-        name: newProduct.name,
-        description: newProduct.description,
-        price: newProduct.price,
-        image_url: '' // Пустая строка вместо base64
+        ...newProduct,
+        image_url: uploadedImageUrl || newProduct.image_url || ''
       };
 
       console.log('Отправляю товар:', {
