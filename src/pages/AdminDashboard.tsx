@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import { format, parseISO } from 'date-fns';
 import { ru } from 'date-fns/locale';
@@ -25,6 +26,7 @@ export const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const { user, token, logout } = useAuth();
+  const navigate = useNavigate();
 
   const fetchUsers = async () => {
     try {
@@ -101,6 +103,16 @@ export const AdminDashboard: React.FC = () => {
             </div>
             
             <div className="flex items-center space-x-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/admin/products')}
+                className="flex items-center space-x-2"
+              >
+                <Icon name="Package" size={16} />
+                <span>Товары</span>
+              </Button>
+              
               <div className="flex items-center space-x-2">
                 <Icon name="User" className="h-5 w-5 text-gray-500" />
                 <span className="text-sm text-gray-700">{user?.name}</span>

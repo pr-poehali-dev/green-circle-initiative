@@ -1,0 +1,41 @@
+{
+  "tests": [
+    {
+      "name": "Получение списка товаров",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "products": "array"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Добавление нового товара",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Тестовый товар",
+        "description": "Описание тестового товара",
+        "price": 1000.00,
+        "image_url": "https://example.com/test.jpg"
+      },
+      "expectedStatus": 201,
+      "expectedBody": {
+        "product": "object",
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Удаление товара",
+      "method": "DELETE",
+      "path": "/?id=1",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

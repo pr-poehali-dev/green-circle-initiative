@@ -14,22 +14,22 @@ const Index = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Добро пожаловать в систему!
+            Добро пожаловать!
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Управляйте пользователями через админ панель
+            Каталог товаров и система управления
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <div className="flex items-center space-x-3">
-                <Icon name="Shield" className="h-8 w-8 text-blue-600" />
+                <Icon name="ShoppingBag" className="h-8 w-8 text-purple-600" />
                 <div>
-                  <CardTitle>Админ панель</CardTitle>
+                  <CardTitle>Каталог товаров</CardTitle>
                   <CardDescription>
-                    Просмотр всех пользователей и дат их регистрации
+                    Просмотр всех доступных товаров
                   </CardDescription>
                 </div>
               </div>
@@ -38,16 +38,56 @@ const Index = () => {
               <div className="space-y-4">
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-center space-x-2">
+                    <Icon name="Package" size={16} className="text-purple-500" />
+                    <span>Актуальный список товаров</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Icon name="Tag" size={16} className="text-purple-500" />
+                    <span>Цены и описания</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Icon name="Image" size={16} className="text-purple-500" />
+                    <span>Фотографии товаров</span>
+                  </li>
+                </ul>
+                
+                <Button 
+                  onClick={() => navigate('/products')}
+                  className="w-full"
+                >
+                  <Icon name="ShoppingCart" size={16} className="mr-2" />
+                  Открыть каталог
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="flex items-center space-x-3">
+                <Icon name="Shield" className="h-8 w-8 text-blue-600" />
+                <div>
+                  <CardTitle>Админ панель</CardTitle>
+                  <CardDescription>
+                    Управление товарами и пользователями
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li className="flex items-center space-x-2">
+                    <Icon name="Settings" size={16} className="text-blue-500" />
+                    <span>Добавление товаров</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Icon name="Trash2" size={16} className="text-blue-500" />
+                    <span>Удаление товаров</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
                     <Icon name="Users" size={16} className="text-blue-500" />
-                    <span>Список всех пользователей</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <Icon name="Calendar" size={16} className="text-blue-500" />
-                    <span>Даты регистрации и последнего входа</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <Icon name="Activity" size={16} className="text-blue-500" />
-                    <span>Статус активности пользователей</span>
+                    <span>Управление пользователями</span>
                   </li>
                 </ul>
                 
