@@ -19,11 +19,11 @@ class ProductCreate(BaseModel):
 
 def get_db_connection():
     """Получение соединения с базой данных"""
-    dsn = os.environ.get('DSN')
-    if not dsn:
-        raise Exception('DSN environment variable not found')
+    database_url = os.environ.get('DATABASE_URL')
+    if not database_url:
+        raise Exception('DATABASE_URL environment variable not found')
     
-    return psycopg2.connect(dsn, cursor_factory=RealDictCursor)
+    return psycopg2.connect(database_url, cursor_factory=RealDictCursor)
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     method: str = event.get('httpMethod', 'GET')
