@@ -124,14 +124,27 @@ const AdminProducts = () => {
 
       const base64Data = await base64Promise;
       
-      // Используем data URL как изображение (временное решение)
-      setUploadedImageUrl(base64Data);
-      setNewProduct(prev => ({ ...prev, image_url: base64Data }));
-
-      toast({
-        title: "Успешно!",
-        description: "Изображение загружено",
-      });
+      // Проверяем размер base64 строки (максимум 2MB после кодирования)
+      if (base64Data.length > 2 * 1024 * 1024) {
+        // Если файл слишком большой, используем placeholder
+        const placeholderUrl = `https://via.placeholder.com/400x400/6366f1/ffffff?text=${encodeURIComponent(file.name.substring(0, 10))}`;
+        setUploadedImageUrl(placeholderUrl);
+        setNewProduct(prev => ({ ...prev, image_url: placeholderUrl }));
+        
+        toast({
+          title: "Изображение заменено",
+          description: "Файл слишком большой, использован placeholder. Попробуйте файл меньшего размера.",
+        });
+      } else {
+        // Используем data URL как изображение
+        setUploadedImageUrl(base64Data);
+        setNewProduct(prev => ({ ...prev, image_url: base64Data }));
+        
+        toast({
+          title: "Успешно!",
+          description: "Изображение загружено",
+        });
+      }
 
     } catch (error) {
       console.error('Upload error:', error);
