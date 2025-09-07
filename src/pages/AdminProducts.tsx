@@ -218,7 +218,11 @@ const AdminProducts = () => {
 
       if (data.product) {
         console.log('Добавляю товар в список:', data.product);
-        setProducts(prev => [data.product, ...prev]);
+        setProducts(prev => {
+          const newList = [data.product, ...prev];
+          console.log('Новый список товаров:', newList.length, 'элементов');
+          return newList;
+        });
       } else {
         console.error('Товар не найден в ответе сервера');
         // Обновляем весь список товаров
@@ -482,7 +486,9 @@ const AdminProducts = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
+            {(() => {
+              console.log('Рендерим товары. Количество:', products.length, products.map(p => p.name));
+              return products.map((product) => (
               <Card key={product.id} className="overflow-hidden">
                 {product.image_url && (
                   <div className="aspect-video overflow-hidden bg-gray-100">
