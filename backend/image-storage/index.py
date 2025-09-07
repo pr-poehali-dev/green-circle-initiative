@@ -103,8 +103,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     elif method == 'GET':
         # Получение изображения
+        # Пробуем получить ID из разных источников
+        query_params = event.get('queryStringParameters', {}) or {}
         path_params = event.get('pathParams', {}) or {}
-        image_id = path_params.get('id')
+        
+        image_id = query_params.get('id') or path_params.get('id')
         
         if not image_id:
             return {

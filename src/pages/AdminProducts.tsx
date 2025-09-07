@@ -144,8 +144,9 @@ const AdminProducts = () => {
 
       const result = await response.json();
       
-      // Сохраняем ID изображения вместо URL
-      const imageUrl = `${IMAGE_STORAGE_URL}/${result.image_id}`;
+      // Сохраняем ID изображения вместо URL 
+      // Используем ?id= параметр вместо /id в пути
+      const imageUrl = `${IMAGE_STORAGE_URL}?id=${result.image_id}`;
       setUploadedImageUrl(imageUrl);
       setNewProduct(prev => ({ ...prev, image_url: imageUrl }));
 
@@ -486,9 +487,7 @@ const AdminProducts = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(() => {
-              console.log('Рендерим товары. Количество:', products.length, products.map(p => p.name));
-              return products.map((product) => (
+            {products.map((product) => (
               <Card key={product.id} className="overflow-hidden">
                 {product.image_url && (
                   <div className="aspect-video overflow-hidden bg-gray-100">
