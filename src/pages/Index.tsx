@@ -139,7 +139,7 @@ const Index = () => {
                   {loading === 'single-1' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 1'
+                    '1'
                   )}
                 </Button>
                 <Button 
@@ -152,7 +152,7 @@ const Index = () => {
                   {loading === 'single-2' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 2'
+                    '2'
                   )}
                 </Button>
                 <Button 
@@ -165,7 +165,7 @@ const Index = () => {
                   {loading === 'single-3' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 3'
+                    '3'
                   )}
                 </Button>
               </div>
@@ -211,7 +211,7 @@ const Index = () => {
                   {loading === 'single-11' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 11'
+                    '11'
                   )}
                 </Button>
                 <Button 
@@ -224,7 +224,7 @@ const Index = () => {
                   {loading === 'single-12' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 12'
+                    '12'
                   )}
                 </Button>
                 <Button 
@@ -237,7 +237,7 @@ const Index = () => {
                   {loading === 'single-13' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 13'
+                    '13'
                   )}
                 </Button>
               </div>
@@ -283,7 +283,7 @@ const Index = () => {
                   {loading === 'single-21' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 21'
+                    '21'
                   )}
                 </Button>
                 <Button 
@@ -296,7 +296,7 @@ const Index = () => {
                   {loading === 'single-22' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 22'
+                    '22'
                   )}
                 </Button>
                 <Button 
@@ -309,7 +309,7 @@ const Index = () => {
                   {loading === 'single-23' ? (
                     <Icon name="Loader2" className="h-3 w-3 animate-spin" />
                   ) : (
-                    'Функция 23'
+                    '23'
                   )}
                 </Button>
               </div>
