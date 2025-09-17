@@ -1,0 +1,13 @@
+{
+  "tests": [{
+    "name": "Test function 05 GET request",
+    "method": "GET",
+    "path": "/",
+    "expectedStatus": 200,
+    "expectedBody": {
+      "functionNumber": 5,
+      "message": "Test function 05"
+    },
+    "bodyMatcher": "partial"
+  }]
+}
