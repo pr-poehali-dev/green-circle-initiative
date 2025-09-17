@@ -14,108 +14,81 @@ interface TestResult {
 }
 
 const Index = () => {
-  const [loading, setLoading] = useState<string | null>(null);
-  const [results, setResults] = useState<TestResult[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [result, setResult] = useState<TestResult | null>(null);
 
-  // Группируем функции
-  const group1 = Array.from({ length: 10 }, (_, i) => i + 1); // 1-10
-  const group2 = Array.from({ length: 10 }, (_, i) => i + 11); // 11-20  
-  const group3 = Array.from({ length: 10 }, (_, i) => i + 21); // 21-30
-
-  const callFunction = async (funcNum: number) => {
-    const funcKey = `test-func-${String(funcNum).padStart(2, '0')}`;
-    const url = functionsData[funcKey as keyof typeof functionsData];
-    
-    if (!url) {
-      return {
-        functionNumber: funcNum,
-        message: 'Function not found',
-        requestId: '',
-        timestamp: new Date().toISOString(),
-        status: 404,
-        error: 'URL not found'
-      };
-    }
+  const callFunction = async () => {
+    setLoading(true);
+    setResult(null);
 
     try {
+      const url = functionsData['test-func-01' as keyof typeof functionsData];
+      
+      if (!url) {
+        setResult({
+          functionNumber: 1,
+          message: 'Function not found',
+          requestId: '',
+          timestamp: new Date().toISOString(),
+          status: 404,
+          error: 'URL not found'
+        });
+        return;
+      }
+
       const response = await fetch(url);
       const data = await response.json();
       
-      return {
+      setResult({
         ...data,
         status: response.status
-      };
+      });
     } catch (error) {
-      return {
-        functionNumber: funcNum,
+      setResult({
+        functionNumber: 1,
         message: 'Network error',
         requestId: '',
         timestamp: new Date().toISOString(),
         status: 500,
         error: error instanceof Error ? error.message : 'Unknown error'
-      };
-    }
-  };
-
-  const callSingleFunction = async (funcNum: number) => {
-    setLoading(`single-${funcNum}`);
-    
-    try {
-      const result = await callFunction(funcNum);
-      setResults([result]);
-    } catch (error) {
-      console.error('Error calling function:', error);
+      });
     } finally {
-      setLoading(null);
-    }
-  };
-
-  const callFunctions = async (group: number[], groupName: string) => {
-    setLoading(groupName);
-    setResults([]);
-
-    try {
-      // Вызываем все функции группы параллельно
-      const promises = group.map(funcNum => callFunction(funcNum));
-      const groupResults = await Promise.all(promises);
-      setResults(groupResults);
-    } catch (error) {
-      console.error('Error calling functions:', error);
-    } finally {
-      setLoading(null);
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 p-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            🚀 Тестирование Backend Функций
+            🚀 Тестирование Backend Функции
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            30 тестовых функций разделены на 3 группы по 10 штук
+            Одна тестовая функция для проверки работы системы
           </p>
         </div>
 
-        {/* Кнопки для тестирования групп */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Card>
+        {/* Кнопка для тестирования функции */}
+        <div className="mb-8">
+          <Card className="max-w-md mx-auto">
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
+              <CardTitle className="flex items-center space-x-2 justify-center">
                 <Icon name="Zap" className="h-6 w-6 text-yellow-600" />
-                <span>Группа 1</span>
+                <span>Тестовая функция #1</span>
               </CardTitle>
-              <CardDescription>Функции 1-10</CardDescription>
+              <CardDescription className="text-center">
+                Вызов единственной backend функции
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent>
               <Button 
-                onClick={() => callFunctions(group1, 'group1')}
-                disabled={loading !== null}
+                onClick={callFunction}
+                disabled={loading}
                 className="w-full"
                 size="lg"
               >
-                {loading === 'group1' ? (
+                {loading ? (
                   <>
                     <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
                     Тестирую...
@@ -123,256 +96,79 @@ const Index = () => {
                 ) : (
                   <>
                     <Icon name="Play" className="mr-2 h-4 w-4" />
-                    Тестировать группу 1
+                    Тестировать функцию
                   </>
                 )}
               </Button>
-              
-              <div className="flex space-x-2">
-                <Button 
-                  onClick={() => callSingleFunction(1)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-1' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '1'
-                  )}
-                </Button>
-                <Button 
-                  onClick={() => callSingleFunction(2)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-2' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '2'
-                  )}
-                </Button>
-                <Button 
-                  onClick={() => callSingleFunction(3)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-3' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '3'
-                  )}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Icon name="Rocket" className="h-6 w-6 text-blue-600" />
-                <span>Группа 2</span>
-              </CardTitle>
-              <CardDescription>Функции 11-20</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Button 
-                onClick={() => callFunctions(group2, 'group2')}
-                disabled={loading !== null}
-                className="w-full"
-                size="lg"
-              >
-                {loading === 'group2' ? (
-                  <>
-                    <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-                    Тестирую...
-                  </>
-                ) : (
-                  <>
-                    <Icon name="Play" className="mr-2 h-4 w-4" />
-                    Тестировать группу 2
-                  </>
-                )}
-              </Button>
-              
-              <div className="flex space-x-2">
-                <Button 
-                  onClick={() => callSingleFunction(11)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-11' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '11'
-                  )}
-                </Button>
-                <Button 
-                  onClick={() => callSingleFunction(12)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-12' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '12'
-                  )}
-                </Button>
-                <Button 
-                  onClick={() => callSingleFunction(13)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-13' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '13'
-                  )}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Icon name="Flame" className="h-6 w-6 text-red-600" />
-                <span>Группа 3</span>
-              </CardTitle>
-              <CardDescription>Функции 21-30</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Button 
-                onClick={() => callFunctions(group3, 'group3')}
-                disabled={loading !== null}
-                className="w-full"
-                size="lg"
-              >
-                {loading === 'group3' ? (
-                  <>
-                    <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-                    Тестирую...
-                  </>
-                ) : (
-                  <>
-                    <Icon name="Play" className="mr-2 h-4 w-4" />
-                    Тестировать группу 3
-                  </>
-                )}
-              </Button>
-              
-              <div className="flex space-x-2">
-                <Button 
-                  onClick={() => callSingleFunction(21)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-21' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '21'
-                  )}
-                </Button>
-                <Button 
-                  onClick={() => callSingleFunction(22)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-22' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '22'
-                  )}
-                </Button>
-                <Button 
-                  onClick={() => callSingleFunction(23)}
-                  disabled={loading !== null}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                >
-                  {loading === 'single-23' ? (
-                    <Icon name="Loader2" className="h-3 w-3 animate-spin" />
-                  ) : (
-                    '23'
-                  )}
-                </Button>
-              </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Результаты тестирования */}
-        {results.length > 0 && (
-          <Card>
+        {/* Результат тестирования */}
+        {result && (
+          <Card className="max-w-md mx-auto">
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Icon name="BarChart3" className="h-6 w-6 text-green-600" />
-                <span>Результаты тестирования</span>
+              <CardTitle className="flex items-center space-x-2 justify-center">
+                <Icon 
+                  name={result.status === 200 ? "CheckCircle" : "XCircle"} 
+                  className={`h-6 w-6 ${
+                    result.status === 200 ? 'text-green-600' : 'text-red-600'
+                  }`}
+                />
+                <span>Результат теста</span>
               </CardTitle>
-              <CardDescription>
-                Успешно: {results.filter(r => r.status === 200).length} / {results.length}
-              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-h-96 overflow-y-auto">
-                {results.map((result) => (
-                  <div 
-                    key={result.functionNumber}
-                    className={`p-4 rounded-lg border-2 ${
-                      result.status === 200 
-                        ? 'border-green-200 bg-green-50' 
-                        : 'border-red-200 bg-red-50'
-                    }`}
-                  >
-                    <div className="flex items-center space-x-2 mb-2">
-                      <Icon 
-                        name={result.status === 200 ? "CheckCircle" : "XCircle"} 
-                        className={`h-4 w-4 ${
-                          result.status === 200 ? 'text-green-600' : 'text-red-600'
-                        }`}
-                      />
-                      <span className="font-bold">#{result.functionNumber}</span>
-                    </div>
-                    
-                    <div className="text-sm space-y-1">
-                      <div className="text-gray-600">
-                        Статус: <span className={result.status === 200 ? 'text-green-600' : 'text-red-600'}>
-                          {result.status}
-                        </span>
-                      </div>
-                      <div className="text-gray-600">
-                        ID: {result.requestId.slice(0, 8)}...
-                      </div>
-                      {result.error && (
-                        <div className="text-red-600 text-xs">
-                          {result.error}
-                        </div>
-                      )}
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-600">Функция:</span>
+                    <div className="font-semibold">#{result.functionNumber}</div>
+                  </div>
+                  
+                  <div>
+                    <span className="text-gray-600">Статус:</span>
+                    <div className={`font-semibold ${
+                      result.status === 200 ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {result.status}
                     </div>
                   </div>
-                ))}
+                  
+                  <div className="col-span-2">
+                    <span className="text-gray-600">Сообщение:</span>
+                    <div className="font-semibold">{result.message}</div>
+                  </div>
+                  
+                  <div className="col-span-2">
+                    <span className="text-gray-600">Request ID:</span>
+                    <div className="font-mono text-xs bg-gray-100 p-2 rounded">
+                      {result.requestId || 'Не получен'}
+                    </div>
+                  </div>
+                  
+                  <div className="col-span-2">
+                    <span className="text-gray-600">Время:</span>
+                    <div className="text-xs">
+                      {new Date(result.timestamp).toLocaleString('ru-RU')}
+                    </div>
+                  </div>
+                  
+                  {result.error && (
+                    <div className="col-span-2">
+                      <span className="text-gray-600">Ошибка:</span>
+                      <div className="text-red-600 text-xs bg-red-50 p-2 rounded">
+                        {result.error}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>
         )}
 
-        {/* Информация о функциях */}
+        {/* Информация о функции */}
         <Card className="mt-8">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
@@ -385,29 +181,30 @@ const Index = () => {
               <div>
                 <h3 className="font-semibold text-lg mb-2">Что тестируем?</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• 30 backend функций</li>
-                  <li>• Параллельные вызовы</li>
+                  <li>• 1 backend функция</li>
+                  <li>• HTTP запрос</li>
                   <li>• Время ответа</li>
-                  <li>• Статус коды</li>
+                  <li>• Статус код</li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-semibold text-lg mb-2">Группы функций:</h3>
+                <h3 className="font-semibold text-lg mb-2">Функция:</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Группа 1: функции 1-10</li>
-                  <li>• Группа 2: функции 11-20</li>
-                  <li>• Группа 3: функции 21-30</li>
+                  <li>• test-func-01</li>
+                  <li>• TypeScript Node.js</li>
+                  <li>• Yandex Cloud Functions</li>
+                  <li>• Возвращает номер функции</li>
                 </ul>
               </div>
               
               <div>
                 <h3 className="font-semibold text-lg mb-2">Метрики:</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Успешность вызовов</li>
+                  <li>• Успешность вызова</li>
                   <li>• Request ID</li>
-                  <li>• Время выполнения</li>
-                  <li>• Ошибки сети</li>
+                  <li>• Timestamp</li>
+                  <li>• Обработка ошибок</li>
                 </ul>
               </div>
             </div>
