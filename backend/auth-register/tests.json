@@ -1,0 +1,50 @@
+{
+  "tests": [
+    {
+      "name": "Успешная регистрация пользователя",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "testuser123",
+        "password": "testpass123"
+      },
+      "expectedStatus": 201,
+      "expectedBody": {
+        "message": "Пользователь успешно зарегистрирован",
+        "success": true,
+        "user": {
+          "username": "testuser123"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Ошибка при коротком username",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "ab",
+        "password": "testpass123"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "Username должен содержать минимум 3 символа"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Ошибка при коротком пароле",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "testuser",
+        "password": "123"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "Пароль должен содержать минимум 6 символов"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

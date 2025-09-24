@@ -2,27 +2,21 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 interface User {
   id: number;
-  email: string;
   username: string;
-  name: string;
-  role: string;
+  created_at: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  token: string | null;
-  login: (email: string, password: string) => Promise<void>;
-  register: (userData: RegisterData) => Promise<void>;
-  logout: () => void;
+  sessionToken: string | null;
   isLoading: boolean;
+  login: (username: string, password: string) => Promise<{success: boolean, error?: string}>;
+  register: (username: string, password: string) => Promise<{success: boolean, error?: string}>;
+  logout: () => void;
+  isAuthenticated: boolean;
 }
 
-interface RegisterData {
-  email: string;
-  username: string;
-  password: string;
-  name: string;
-}
+
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -34,100 +28,89 @@ export const useAuth = () => {
   return context;
 };
 
-const API_BASE_URL = 'https://functions.yandexcloud.net/d4eb0qlo5gigl6ca6cnr';
+const AUTH_API_URLS = {
+  login: 'https://devfunctions.poehali.dev/dab13638-4c5c-4781-8c2c-8686f11172fb',
+  register: 'https://devfunctions.poehali.dev/a6f869f0-0f25-46df-b5b6-9a35622754ab'
+};
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('auth_token');
-    const savedUser = localStorage.getItem('auth_user');
+    const savedUser = localStorage.getItem('user');
+    const savedToken = localStorage.getItem('sessionToken');
     
-    if (savedToken && savedUser) {
-      setToken(savedToken);
-      setUser(JSON.parse(savedUser));
-      verifyToken(savedToken).finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
+    if (savedUser && savedToken) {
+      try {
+        setUser(JSON.parse(savedUser));
+        setSessionToken(savedToken);
+      } catch (error) {
+        localStorage.removeItem('user');
+        localStorage.removeItem('sessionToken');
+      }
     }
+    
+    setIsLoading(false);
   }, []);
 
-  const verifyToken = async (authToken: string) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/?action=verify`, {
-        headers: {
-          'X-Auth-Token': authToken
-        }
-      });
-      
-      if (!response.ok) {
-        logout();
-        return false;
-      }
-      
-      return true;
-    } catch (error) {
-      console.error('Token verification failed:', error);
-      logout();
-      return false;
-    }
-  };
 
-  const login = async (email: string, password: string) => {
+
+  const login = async (username: string, password: string): Promise<{success: boolean, error?: string}> => {
     setIsLoading(true);
+    
     try {
-      const response = await fetch(`${API_BASE_URL}/?action=login`, {
+      const response = await fetch(AUTH_API_URLS.login, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Ошибка входа');
-      }
 
-      setUser(data.user);
-      setToken(data.token);
-      localStorage.setItem('auth_token', data.token);
-      localStorage.setItem('auth_user', JSON.stringify(data.user));
+      if (response.ok && data.success) {
+        setUser(data.user);
+        setSessionToken(data.session_token);
+        
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('sessionToken', data.session_token);
+        
+        return { success: true };
+      } else {
+        return { success: false, error: data.error || 'Ошибка авторизации' };
+      }
     } catch (error) {
-      console.error('Login failed:', error);
-      throw error;
+      return { success: false, error: 'Ошибка сети. Проверьте подключение к интернету.' };
     } finally {
       setIsLoading(false);
     }
   };
 
-  const register = async (userData: RegisterData) => {
+  const register = async (username: string, password: string): Promise<{success: boolean, error?: string}> => {
     setIsLoading(true);
+    
     try {
-      const response = await fetch(`${API_BASE_URL}/?action=register`, {
+      const response = await fetch(AUTH_API_URLS.register, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Ошибка регистрации');
-      }
 
-      setUser(data.user);
-      setToken(data.token);
-      localStorage.setItem('auth_token', data.token);
-      localStorage.setItem('auth_user', JSON.stringify(data.user));
+      if (response.ok && data.success) {
+        const loginResult = await login(username, password);
+        return loginResult;
+      } else {
+        return { success: false, error: data.error || 'Ошибка регистрации' };
+      }
     } catch (error) {
-      console.error('Registration failed:', error);
-      throw error;
+      return { success: false, error: 'Ошибка сети. Проверьте подключение к интернету.' };
     } finally {
       setIsLoading(false);
     }
@@ -135,20 +118,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     setUser(null);
-    setToken(null);
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('auth_user');
+    setSessionToken(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('sessionToken');
   };
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        token,
+        sessionToken,
+        isLoading,
         login,
         register,
         logout,
-        isLoading,
+        isAuthenticated: !!user && !!sessionToken,
       }}
     >
       {children}

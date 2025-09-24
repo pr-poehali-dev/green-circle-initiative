@@ -2,160 +2,84 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useAuth } from '@/contexts/AuthContext';
-import { toast } from '@/components/ui/use-toast';
-import { EmailVerification } from './EmailVerification';
+import Icon from '@/components/ui/icon';
 
 interface RegisterFormProps {
   onToggleMode: () => void;
 }
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    username: '',
-    password: '',
-    name: '',
-    confirmPassword: ''
-  });
-  const [showVerification, setShowVerification] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const { register, isLoading } = useAuth();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (formData.password !== formData.confirmPassword) {
-      toast({
-        title: "Ошибка",
-        description: "Пароли не совпадают",
-        variant: "destructive",
-      });
+    setError('');
+
+    if (!username.trim() || !password.trim() || !confirmPassword.trim()) {
+      setError('Заполните все поля');
       return;
     }
 
-    if (formData.password.length < 6) {
-      toast({
-        title: "Ошибка",
-        description: "Пароль должен быть минимум 6 символов",
-        variant: "destructive",
-      });
+    if (username.trim().length < 3) {
+      setError('Username должен содержать минимум 3 символа');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Пароль должен содержать минимум 6 символов');
       return;
     }
     
-    try {
-      // Сначала отправляем код подтверждения
-      const response = await fetch('https://functions.yandexcloud.net/d4enr0qps8ck1pjuc4gq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: formData.email }),
-      });
+    if (password !== confirmPassword) {
+      setError('Пароли не совпадают');
+      return;
+    }
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        toast({
-          title: "Код отправлен",
-          description: "Проверьте вашу почту для подтверждения",
-        });
-        setShowVerification(true);
-      } else {
-        toast({
-          title: "Ошибка",
-          description: data.error || "Не удалось отправить код",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Ошибка",
-        description: "Не удалось отправить код подтверждения",
-        variant: "destructive",
-      });
+    const result = await register(username.trim(), password);
+    
+    if (!result.success) {
+      setError(result.error || 'Ошибка регистрации');
     }
   };
 
-  const handleVerified = async () => {
-    try {
-      await register({
-        email: formData.email,
-        username: formData.username,
-        password: formData.password,
-        name: formData.name,
-      });
-      toast({
-        title: "Успешно!",
-        description: "Аккаунт создан и вы вошли в систему",
-      });
-    } catch (error) {
-      toast({
-        title: "Ошибка регистрации",
-        description: error instanceof Error ? error.message : "Неизвестная ошибка",
-        variant: "destructive",
-      });
-    }
-  };
 
-  if (showVerification) {
-    return (
-      <EmailVerification
-        email={formData.email}
-        onVerified={handleVerified}
-        onBack={() => setShowVerification(false)}
-      />
-    );
-  }
 
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold">Регистрация</CardTitle>
+        <CardDescription>
+          Создайте новый аккаунт для продолжения
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Имя</Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="Ваше имя"
-            />
-          </div>
+          {error && (
+            <Alert variant="destructive">
+              <Icon name="AlertCircle" size={16} />
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
 
           <div className="space-y-2">
             <Label htmlFor="username">Имя пользователя</Label>
             <Input
               id="username"
-              name="username"
               type="text"
-              value={formData.username}
-              onChange={handleChange}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Введите имя пользователя (мин. 3 символа)"
+              disabled={isLoading}
               required
-              placeholder="username"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="user@example.com"
             />
           </div>
           
@@ -163,13 +87,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
             <Label htmlFor="password">Пароль</Label>
             <Input
               id="password"
-              name="password"
               type="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Введите пароль (мин. 6 символов)"
+              disabled={isLoading}
               minLength={6}
+              required
             />
           </div>
 
@@ -177,12 +101,12 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
             <Label htmlFor="confirmPassword">Подтвердите пароль</Label>
             <Input
               id="confirmPassword"
-              name="confirmPassword"
               type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Повторите пароль"
+              disabled={isLoading}
               required
-              placeholder="••••••••"
             />
           </div>
           
@@ -191,7 +115,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
             className="w-full" 
             disabled={isLoading}
           >
-            {isLoading ? 'Регистрируемся...' : 'Зарегистрироваться'}
+            {isLoading ? (
+              <>
+                <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
+                Регистрация...
+              </>
+            ) : (
+              'Зарегистрироваться'
+            )}
           </Button>
           
           <div className="text-center text-sm text-muted-foreground">
@@ -199,7 +130,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleMode }) => {
             <button
               type="button"
               onClick={onToggleMode}
-              className="text-primary hover:underline"
+              className="text-primary hover:underline font-medium"
+              disabled={isLoading}
             >
               Войти
             </button>

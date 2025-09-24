@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "name": "Ошибка при несуществующем пользователе",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "nonexistentuser",
+        "password": "somepassword"
+      },
+      "expectedStatus": 401,
+      "expectedBody": {
+        "error": "Неверный username или password"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Ошибка при неверном пароле",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "testuser123",
+        "password": "wrongpass"
+      },
+      "expectedStatus": 401,
+      "expectedBody": {
+        "error": "Неверный username или password"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Ошибка при пустых данных",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "",
+        "password": ""
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "Username и password обязательны"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

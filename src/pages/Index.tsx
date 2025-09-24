@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import { useAuth } from '@/contexts/AuthContext';
+import { Link } from 'react-router-dom';
 import functionsData from '../../backend/func2url.json';
 
 interface TestResult {
@@ -16,6 +18,7 @@ interface TestResult {
 const Index = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [result, setResult] = useState<TestResult | null>(null);
+  const { isAuthenticated, user } = useAuth();
 
   const callFunction = async () => {
     setLoading(true);
@@ -60,12 +63,41 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 p-8">
       <div className="max-w-4xl mx-auto">
+        {/* Навигация */}
+        <div className="flex justify-between items-center mb-8 bg-white/70 backdrop-blur-sm rounded-lg p-4 shadow-sm">
+          <h2 className="text-lg font-semibold">Главная</h2>
+          <div className="flex items-center space-x-4">
+            {isAuthenticated ? (
+              <>
+                <span className="text-sm text-muted-foreground">
+                  Привет, {user?.username}!
+                </span>
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/profile">
+                    <Icon name="User" className="mr-2 h-4 w-4" />
+                    Профиль
+                  </Link>
+                </Button>
+              </>
+            ) : (
+              <Button asChild size="sm">
+                <Link to="/auth">
+                  <Icon name="LogIn" className="mr-2 h-4 w-4" />
+                  Войти
+                </Link>
+              </Button>
+            )}
+          </div>
+        </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            🚀 Тестирование Backend Функции
+            🚀 Добро пожаловать!
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Одна тестовая функция для проверки работы системы
+            {isAuthenticated 
+              ? `Привет, ${user?.username}! Система авторизации работает.`
+              : 'Система с авторизацией готова к использованию'
+            }
           </p>
         </div>
 
