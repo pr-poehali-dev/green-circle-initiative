@@ -25,21 +25,25 @@ const API_BASE_URL = 'https://devfunctions.poehali.dev/a338b85b-5c16-4e27-ba2b-a
 export const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user, token, logout } = useAuth();
+  const { user, sessionToken, logout } = useAuth();
   const navigate = useNavigate();
 
   const fetchUsers = async () => {
     try {
       setLoading(true);
+      console.log('Fetching users with token:', sessionToken ? 'present' : 'missing');
+      
       const response = await fetch(`${API_BASE_URL}/?action=users`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Auth-Token': token || ''
+          'X-Auth-Token': sessionToken || ''
         }
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
       
       if (!response.ok) {
         throw new Error(data.error || 'Ошибка загрузки пользователей');
@@ -59,10 +63,10 @@ export const AdminDashboard: React.FC = () => {
   };
 
   useEffect(() => {
-    if (token) {
+    if (sessionToken) {
       fetchUsers();
     }
-  }, [token]);
+  }, [sessionToken]);
 
   const formatDate = (dateString: string) => {
     try {
