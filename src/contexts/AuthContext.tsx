@@ -29,7 +29,7 @@ export const useAuth = () => {
 };
 
 const AUTH_API_URLS = {
-  login: 'https://devfunctions.poehali.dev/dab13638-4c5c-4781-8c2c-8686f11172fb',
+  login: 'https://devfunctions.poehali.dev/9263aa21-bad4-4a97-a610-6d5d7405193f',
   register: 'https://devfunctions.poehali.dev/a6f869f0-0f25-46df-b5b6-9a35622754ab'
 };
 
