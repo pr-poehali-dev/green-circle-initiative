@@ -20,7 +20,7 @@ interface User {
   last_login?: string;
 }
 
-const API_BASE_URL = 'https://functions.yandexcloud.net/d4eb0qlo5gigl6ca6cnr';
+const API_BASE_URL = 'https://devfunctions.poehali.dev/a338b85b-5c16-4e27-ba2b-aac023a00217';
 
 export const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
