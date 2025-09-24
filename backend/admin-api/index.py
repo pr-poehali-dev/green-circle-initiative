@@ -56,8 +56,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     try:
         # Connect to database
+        print(f"Connecting to database with URL: {database_url[:50]}...")
         conn = psycopg2.connect(database_url)
         cur = conn.cursor(cursor_factory=RealDictCursor)
+        print("Successfully connected to database")
         
         if method == 'GET':
             action = event.get('queryStringParameters', {}).get('action', 'users')
@@ -73,7 +75,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         created_at,
                         last_login,
                         is_active
-                    FROM users 
+                    FROM t_p18279400_green_circle_initiat.users 
                     ORDER BY created_at DESC
                 """)
                 
@@ -99,13 +101,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             elif action == 'stats':
                 # Get basic statistics
-                cur.execute("SELECT COUNT(*) as total_users FROM users")
+                cur.execute("SELECT COUNT(*) as total_users FROM t_p18279400_green_circle_initiat.users")
                 total_users = cur.fetchone()['total_users']
                 
-                cur.execute("SELECT COUNT(*) as active_users FROM users WHERE is_active = true")
+                cur.execute("SELECT COUNT(*) as active_users FROM t_p18279400_green_circle_initiat.users WHERE is_active = true")
                 active_users = cur.fetchone()['active_users']
                 
-                cur.execute("SELECT COUNT(*) as recent_users FROM users WHERE created_at >= NOW() - INTERVAL '30 days'")
+                cur.execute("SELECT COUNT(*) as recent_users FROM t_p18279400_green_circle_initiat.users WHERE created_at >= NOW() - INTERVAL '30 days'")
                 recent_users = cur.fetchone()['recent_users']
                 
                 return {
@@ -135,6 +137,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
         
     except psycopg2.Error as e:
+        print(f"Database error: {str(e)}")
         return {
             'statusCode': 500,
             'headers': {
@@ -143,6 +146,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             },
             'isBase64Encoded': False,
             'body': json.dumps({'error': f'Ошибка базы данных: {str(e)}'})
+        }
+    except Exception as e:
+        print(f"General error: {str(e)}")
+        return {
+            'statusCode': 500,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'isBase64Encoded': False,
+            'body': json.dumps({'error': f'Общая ошибка: {str(e)}'})
         }
     
     finally:
