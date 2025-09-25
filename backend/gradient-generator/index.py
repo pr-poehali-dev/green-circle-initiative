@@ -35,8 +35,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     if method == 'GET':
-        # Коллекция готовых красивых градиентов
-        gradients = [
+        # Коллекция готовых красивых градиентов (линейные)
+        linear_gradients = [
             GradientData(
                 css="linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                 colors=["#667eea", "#764ba2"],
@@ -108,6 +108,83 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 category="dark"
             )
         ]
+        
+        # Коллекция радиальных градиентов  
+        radial_gradients = [
+            GradientData(
+                css="radial-gradient(circle at center, #ff6b6b 0%, #ee5a24 100%)",
+                colors=["#ff6b6b", "#ee5a24"],
+                direction="circle at center",
+                name="Fire Ball",
+                category="warm"
+            ),
+            GradientData(
+                css="radial-gradient(ellipse at top, #667eea 0%, #764ba2 100%)",
+                colors=["#667eea", "#764ba2"],
+                direction="ellipse at top",
+                name="Purple Sphere",
+                category="pastel"
+            ),
+            GradientData(
+                css="radial-gradient(circle at bottom right, #00c9ff 0%, #92fe9d 100%)",
+                colors=["#00c9ff", "#92fe9d"],
+                direction="circle at bottom right",
+                name="Ocean Bubble",
+                category="cool"
+            ),
+            GradientData(
+                css="radial-gradient(ellipse at center, #ffeaa7 0%, #fab1a0 100%)",
+                colors=["#ffeaa7", "#fab1a0"],
+                direction="ellipse at center",
+                name="Warm Glow",
+                category="warm"
+            ),
+            GradientData(
+                css="radial-gradient(circle at top left, #fd79a8 0%, #fdcb6e 100%)",
+                colors=["#fd79a8", "#fdcb6e"],
+                direction="circle at top left",
+                name="Pink Sunrise",
+                category="romantic"
+            ),
+            GradientData(
+                css="radial-gradient(ellipse at bottom, #a29bfe 0%, #6c5ce7 100%)",
+                colors=["#a29bfe", "#6c5ce7"],
+                direction="ellipse at bottom",
+                name="Violet Drop",
+                category="pastel"
+            ),
+            GradientData(
+                css="radial-gradient(circle at center, #00b894 0%, #00cec9 100%)",
+                colors=["#00b894", "#00cec9"],
+                direction="circle at center",
+                name="Mint Circle",
+                category="cool"
+            ),
+            GradientData(
+                css="radial-gradient(ellipse at top right, #e17055 0%, #74b9ff 100%)",
+                colors=["#e17055", "#74b9ff"],
+                direction="ellipse at top right",
+                name="Sunset Orb",
+                category="sunset"
+            ),
+            GradientData(
+                css="radial-gradient(circle at bottom left, #2d3436 0%, #636e72 100%)",
+                colors=["#2d3436", "#636e72"],
+                direction="circle at bottom left",
+                name="Shadow Sphere",
+                category="dark"
+            ),
+            GradientData(
+                css="radial-gradient(ellipse at center, #ff7675 0%, #fd79a8 100%)",
+                colors=["#ff7675", "#fd79a8"],
+                direction="ellipse at center",
+                name="Coral Heart",
+                category="romantic"
+            )
+        ]
+        
+        # Объединяем все градиенты
+        gradients = linear_gradients + radial_gradients
         
         params = event.get('queryStringParameters', {}) or {}
         category_filter = params.get('category', '').lower()

@@ -232,7 +232,7 @@ const Index = () => {
                 <span>Генератор градиентов</span>
               </CardTitle>
               <CardDescription className="text-center">
-                Получи красивый CSS градиент для фона
+                Получи красивый линейный или радиальный градиент
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -447,7 +447,8 @@ const Index = () => {
               <div>
                 <h3 className="font-semibold text-lg mb-2">🎨 CSS градиенты</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• 10 готовых градиентов</li>
+                  <li>• 20 готовых градиентов</li>
+                  <li>• Линейные и радиальные</li>
                   <li>• 6 стильных категорий</li>
                   <li>• Готовый CSS код</li>
                   <li>• Превью в реальном времени</li>
