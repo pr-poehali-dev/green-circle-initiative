@@ -6,33 +6,47 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import functionsData from '../../backend/func2url.json';
 
-interface TestResult {
-  functionNumber: number;
-  message: string;
-  requestId: string;
+interface SpaceFactResult {
+  success: boolean;
   timestamp: string;
+  total_facts: number;
+  categories: string[];
+  fact_data: {
+    fact: string;
+    explanation: string;
+    category: string;
+  };
+  fun_bonus: string;
+  request_info: {
+    function_name: string;
+    method: string;
+    filtered_by: string;
+  };
   status: number;
   error?: string;
 }
 
 const Index = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [result, setResult] = useState<TestResult | null>(null);
+  const [result, setResult] = useState<SpaceFactResult | null>(null);
   const { isAuthenticated, user } = useAuth();
 
-  const callFunction = async () => {
+  const getSpaceFact = async () => {
     setLoading(true);
     setResult(null);
 
     try {
-      const url = functionsData['test-func-01' as keyof typeof functionsData];
+      const url = functionsData['space-facts' as keyof typeof functionsData];
       
       if (!url) {
         setResult({
-          functionNumber: 1,
-          message: 'Function not found',
-          requestId: '',
+          success: false,
           timestamp: new Date().toISOString(),
+          total_facts: 0,
+          categories: [],
+          fact_data: { fact: '', explanation: '', category: '' },
+          fun_bonus: '',
+          request_info: { function_name: '', method: '', filtered_by: '' },
           status: 404,
           error: 'URL not found'
         });
@@ -48,10 +62,13 @@ const Index = () => {
       });
     } catch (error) {
       setResult({
-        functionNumber: 1,
-        message: 'Network error',
-        requestId: '',
+        success: false,
         timestamp: new Date().toISOString(),
+        total_facts: 0,
+        categories: [],
+        fact_data: { fact: '', explanation: '', category: '' },
+        fun_bonus: '',
+        request_info: { function_name: '', method: '', filtered_by: '' },
         status: 500,
         error: error instanceof Error ? error.message : 'Unknown error'
       });
@@ -91,44 +108,44 @@ const Index = () => {
         </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            🚀 Добро пожаловать!
+            🚀 Космические факты!
           </h1>
           <p className="text-xl text-gray-600 mb-8">
             {isAuthenticated 
-              ? `Привет, ${user?.username}! Система авторизации работает.`
-              : 'Система с авторизацией готова к использованию'
+              ? `Привет, ${user?.username}! Готов узнать что-то удивительное о космосе?`
+              : 'Узнай удивительные факты о космосе из нашей базы знаний'
             }
           </p>
         </div>
 
-        {/* Кнопка для тестирования функции */}
+        {/* Кнопка для получения факта */}
         <div className="mb-8">
-          <Card className="max-w-md mx-auto">
+          <Card className="max-w-lg mx-auto">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 justify-center">
-                <Icon name="Zap" className="h-6 w-6 text-yellow-600" />
-                <span>Тестовая функция #1</span>
+                <Icon name="Sparkles" className="h-6 w-6 text-purple-600" />
+                <span>Генератор космических фактов</span>
               </CardTitle>
               <CardDescription className="text-center">
-                Вызов единственной backend функции
+                Получи случайный удивительный факт о космосе
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button 
-                onClick={callFunction}
+                onClick={getSpaceFact}
                 disabled={loading}
-                className="w-full"
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                 size="lg"
               >
                 {loading ? (
                   <>
                     <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-                    Тестирую...
+                    Ищу факт...
                   </>
                 ) : (
                   <>
-                    <Icon name="Play" className="mr-2 h-4 w-4" />
-                    Тестировать функцию
+                    <Icon name="Rocket" className="mr-2 h-4 w-4" />
+                    Получить космический факт
                   </>
                 )}
               </Button>
@@ -136,107 +153,111 @@ const Index = () => {
           </Card>
         </div>
 
-        {/* Результат тестирования */}
+        {/* Результат - космический факт */}
         {result && (
-          <Card className="max-w-md mx-auto">
+          <Card className="max-w-2xl mx-auto">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 justify-center">
                 <Icon 
-                  name={result.status === 200 ? "CheckCircle" : "XCircle"} 
+                  name={result.success ? "Stars" : "XCircle"} 
                   className={`h-6 w-6 ${
-                    result.status === 200 ? 'text-green-600' : 'text-red-600'
+                    result.success ? 'text-yellow-600' : 'text-red-600'
                   }`}
                 />
-                <span>Результат теста</span>
+                <span>{result.success ? result.fun_bonus : 'Ошибка'}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="text-gray-600">Функция:</span>
-                    <div className="font-semibold">#{result.functionNumber}</div>
-                  </div>
-                  
-                  <div>
-                    <span className="text-gray-600">Статус:</span>
-                    <div className={`font-semibold ${
-                      result.status === 200 ? 'text-green-600' : 'text-red-600'
-                    }`}>
-                      {result.status}
+              {result.success ? (
+                <div className="space-y-6">
+                  {/* Главный факт */}
+                  <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg border">
+                    <h3 className="font-bold text-lg mb-3 text-purple-900">
+                      💫 {result.fact_data.fact}
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed">
+                      {result.fact_data.explanation}
+                    </p>
+                    <div className="mt-4 flex items-center space-x-2">
+                      <Icon name="Tag" className="h-4 w-4 text-purple-600" />
+                      <span className="text-sm font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded">
+                        {result.fact_data.category}
+                      </span>
                     </div>
                   </div>
                   
-                  <div className="col-span-2">
-                    <span className="text-gray-600">Сообщение:</span>
-                    <div className="font-semibold">{result.message}</div>
-                  </div>
-                  
-                  <div className="col-span-2">
-                    <span className="text-gray-600">Request ID:</span>
-                    <div className="font-mono text-xs bg-gray-100 p-2 rounded">
-                      {result.requestId || 'Не получен'}
+                  {/* Метаинформация */}
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="font-semibold text-gray-700 mb-2">📊 Статистика</div>
+                      <div>Всего фактов: {result.total_facts}</div>
+                      <div>Категорий: {result.categories.length}</div>
                     </div>
-                  </div>
-                  
-                  <div className="col-span-2">
-                    <span className="text-gray-600">Время:</span>
-                    <div className="text-xs">
-                      {new Date(result.timestamp).toLocaleString('ru-RU')}
-                    </div>
-                  </div>
-                  
-                  {result.error && (
-                    <div className="col-span-2">
-                      <span className="text-gray-600">Ошибка:</span>
-                      <div className="text-red-600 text-xs bg-red-50 p-2 rounded">
-                        {result.error}
+                    
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="font-semibold text-gray-700 mb-2">🔗 Доступные категории</div>
+                      <div className="flex flex-wrap gap-1">
+                        {result.categories.map((cat, index) => (
+                          <span key={index} className="text-xs bg-gray-200 px-2 py-1 rounded">
+                            {cat}
+                          </span>
+                        ))}
                       </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center text-red-600">
+                  <p>Не удалось получить космический факт</p>
+                  {result.error && (
+                    <div className="mt-2 text-sm bg-red-50 p-3 rounded">
+                      {result.error}
                     </div>
                   )}
                 </div>
-              </div>
+              )}
             </CardContent>
           </Card>
         )}
 
-        {/* Информация о функции */}
+        {/* Информация о приложении */}
         <Card className="mt-8">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <Icon name="Info" className="h-6 w-6 text-blue-600" />
-              <span>Информация о тестировании</span>
+              <span>О приложении космических фактов</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-6">
               <div>
-                <h3 className="font-semibold text-lg mb-2">Что тестируем?</h3>
+                <h3 className="font-semibold text-lg mb-2">🔬 Что это?</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• 1 backend функция</li>
-                  <li>• HTTP запрос</li>
-                  <li>• Время ответа</li>
-                  <li>• Статус код</li>
+                  <li>• Генератор космических фактов</li>
+                  <li>• 8 уникальных фактов</li>
+                  <li>• 5 различных категорий</li>
+                  <li>• Подробные объяснения</li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-semibold text-lg mb-2">Функция:</h3>
+                <h3 className="font-semibold text-lg mb-2">⚙️ Технологии:</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• test-func-01</li>
-                  <li>• TypeScript Node.js</li>
-                  <li>• Yandex Cloud Functions</li>
-                  <li>• Возвращает номер функции</li>
+                  <li>• Python backend функция</li>
+                  <li>• React frontend</li>
+                  <li>• Cloud Functions</li>
+                  <li>• JSON API</li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-semibold text-lg mb-2">Метрики:</h3>
+                <h3 className="font-semibold text-lg mb-2">🌌 Категории фактов:</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Успешность вызова</li>
-                  <li>• Request ID</li>
-                  <li>• Timestamp</li>
-                  <li>• Обработка ошибок</li>
+                  <li>• Планеты</li>
+                  <li>• Звёзды</li>
+                  <li>• Физика космоса</li>
+                  <li>• Космонавтика</li>
+                  <li>• Галактики</li>
                 </ul>
               </div>
             </div>
