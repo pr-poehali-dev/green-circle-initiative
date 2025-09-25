@@ -3,7 +3,7 @@ from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Тестовая функция с ошибкой в зависимостях
+    Business: Тестовая функция для проверки деплоя (исправленная версия)
     Args: event - dict с httpMethod, queryStringParameters
           context - объект с атрибутами request_id, function_name
     Returns: HTTP response с тестовым сообщением
@@ -25,8 +25,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     if method == 'GET':
         result = {
-            'message': 'Это тестовая функция с ошибкой в зависимостях',
+            'message': 'Функция успешно развернута!',
             'status': 'working',
+            'version': '2.0',
+            'dependencies_fixed': True,
             'request_id': context.request_id
         }
         

@@ -1,13 +1,15 @@
 {
   "tests": [
     {
-      "name": "Test function with dependency error",
+      "name": "Test working function",
       "method": "GET",
       "path": "/",
       "expectedStatus": 200,
       "expectedBody": {
         "message": "string",
         "status": "string",
+        "version": "string",
+        "dependencies_fixed": "boolean",
         "request_id": "string"
       },
       "bodyMatcher": "partial"
