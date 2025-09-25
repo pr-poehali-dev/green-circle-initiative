@@ -9,7 +9,7 @@
       "bodyMatcher": "partial"
     },
     {
-      "name": "Получение случайного факта о животных",
+      "name": "Получение случайного факта о космосе",
       "method": "GET",
       "path": "/",
       "expectedStatus": 200,
@@ -25,17 +25,17 @@
       "bodyMatcher": "partial"
     },
     {
-      "name": "Фильтр по категории морские",
+      "name": "Фильтр по категории планеты",
       "method": "GET",
-      "path": "/?category=морские",
+      "path": "/?category=планеты",
       "expectedStatus": 200,
       "expectedBody": {
         "success": true,
         "fact_data": {
-          "category": "морские"
+          "category": "планеты"
         },
         "request_info": {
-          "filtered_by": "морские"
+          "filtered_by": "планеты"
         }
       },
       "bodyMatcher": "partial"
