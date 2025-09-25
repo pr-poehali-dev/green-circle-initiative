@@ -4,9 +4,9 @@ from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Генератор случайных фактов о космосе
+    Генератор случайных фактов о животных
     Args: event - HTTP запрос, context - контекст выполнения
-    Returns: Случайный факт о космосе с дополнительной информацией
+    Returns: Случайный факт о животных с дополнительной информацией
     '''
     method: str = event.get('httpMethod', 'GET')
     
@@ -23,52 +23,52 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': ''
         }
     
-    # Космические факты
-    space_facts = [
+    # Факты о животных
+    animal_facts = [
         {
-            "fact": "Один день на Венере длится дольше, чем год на Венере",
-            "explanation": "Венера вращается вокруг своей оси за 243 земных дня, но облетает Солнце за 225 дней",
-            "category": "планеты"
+            "fact": "Осьминоги имеют три сердца и голубую кровь",
+            "explanation": "Два сердца качают кровь через жабры, третье - по всему телу. Голубая кровь из-за гемоцианина вместо гемоглобина",
+            "category": "морские"
         },
         {
-            "fact": "В космосе нельзя плакать как на Земле",
-            "explanation": "Без гравитации слёзы не стекают по щекам, а остаются в виде пузырей на глазах",
-            "category": "физика"
+            "fact": "Слоны боятся пчёл и умеют плавать",
+            "explanation": "Слоны избегают пчелиных ульев и могут плыть часами, используя хобот как трубку для дыхания",
+            "category": "млекопитающие"
         },
         {
-            "fact": "Нейтронная звезда размером с город может весить больше Солнца",
-            "explanation": "Плотность нейтронной звезды настолько велика, что чайная ложка её вещества весила бы миллиарды тонн",
-            "category": "звёзды"
+            "fact": "Акулы существуют дольше деревьев",
+            "explanation": "Акулы появились 400 млн лет назад, а деревья - только 350 млн лет назад",
+            "category": "морские"
         },
         {
-            "fact": "На Марсе закаты голубые, а небо красное",
-            "explanation": "Из-за состава атмосферы и пыли в воздухе цвета неба на Марсе противоположны земным",
-            "category": "планеты"
+            "fact": "Коты мурлыкают на частоте, которая лечит кости",
+            "explanation": "Частота 20-50 Гц стимулирует заживление костей и мышц - поэтому коты быстро восстанавливаются",
+            "category": "млекопитающие"
         },
         {
-            "fact": "Галактика Млечный Путь движется со скоростью 600 км/с",
-            "explanation": "Наша галактика несётся через космос к созвездию Гидры с невероятной скоростью",
-            "category": "галактики"
+            "fact": "Дельфины дают друг другу имена",
+            "explanation": "У каждого дельфина есть уникальный свист-подпись, по которому его узнают сородичи",
+            "category": "морские"
         },
         {
-            "fact": "На МКС астронавты встречают рассвет и закат каждые 90 минут",
-            "explanation": "Станция облетает Землю за 90 минут, поэтому экипаж видит 16 рассветов и закатов в сутки",
-            "category": "космонавтика"
+            "fact": "Пингвины делают предложения камешками",
+            "explanation": "Самец пингвина ищет самый красивый камешек и подносит самке как символ любви",
+            "category": "птицы"
         },
         {
-            "fact": "Юпитер защищает Землю от астероидов",
-            "explanation": "Мощная гравитация Юпитера притягивает к себе большинство опасных объектов из космоса",
-            "category": "планеты"
+            "fact": "Медведи могут бегать со скоростью 60 км/ч",
+            "explanation": "Несмотря на крупные размеры, медведи развивают скорость быстрее большинства велосипедистов",
+            "category": "млекопитающие"
         },
         {
-            "fact": "Время в космосе идёт быстрее, чем на Земле",
-            "explanation": "Согласно теории относительности, гравитация замедляет время. В космосе гравитация слабее",
-            "category": "физика"
+            "fact": "Совы не могут двигать глазами",
+            "explanation": "Глаза совы зафиксированы в черепе, но она поворачивает голову на 270 градусов",
+            "category": "птицы"
         }
     ]
     
     # Выбираем случайный факт
-    selected_fact = random.choice(space_facts)
+    selected_fact = random.choice(animal_facts)
     
     # Получаем параметры запроса
     query_params = event.get('queryStringParameters', {}) or {}
@@ -76,7 +76,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     # Фильтруем по категории если указана
     if category_filter:
-        filtered_facts = [f for f in space_facts if f['category'] == category_filter]
+        filtered_facts = [f for f in animal_facts if f['category'] == category_filter]
         if filtered_facts:
             selected_fact = random.choice(filtered_facts)
     
@@ -84,12 +84,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     result = {
         'success': True,
         'timestamp': context.request_id,  # Используем request_id как timestamp
-        'total_facts': len(space_facts),
-        'categories': list(set(f['category'] for f in space_facts)),
+        'total_facts': len(animal_facts),
+        'categories': list(set(f['category'] for f in animal_facts)),
         'fact_data': selected_fact,
-        'fun_bonus': f"🚀 Факт #{random.randint(1, 1000)}",
+        'fun_bonus': f"🐾 Факт #{random.randint(1, 1000)}",
         'request_info': {
-            'function_name': 'space-facts',
+            'function_name': 'animal-facts',
             'method': method,
             'filtered_by': category_filter or 'none'
         }
