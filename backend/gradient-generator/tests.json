@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "name": "Get random gradient",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "gradient": {
+          "css": "string",
+          "colors": "array",
+          "name": "string",
+          "category": "string"
+        },
+        "available_categories": "array",
+        "total_gradients": "number"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get gradient by category",
+      "method": "GET",
+      "path": "/?category=pastel",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "gradient": {
+          "category": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "CORS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}
