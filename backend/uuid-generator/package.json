@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "non-existent-package-test": "^1.0.0",
+    "fake-dependency-for-testing": "^2.5.0"
+  }
+}
