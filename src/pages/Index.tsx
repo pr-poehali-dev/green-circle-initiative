@@ -108,7 +108,7 @@ const Index = () => {
     setGradient(null);
 
     try {
-      const url = functionsData['gradients' as keyof typeof functionsData];
+      const url = functionsData['bggen' as keyof typeof functionsData];
       
       if (!url) {
         setGradient({
