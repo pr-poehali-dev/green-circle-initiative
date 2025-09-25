@@ -26,9 +26,35 @@ interface SpaceFactResult {
   error?: string;
 }
 
+interface GradientResult {
+  success: boolean;
+  gradient: {
+    css: string;
+    colors: string[];
+    direction: string;
+    name: string;
+    category: string;
+  };
+  total_gradients: number;
+  filtered_count: number;
+  available_categories: string[];
+  filter_applied: string | null;
+  usage_tip: string;
+  request_info: {
+    function_name: string;
+    method: string;
+    filtered_by: string;
+  };
+  timestamp: string;
+  status: number;
+  error?: string;
+}
+
 const Index = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [gradientLoading, setGradientLoading] = useState<boolean>(false);
   const [result, setResult] = useState<SpaceFactResult | null>(null);
+  const [gradient, setGradient] = useState<GradientResult | null>(null);
   const { isAuthenticated, user } = useAuth();
 
   const getSpaceFact = async () => {
@@ -77,6 +103,68 @@ const Index = () => {
     }
   };
 
+  const getGradient = async () => {
+    setGradientLoading(true);
+    setGradient(null);
+
+    try {
+      const url = functionsData['gradients' as keyof typeof functionsData];
+      
+      if (!url) {
+        setGradient({
+          success: false,
+          gradient: {
+            css: '',
+            colors: [],
+            direction: '',
+            name: '',
+            category: ''
+          },
+          total_gradients: 0,
+          filtered_count: 0,
+          available_categories: [],
+          filter_applied: null,
+          usage_tip: '',
+          request_info: { function_name: '', method: '', filtered_by: '' },
+          timestamp: new Date().toISOString(),
+          status: 404,
+          error: 'URL not found'
+        });
+        return;
+      }
+
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      setGradient({
+        ...data,
+        status: response.status
+      });
+    } catch (error) {
+      setGradient({
+        success: false,
+        gradient: {
+          css: '',
+          colors: [],
+          direction: '',
+          name: '',
+          category: ''
+        },
+        total_gradients: 0,
+        filtered_count: 0,
+        available_categories: [],
+        filter_applied: null,
+        usage_tip: '',
+        request_info: { function_name: '', method: '', filtered_by: '' },
+        timestamp: new Date().toISOString(),
+        status: 500,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    } finally {
+      setGradientLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 p-8">
       <div className="max-w-4xl mx-auto">
@@ -108,23 +196,23 @@ const Index = () => {
         </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            🚀 Космические факты!
+            🚀 Космические факты & 🎨 Градиенты!
           </h1>
           <p className="text-xl text-gray-600 mb-8">
             {isAuthenticated 
-              ? `Привет, ${user?.username}! Готов узнать что-то удивительное о космосе?`
-              : 'Узнай удивительные факты о космосе из нашей базы знаний'
+              ? `Привет, ${user?.username}! Готов узнать факт о космосе и получить красивый градиент?`
+              : 'Узнай удивительные факты о космосе и получи крутые CSS градиенты!'
             }
           </p>
         </div>
 
-        {/* Кнопка для получения факта */}
-        <div className="mb-8">
-          <Card className="max-w-lg mx-auto">
+        {/* Кнопки для получения контента */}
+        <div className="mb-8 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 justify-center">
                 <Icon name="Sparkles" className="h-6 w-6 text-purple-600" />
-                <span>Генератор космических фактов</span>
+                <span>Космические факты</span>
               </CardTitle>
               <CardDescription className="text-center">
                 Получи случайный удивительный факт о космосе
@@ -151,113 +239,241 @@ const Index = () => {
               </Button>
             </CardContent>
           </Card>
-        </div>
 
-        {/* Результат - космический факт */}
-        {result && (
-          <Card className="max-w-2xl mx-auto">
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 justify-center">
-                <Icon 
-                  name={result.success ? "Stars" : "XCircle"} 
-                  className={`h-6 w-6 ${
-                    result.success ? 'text-yellow-600' : 'text-red-600'
-                  }`}
-                />
-                <span>{result.success ? result.fun_bonus : 'Ошибка'}</span>
+                <Icon name="Palette" className="h-6 w-6 text-pink-600" />
+                <span>Генератор градиентов</span>
               </CardTitle>
+              <CardDescription className="text-center">
+                Получи красивый CSS градиент для фона
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              {result.success ? (
-                <div className="space-y-6">
-                  {/* Главный факт */}
-                  <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg border">
-                    <h3 className="font-bold text-lg mb-3 text-purple-900">
-                      💫 {result.fact_data.fact}
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {result.fact_data.explanation}
-                    </p>
-                    <div className="mt-4 flex items-center space-x-2">
-                      <Icon name="Tag" className="h-4 w-4 text-purple-600" />
-                      <span className="text-sm font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded">
-                        {result.fact_data.category}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  {/* Метаинформация */}
-                  <div className="grid md:grid-cols-2 gap-4 text-sm">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <div className="font-semibold text-gray-700 mb-2">📊 Статистика</div>
-                      <div>Всего фактов: {result.total_facts}</div>
-                      <div>Категорий: {result.categories.length}</div>
+              <Button 
+                onClick={getGradient}
+                disabled={gradientLoading}
+                className="w-full bg-gradient-to-r from-pink-600 to-orange-600 hover:from-pink-700 hover:to-orange-700"
+                size="lg"
+              >
+                {gradientLoading ? (
+                  <>
+                    <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
+                    Генерирую...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="Brush" className="mr-2 h-4 w-4" />
+                    Получить градиент
+                  </>
+                )}
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Результаты */}
+        <div className="grid gap-6 max-w-6xl mx-auto">
+          {/* Результат - космический факт */}
+          {result && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2 justify-center">
+                  <Icon 
+                    name={result.success ? "Stars" : "XCircle"} 
+                    className={`h-6 w-6 ${
+                      result.success ? 'text-yellow-600' : 'text-red-600'
+                    }`}
+                  />
+                  <span>{result.success ? result.fun_bonus : 'Ошибка'}</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {result.success ? (
+                  <div className="space-y-6">
+                    {/* Главный факт */}
+                    <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg border">
+                      <h3 className="font-bold text-lg mb-3 text-purple-900">
+                        💫 {result.fact_data.fact}
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        {result.fact_data.explanation}
+                      </p>
+                      <div className="mt-4 flex items-center space-x-2">
+                        <Icon name="Tag" className="h-4 w-4 text-purple-600" />
+                        <span className="text-sm font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded">
+                          {result.fact_data.category}
+                        </span>
+                      </div>
                     </div>
                     
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <div className="font-semibold text-gray-700 mb-2">🔗 Доступные категории</div>
-                      <div className="flex flex-wrap gap-1">
-                        {result.categories.map((cat, index) => (
-                          <span key={index} className="text-xs bg-gray-200 px-2 py-1 rounded">
-                            {cat}
-                          </span>
-                        ))}
+                    {/* Метаинформация */}
+                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <div className="font-semibold text-gray-700 mb-2">📊 Статистика</div>
+                        <div>Всего фактов: {result.total_facts}</div>
+                        <div>Категорий: {result.categories.length}</div>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <div className="font-semibold text-gray-700 mb-2">🔗 Доступные категории</div>
+                        <div className="flex flex-wrap gap-1">
+                          {result.categories.map((cat, index) => (
+                            <span key={index} className="text-xs bg-gray-200 px-2 py-1 rounded">
+                              {cat}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="text-center text-red-600">
-                  <p>Не удалось получить космический факт</p>
-                  {result.error && (
-                    <div className="mt-2 text-sm bg-red-50 p-3 rounded">
-                      {result.error}
+                ) : (
+                  <div className="text-center text-red-600">
+                    <p>Не удалось получить космический факт</p>
+                    {result.error && (
+                      <div className="mt-2 text-sm bg-red-50 p-3 rounded">
+                        {result.error}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Результат - градиент */}
+          {gradient && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2 justify-center">
+                  <Icon 
+                    name={gradient.success ? "Palette" : "XCircle"} 
+                    className={`h-6 w-6 ${
+                      gradient.success ? 'text-pink-600' : 'text-red-600'
+                    }`}
+                  />
+                  <span>{gradient.success ? `🎨 ${gradient.gradient.name}` : 'Ошибка'}</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {gradient.success ? (
+                  <div className="space-y-6">
+                    {/* Превью градиента */}
+                    <div 
+                      className="h-32 rounded-lg border-2 border-gray-200 shadow-inner relative overflow-hidden"
+                      style={{ background: gradient.gradient.css }}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-black/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg font-semibold">
+                          {gradient.gradient.name}
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        )}
+                    
+                    {/* CSS код и информация */}
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-sm font-semibold text-gray-700">CSS Код:</label>
+                          <div className="bg-gray-900 text-green-400 p-3 rounded-lg text-sm font-mono overflow-x-auto">
+                            background: {gradient.gradient.css};
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                          <Icon name="Tag" className="h-4 w-4 text-pink-600" />
+                          <span className="text-sm font-semibold text-pink-600 bg-pink-100 px-2 py-1 rounded">
+                            {gradient.gradient.category}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-sm font-semibold text-gray-700">Цвета:</label>
+                          <div className="flex space-x-2 mt-1">
+                            {gradient.gradient.colors.map((color, index) => (
+                              <div key={index} className="flex flex-col items-center space-y-1">
+                                <div 
+                                  className="w-8 h-8 rounded-full border-2 border-gray-300"
+                                  style={{ backgroundColor: color }}
+                                />
+                                <span className="text-xs font-mono text-gray-600">{color}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="text-sm text-gray-600">
+                          <strong>Направление:</strong> {gradient.gradient.direction}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Подсказка по использованию */}
+                    <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                      <div className="flex items-start space-x-2">
+                        <Icon name="Lightbulb" className="h-5 w-5 text-blue-600 mt-0.5" />
+                        <div>
+                          <div className="text-sm font-semibold text-blue-900 mb-1">💡 Как использовать:</div>
+                          <div className="text-sm text-blue-800">{gradient.usage_tip}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center text-red-600">
+                    <p>Не удалось сгенерировать градиент</p>
+                    {gradient.error && (
+                      <div className="mt-2 text-sm bg-red-50 p-3 rounded">
+                        {gradient.error}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+        </div>
 
         {/* Информация о приложении */}
         <Card className="mt-8">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <Icon name="Info" className="h-6 w-6 text-blue-600" />
-              <span>О приложении космических фактов</span>
+              <span>О приложении</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-6">
               <div>
-                <h3 className="font-semibold text-lg mb-2">🔬 Что это?</h3>
+                <h3 className="font-semibold text-lg mb-2">🚀 Космические факты</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Генератор космических фактов</li>
-                  <li>• 8 уникальных фактов</li>
+                  <li>• 8 удивительных фактов</li>
                   <li>• 5 различных категорий</li>
                   <li>• Подробные объяснения</li>
+                  <li>• Случайная выборка</li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-semibold text-lg mb-2">⚙️ Технологии:</h3>
+                <h3 className="font-semibold text-lg mb-2">🎨 CSS градиенты</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Python backend функция</li>
-                  <li>• React frontend</li>
-                  <li>• Cloud Functions</li>
-                  <li>• JSON API</li>
+                  <li>• 10 готовых градиентов</li>
+                  <li>• 6 стильных категорий</li>
+                  <li>• Готовый CSS код</li>
+                  <li>• Превью в реальном времени</li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-semibold text-lg mb-2">🌌 Категории фактов:</h3>
+                <h3 className="font-semibold text-lg mb-2">⚙️ Технологии</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Планеты</li>
-                  <li>• Звёзды</li>
-                  <li>• Физика космоса</li>
-                  <li>• Космонавтика</li>
-                  <li>• Галактики</li>
+                  <li>• 2 Python Cloud Functions</li>
+                  <li>• React + TypeScript</li>
+                  <li>• Tailwind CSS</li>
+                  <li>• Адаптивный дизайн</li>
                 </ul>
               </div>
             </div>
