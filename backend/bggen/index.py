@@ -14,7 +14,7 @@ class GradientData:
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Генерирует красивые CSS градиенты для фонов
+    Business: Генерирует красивые CSS градиенты для фонов v2
     Args: event - dict с httpMethod, queryStringParameters
           context - объект с атрибутами request_id, function_name
     Returns: HTTP response с CSS градиентом и метаданными
