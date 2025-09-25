@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "Generate UUID via GET request",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "uuid": "string",
+        "timestamp": "string",
+        "requestId": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Handle OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}
