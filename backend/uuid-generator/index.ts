@@ -47,6 +47,7 @@ export const handler = async (event: CloudFunctionEvent, context: CloudFunctionC
     
     if (httpMethod === 'GET') {
         const uuid = randomUUID();
+        const randomInteger = Math.floor(Math.random() * 1000000);
         
         return {
             statusCode: 200,
@@ -57,6 +58,7 @@ export const handler = async (event: CloudFunctionEvent, context: CloudFunctionC
             isBase64Encoded: false,
             body: JSON.stringify({ 
                 uuid,
+                randomInteger,
                 timestamp: new Date().toISOString(),
                 requestId: context.requestId
             })
