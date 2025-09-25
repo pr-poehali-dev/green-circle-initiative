@@ -181,12 +181,12 @@ const Index = () => {
         </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            🚀 Космические факты & 🎨 Градиенты!
+            🐾 Факты о животных & 🎨 Градиенты!
           </h1>
           <p className="text-xl text-gray-600 mb-8">
             {isAuthenticated 
-              ? `Привет, ${user?.username}! Готов узнать факт о космосе и получить красивый градиент?`
-              : 'Узнай удивительные факты о космосе и получи крутые CSS градиенты!'
+              ? `Привет, ${user?.username}! Готов узнать факт о животных и получить красивый градиент?`
+              : 'Узнай удивительные факты о животных и получи крутые CSS градиенты!'
             }
           </p>
         </div>
@@ -197,10 +197,10 @@ const Index = () => {
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 justify-center">
                 <Icon name="Sparkles" className="h-6 w-6 text-purple-600" />
-                <span>Космические факты</span>
+                <span>Факты о животных</span>
               </CardTitle>
               <CardDescription className="text-center">
-                Получи случайный удивительный факт о космосе
+                Получи случайный удивительный факт о животных
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -217,8 +217,8 @@ const Index = () => {
                   </>
                 ) : (
                   <>
-                    <Icon name="Rocket" className="mr-2 h-4 w-4" />
-                    Получить космический факт
+                    <Icon name="Heart" className="mr-2 h-4 w-4" />
+                    Получить факт о животном
                   </>
                 )}
               </Button>
