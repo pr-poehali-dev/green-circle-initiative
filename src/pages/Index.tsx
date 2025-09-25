@@ -27,7 +27,6 @@ interface SpaceFactResult {
 }
 
 interface GradientResult {
-  success: boolean;
   gradient: {
     css: string;
     colors: string[];
@@ -35,18 +34,11 @@ interface GradientResult {
     name: string;
     category: string;
   };
-  total_gradients: number;
-  filtered_count: number;
   available_categories: string[];
-  filter_applied: string | null;
-  usage_tip: string;
-  request_info: {
-    function_name: string;
-    method: string;
-    filtered_by: string;
-  };
-  timestamp: string;
+  total_gradients: number;
+  request_id: string;
   status: number;
+  success?: boolean;
   error?: string;
 }
 
@@ -112,7 +104,6 @@ const Index = () => {
       
       if (!url) {
         setGradient({
-          success: false,
           gradient: {
             css: '',
             colors: [],
@@ -120,14 +111,11 @@ const Index = () => {
             name: '',
             category: ''
           },
-          total_gradients: 0,
-          filtered_count: 0,
           available_categories: [],
-          filter_applied: null,
-          usage_tip: '',
-          request_info: { function_name: '', method: '', filtered_by: '' },
-          timestamp: new Date().toISOString(),
+          total_gradients: 0,
+          request_id: '',
           status: 404,
+          success: false,
           error: 'URL not found'
         });
         return;
@@ -138,11 +126,11 @@ const Index = () => {
       
       setGradient({
         ...data,
-        status: response.status
+        status: response.status,
+        success: response.ok
       });
     } catch (error) {
       setGradient({
-        success: false,
         gradient: {
           css: '',
           colors: [],
@@ -150,14 +138,11 @@ const Index = () => {
           name: '',
           category: ''
         },
-        total_gradients: 0,
-        filtered_count: 0,
         available_categories: [],
-        filter_applied: null,
-        usage_tip: '',
-        request_info: { function_name: '', method: '', filtered_by: '' },
-        timestamp: new Date().toISOString(),
+        total_gradients: 0,
+        request_id: '',
         status: 500,
+        success: false,
         error: error instanceof Error ? error.message : 'Unknown error'
       });
     } finally {
@@ -417,7 +402,9 @@ const Index = () => {
                         <Icon name="Lightbulb" className="h-5 w-5 text-blue-600 mt-0.5" />
                         <div>
                           <div className="text-sm font-semibold text-blue-900 mb-1">💡 Как использовать:</div>
-                          <div className="text-sm text-blue-800">{gradient.usage_tip}</div>
+                          <div className="text-sm text-blue-800">
+                            Скопируй CSS код и добавь в свой файл стилей. Этот градиент отлично подойдет для фонов, кнопок и декоративных элементов!
+                          </div>
                         </div>
                       </div>
                     </div>
