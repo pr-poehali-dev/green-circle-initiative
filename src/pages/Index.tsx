@@ -180,7 +180,7 @@ const Index = () => {
           </div>
         </div>
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">🎨 Творчество без границ!</h1>
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">⚡ Энергия новых идей!</h1>
           <p className="text-xl text-gray-600 mb-8">
             {isAuthenticated 
               ? `Привет, ${user?.username}! Готов узнать факт о животных и получить красивый градиент?`
