@@ -179,14 +179,26 @@ const Index = () => {
             )}
           </div>
         </div>
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">⚡ Энергия новых идей!</h1>
-          <p className="text-xl text-gray-600 mb-8">
-            {isAuthenticated 
-              ? `Привет, ${user?.username}! Готов узнать факт о животных и получить красивый градиент?`
-              : 'Узнай удивительные факты о животных и получи крутые CSS градиенты!'
-            }
-          </p>
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-12">
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+            }}
+          />
+          <div className="relative bg-black/20 backdrop-blur-sm">
+            <div className="text-center py-24 px-8">
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+                ⚡ Энергия новых идей!
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-md">
+                {isAuthenticated 
+                  ? `Привет, ${user?.username}! Готов узнать факт о животных и получить красивый градиент?`
+                  : 'Узнай удивительные факты о животных и получи крутые CSS градиенты!'
+                }
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Кнопки для получения контента */}
