@@ -181,15 +181,17 @@ const Index = () => {
         </div>
         <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-12">
           <div 
-            className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500"
+            className="absolute inset-0"
             style={{
-              backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+              backgroundImage: 'url(https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/25d526f2-9e5b-42d9-b221-17890079b5aa.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
             }}
           />
-          <div className="relative bg-black/20 backdrop-blur-sm">
+          <div className="relative bg-black/40 backdrop-blur-sm">
             <div className="text-center py-24 px-8">
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-                ⚡ Энергия новых идей!
+                🐱 Мир животных!
               </h1>
               <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-md">
                 {isAuthenticated 
