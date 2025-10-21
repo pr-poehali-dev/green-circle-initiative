@@ -1,487 +1,277 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Icon from '@/components/ui/icon';
-import { useAuth } from '@/contexts/AuthContext';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import functionsData from '../../backend/func2url.json';
+import Header from '@/components/Header';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 
-interface SpaceFactResult {
-  success: boolean;
-  timestamp: string;
-  total_facts: number;
-  categories: string[];
-  fact_data: {
-    fact: string;
-    explanation: string;
-    category: string;
+export default function Index() {
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
   };
-  fun_bonus: string;
-  request_info: {
-    function_name: string;
-    method: string;
-    filtered_by: string;
-  };
-  status: number;
-  error?: string;
-}
 
-interface GradientResult {
-  gradient: {
-    css: string;
-    colors: string[];
-    direction: string;
-    name: string;
-    category: string;
-  };
-  available_categories: string[];
-  total_gradients: number;
-  request_id: string;
-  status: number;
-  success?: boolean;
-  error?: string;
-}
+  const categories = [
+    { name: 'Платья', icon: 'Shirt', gradient: 'from-primary to-secondary' },
+    { name: 'Куртки', icon: 'Coat', gradient: 'from-secondary to-accent' },
+    { name: 'Джинсы', icon: 'PantsIcon', gradient: 'from-accent to-primary' },
+  ];
 
-const Index = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [gradientLoading, setGradientLoading] = useState<boolean>(false);
-  const [result, setResult] = useState<SpaceFactResult | null>(null);
-  const [gradient, setGradient] = useState<GradientResult | null>(null);
-  const { isAuthenticated, user } = useAuth();
-
-  const getSpaceFact = async () => {
-    setLoading(true);
-    setResult(null);
-
-    try {
-      const url = functionsData['space-facts' as keyof typeof functionsData];
-      
-      if (!url) {
-        setResult({
-          success: false,
-          timestamp: new Date().toISOString(),
-          total_facts: 0,
-          categories: [],
-          fact_data: { fact: '', explanation: '', category: '' },
-          fun_bonus: '',
-          request_info: { function_name: '', method: '', filtered_by: '' },
-          status: 404,
-          error: 'URL not found'
-        });
-        return;
-      }
-
-      const response = await fetch(url);
-      const data = await response.json();
-      
-      setResult({
-        ...data,
-        status: response.status
-      });
-    } catch (error) {
-      setResult({
-        success: false,
-        timestamp: new Date().toISOString(),
-        total_facts: 0,
-        categories: [],
-        fact_data: { fact: '', explanation: '', category: '' },
-        fun_bonus: '',
-        request_info: { function_name: '', method: '', filtered_by: '' },
-        status: 500,
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
-    } finally {
-      setLoading(false);
+  const featured = [
+    {
+      id: 1,
+      name: 'Стильная куртка',
+      price: 4990,
+      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/c5ae5c07-0377-4896-8cc7-1ec1234feecf.jpg',
+      colors: ['#8B5CF6', '#EC4899', '#F59E0B']
+    },
+    {
+      id: 2,
+      name: 'Элегантное платье',
+      price: 5990,
+      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/fac472a3-752e-4ea4-85f6-9d3e9f3af8b7.jpg',
+      colors: ['#EC4899', '#8B5CF6', '#F59E0B']
+    },
+    {
+      id: 3,
+      name: 'Уличный стиль',
+      price: 3990,
+      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/776e2225-a116-41b4-acac-0f9cda8446a6.jpg',
+      colors: ['#F59E0B', '#8B5CF6', '#EC4899']
     }
-  };
-
-  const getGradient = async () => {
-    setGradientLoading(true);
-    setGradient(null);
-
-    try {
-      const url = functionsData['gradient-generator' as keyof typeof functionsData];
-      
-      if (!url) {
-        setGradient({
-          gradient: {
-            css: '',
-            colors: [],
-            direction: '',
-            name: '',
-            category: ''
-          },
-          available_categories: [],
-          total_gradients: 0,
-          request_id: '',
-          status: 404,
-          success: false,
-          error: 'URL not found'
-        });
-        return;
-      }
-
-      const response = await fetch(url);
-      const data = await response.json();
-      
-      setGradient({
-        ...data,
-        status: response.status,
-        success: response.ok
-      });
-    } catch (error) {
-      setGradient({
-        gradient: {
-          css: '',
-          colors: [],
-          direction: '',
-          name: '',
-          category: ''
-        },
-        available_categories: [],
-        total_gradients: 0,
-        request_id: '',
-        status: 500,
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
-    } finally {
-      setGradientLoading(false);
-    }
-  };
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 p-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Навигация */}
-        <div className="flex justify-between items-center mb-8 bg-white/70 backdrop-blur-sm rounded-lg p-4 shadow-sm">
-          <h2 className="text-lg font-semibold">Главная</h2>
-          <div className="flex items-center space-x-4">
-            {isAuthenticated ? (
-              <>
-                <span className="text-sm text-muted-foreground">
-                  Привет, {user?.username}!
-                </span>
-                <Button asChild variant="outline" size="sm">
-                  <Link to="/profile">
-                    <Icon name="User" className="mr-2 h-4 w-4" />
-                    Профиль
-                  </Link>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+      <Header />
+
+      <section className="container mx-auto px-4 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div {...fadeIn}>
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Твой стиль начинается здесь
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-muted-foreground mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Открой для себя яркую коллекцию модной одежды. 
+              Создавай уникальные образы каждый день.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <Link to="/catalog">
+                <Button size="lg" className="text-lg px-8 py-6 rounded-full shadow-2xl hover:shadow-primary/50 transition-all">
+                  Смотреть коллекцию
+                  <Icon name="ArrowRight" size={20} className="ml-2" />
                 </Button>
-              </>
-            ) : (
-              <Button asChild size="sm">
-                <Link to="/auth">
-                  <Icon name="LogIn" className="mr-2 h-4 w-4" />
-                  Войти
-                </Link>
-              </Button>
-            )}
-          </div>
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div 
+              className="absolute -top-10 -left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, 90, 0]
+              }}
+              transition={{ 
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div 
+              className="absolute -bottom-10 -right-10 w-72 h-72 bg-secondary/20 rounded-full blur-3xl"
+              animate={{ 
+                scale: [1.2, 1, 1.2],
+                rotate: [0, -90, 0]
+              }}
+              transition={{ 
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <div className="relative grid grid-cols-2 gap-4">
+              {featured.slice(0, 2).map((item, idx) => (
+                <motion.div
+                  key={item.id}
+                  className="bg-white rounded-3xl overflow-hidden shadow-xl"
+                  whileHover={{ scale: 1.05, rotate: idx === 0 ? -2 : 2 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img src={item.image} alt={item.name} className="w-full h-64 object-cover" />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-12">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: 'url(https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/08318008-1a83-42b2-b12d-e0c848ff42c2.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          />
-          <div className="relative bg-black/40 backdrop-blur-sm">
-            <div className="text-center py-24 px-8">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-                🐱 Мир животных!
-              </h1>
-              <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-md">
-                {isAuthenticated 
-                  ? `Привет, ${user?.username}! Готов узнать факт о животных и получить красивый градиент?`
-                  : 'Узнай удивительные факты о животных и получи крутые CSS градиенты!'
-                }
-              </p>
+      </section>
+
+      <section className="container mx-auto px-4 py-16">
+        <motion.h2 
+          className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+          {...fadeIn}
+        >
+          Категории
+        </motion.h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {categories.map((cat, idx) => (
+            <motion.div
+              key={cat.name}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              whileHover={{ scale: 1.05, y: -10 }}
+              className={`bg-gradient-to-br ${cat.gradient} p-8 rounded-3xl text-white cursor-pointer shadow-xl hover:shadow-2xl transition-all`}
+            >
+              <Icon name={cat.icon} size={48} className="mb-4" />
+              <h3 className="text-2xl font-bold">{cat.name}</h3>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-16">
+        <motion.h2 
+          className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent"
+          {...fadeIn}
+        >
+          Хиты продаж
+        </motion.h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {featured.map((product, idx) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.15, duration: 0.6 }}
+              whileHover={{ y: -10 }}
+              className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all group"
+            >
+              <div className="relative overflow-hidden">
+                <motion.img 
+                  src={product.image} 
+                  alt={product.name} 
+                  className="w-full h-80 object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                />
+                <motion.div 
+                  className="absolute top-4 right-4"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <button className="bg-white rounded-full p-3 shadow-lg">
+                    <Icon name="Heart" size={20} className="text-secondary" />
+                  </button>
+                </motion.div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+                <div className="flex items-center gap-2 mb-4">
+                  {product.colors.map((color, i) => (
+                    <motion.div
+                      key={i}
+                      className="w-6 h-6 rounded-full border-2 border-white shadow-md cursor-pointer"
+                      style={{ backgroundColor: color }}
+                      whileHover={{ scale: 1.3 }}
+                      whileTap={{ scale: 0.9 }}
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-primary">{product.price} ₽</span>
+                  <Button className="rounded-full">
+                    <Icon name="ShoppingCart" size={18} />
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-20">
+        <motion.div 
+          className="bg-gradient-to-r from-primary via-secondary to-accent p-12 rounded-3xl text-white text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl font-bold mb-4">Скидка 20% на первый заказ</h2>
+          <p className="text-xl mb-8 opacity-90">Подпишись на рассылку и получи промокод</p>
+          <div className="flex gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="Твой email" 
+              className="flex-1 px-6 py-3 rounded-full text-foreground"
+            />
+            <Button variant="secondary" size="lg" className="rounded-full px-8">
+              Подписаться
+            </Button>
+          </div>
+        </motion.div>
+      </section>
+
+      <footer className="bg-foreground text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Icon name="ShoppingBag" size={32} className="text-primary" />
+                <span className="text-2xl font-bold">StyleShop</span>
+              </div>
+              <p className="text-white/70">Твой стиль, твой выбор</p>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Покупателям</h4>
+              <ul className="space-y-2 text-white/70">
+                <li>Доставка</li>
+                <li>Возврат</li>
+                <li>Оплата</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Компания</h4>
+              <ul className="space-y-2 text-white/70">
+                <li>О нас</li>
+                <li>Контакты</li>
+                <li>Вакансии</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Соцсети</h4>
+              <div className="flex gap-4">
+                <Icon name="Instagram" size={24} className="text-white/70 hover:text-primary cursor-pointer transition-colors" />
+                <Icon name="Facebook" size={24} className="text-white/70 hover:text-primary cursor-pointer transition-colors" />
+                <Icon name="Twitter" size={24} className="text-white/70 hover:text-primary cursor-pointer transition-colors" />
+              </div>
             </div>
           </div>
+          <div className="border-t border-white/10 mt-8 pt-8 text-center text-white/70">
+            © 2025 StyleShop. Все права защищены
+          </div>
         </div>
-
-        {/* Кнопки для получения контента */}
-        <div className="mb-8 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 justify-center">
-                <Icon name="Sparkles" className="h-6 w-6 text-purple-600" />
-                <span>Факты о животных</span>
-              </CardTitle>
-              <CardDescription className="text-center">
-                Получи случайный удивительный факт о животных
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button 
-                onClick={getSpaceFact}
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-                size="lg"
-              >
-                {loading ? (
-                  <>
-                    <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-                    Ищу факт...
-                  </>
-                ) : (
-                  <>
-                    <Icon name="Heart" className="mr-2 h-4 w-4" />
-                    Получить факт о животном
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 justify-center">
-                <Icon name="Palette" className="h-6 w-6 text-pink-600" />
-                <span>Генератор градиентов</span>
-              </CardTitle>
-              <CardDescription className="text-center">
-                Получи красивый линейный или радиальный градиент
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button 
-                onClick={getGradient}
-                disabled={gradientLoading}
-                className="w-full bg-gradient-to-r from-pink-600 to-orange-600 hover:from-pink-700 hover:to-orange-700"
-                size="lg"
-              >
-                {gradientLoading ? (
-                  <>
-                    <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-                    Генерирую...
-                  </>
-                ) : (
-                  <>
-                    <Icon name="Brush" className="mr-2 h-4 w-4" />
-                    Получить градиент
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Результаты */}
-        <div className="grid gap-6 max-w-6xl mx-auto">
-          {/* Результат - космический факт */}
-          {result && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 justify-center">
-                  <Icon 
-                    name={result.success ? "Stars" : "XCircle"} 
-                    className={`h-6 w-6 ${
-                      result.success ? 'text-yellow-600' : 'text-red-600'
-                    }`}
-                  />
-                  <span>{result.success ? result.fun_bonus : 'Ошибка'}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {result.success ? (
-                  <div className="space-y-6">
-                    {/* Главный факт */}
-                    <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg border">
-                      <h3 className="font-bold text-lg mb-3 text-purple-900">
-                        💫 {result.fact_data.fact}
-                      </h3>
-                      <p className="text-gray-700 leading-relaxed">
-                        {result.fact_data.explanation}
-                      </p>
-                      <div className="mt-4 flex items-center space-x-2">
-                        <Icon name="Tag" className="h-4 w-4 text-purple-600" />
-                        <span className="text-sm font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded">
-                          {result.fact_data.category}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* Метаинформация */}
-                    <div className="grid md:grid-cols-2 gap-4 text-sm">
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <div className="font-semibold text-gray-700 mb-2">📊 Статистика</div>
-                        <div>Всего фактов: {result.total_facts}</div>
-                        <div>Категорий: {result.categories.length}</div>
-                      </div>
-                      
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <div className="font-semibold text-gray-700 mb-2">🔗 Доступные категории</div>
-                        <div className="flex flex-wrap gap-1">
-                          {result.categories.map((cat, index) => (
-                            <span key={index} className="text-xs bg-gray-200 px-2 py-1 rounded">
-                              {cat}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center text-red-600">
-                    <p>Не удалось получить космический факт</p>
-                    {result.error && (
-                      <div className="mt-2 text-sm bg-red-50 p-3 rounded">
-                        {result.error}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Результат - градиент */}
-          {gradient && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 justify-center">
-                  <Icon 
-                    name={gradient.success ? "Palette" : "XCircle"} 
-                    className={`h-6 w-6 ${
-                      gradient.success ? 'text-pink-600' : 'text-red-600'
-                    }`}
-                  />
-                  <span>{gradient.success ? `🎨 ${gradient.gradient.name}` : 'Ошибка'}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {gradient.success ? (
-                  <div className="space-y-6">
-                    {/* Превью градиента */}
-                    <div 
-                      className="h-32 rounded-lg border-2 border-gray-200 shadow-inner relative overflow-hidden"
-                      style={{ background: gradient.gradient.css }}
-                    >
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-black/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg font-semibold">
-                          {gradient.gradient.name}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* CSS код и информация */}
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-3">
-                        <div>
-                          <label className="text-sm font-semibold text-gray-700">CSS Код:</label>
-                          <div className="bg-gray-900 text-green-400 p-3 rounded-lg text-sm font-mono overflow-x-auto">
-                            background: {gradient.gradient.css};
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center space-x-2">
-                          <Icon name="Tag" className="h-4 w-4 text-pink-600" />
-                          <span className="text-sm font-semibold text-pink-600 bg-pink-100 px-2 py-1 rounded">
-                            {gradient.gradient.category}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-3">
-                        <div>
-                          <label className="text-sm font-semibold text-gray-700">Цвета:</label>
-                          <div className="flex space-x-2 mt-1">
-                            {gradient.gradient.colors.map((color, index) => (
-                              <div key={index} className="flex flex-col items-center space-y-1">
-                                <div 
-                                  className="w-8 h-8 rounded-full border-2 border-gray-300"
-                                  style={{ backgroundColor: color }}
-                                />
-                                <span className="text-xs font-mono text-gray-600">{color}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <div className="text-sm text-gray-600">
-                          <strong>Направление:</strong> {gradient.gradient.direction}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Подсказка по использованию */}
-                    <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
-                      <div className="flex items-start space-x-2">
-                        <Icon name="Lightbulb" className="h-5 w-5 text-blue-600 mt-0.5" />
-                        <div>
-                          <div className="text-sm font-semibold text-blue-900 mb-1">💡 Как использовать:</div>
-                          <div className="text-sm text-blue-800">
-                            Скопируй CSS код и добавь в свой файл стилей. Этот градиент отлично подойдет для фонов, кнопок и декоративных элементов!
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center text-red-600">
-                    <p>Не удалось сгенерировать градиент</p>
-                    {gradient.error && (
-                      <div className="mt-2 text-sm bg-red-50 p-3 rounded">
-                        {gradient.error}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          )}
-        </div>
-
-        {/* Информация о приложении */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <Icon name="Info" className="h-6 w-6 text-blue-600" />
-              <span>О приложении</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div>
-                <h3 className="font-semibold text-lg mb-2">🚀 Космические факты</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• 8 удивительных фактов</li>
-                  <li>• 5 различных категорий</li>
-                  <li>• Подробные объяснения</li>
-                  <li>• Случайная выборка</li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">🎨 CSS градиенты</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• 20 готовых градиентов</li>
-                  <li>• Линейные и радиальные</li>
-                  <li>• 6 стильных категорий</li>
-                  <li>• Готовый CSS код</li>
-                  <li>• Превью в реальном времени</li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">⚙️ Технологии</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• 2 Python Cloud Functions</li>
-                  <li>• React + TypeScript</li>
-                  <li>• Tailwind CSS</li>
-                  <li>• Адаптивный дизайн</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      </footer>
     </div>
   );
-};
-
-export default Index;
+}
