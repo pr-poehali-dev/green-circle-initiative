@@ -13,8 +13,8 @@ export default function Index() {
 
   const categories = [
     { name: 'Платья', icon: 'Shirt', gradient: 'from-primary to-secondary' },
-    { name: 'Куртки', icon: 'Coat', gradient: 'from-secondary to-accent' },
-    { name: 'Джинсы', icon: 'PantsIcon', gradient: 'from-accent to-primary' },
+    { name: 'Куртки', icon: 'Shirt', gradient: 'from-secondary to-accent' },
+    { name: 'Джинсы', icon: 'Shirt', gradient: 'from-accent to-primary' },
   ];
 
   const featured = [
