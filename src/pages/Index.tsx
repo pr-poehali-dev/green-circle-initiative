@@ -54,7 +54,7 @@ export default function Index() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              МОЙ
+              ВАШ
             </motion.h1>
             <motion.p 
               className="text-xl text-muted-foreground mb-8"
