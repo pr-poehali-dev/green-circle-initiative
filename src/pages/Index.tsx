@@ -22,7 +22,7 @@ export default function Index() {
       id: 1,
       name: 'Стильная куртка',
       price: 4990,
-      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/c5ae5c07-0377-4896-8cc7-1ec1234feecf.jpg',
+      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/c79a0d62-08c5-4285-9ca2-11273dba88df.jpg',
       colors: ['#8B5CF6', '#EC4899', '#F59E0B']
     },
     {
