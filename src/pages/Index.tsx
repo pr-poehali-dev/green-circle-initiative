@@ -164,7 +164,7 @@ export default function Index() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.15, duration: 0.6 }}
               whileHover={{ y: -10 }}
-              className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all group"
+              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-gray-100"
             >
               <div className="relative overflow-hidden">
                 <motion.img 
@@ -179,28 +179,26 @@ export default function Index() {
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <button className="bg-white rounded-full p-3 shadow-lg">
-                    <Icon name="Heart" size={20} className="text-secondary" />
+                  <button className="bg-white/80 backdrop-blur-sm rounded-full p-2.5 shadow-sm hover:bg-white hover:shadow-md transition-all duration-300">
+                    <Icon name="Heart" size={16} className="text-gray-400 hover:text-red-400 transition-colors duration-300" />
                   </button>
                 </motion.div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-                <div className="flex items-center gap-2 mb-4">
+                <h3 className="text-lg font-semibold mb-2 text-gray-900">{product.name}</h3>
+                <div className="flex items-center gap-1.5 mb-4">
                   {product.colors.map((color, i) => (
-                    <motion.div
+                    <div
                       key={i}
-                      className="w-6 h-6 rounded-full border-2 border-white shadow-md cursor-pointer"
+                      className="w-4 h-4 rounded-full border border-gray-200 shadow-sm cursor-pointer hover:scale-110 transition-transform duration-200"
                       style={{ backgroundColor: color }}
-                      whileHover={{ scale: 1.3 }}
-                      whileTap={{ scale: 0.9 }}
                     />
                   ))}
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-primary">{product.price} ₽</span>
-                  <Button className="rounded-full">
-                    <Icon name="ShoppingCart" size={18} />
+                  <span className="text-xl font-semibold text-gray-900">{product.price.toLocaleString()} ₽</span>
+                  <Button className="rounded-xl bg-black hover:bg-gray-800 text-white transition-colors duration-300 px-4 h-9 text-sm font-medium">
+                    В корзину
                   </Button>
                 </div>
               </div>
