@@ -140,7 +140,7 @@ export default function Index() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.05, y: -10 }}
-              className={`bg-gradient-to-br ${cat.gradient} p-8 rounded-3xl text-white cursor-pointer shadow-xl hover:shadow-2xl transition-all`}
+              className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-3xl text-white cursor-pointer shadow-xl hover:shadow-2xl transition-all"
             >
               <Icon name={cat.icon} size={48} className="mb-4" />
               <h3 className="text-2xl font-bold">{cat.name}</h3>
