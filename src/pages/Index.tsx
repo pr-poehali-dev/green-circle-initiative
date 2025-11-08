@@ -42,7 +42,7 @@ export default function Index() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <Header />
 
       <section className="container mx-auto px-4 py-20">
@@ -140,7 +140,7 @@ export default function Index() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.05, y: -10 }}
-              className="bg-gradient-to-br from-gray-900 to-gray-700 backdrop-blur-xl border border-gray-200/20 p-8 rounded-3xl text-white cursor-pointer shadow-xl hover:shadow-2xl transition-all"
+              className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl text-white cursor-pointer shadow-xl hover:shadow-2xl transition-all"
             >
               <Icon name={cat.icon} size={48} className="mb-4 text-white" />
               <h3 className="text-2xl font-bold text-white">{cat.name}</h3>
