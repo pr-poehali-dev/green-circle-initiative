@@ -12,7 +12,7 @@ export default function Index() {
   };
 
   const categories = [
-    { name: 'Мокасины', icon: 'Shirt', gradient: 'from-primary to-secondary' },
+    { name: 'Сапожки', icon: 'Shirt', gradient: 'from-primary to-secondary' },
     { name: 'Куртки', icon: 'Shirt', gradient: 'from-secondary to-accent' },
     { name: 'Джинсы', icon: 'Shirt', gradient: 'from-accent to-primary' },
   ];
