@@ -109,7 +109,7 @@ export default function Index() {
                 ease: "easeInOut"
               }}
             />
-            <div className="relative grid grid-cols-2 gap-4">
+            <div className="relative grid grid-cols-2 gap-4 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-4 shadow-[0_0_40px_rgba(255,255,255,0.15)]">
               {featured.slice(0, 2).map((item, idx) => (
                 <motion.div
                   key={item.id}
