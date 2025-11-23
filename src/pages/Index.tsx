@@ -60,61 +60,54 @@ export default function Index() {
       <main className="px-4 py-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
           <section className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-            <motion.div {...fadeIn} className="space-y-6">
-              <div>
-                <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-gray-500">
-                  drop 11/24
-                </p>
-                <h1 className="text-4xl font-semibold leading-tight text-gray-900 md:text-5xl">
-                  NAШ! Capsule
-                  <span className="block text-gray-500">Готовые формулы стиля</span>
-                </h1>
+            <motion.div
+              {...fadeIn}
+              className="space-y-8 rounded-[32px] border border-white/40 bg-white/80 p-8 shadow-[0_40px_80px_rgba(15,23,42,0.12)] backdrop-blur"
+            >
+              <div className="flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.4em] text-gray-500">
+                <span className="h-px flex-1 bg-gray-300" />
+                drop 11/24
+                <span className="h-px flex-1 bg-gray-300" />
               </div>
+              <h1 className="text-4xl font-light leading-tight text-gray-900 md:text-5xl">
+                Capsule 11
+                <span className="block text-2xl text-gray-500">Звук тишины и мягкий свет</span>
+              </h1>
               <p className="max-w-xl text-base text-gray-600 md:text-lg">
-                Живые фактуры, приглушённые оттенки и акцентные детали. Подбираем пары, которые сразу работают вместе: от офиса до поздних ужинов.
+                Структурный трикотаж, пластичные жакеты и объёмные аксессуары формируют единый тон. Мы оставили только то, что ощущается бесшовно.
               </p>
-              <ul className="grid gap-3 text-sm text-gray-600 sm:grid-cols-2">
-                <li className="flex items-start gap-2">
-                  <Icon name="Sparkles" size={18} />
-                  7 сочетаний «из коробки»
-                </li>
-                <li className="flex items-start gap-2">
-                  <Icon name="Thermometer" size={18} />
-                  Итальянская шерсть и мягкий кашемир
-                </li>
-                <li className="flex items-start gap-2">
-                  <Icon name="MoonStar" size={18} />
-                  Актуальны и днём, и вечером
-                </li>
-                <li className="flex items-start gap-2">
-                  <Icon name="Recycle" size={18} />
-                  Сборка капсулы за 5 минут
-                </li>
-              </ul>
-              <div className="flex flex-wrap gap-6 text-gray-900">
-                <div>
-                  <p className="text-3xl font-semibold">48</p>
-                  <span className="text-xs uppercase tracking-[0.3em] text-gray-500">лимитированных позиций</span>
+              <div className="grid gap-4 text-sm text-gray-700 sm:grid-cols-2">
+                <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
+                  <p className="text-xs uppercase tracking-[0.4em] text-gray-500">тактильность</p>
+                  <p className="mt-2 text-lg text-gray-900">Итальянская шерсть · кашемир · recycled нейлон</p>
                 </div>
-                <div>
-                  <p className="text-3xl font-semibold">72ч</p>
-                  <span className="text-xs uppercase tracking-[0.3em] text-gray-500">приоритетный доступ</span>
-                </div>
-                <div>
-                  <p className="text-3xl font-semibold">3</p>
-                  <span className="text-xs uppercase tracking-[0.3em] text-gray-500">новые цвета</span>
+                <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
+                  <p className="text-xs uppercase tracking-[0.4em] text-gray-500">силуэты</p>
+                  <p className="mt-2 text-lg text-gray-900">Монолитные линии и скрытые застёжки</p>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="grid gap-6 text-gray-900 sm:grid-cols-3">
+                <div>
+                  <p className="text-5xl font-light">48</p>
+                  <p className="mt-2 text-[0.65rem] uppercase tracking-[0.35em] text-gray-500">лимитированных позиций</p>
+                </div>
+                <div>
+                  <p className="text-5xl font-light">72ч</p>
+                  <p className="mt-2 text-[0.65rem] uppercase tracking-[0.35em] text-gray-500">приоритетный доступ</p>
+                </div>
+                <div>
+                  <p className="text-5xl font-light">3</p>
+                  <p className="mt-2 text-[0.65rem] uppercase tracking-[0.35em] text-gray-500">новые оттенки</p>
+                </div>
+              </div>
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
                 <Link to="/catalog">
-                  <Button className="h-11 rounded-full bg-gray-900 px-6 text-sm font-medium text-white hover:bg-black">
+                  <Button className="h-12 rounded-full bg-gray-900 px-8 text-sm font-medium text-white hover:bg-black">
                     Забронировать примерку
                   </Button>
                 </Link>
-                <Link to="/catalog">
-                  <button className="inline-flex h-11 items-center rounded-full border border-slate-300 bg-white px-6 text-sm font-medium text-gray-900 transition hover:border-gray-900">
-                    Смотреть коллекцию
-                  </button>
+                <Link to="/catalog" className="text-sm font-medium text-gray-500 underline-offset-4 transition hover:text-gray-900">
+                  Смотреть коллекцию
                 </Link>
               </div>
             </motion.div>
