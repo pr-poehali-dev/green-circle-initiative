@@ -22,14 +22,14 @@ export default function Index() {
       id: 1,
       name: 'Стильная куртка',
       price: 4990,
-      image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80',
+      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/60fe2443-2b94-488d-a2e4-b3b7dace5ab2.jpg',
       colors: ['#8B5CF6', '#EC4899', '#F59E0B']
     },
     {
       id: 2,
       name: 'Элегантное платье',
       price: 5990,
-      image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=900&q=80',
+      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/f1a62f27-c0d0-482a-b5ed-b9e3b93c1376.jpg',
       colors: ['#EC4899', '#8B5CF6', '#F59E0B']
     },
     {
