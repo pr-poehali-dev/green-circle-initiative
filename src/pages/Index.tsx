@@ -22,21 +22,21 @@ export default function Index() {
       id: 1,
       name: 'Стильная куртка',
       price: 4990,
-      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/c79a0d62-08c5-4285-9ca2-11273dba88df.jpg',
+      image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80',
       colors: ['#8B5CF6', '#EC4899', '#F59E0B']
     },
     {
       id: 2,
       name: 'Элегантное платье',
       price: 5990,
-      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/fac472a3-752e-4ea4-85f6-9d3e9f3af8b7.jpg',
+      image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=900&q=80',
       colors: ['#EC4899', '#8B5CF6', '#F59E0B']
     },
     {
       id: 3,
       name: 'Уличный стиль',
       price: 3990,
-      image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/776e2225-a116-41b4-acac-0f9cda8446a6.jpg',
+      image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80',
       colors: ['#F59E0B', '#8B5CF6', '#EC4899']
     }
   ];
