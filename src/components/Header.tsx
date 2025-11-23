@@ -1,56 +1,57 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Icon from '@/components/ui/icon';
 
+const navItems = [
+  { label: 'Главная', href: '/' },
+  { label: 'Каталог', href: '/catalog' },
+  { label: 'Lookbook', href: '/lookbook' }
+];
+
 export default function Header() {
   return (
-    <motion.header 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border"
+    <motion.header
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur"
     >
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <Link to="/" className="flex items-center gap-2 text-gray-900">
+          <Icon name="ShoppingBag" size={26} />
+          <span className="text-lg font-semibold tracking-tight">StyleShop</span>
+        </Link>
+
+        <nav className="hidden items-center gap-6 text-sm font-medium text-gray-600 md:flex">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.href}
+              to={item.href}
+              className={({ isActive }) =>
+                `transition hover:text-gray-900 ${isActive ? 'text-gray-900' : ''}`
+              }
             >
-              <Icon name="ShoppingBag" size={32} className="text-primary" />
-            </motion.div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              StyleShop
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <button className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-gray-600 transition hover:border-gray-900 hover:text-gray-900">
+            <Icon name="Search" size={18} />
+          </button>
+          <button className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-gray-600 transition hover:border-gray-900 hover:text-gray-900">
+            <Icon name="Heart" size={18} />
+            <span className="absolute -top-1 -right-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-gray-900 px-1 text-[10px] font-semibold text-white">
+              2
             </span>
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">
-              Главная
-            </Link>
-            <Link to="/catalog" className="text-foreground hover:text-primary transition-colors font-medium">
-              Каталог
-            </Link>
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <Icon name="Heart" size={24} className="text-foreground" />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <Icon name="ShoppingCart" size={24} className="text-foreground" />
-              <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                0
-              </span>
-            </motion.button>
-          </div>
+          </button>
+          <button className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-gray-600 transition hover:border-gray-900 hover:text-gray-900">
+            <Icon name="ShoppingCart" size={18} />
+            <span className="absolute -top-1 -right-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-gray-900 px-1 text-[10px] font-semibold text-white">
+              1
+            </span>
+          </button>
         </div>
       </div>
     </motion.header>
