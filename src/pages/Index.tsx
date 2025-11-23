@@ -86,18 +86,19 @@ export default function Index() {
                   <p className="mt-2 text-base text-gray-900">Монолитные линии и скрытые застёжки</p>
                 </div>
               </div>
-              <div className="grid gap-6 text-gray-900 sm:grid-cols-3">
-                <div>
-                  <p className="text-5xl font-light">48</p>
-                  <p className="mt-2 text-[0.65rem] uppercase tracking-[0.35em] text-gray-500">лимитированных позиций</p>
-                </div>
-                <div>
-                  <p className="text-5xl font-light">72ч</p>
-                  <p className="mt-2 text-[0.65rem] uppercase tracking-[0.35em] text-gray-500">приоритетный доступ</p>
-                </div>
-                <div>
-                  <p className="text-5xl font-light">3</p>
-                  <p className="mt-2 text-[0.65rem] uppercase tracking-[0.35em] text-gray-500">новые оттенки</p>
+              <div className="rounded-[28px] border border-white/60 bg-white/70 p-6 shadow-[0_25px_60px_rgba(15,23,42,0.08)] backdrop-blur">
+                <div className="flex flex-col gap-6 text-gray-900 sm:flex-row sm:items-center sm:justify-between">
+                  {[
+                    { value: '48', label: 'лимитированных позиций' },
+                    { value: '72ч', label: 'приоритетный доступ' },
+                    { value: '3', label: 'новые оттенки' }
+                  ].map((metric) => (
+                    <div key={metric.label} className="flex flex-1 flex-col text-left sm:text-center">
+                      <span className="text-[0.55rem] uppercase tracking-[0.45em] text-gray-400">capsule</span>
+                      <p className="mt-2 text-5xl font-light leading-none">{metric.value}</p>
+                      <p className="mt-3 text-xs uppercase tracking-[0.3em] text-gray-500">{metric.label}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
