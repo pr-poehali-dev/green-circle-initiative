@@ -78,8 +78,8 @@ export default function Index() {
               </p>
               <div className="grid gap-4 text-sm text-gray-700 sm:grid-cols-2">
                 <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
-                  <p className="text-xs uppercase tracking-[0.4em] text-gray-500">тактильность</p>
-                  <p className="mt-2 text-lg text-gray-900">Итальянская шерсть · кашемир · recycled нейлон</p>
+                  <p className="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">тактильность</p>
+                  <p className="mt-2 text-base text-gray-900">Итальянская шерсть · кашемир · recycled нейлон</p>
                 </div>
                 <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
                   <p className="text-xs uppercase tracking-[0.4em] text-gray-500">силуэты</p>
