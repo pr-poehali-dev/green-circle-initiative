@@ -60,26 +60,60 @@ export default function Index() {
       <main className="px-4 py-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
           <section className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-            <motion.div {...fadeIn}>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-gray-500">
-                новая коллекция
+            <motion.div {...fadeIn} className="space-y-6">
+              <div>
+                <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-gray-500">
+                  drop 11/24
+                </p>
+                <h1 className="text-4xl font-semibold leading-tight text-gray-900 md:text-5xl">
+                  NAШ! Capsule
+                  <span className="block text-gray-500">Готовые формулы стиля</span>
+                </h1>
+              </div>
+              <p className="max-w-xl text-base text-gray-600 md:text-lg">
+                Живые фактуры, приглушённые оттенки и акцентные детали. Подбираем пары, которые сразу работают вместе: от офиса до поздних ужинов.
               </p>
-              <h1 className="mb-5 text-4xl font-semibold leading-tight tracking-tight text-gray-900 md:text-5xl">
-                NAШ! — актуальные образы на каждый день
-              </h1>
-              <p className="mb-8 max-w-lg text-base text-gray-600 md:text-lg">
-                Собрали вещи, которые легко сочетать: лаконичные пальто, мягкий трикотаж и акцентные модели
-                для вечерних выходов.
-              </p>
+              <ul className="grid gap-3 text-sm text-gray-600 sm:grid-cols-2">
+                <li className="flex items-start gap-2">
+                  <Icon name="Sparkles" size={18} />
+                  7 сочетаний «из коробки»
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon name="Thermometer" size={18} />
+                  Итальянская шерсть и мягкий кашемир
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon name="MoonStar" size={18} />
+                  Актуальны и днём, и вечером
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon name="Recycle" size={18} />
+                  Сборка капсулы за 5 минут
+                </li>
+              </ul>
+              <div className="flex flex-wrap gap-6 text-gray-900">
+                <div>
+                  <p className="text-3xl font-semibold">48</p>
+                  <span className="text-xs uppercase tracking-[0.3em] text-gray-500">лимитированных позиций</span>
+                </div>
+                <div>
+                  <p className="text-3xl font-semibold">72ч</p>
+                  <span className="text-xs uppercase tracking-[0.3em] text-gray-500">приоритетный доступ</span>
+                </div>
+                <div>
+                  <p className="text-3xl font-semibold">3</p>
+                  <span className="text-xs uppercase tracking-[0.3em] text-gray-500">новые цвета</span>
+                </div>
+              </div>
               <div className="flex flex-wrap items-center gap-3">
                 <Link to="/catalog">
                   <Button className="h-11 rounded-full bg-gray-900 px-6 text-sm font-medium text-white hover:bg-black">
-                    Смотреть коллекцию
+                    Забронировать примерку
                   </Button>
                 </Link>
                 <Link to="/catalog">
                   <button className="inline-flex h-11 items-center rounded-full border border-slate-300 bg-white px-6 text-sm font-medium text-gray-900 transition hover:border-gray-900">
-                    Все разделы
+                    Смотреть коллекцию
                   </button>
                 </Link>
               </div>
@@ -91,17 +125,35 @@ export default function Index() {
               transition={{ duration: 0.5 }}
               className="w-full"
             >
-              <div className="grid grid-cols-2 gap-4 rounded-3xl border border-slate-200 bg-white p-4">
-                {featured.slice(0, 2).map((item) => (
-                  <motion.div
-                    key={item.id}
-                    className="overflow-hidden rounded-2xl bg-gray-100"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img src={item.image} alt={item.name} className="h-64 w-full object-cover" loading="lazy" />
-                  </motion.div>
-                ))}
+              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-600 p-6 text-white">
+                <div className="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-white/60">
+                  <span>capsule edit</span>
+                  <span>limited</span>
+                </div>
+                <div className="mt-6 space-y-4">
+                  {featured.slice(0, 2).map((item) => (
+                    <motion.div
+                      key={item.id}
+                      className="relative overflow-hidden rounded-2xl bg-white/10"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img src={item.image} alt={item.name} className="h-64 w-full object-cover" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4 text-sm">
+                        <p className="text-lg font-semibold">{item.name}</p>
+                        <p className="text-white/70">{item.subtitle}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="mt-6 flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-sm">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-white/60">доставка</p>
+                    <p className="text-base font-semibold text-white">в день заказа по москве</p>
+                  </div>
+                  <Icon name="ArrowUpRight" size={24} />
+                </div>
               </div>
             </motion.div>
           </section>
