@@ -106,7 +106,7 @@ export default function Index() {
               </div>
               <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
                 <Link to="/catalog">
-                  <Button className="h-12 rounded-full bg-gray-900 px-8 text-sm font-medium text-white hover:bg-black">
+                  <Button className="h-12 rounded-full bg-[#ff6b2c] px-8 text-sm font-medium text-white transition hover:bg-[#e85b1f]">
                     Забронировать примерку
                   </Button>
                 </Link>
