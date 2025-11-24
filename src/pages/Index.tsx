@@ -69,9 +69,9 @@ export default function Index() {
                 drop 11/24
                 <span className="h-px flex-1 bg-gray-300" />
               </div>
-              <h1 className="text-4xl font-light leading-tight text-gray-900 md:text-5xl">
+              <h1 className="text-3xl font-light leading-snug text-gray-900 md:text-[2.75rem]">
                 Capsule 18
-                <span className="block text-2xl text-gray-500">Звук тишины и мягкий свет</span>
+                <span className="block text-xl text-gray-500">Звук тишины и мягкий свет</span>
               </h1>
               <p className="max-w-xl text-base text-gray-600 md:text-lg">
                 Структурный трикотаж, пластичные жакеты и объёмные аксессуары формируют единый тон. Мы оставили только то, что ощущается бесшовно.
