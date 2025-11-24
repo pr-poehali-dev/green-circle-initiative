@@ -23,8 +23,12 @@ export default function Header() {
       className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link to="/" className="flex items-center gap-2 text-gray-900" onClick={closeMenu}>
-          <Icon name="ShoppingBag" size={26} />
+        <Link to="/" className="flex items-center gap-3 text-gray-900" onClick={closeMenu}>
+          <svg viewBox="0 0 64 64" aria-hidden="true" className="h-8 w-8 fill-none">
+            <circle cx="32" cy="32" r="30" className="stroke-gray-900" strokeWidth="3" />
+            <path d="M20 39c4 4 10 4 14 0s10-4 14 0" className="stroke-gray-900" strokeWidth="3" strokeLinecap="round" />
+            <path d="M22 24c0-5 4-9 10-9s10 4 10 9" className="stroke-gray-900" strokeWidth="3" strokeLinecap="round" />
+          </svg>
           <span className="text-lg font-semibold tracking-tight">StyleShop</span>
         </Link>
 
