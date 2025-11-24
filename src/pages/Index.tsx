@@ -11,7 +11,7 @@ const featured = [
     subtitle: 'Водонепроницаемый нейлон',
     price: 4990,
     image:
-      'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/60fe2443-2b94-488d-a2e4-b3b7dace5ab2.jpg'
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80'
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const featured = [
     subtitle: 'Вискоза и хлопок',
     price: 5990,
     image:
-      'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/f1a62f27-c0d0-482a-b5ed-b9e3b93c1376.jpg'
+      'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80'
   },
   {
     id: 3,
@@ -98,37 +98,37 @@ export default function Index() {
               transition={{ duration: 0.5 }}
               className="w-full"
             >
-              <div className="space-y-6 rounded-[32px] border border-white/40 bg-white/80 p-8 text-gray-900 shadow-[0_40px_80px_rgba(15,23,42,0.12)] backdrop-blur">
-                <div className="flex items-center justify-between text-xs uppercase tracking-[0.35em] text-gray-500">
+              <div className="space-y-5 rounded-[24px] border border-white/50 bg-white/85 p-6 text-gray-900 shadow-[0_30px_60px_rgba(15,23,42,0.12)] backdrop-blur">
+                <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.35em] text-gray-500">
                   <span>capsule edit</span>
                   <span>limited</span>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {featured.slice(0, 2).map((item) => (
                     <motion.div
                       key={item.id}
-                      className="flex flex-col rounded-3xl border border-gray-100/80 bg-white/90 p-4 sm:flex-row sm:items-center sm:gap-4"
+                      className="grid grid-cols-[80px_1fr] items-center gap-4 rounded-2xl border border-gray-100/80 bg-white/90 p-3"
                       whileHover={{ y: -2 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="aspect-[3/4] w-full overflow-hidden rounded-2xl bg-gray-100 sm:w-1/2">
+                      <div className="aspect-[3/4] overflow-hidden rounded-xl bg-gray-100">
                         <img src={item.image} alt={item.name} className="h-full w-full object-cover" loading="lazy" />
                       </div>
-                      <div className="mt-4 flex flex-1 flex-col gap-2 text-sm text-gray-600 sm:mt-0">
-                        <p className="text-lg font-semibold text-gray-900">{item.name}</p>
+                      <div className="flex flex-col gap-1 text-xs text-gray-600">
+                        <p className="text-base font-semibold text-gray-900">{item.name}</p>
                         <p>{item.subtitle}</p>
-                        <span className="text-xs uppercase tracking-[0.3em] text-gray-400">готово к примерке</span>
+                        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-400">готово к примерке</span>
                       </div>
                     </motion.div>
                   ))}
                 </div>
-                <div className="flex items-center justify-between rounded-2xl border border-gray-100/80 bg-white/90 px-4 py-3 text-sm text-gray-500">
+                <div className="flex items-center justify-between rounded-2xl border border-gray-100/80 bg-white/90 px-4 py-3 text-xs text-gray-500">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.3em] text-gray-400">доставка</p>
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400">доставка</p>
                     <p className="text-base font-semibold text-gray-900">в день заказа по москве</p>
                   </div>
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-900">
-                    <Icon name="ArrowUpRight" size={20} />
+                  <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-900">
+                    <Icon name="ArrowUpRight" size={18} />
                   </div>
                 </div>
               </div>
