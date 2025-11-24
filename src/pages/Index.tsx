@@ -70,7 +70,7 @@ export default function Index() {
                 <span className="h-px flex-1 bg-gray-300" />
               </div>
               <h1 className="text-4xl font-light leading-tight text-gray-900 md:text-5xl">
-                Capsule 11
+                Capsule 18
                 <span className="block text-2xl text-gray-500">Звук тишины и мягкий свет</span>
               </h1>
               <p className="max-w-xl text-base text-gray-600 md:text-lg">
