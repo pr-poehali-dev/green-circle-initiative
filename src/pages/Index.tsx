@@ -67,7 +67,6 @@ export default function Index() {
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.35em] text-gray-500">drop 11/24</p>
                 <div>
-                  <p className="text-sm uppercase tracking-[0.4em] text-gray-500">capsule 18</p>
                   <p className="text-4xl font-light text-gray-900">Мягкий свет и тишина</p>
                 </div>
                 <p className="text-base text-gray-600 md:text-lg">
