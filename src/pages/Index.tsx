@@ -98,34 +98,38 @@ export default function Index() {
               transition={{ duration: 0.5 }}
               className="w-full"
             >
-              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-600 p-6 text-white">
-                <div className="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-white/60">
+              <div className="space-y-6 rounded-[32px] border border-white/40 bg-white/80 p-8 text-gray-900 shadow-[0_40px_80px_rgba(15,23,42,0.12)] backdrop-blur">
+                <div className="flex items-center justify-between text-xs uppercase tracking-[0.35em] text-gray-500">
                   <span>capsule edit</span>
                   <span>limited</span>
                 </div>
-                <div className="mt-6 space-y-4">
+                <div className="space-y-4">
                   {featured.slice(0, 2).map((item) => (
                     <motion.div
                       key={item.id}
-                      className="relative overflow-hidden rounded-2xl bg-white/10"
-                      whileHover={{ scale: 1.02 }}
+                      className="flex flex-col rounded-3xl border border-gray-100/80 bg-white/90 p-4 sm:flex-row sm:items-center sm:gap-4"
+                      whileHover={{ y: -2 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <img src={item.image} alt={item.name} className="h-64 w-full object-cover" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4 text-sm">
-                        <p className="text-lg font-semibold">{item.name}</p>
-                        <p className="text-white/70">{item.subtitle}</p>
+                      <div className="aspect-[3/4] w-full overflow-hidden rounded-2xl bg-gray-100 sm:w-1/2">
+                        <img src={item.image} alt={item.name} className="h-full w-full object-cover" loading="lazy" />
+                      </div>
+                      <div className="mt-4 flex flex-1 flex-col gap-2 text-sm text-gray-600 sm:mt-0">
+                        <p className="text-lg font-semibold text-gray-900">{item.name}</p>
+                        <p>{item.subtitle}</p>
+                        <span className="text-xs uppercase tracking-[0.3em] text-gray-400">готово к примерке</span>
                       </div>
                     </motion.div>
                   ))}
                 </div>
-                <div className="mt-6 flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-sm">
+                <div className="flex items-center justify-between rounded-2xl border border-gray-100/80 bg-white/90 px-4 py-3 text-sm text-gray-500">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.3em] text-white/60">доставка</p>
-                    <p className="text-base font-semibold text-white">в день заказа по москве</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-gray-400">доставка</p>
+                    <p className="text-base font-semibold text-gray-900">в день заказа по москве</p>
                   </div>
-                  <Icon name="ArrowUpRight" size={24} />
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-900">
+                    <Icon name="ArrowUpRight" size={20} />
+                  </div>
                 </div>
               </div>
             </motion.div>
