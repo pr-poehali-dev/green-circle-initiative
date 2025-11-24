@@ -223,9 +223,27 @@ export default function Index() {
       <footer className="border-t border-slate-200 bg-white py-12 text-sm text-gray-500">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:grid-cols-2 md:grid-cols-4">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 text-gray-900">
-              <Icon name="ShoppingBag" size={28} />
-              <span className="text-lg font-semibold">StyleShop</span>
+            <div className="flex items-center gap-3 text-gray-900">
+              <svg
+                viewBox="0 0 64 64"
+                aria-hidden="true"
+                className="h-9 w-9 fill-none"
+              >
+                <circle cx="32" cy="32" r="30" className="stroke-gray-900" strokeWidth="3" />
+                <path
+                  d="M20 39c4 4 10 4 14 0s10-4 14 0"
+                  className="stroke-gray-900"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M22 24c0-5 4-9 10-9s10 4 10 9"
+                  className="stroke-gray-900"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span className="text-lg font-semibold tracking-wide">StyleShop</span>
             </div>
             <p>Твой стиль, твой выбор. Служба поддержки 24/7.</p>
           </div>
