@@ -11,7 +11,7 @@ const featured = [
     subtitle: 'Водонепроницаемый нейлон',
     price: 4990,
     image:
-      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80'
+      'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/e174dfd0-99d8-46b6-80ae-3c0aa37d35f9.jpg'
   },
   {
     id: 2,
@@ -19,21 +19,21 @@ const featured = [
     subtitle: 'Вискоза и хлопок',
     price: 5990,
     image:
-      'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80'
+      'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/20b4d416-e703-42fd-a4f6-914e9bc3fb5a.jpg'
   },
   {
     id: 3,
     name: 'Capsule джинсы',
     subtitle: 'Прямой крой, средняя посадка',
     price: 3990,
-    image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80'
+    image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/b544d48d-330f-4dc6-b071-fd77cdad03f1.jpg'
   },
   {
     id: 4,
     name: 'Лоферы Soft Step',
     subtitle: 'Натуральная кожа',
     price: 4590,
-    image: 'https://images.unsplash.com/photo-1475180098004-ca77a66827be?auto=format&fit=crop&w=900&q=80'
+    image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/8a6a4fb7-7876-4077-ae96-10211b6a94b9.jpg'
   }
 ];
 
