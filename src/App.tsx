@@ -6,24 +6,32 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
-import Test from "./pages/Test";
+import Cart from "./pages/Cart";
+import Compare from "./pages/Compare";
 import NotFound from "./pages/NotFound";
+import { CartProvider } from "./contexts/CartContext";
+import { CompareProvider } from "./contexts/CompareContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <CompareProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/catalog" element={<Catalog />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/compare" element={<Compare />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </CompareProvider>
+      </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

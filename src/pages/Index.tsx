@@ -1,281 +1,89 @@
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import Header from '@/components/layout/Header';
 
-const featured = [
-  {
-    id: 1,
-    name: 'Стёганая куртка BASE',
-    subtitle: 'Водонепроницаемый нейлон',
-    price: 4990,
-    image:
-      'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/e174dfd0-99d8-46b6-80ae-3c0aa37d35f9.jpg'
-  },
-  {
-    id: 2,
-    name: 'Платье NAШ! Statement',
-    subtitle: 'Вискоза и хлопок',
-    price: 5990,
-    image:
-      'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/20b4d416-e703-42fd-a4f6-914e9bc3fb5a.jpg'
-  },
-  {
-    id: 3,
-    name: 'Capsule джинсы',
-    subtitle: 'Прямой крой, средняя посадка',
-    price: 3990,
-    image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/b544d48d-330f-4dc6-b071-fd77cdad03f1.jpg'
-  },
-  {
-    id: 4,
-    name: 'Лоферы Soft Step',
-    subtitle: 'Натуральная кожа',
-    price: 4590,
-    image: 'https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/8a6a4fb7-7876-4077-ae96-10211b6a94b9.jpg'
-  }
-];
+const Index = () => {
+  const categories: { name: string; icon: string }[] = [
+    { name: 'Электроника', icon: 'Laptop' },
+    { name: 'Одежда', icon: 'Shirt' },
+    { name: 'Дом', icon: 'Home' },
+    { name: 'Спорт', icon: 'Dumbbell' },
+  ];
 
-const categories = [
-  { name: 'Верхняя одежда', icon: 'Snowflake', description: 'Пальто, пуховики, парки' },
-  { name: 'Обновлённый деним', icon: 'Sparkles', description: 'Прямой, wide-leg, mom fit' },
-  { name: 'Трикотаж и свитеры', icon: 'Layers', description: 'Базовые и фактурные модели' },
-  { name: 'Обувь на каждый день', icon: 'Footprints', description: 'Кроссовки, лоферы, сапоги' },
-  { name: 'Аксессуары', icon: 'Gem', description: 'Сумки, ремни, шапки' },
-  { name: 'Спортивная линейка', icon: 'Activity', description: 'Техничные ткани и крои' }
-];
-
-const fadeIn = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 }
-};
-
-export default function Index() {
   return (
-    <div className="min-h-screen bg-[#f5f5f7] text-gray-900">
+    <div className="min-h-screen bg-background">
       <Header />
 
-      <main className="px-4 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-16">
-          <section className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-            <motion.div
-              {...fadeIn}
-              className="space-y-8 rounded-[32px] border border-white/40 bg-white/80 p-8 shadow-[0_40px_80px_rgba(15,23,42,0.12)] backdrop-blur"
-            >
-              <div className="space-y-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-gray-500">drop 11/24</p>
-                <div>
-                  <p className="text-4xl font-light text-gray-900">Мягкий свет и тишина</p>
-                </div>
-                <p className="text-base text-gray-600 md:text-lg">
-                  Три ключевых силуэта из шерсти, кашемира и recycled нейлона. Сняли всё лишнее — оставили лёгкость.
-                </p>
-                <div className="flex flex-wrap gap-3 text-sm text-gray-900">
-                  {['Шерсть', 'Кашемир', 'Recycled нейлон'].map((item) => (
-                    <div key={item} className="rounded-full border border-gray-200/80 bg-white/70 px-4 py-2">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link to="/catalog">
-                  <Button className="h-12 rounded-full bg-[#f2c94c] px-8 text-sm font-medium text-gray-900 transition hover:bg-[#e0b43f]">
-                    Забронировать примерку
-                  </Button>
-                </Link>
-                <Link to="/catalog" className="text-sm font-medium text-gray-500 underline-offset-4 transition hover:text-gray-900">
-                  Смотреть коллекцию
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="w-full"
-            >
-              <div className="space-y-5 rounded-[24px] border border-white/50 bg-white/85 p-6 text-gray-900 shadow-[0_30px_60px_rgba(15,23,42,0.12)] backdrop-blur">
-                <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.35em] text-gray-500">
-                  <span>capsule edit</span>
-                  <span>limited</span>
-                </div>
-                <div className="space-y-3">
-                  {featured.slice(0, 2).map((item) => (
-                    <motion.div
-                      key={item.id}
-                      className="grid grid-cols-[80px_1fr] items-center gap-4 rounded-2xl border border-gray-100/80 bg-white/90 p-3"
-                      whileHover={{ y: -2 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="aspect-[3/4] overflow-hidden rounded-xl bg-gray-100">
-                        <img src={item.image} alt={item.name} className="h-full w-full object-cover" loading="lazy" />
-                      </div>
-                      <div className="flex flex-col gap-1 text-xs text-gray-600">
-                        <p className="text-base font-semibold text-gray-900">{item.name}</p>
-                        <p>{item.subtitle}</p>
-                        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-400">готово к примерке</span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="flex items-center justify-between rounded-2xl border border-gray-100/80 bg-white/90 px-4 py-3 text-xs text-gray-500">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400">доставка</p>
-                    <p className="text-base font-semibold text-gray-900">в день заказа по москве</p>
-                  </div>
-                  <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-900">
-                    <Icon name="ArrowUpRight" size={18} />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </section>
-
-          <section className="space-y-6">
-            <div className="flex items-baseline justify-between">
-              <h2 className="text-lg font-semibold text-gray-900">Категории</h2>
-              <Link to="/catalog" className="text-xs font-medium text-gray-500 hover:text-gray-900">
-                Смотреть все
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-              {categories.map((category) => (
-                <button
-                  key={category.name}
-                  className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-left transition hover:border-gray-900"
-                >
-                  <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-500">
-                    <Icon name={category.icon} size={20} />
-                  </div>
-                  <span className="text-sm font-semibold text-gray-900">{category.name}</span>
-                  <span className="mt-1 text-xs text-gray-500">{category.description}</span>
-                </button>
-              ))}
-            </div>
-          </section>
-
-          <section className="space-y-6">
-            <div className="flex items-baseline justify-between">
-              <h2 className="text-lg font-semibold text-gray-900">Хиты продаж</h2>
-              <Link to="/catalog" className="text-xs font-medium text-gray-500 hover:text-gray-900">
-                Больше товаров
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              {featured.map((product) => (
-                <motion.div
-                  key={product.id}
-                  className="flex flex-col rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:shadow-sm"
-                  whileHover={{ y: -2 }}
-                >
-                  <div className="aspect-[3/4] w-full overflow-hidden bg-gray-100">
-                    <img src={product.image} alt={product.name} className="h-full w-full object-cover" loading="lazy" />
-                  </div>
-                  <div className="flex flex-1 flex-col px-4 py-4">
-                    <p className="text-sm font-semibold text-gray-900">{product.name}</p>
-                    <p className="mt-1 text-xs text-gray-500">{product.subtitle}</p>
-                    <div className="mt-auto flex items-center justify-between pt-4">
-                      <span className="text-sm font-semibold text-gray-900">{product.price.toLocaleString()} ₽</span>
-                      <button className="text-xs font-medium text-gray-900 hover:underline">В корзину</button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="rounded-3xl border border-slate-200 bg-white px-6 py-10 text-center md:px-12"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-gray-500">
-                welcome бонус
-              </p>
-              <h3 className="mx-auto mt-4 max-w-2xl text-2xl font-semibold text-gray-900 md:text-3xl">
-                -20% на первый заказ по подписке на рассылку
-              </h3>
-              <p className="mx-auto mt-3 max-w-xl text-sm text-gray-600">
-                Только реальные подборки и ранний доступ к лимитированным дропам. Никакого спама.
-              </p>
-              <div className="mx-auto mt-8 flex flex-col gap-3 md:w-3/4 md:flex-row">
-                <input
-                  type="email"
-                  placeholder="Введите email"
-                  className="h-11 flex-1 rounded-full border border-slate-200 px-5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none"
-                />
-                <Button className="h-11 rounded-full bg-gray-900 px-6 text-sm font-medium text-white hover:bg-black">
-                  Подписаться
-                </Button>
-              </div>
-            </motion.div>
-          </section>
+      <section className="relative h-[70vh] flex items-center justify-center bg-gradient-to-br from-muted/30 to-background">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-6xl md:text-8xl font-light tracking-wider mb-6">
+            MINIMAL
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 font-light tracking-wide">
+            Простота в каждой детали
+          </p>
+          <Link to="/catalog">
+            <Button size="lg" className="rounded-full px-8">
+              Смотреть каталог
+              <Icon name="ArrowRight" size={18} className="ml-2" />
+            </Button>
+          </Link>
         </div>
-      </main>
+      </section>
 
-      <footer className="border-t border-slate-200 bg-white py-12 text-sm text-gray-500">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:grid-cols-2 md:grid-cols-4">
-          <div className="space-y-3">
-            <div className="flex items-center gap-3 text-gray-900">
-              <svg
-                viewBox="0 0 64 64"
-                aria-hidden="true"
-                className="h-9 w-9 fill-none"
-              >
-                <circle cx="32" cy="32" r="30" className="stroke-gray-900" strokeWidth="3" />
-                <path
-                  d="M20 39c4 4 10 4 14 0s10-4 14 0"
-                  className="stroke-gray-900"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M22 24c0-5 4-9 10-9s10 4 10 9"
-                  className="stroke-gray-900"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <span className="text-lg font-semibold tracking-wide">StyleShop</span>
+      <section className="py-24 container mx-auto px-4">
+        <h2 className="text-3xl font-light tracking-wider mb-12 text-center">
+          Категории
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {categories.map((category) => (
+            <Link key={category.name} to="/catalog">
+              <Card className="p-8 hover:shadow-lg transition-shadow cursor-pointer group">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <Icon name={category.icon} size={28} />
+                  </div>
+                  <span className="text-sm font-light tracking-wide">
+                    {category.name}
+                  </span>
+                </div>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Icon name="Truck" size={24} className="text-primary" />
+              </div>
+              <h3 className="text-lg font-light mb-2">Быстрая доставка</h3>
+              <p className="text-sm text-muted-foreground">По всей России</p>
             </div>
-            <p>Твой стиль, твой выбор. Служба поддержки 24/7.</p>
-          </div>
-          <div>
-            <h4 className="mb-3 font-semibold text-gray-900">Покупателям</h4>
-            <ul className="space-y-1">
-              <li>Доставка</li>
-              <li>Возврат</li>
-              <li>Оплата</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="mb-3 font-semibold text-gray-900">Компания</h4>
-            <ul className="space-y-1">
-              <li>О нас</li>
-              <li>Контакты</li>
-              <li>Вакансии</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="mb-3 font-semibold text-gray-900">Соцсети</h4>
-            <div className="flex gap-4 text-gray-600">
-              <Icon name="Instagram" size={20} className="hover:text-gray-900" />
-              <Icon name="Facebook" size={20} className="hover:text-gray-900" />
-              <Icon name="Twitter" size={20} className="hover:text-gray-900" />
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Icon name="Shield" size={24} className="text-primary" />
+              </div>
+              <h3 className="text-lg font-light mb-2">Гарантия качества</h3>
+              <p className="text-sm text-muted-foreground">На все товары</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Icon name="RotateCcw" size={24} className="text-primary" />
+              </div>
+              <h3 className="text-lg font-light mb-2">Легкий возврат</h3>
+              <p className="text-sm text-muted-foreground">14 дней на возврат</p>
             </div>
           </div>
         </div>
-        <div className="mt-10 border-t border-slate-100 pt-6 text-center text-xs text-gray-400">
-          © 2025 StyleShop. Все права защищены
-        </div>
-      </footer>
+      </section>
     </div>
   );
-}
+};
+
+export default Index;
