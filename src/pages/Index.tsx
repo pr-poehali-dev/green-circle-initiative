@@ -42,7 +42,7 @@ const categories = [
   { name: 'Обновлённый деним', icon: 'Sparkles', description: 'Прямой, wide-leg, mom fit' },
   { name: 'Трикотаж и свитеры', icon: 'Layers', description: 'Базовые и фактурные модели' },
   { name: 'Обувь на каждый день', icon: 'Footprints', description: 'Кроссовки, лоферы, сапоги' },
-  { name: 'Аксессуары', icon: 'Star', description: 'Сумки, ремни, шапки' },
+  { name: 'Аксессуары', icon: 'Gem', description: 'Сумки, ремни, шапки' },
   { name: 'Спортивная линейка', icon: 'Activity', description: 'Техничные ткани и крои' }
 ];
 
