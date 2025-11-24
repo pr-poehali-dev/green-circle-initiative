@@ -64,47 +64,24 @@ export default function Index() {
               {...fadeIn}
               className="space-y-8 rounded-[32px] border border-white/40 bg-white/80 p-8 shadow-[0_40px_80px_rgba(15,23,42,0.12)] backdrop-blur"
             >
-              <div className="flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.4em] text-gray-500">
-                <span className="h-px flex-1 bg-gray-300" />
-                drop 11/24
-                <span className="h-px flex-1 bg-gray-300" />
-              </div>
-              <h1 className="text-3xl font-light leading-snug text-gray-900 md:text-[2.75rem]">
-                Capsule 18
-                <span className="block text-xl text-gray-500">Три оттенка мягкого света</span>
-              </h1>
-              <p className="max-w-xl text-base text-gray-600 md:text-lg">
-                Мини-дроп про тактильность: итальянская шерсть, кашемир и recycled нейлон без лишних деталей.
-              </p>
-              <div className="grid gap-4 text-sm text-gray-700 sm:grid-cols-2">
-                <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
-                  <p className="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">материалы</p>
-                  <p className="mt-2 text-base text-gray-900">Шерсть, кашемир, recycled нейлон</p>
+              <div className="space-y-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-gray-500">drop 11/24</p>
+                <div>
+                  <p className="text-sm uppercase tracking-[0.4em] text-gray-500">capsule 18</p>
+                  <p className="text-4xl font-light text-gray-900">Мягкий свет и тишина</p>
                 </div>
-                <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
-                  <p className="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">силуэт</p>
-                  <p className="mt-2 text-base text-gray-900">Чистые линии, скрытые застёжки</p>
-                </div>
-              </div>
-              <div className="rounded-[24px] border border-white/60 bg-white/70 px-5 py-4 shadow-[0_20px_50px_rgba(15,23,42,0.08)] backdrop-blur">
-                <div className="flex flex-col gap-4 text-gray-900 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
-                  {[
-                    { value: '48', label: 'лимитированных позиций' },
-                    { value: '72ч', label: 'приоритетный доступ' },
-                    { value: '3', label: 'новые оттенки' }
-                  ].map((metric, index) => (
-                    <div
-                      key={metric.label}
-                      className="flex flex-1 flex-col text-left sm:border-l sm:border-white/40 sm:px-4 sm:first:border-l-0 sm:first:pl-0 sm:text-center"
-                    >
-                      <span className="text-[0.5rem] uppercase tracking-[0.4em] text-gray-400">capsule</span>
-                      <p className="mt-1 text-4xl font-light leading-none">{metric.value}</p>
-                      <p className="mt-2 text-[0.65rem] uppercase tracking-[0.25em] text-gray-500">{metric.label}</p>
+                <p className="text-base text-gray-600 md:text-lg">
+                  Три ключевых силуэта из шерсти, кашемира и recycled нейлона. Сняли всё лишнее — оставили лёгкость.
+                </p>
+                <div className="flex flex-wrap gap-3 text-sm text-gray-900">
+                  {['Шерсть', 'Кашемир', 'Recycled нейлон'].map((item) => (
+                    <div key={item} className="rounded-full border border-gray-200/80 bg-white/70 px-4 py-2">
+                      {item}
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link to="/catalog">
                   <Button className="h-12 rounded-full bg-[#f2c94c] px-8 text-sm font-medium text-gray-900 transition hover:bg-[#e0b43f]">
                     Забронировать примерку
