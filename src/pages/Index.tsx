@@ -71,19 +71,19 @@ export default function Index() {
               </div>
               <h1 className="text-3xl font-light leading-snug text-gray-900 md:text-[2.75rem]">
                 Capsule 18
-                <span className="block text-xl text-gray-500">Звук тишины и мягкий свет</span>
+                <span className="block text-xl text-gray-500">Три оттенка мягкого света</span>
               </h1>
               <p className="max-w-xl text-base text-gray-600 md:text-lg">
-                Структурный трикотаж, пластичные жакеты и объёмные аксессуары формируют единый тон. Мы оставили только то, что ощущается бесшовно.
+                Мини-дроп про тактильность: итальянская шерсть, кашемир и recycled нейлон без лишних деталей.
               </p>
               <div className="grid gap-4 text-sm text-gray-700 sm:grid-cols-2">
                 <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
-                  <p className="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">тактильность</p>
-                  <p className="mt-2 text-base text-gray-900">Итальянская шерсть · кашемир · recycled нейлон</p>
+                  <p className="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">материалы</p>
+                  <p className="mt-2 text-base text-gray-900">Шерсть, кашемир, recycled нейлон</p>
                 </div>
                 <div className="rounded-2xl border border-gray-200/80 bg-white/60 p-4">
-                  <p className="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">силуэты</p>
-                  <p className="mt-2 text-base text-gray-900">Монолитные линии и скрытые застёжки</p>
+                  <p className="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">силуэт</p>
+                  <p className="mt-2 text-base text-gray-900">Чистые линии, скрытые застёжки</p>
                 </div>
               </div>
               <div className="rounded-[24px] border border-white/60 bg-white/70 px-5 py-4 shadow-[0_20px_50px_rgba(15,23,42,0.08)] backdrop-blur">
