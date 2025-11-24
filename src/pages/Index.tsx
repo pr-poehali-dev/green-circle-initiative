@@ -86,17 +86,20 @@ export default function Index() {
                   <p className="mt-2 text-base text-gray-900">Монолитные линии и скрытые застёжки</p>
                 </div>
               </div>
-              <div className="rounded-[28px] border border-white/60 bg-white/70 p-6 shadow-[0_25px_60px_rgba(15,23,42,0.08)] backdrop-blur">
-                <div className="flex flex-col gap-6 text-gray-900 sm:flex-row sm:items-center sm:justify-between">
+              <div className="rounded-[24px] border border-white/60 bg-white/70 px-5 py-4 shadow-[0_20px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+                <div className="flex flex-col gap-4 text-gray-900 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
                   {[
                     { value: '48', label: 'лимитированных позиций' },
                     { value: '72ч', label: 'приоритетный доступ' },
                     { value: '3', label: 'новые оттенки' }
-                  ].map((metric) => (
-                    <div key={metric.label} className="flex flex-1 flex-col text-left sm:text-center">
-                      <span className="text-[0.55rem] uppercase tracking-[0.45em] text-gray-400">capsule</span>
-                      <p className="mt-2 text-5xl font-light leading-none">{metric.value}</p>
-                      <p className="mt-3 text-xs uppercase tracking-[0.3em] text-gray-500">{metric.label}</p>
+                  ].map((metric, index) => (
+                    <div
+                      key={metric.label}
+                      className="flex flex-1 flex-col text-left sm:border-l sm:border-white/40 sm:px-4 sm:first:border-l-0 sm:first:pl-0 sm:text-center"
+                    >
+                      <span className="text-[0.5rem] uppercase tracking-[0.4em] text-gray-400">capsule</span>
+                      <p className="mt-1 text-4xl font-light leading-none">{metric.value}</p>
+                      <p className="mt-2 text-[0.65rem] uppercase tracking-[0.25em] text-gray-500">{metric.label}</p>
                     </div>
                   ))}
                 </div>
