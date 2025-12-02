@@ -6,7 +6,7 @@
       "path": "/",
       "expectedStatus": 200,
       "expectedBody": {
-        "message": "Hello, World!",
+        "message": "Привет, World! Добро пожаловать в космос! 🚀",
         "status": "success"
       },
       "bodyMatcher": "partial"
@@ -17,7 +17,7 @@
       "path": "/?name=Yura",
       "expectedStatus": 200,
       "expectedBody": {
-        "message": "Hello, Yura!",
+        "message": "Привет, Yura! Добро пожаловать в космос! 🚀",
         "status": "success"
       },
       "bodyMatcher": "partial"

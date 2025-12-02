@@ -30,7 +30,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         name: str = params.get('name', 'World')
         
         response_data = {
-            'message': f'Hello, {name}!',
+            'message': f'Привет, {name}! Добро пожаловать в космос! 🚀',
             'timestamp': context.request_id,
             'status': 'success'
         }
