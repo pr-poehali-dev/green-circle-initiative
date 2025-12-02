@@ -3,8 +3,22 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
+import { useState, useEffect } from 'react';
 
 const Index = () => {
+  const [spaceFact, setSpaceFact] = useState<string>('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('https://devfunctions.poehali.dev/8e267dd8-c239-4593-b4e9-e50e3ff1ed72')
+      .then((res) => res.json())
+      .then((data) => {
+        setSpaceFact(data.spaceFact);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
   const categories: { name: string; icon: string }[] = [
     { name: 'Электроника', icon: 'Laptop' },
     { name: 'Одежда', icon: 'Shirt' },
@@ -24,6 +38,16 @@ const Index = () => {
           <p className="text-xl text-muted-foreground mb-8 font-light tracking-wide">
             Твой путь к звездам начинается здесь
           </p>
+          {!loading && spaceFact && (
+            <div className="mb-8 max-w-2xl mx-auto">
+              <Card className="p-6 bg-primary/5 border-primary/20">
+                <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+                  <Icon name="Sparkles" size={16} />
+                  <span>{spaceFact}</span>
+                </p>
+              </Card>
+            </div>
+          )}
           <Link to="/catalog">
             <Button size="lg" className="rounded-full px-8">
               Смотреть каталог
