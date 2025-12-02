@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "name": "Test default greeting",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "greeting": "Hello, World!",
+        "timestamp": "string",
+        "request_id": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test custom name greeting",
+      "method": "GET",
+      "path": "/?name=Yura",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "greeting": "Hello, Yura!"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

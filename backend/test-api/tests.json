@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "GET запрос без параметров",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "message": "string",
+        "timestamp": "string",
+        "request_id": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "GET запрос с параметром name",
+      "method": "GET",
+      "path": "/?name=Юра",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "message": "Привет, Юра!"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "POST запрос с JSON",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "test": "data",
+        "value": 123
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "status": "success",
+        "received_data": {
+          "test": "data",
+          "value": 123
+        }
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
