@@ -19,10 +19,10 @@ const Index = () => {
       <section className="relative h-[70vh] flex items-center justify-center bg-gradient-to-br from-muted/30 to-background">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-6xl md:text-8xl font-light tracking-wider mb-6">
-            MINIMAL
+            КОСМО-МАГАЗИН 🚀
           </h1>
           <p className="text-xl text-muted-foreground mb-8 font-light tracking-wide">
-            Простота в каждой детали
+            Твой путь к звездам начинается здесь
           </p>
           <Link to="/catalog">
             <Button size="lg" className="rounded-full px-8">
