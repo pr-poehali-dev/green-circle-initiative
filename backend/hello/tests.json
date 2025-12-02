@@ -1,7 +1,7 @@
 {
   "tests": [
     {
-      "name": "Test default greeting",
+      "name": "Test default greeting with full data",
       "method": "GET",
       "path": "/",
       "expectedStatus": 200,
@@ -12,12 +12,38 @@
       "bodyMatcher": "partial"
     },
     {
-      "name": "Test custom name",
+      "name": "Test custom name with full mode",
       "method": "GET",
-      "path": "/?name=Yura",
+      "path": "/?name=Yura&mode=full",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "status": "success",
+        "planetOfTheDay": {}
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test quick mode",
+      "method": "GET",
+      "path": "/?mode=quick",
       "expectedStatus": 200,
       "expectedBody": {
         "status": "success"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test POST mission action",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "mission",
+        "name": "Юра"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "status": "success",
+        "action": "mission"
       },
       "bodyMatcher": "partial"
     }
