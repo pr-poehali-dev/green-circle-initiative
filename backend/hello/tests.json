@@ -6,7 +6,6 @@
       "path": "/",
       "expectedStatus": 200,
       "expectedBody": {
-        "message": "🚀 Привет, космонавт! Добро пожаловать в КОСМО-МАГАЗИН!",
         "status": "success",
         "mission": "Твой путь к звездам начинается здесь!"
       },
@@ -18,7 +17,6 @@
       "path": "/?name=Yura",
       "expectedStatus": 200,
       "expectedBody": {
-        "message": "🚀 Привет, Yura! Добро пожаловать в КОСМО-МАГАЗИН!",
         "status": "success"
       },
       "bodyMatcher": "partial"

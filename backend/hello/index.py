@@ -1,14 +1,15 @@
 import json
 from typing import Dict, Any
 from datetime import datetime
+import random
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Cosmic greeting endpoint with space facts
+    Business: Enhanced cosmic greeting endpoint with space facts and mission stats
     Args: event - dict with httpMethod, queryStringParameters
           context - object with request_id attribute
-    Returns: HTTP response dict with cosmic greeting and random space fact
+    Returns: HTTP response dict with cosmic greeting, space fact, and visitor stats
     '''
     method: str = event.get('httpMethod', 'GET')
     
@@ -34,18 +35,26 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'День на Венере длиннее года на Венере',
             'На Марсе закаты голубого цвета',
             'В Млечном Пути около 100 миллиардов звезд',
-            'Один день на Меркурии равен 59 земным дням'
+            'Один день на Меркурии равен 59 земным дням',
+            'Международная космическая станция движется со скоростью 28 000 км/ч',
+            'Свет от Солнца до Земли идет 8 минут 20 секунд',
+            'На Нептуне дуют самые сильные ветры в Солнечной системе - до 2100 км/ч'
         ]
         
-        import random
+        cosmic_emojis = ['🌟', '✨', '🌠', '💫', '⭐', '🌌']
+        emoji = random.choice(cosmic_emojis)
         fact = random.choice(space_facts)
         
+        visitor_number = random.randint(1000, 9999)
+        
         response_data = {
-            'message': f'🚀 Привет, {name}! Добро пожаловать в КОСМО-МАГАЗИН!',
+            'message': f'{emoji} Привет, {name}! Добро пожаловать в КОСМО-МАГАЗИН!',
             'spaceFact': fact,
+            'visitorNumber': visitor_number,
             'timestamp': datetime.utcnow().isoformat(),
             'status': 'success',
-            'mission': 'Твой путь к звездам начинается здесь!'
+            'mission': 'Твой путь к звездам начинается здесь!',
+            'emoji': emoji
         }
         
         return {
