@@ -19,19 +19,7 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
 )
 
-def get_project_id():
-    """Получить PROJECT_ID из DATABASE_URL"""
-    import psycopg2
-    dsn = os.environ['DATABASE_URL']
-    conn = psycopg2.connect(dsn)
-    cur = conn.cursor()
-    cur.execute("SELECT current_database()")
-    db_name = cur.fetchone()[0]
-    cur.close()
-    conn.close()
-    return db_name
 
-PROJECT_ID = get_project_id()
 
 
 def get_db_connection():
@@ -66,7 +54,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     # POST - загрузка новой фотографии
     if method == 'POST':
         try:
-            print(f"POST request, PROJECT_ID: {PROJECT_ID}")
+            print(f"POST request")
             body_data = json.loads(event.get('body', '{}'))
             print(f"Body parsed, keys: {body_data.keys()}")
             
@@ -107,9 +95,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             )
             print(f"S3 upload complete")
             
-            # URL фотографии
-            photo_url = f'https://bucket.poehali.dev/{PROJECT_ID}/files/{s3_key}'
-            print(f"Photo URL: {photo_url}")
+            # URL фотографии - используем относительный путь, бакет сам подставит PROJECT_ID
+            photo_url = s3_key
+            print(f"Photo S3 key: {photo_url}")
             
             # Сохраняем в БД
             print(f"Saving to DB...")
