@@ -106,7 +106,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 ContentType=content_type
             )
             
-            project_id = os.environ.get('AWS_ACCESS_KEY_ID', '').split('-')[0] if '-' in os.environ.get('AWS_ACCESS_KEY_ID', '') else 'unknown'
+            project_id = os.environ.get('AWS_ACCESS_KEY_ID', '')
             cdn_url = f'https://cdn.poehali.dev/projects/{project_id}/bucket/{s3_key}'
             
             cur.execute('''
