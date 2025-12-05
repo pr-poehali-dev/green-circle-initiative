@@ -61,11 +61,14 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     # POST - загрузка новой фотографии
     if method == 'POST':
         try:
+            print(f"POST request, PROJECT_ID: {PROJECT_ID}")
             body_data = json.loads(event.get('body', '{}'))
+            print(f"Body parsed, keys: {body_data.keys()}")
             
             # Получаем base64 изображение
             image_base64 = body_data.get('image', '')
             filename = body_data.get('filename', f'photo_{uuid.uuid4().hex[:8]}.jpg')
+            print(f"Filename: {filename}, image length: {len(image_base64)}")
             
             if not image_base64:
                 return {
@@ -80,23 +83,28 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 image_base64 = image_base64.split(',')[1]
             
             image_data = base64.b64decode(image_base64)
+            print(f"Image decoded, size: {len(image_data)} bytes")
             
             # Генерируем уникальное имя
             photo_id = str(uuid.uuid4())
             ext = filename.split('.')[-1] if '.' in filename else 'jpg'
             s3_key = f'photos/{photo_id}.{ext}'
+            print(f"S3 key: {s3_key}")
             
             # Загружаем в S3
             content_type = f'image/{ext}'
+            print(f"Uploading to S3...")
             s3.put_object(
                 Bucket='files',
                 Key=s3_key,
                 Body=image_data,
                 ContentType=content_type
             )
+            print(f"S3 upload complete")
             
             # URL фотографии
             photo_url = f'https://bucket.poehali.dev/{PROJECT_ID}/files/{s3_key}'
+            print(f"Photo URL: {photo_url}")
             
             # Сохраняем в БД
             conn = get_db_connection()
