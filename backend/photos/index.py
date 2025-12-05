@@ -36,7 +36,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     s3 = boto3.client(
         's3',
-        endpoint_url='https://bucket.poehali.dev',
+        endpoint_url='https://devbucket.poehali.dev',
         aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
         aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
     )
@@ -107,7 +107,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             )
             
             project_id = os.environ.get('AWS_ACCESS_KEY_ID', '').split('-')[0] if '-' in os.environ.get('AWS_ACCESS_KEY_ID', '') else 'unknown'
-            cdn_url = f'https://cdn.poehali.dev/projects/{project_id}/bucket/{s3_key}'
+            cdn_url = f'https://devcdn.poehali.dev/projects/{project_id}/bucket/{s3_key}'
             
             cur.execute('''
                 INSERT INTO t_p18279400_green_circle_initiat.photos 
