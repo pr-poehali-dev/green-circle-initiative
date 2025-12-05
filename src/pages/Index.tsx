@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
+import PhotoUpload from '@/components/PhotoUpload';
+import PhotoGallery from '@/components/PhotoGallery';
 import { useState, useEffect } from 'react';
 
 const Index = () => {
@@ -105,6 +107,16 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="py-24 container mx-auto px-4">
+        <h2 className="text-3xl font-light tracking-wider mb-12 text-center">
+          Галерея фотографий
+        </h2>
+        <div className="mb-12 max-w-md mx-auto">
+          <PhotoUpload />
+        </div>
+        <PhotoGallery />
       </section>
     </div>
   );
