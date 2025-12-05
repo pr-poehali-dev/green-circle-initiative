@@ -19,7 +19,14 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
 )
 
-PROJECT_ID = os.environ.get('PROJECT_ID', 'default')
+def get_project_id():
+    """Получить PROJECT_ID из DSN"""
+    dsn = os.environ['DATABASE_URL']
+    if 'dbname=' in dsn:
+        return dsn.split('dbname=')[1].split()[0]
+    return 'default'
+
+PROJECT_ID = get_project_id()
 
 
 def get_db_connection():
