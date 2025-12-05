@@ -112,20 +112,24 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             print(f"Photo URL: {photo_url}")
             
             # Сохраняем в БД
+            print(f"Saving to DB...")
             conn = get_db_connection()
             cur = conn.cursor()
             
             query = """
                 INSERT INTO photos (id, filename, s3_key, url, created_at)
-                VALUES (%s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, NOW())
                 RETURNING id, filename, url, created_at
             """
-            cur.execute(query, (photo_id, filename, s3_key, photo_url, datetime.utcnow()))
+            print(f"Executing query...")
+            cur.execute(query, (photo_id, filename, s3_key, photo_url))
             result = cur.fetchone()
+            print(f"Query executed, result: {result}")
             
             conn.commit()
             cur.close()
             conn.close()
+            print(f"DB save complete")
             
             return {
                 'statusCode': 200,
@@ -138,6 +142,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             }
             
         except Exception as e:
+            print(f"ERROR: {str(e)}")
+            import traceback
+            traceback.print_exc()
             return {
                 'statusCode': 500,
                 'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
