@@ -20,11 +20,16 @@ s3 = boto3.client(
 )
 
 def get_project_id():
-    """Получить PROJECT_ID из DSN"""
+    """Получить PROJECT_ID из DATABASE_URL"""
+    import psycopg2
     dsn = os.environ['DATABASE_URL']
-    if 'dbname=' in dsn:
-        return dsn.split('dbname=')[1].split()[0]
-    return 'default'
+    conn = psycopg2.connect(dsn)
+    cur = conn.cursor()
+    cur.execute("SELECT current_database()")
+    db_name = cur.fetchone()[0]
+    cur.close()
+    conn.close()
+    return db_name
 
 PROJECT_ID = get_project_id()
 
