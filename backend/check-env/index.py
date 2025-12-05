@@ -4,7 +4,7 @@ from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Отладочная функция для проверки переменных окружения
+    Проверка переменных окружения для отладки
     '''
     method: str = event.get('httpMethod', 'GET')
     
@@ -46,6 +46,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'aws_key_length': len(aws_key),
             'aws_secret_set': aws_secret != 'NOT_SET',
             'aws_secret_length': len(aws_secret),
-            'message': 'Check backend/debug-env logs for full values'
+            'message': 'Check backend/check-env logs for full values'
         })
     }
