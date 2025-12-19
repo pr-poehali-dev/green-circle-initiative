@@ -1,0 +1,53 @@
+{
+  "tests": [
+    {
+      "name": "GET request - basic calculation",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "message": "Multimodule test",
+        "calculation": "5 + 3",
+        "result": 8,
+        "module": "calculator"
+      },
+      "bodyMatcher": "exact"
+    },
+    {
+      "name": "POST request - addition",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "a": 10,
+        "b": 5,
+        "operation": "add"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "a": 10,
+        "b": 5,
+        "operation": "add",
+        "result": 15
+      },
+      "bodyMatcher": "exact"
+    },
+    {
+      "name": "POST request - multiplication",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "a": 7,
+        "b": 3,
+        "operation": "multiply"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "a": 7,
+        "b": 3,
+        "operation": "multiply",
+        "result": 21
+      },
+      "bodyMatcher": "exact"
+    }
+  ]
+}
