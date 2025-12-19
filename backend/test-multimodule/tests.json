@@ -9,9 +9,10 @@
         "message": "Multimodule test",
         "calculation": "5 + 3",
         "result": 8,
-        "module": "calculator"
+        "module": "calculator",
+        "requests_version": "string"
       },
-      "bodyMatcher": "exact"
+      "bodyMatcher": "partial"
     },
     {
       "name": "POST request - addition",

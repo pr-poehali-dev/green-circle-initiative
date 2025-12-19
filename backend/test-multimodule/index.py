@@ -1,11 +1,12 @@
 import json
 from typing import Dict, Any
+import requests
 from calculator import Calculator
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
     Тестовая функция для проверки многомодульной архитектуры.
-    Использует отдельный модуль calculator для вычислений.
+    Использует отдельный модуль calculator для вычислений и библиотеку requests.
     '''
     method: str = event.get('httpMethod', 'GET')
     
@@ -26,6 +27,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         calc = Calculator()
         result = calc.add(5, 3)
         
+        requests_version = requests.__version__
+        
         return {
             'statusCode': 200,
             'headers': {
@@ -36,7 +39,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'message': 'Multimodule test',
                 'calculation': '5 + 3',
                 'result': result,
-                'module': 'calculator'
+                'module': 'calculator',
+                'requests_version': requests_version
             }),
             'isBase64Encoded': False
         }
