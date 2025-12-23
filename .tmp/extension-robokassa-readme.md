@@ -77,17 +77,26 @@ import { PaymentButton } from "@/components/PaymentButton";
   userPhone={formData.phone}
   userAddress={formData.address}
   cartItems={cart}
+  successUrl="https://your-site.com/success"
+  failUrl="https://your-site.com/failed"
   onSuccess={(orderNumber) => router.push(`/success?order=${orderNumber}`)}
 />
 ```
 
-### 5. Настройка Robokassa
+### 5. URL редиректа
+
+Укажи URL страниц, на которые Robokassa редиректит пользователя:
+
+- **successUrl** (обязательно) — страница после успешной оплаты, например `/success` или `/order-complete`
+- **failUrl** (опционально) — страница при отмене оплаты, например `/checkout`
+
+Эти URL передаются в `PaymentButton` и Robokassa автоматически редиректит на них.
+
+### 6. Настройка Robokassa
 
 В личном кабинете Robokassa укажи:
 
-- **Result URL**: `{func2url.robokassa-webhook}`
-- **Success URL**: `https://your-site.com/order-success`
-- **Fail URL**: `https://your-site.com/order-failed`
+- **Result URL**: `{func2url.robokassa-webhook}` — обязательно, для получения уведомлений об оплате
 
 ## Поток оплаты
 
@@ -169,6 +178,8 @@ Webhook от Robokassa (вызывается автоматически посл
      userPhone={formData.phone}
      userAddress={formData.address}
      cartItems={cartItems}
+     successUrl="https://your-site.com/success"
+     failUrl="https://your-site.com/failed"
      onSuccess={(orderNumber) => router.push(`/success?order=${orderNumber}`)}
      onError={(error) => toast.error(error.message)}
    />

@@ -24,6 +24,8 @@ export interface PaymentPayload {
   userAddress?: string;
   orderComment?: string;
   cartItems: CartItem[];
+  successUrl?: string;
+  failUrl?: string;
 }
 
 export interface PaymentResponse {
@@ -34,23 +36,14 @@ export interface PaymentResponse {
   amount: string;
 }
 
-export interface OrderStatus {
-  order_number: string;
-  status: "pending" | "paid" | "cancelled" | "refunded";
-  amount: number;
-  paid_at: string | null;
-}
-
 interface UseRobokassaOptions {
   apiUrl: string;
   onSuccess?: (orderNumber: string) => void;
   onError?: (error: Error) => void;
-  pollInterval?: number;
 }
 
 interface UseRobokassaReturn {
   createPayment: (payload: PaymentPayload) => Promise<PaymentResponse>;
-  checkStatus: (orderNumber: string) => Promise<OrderStatus>;
   isLoading: boolean;
   error: Error | null;
   paymentUrl: string | null;
@@ -62,7 +55,7 @@ interface UseRobokassaReturn {
 // ============================================================================
 
 export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
-  const { apiUrl, onSuccess, onError, pollInterval = 5000 } = options;
+  const { apiUrl, onError } = options;
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -83,6 +76,7 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({
             amount: payload.amount,
             user_name: payload.userName,
@@ -91,6 +85,8 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
             user_address: payload.userAddress,
             order_comment: payload.orderComment,
             cart_items: payload.cartItems,
+            success_url: payload.successUrl,
+            fail_url: payload.failUrl,
           }),
         });
 
@@ -120,38 +116,8 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
     [apiUrl, onError]
   );
 
-  /**
-   * Проверяет статус оплаты
-   */
-  const checkStatus = useCallback(
-    async (orderNum: string): Promise<OrderStatus> => {
-      const response = await fetch(
-        `${apiUrl}/robokassa/check-status/${orderNum}`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to check payment status");
-      }
-
-      const data: OrderStatus = await response.json();
-
-      if (data.status === "paid") {
-        localStorage.removeItem("pending_order");
-        onSuccess?.(orderNum);
-      }
-
-      return data;
-    },
-    [apiUrl, onSuccess]
-  );
-
   return {
     createPayment,
-    checkStatus,
     isLoading,
     error,
     paymentUrl,
