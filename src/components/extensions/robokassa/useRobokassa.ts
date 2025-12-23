@@ -79,12 +79,11 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
       setError(null);
 
       try {
-        const response = await fetch(`${apiUrl}/robokassa/create-payment`, {
+        const response = await fetch(apiUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
           body: JSON.stringify({
             amount: payload.amount,
             user_name: payload.userName,
