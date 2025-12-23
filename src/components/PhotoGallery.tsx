@@ -22,8 +22,9 @@ export default function PhotoGallery() {
     try {
       const response = await fetch(PHOTOS_API);
       const data = await response.json();
-      setPhotos(data.photos);
+      setPhotos(data.photos || []);
     } catch (error) {
+      setPhotos([]);
       toast({
         title: 'Ошибка',
         description: 'Не удалось загрузить фотографии',
