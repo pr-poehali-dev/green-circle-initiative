@@ -6,9 +6,18 @@ import { useCart } from '@/contexts/CartContext';
 import { Link } from 'react-router-dom';
 import { PaymentButton } from '@/components/extensions/robokassa/PaymentButton';
 import func2url from '../../backend/func2url.json';
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, total, clearCart } = useCart();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
 
   if (items.length === 0) {
     return (
@@ -101,9 +110,58 @@ const Cart = () => {
 
           <div className="lg:col-span-1">
             <Card className="p-6 sticky top-24">
-              <h2 className="text-xl font-light mb-6">Итого</h2>
+              <h2 className="text-xl font-light mb-6">Оформление заказа</h2>
               
-              <div className="space-y-3 mb-6">
+              <div className="space-y-4 mb-6">
+                <div>
+                  <Label htmlFor="name">Имя</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Иван Иванов"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="example@mail.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="phone">Телефон</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+7 999 123-45-67"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="address">Адрес доставки</Label>
+                  <Input
+                    id="address"
+                    type="text"
+                    placeholder="Москва, ул. Примерная, д. 1"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-3 mb-6 pt-6 border-t">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Товары ({items.length})</span>
                   <span>{total.toLocaleString('ru-RU')} ₽</span>
@@ -124,16 +182,16 @@ const Cart = () => {
               <PaymentButton
                 apiUrl={func2url['robokassa-robokassa']}
                 amount={total}
-                userName="Покупатель"
-                userEmail="customer@example.com"
-                userPhone="+79991234567"
+                userName={formData.name}
+                userEmail={formData.email}
+                userPhone={formData.phone}
+                userAddress={formData.address}
                 cartItems={items.map(item => ({
                   id: item.id.toString(),
                   name: item.name,
                   price: item.price,
                   quantity: item.quantity
                 }))}
-                isTest={true}
                 onSuccess={(orderNumber) => {
                   clearCart();
                   alert(`Заказ ${orderNumber} успешно оформлен!`);
@@ -143,6 +201,7 @@ const Cart = () => {
                 }}
                 buttonText="Оформить заказ"
                 className="w-full rounded-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                disabled={!formData.name || !formData.email || !formData.phone}
               />
             </Card>
           </div>
