@@ -11,13 +11,22 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 const Cart = () => {
-  const { items, removeFromCart, updateQuantity, total, clearCart } = useCart();
+  const { items, removeFromCart, updateQuantity, total, clearCart, addToCart } = useCart();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     address: ''
   });
+
+  const addTestProduct = () => {
+    addToCart({
+      id: 'test-10',
+      name: 'Тестовый товар',
+      price: 10,
+      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400'
+    });
+  };
 
   if (items.length === 0) {
     return (
@@ -26,11 +35,16 @@ const Cart = () => {
         <div className="container mx-auto px-4 py-24 text-center">
           <Icon name="ShoppingCart" size={64} className="mx-auto mb-6 text-muted-foreground" />
           <h2 className="text-2xl font-light mb-4">Корзина пуста</h2>
-          <Link to="/catalog">
-            <Button size="lg" className="rounded-full">
-              Перейти в каталог
+          <div className="flex gap-4 justify-center">
+            <Link to="/catalog">
+              <Button size="lg" className="rounded-full">
+                Перейти в каталог
+              </Button>
+            </Link>
+            <Button size="lg" variant="outline" className="rounded-full" onClick={addTestProduct}>
+              Добавить тестовый товар (10₽)
             </Button>
-          </Link>
+          </div>
         </div>
       </div>
     );
