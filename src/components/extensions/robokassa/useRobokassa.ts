@@ -24,7 +24,6 @@ export interface PaymentPayload {
   userAddress?: string;
   orderComment?: string;
   cartItems: CartItem[];
-  isTest?: boolean;
 }
 
 export interface PaymentResponse {
@@ -79,11 +78,12 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
       setError(null);
 
       try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(`${apiUrl}/robokassa/create-payment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({
             amount: payload.amount,
             user_name: payload.userName,
@@ -92,7 +92,6 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
             user_address: payload.userAddress,
             order_comment: payload.orderComment,
             cart_items: payload.cartItems,
-            is_test: payload.isTest ?? false,
           }),
         });
 
