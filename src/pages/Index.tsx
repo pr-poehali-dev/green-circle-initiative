@@ -5,9 +5,7 @@ import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
 import PhotoUpload from '@/components/PhotoUpload';
 import PhotoGallery from '@/components/PhotoGallery';
-import { PaymentButton } from '@/components/extensions/robokassa/PaymentButton';
 import { useState, useEffect } from 'react';
-import { toast } from 'sonner';
 
 const Index = () => {
   const [spaceFact, setSpaceFact] = useState<string>('');
@@ -52,34 +50,12 @@ const Index = () => {
               </Card>
             </div>
           )}
-          <div className="flex gap-4 justify-center items-center">
-            <Link to="/catalog">
-              <Button size="lg" className="rounded-full px-8">
-                Смотреть каталог
-                <Icon name="ArrowRight" size={18} className="ml-2" />
-              </Button>
-            </Link>
-            <PaymentButton
-              apiUrl="https://devfunctions.poehali.dev/d2d10bb7-7701-441c-a26e-087018d36cb9"
-              amount={10}
-              userName="Тестовый покупатель"
-              userEmail="test@example.com"
-              userPhone="+79991234567"
-              cartItems={[
-                { id: 'test-1', name: 'Тестовый товар', price: 10, quantity: 1 }
-              ]}
-              successUrl={`${window.location.origin}/success`}
-              failUrl={`${window.location.origin}/`}
-              onSuccess={(orderNumber) => {
-                toast.success(`Заказ ${orderNumber} успешно оплачен!`);
-              }}
-              onError={(error) => {
-                toast.error(`Ошибка: ${error.message}`);
-              }}
-              buttonText="Тестовый платёж 10₽"
-              className="rounded-full px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-medium transition-colors"
-            />
-          </div>
+          <Link to="/catalog">
+            <Button size="lg" className="rounded-full px-8">
+              Смотреть каталог
+              <Icon name="ArrowRight" size={18} className="ml-2" />
+            </Button>
+          </Link>
         </div>
       </section>
 
