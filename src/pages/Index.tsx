@@ -68,6 +68,8 @@ const Index = () => {
               cartItems={[
                 { id: 'test-1', name: 'Тестовый товар', price: 10, quantity: 1 }
               ]}
+              successUrl={`${window.location.origin}/catalog`}
+              failUrl={window.location.origin}
               onSuccess={(orderNumber) => {
                 toast.success(`Заказ ${orderNumber} успешно оплачен!`);
               }}
