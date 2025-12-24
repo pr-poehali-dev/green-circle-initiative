@@ -4,8 +4,7 @@ import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
 import { useCart } from '@/contexts/CartContext';
 import { Link } from 'react-router-dom';
-import { PaymentButton } from '@/components/extensions/robokassa/PaymentButton';
-import func2url from '../../backend/func2url.json';
+
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -193,30 +192,17 @@ const Cart = () => {
                 </div>
               </div>
 
-              <PaymentButton
-                apiUrl={func2url['robokassa-robokassa']}
-                amount={total}
-                userName={formData.name}
-                userEmail={formData.email}
-                userPhone={formData.phone}
-                userAddress={formData.address}
-                cartItems={items.map(item => ({
-                  id: item.id.toString(),
-                  name: item.name,
-                  price: item.price,
-                  quantity: item.quantity
-                }))}
-                onSuccess={(orderNumber) => {
-                  clearCart();
-                  alert(`Заказ ${orderNumber} успешно оформлен!`);
-                }}
-                onError={(error) => {
-                  alert(`Ошибка: ${error.message}`);
-                }}
-                buttonText="Оформить заказ"
-                className="w-full rounded-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              <Button
+                className="w-full rounded-full"
+                size="lg"
                 disabled={!formData.name || !formData.email || !formData.phone}
-              />
+                onClick={() => {
+                  alert(`Заказ оформлен! Сумма: ${total.toLocaleString('ru-RU')} ₽`);
+                  clearCart();
+                }}
+              >
+                Оформить заказ
+              </Button>
             </Card>
           </div>
         </div>
