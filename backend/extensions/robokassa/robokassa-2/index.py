@@ -41,16 +41,16 @@ def handler(event: dict, context) -> dict:
     method = event.get('httpMethod', 'GET').upper()
 
     if method == 'OPTIONS':
-        return {'statusCode': 200, 'headers': HEADERS, 'body': ''}
+        return {'statusCode': 200, 'headers': HEADERS, 'body': '', 'isBase64Encoded': False}
 
     if method != 'POST':
-        return {'statusCode': 405, 'headers': HEADERS, 'body': json.dumps({'error': 'Method not allowed'})}
+        return {'statusCode': 405, 'headers': HEADERS, 'body': json.dumps({'error': 'Method not allowed'}), 'isBase64Encoded': False}
 
     merchant_login = os.environ.get('ROBOKASSA_MERCHANT_LOGIN')
     password_1 = os.environ.get('ROBOKASSA_PASSWORD_1')
 
     if not merchant_login or not password_1:
-        return {'statusCode': 500, 'headers': HEADERS, 'body': json.dumps({'error': 'Robokassa credentials not configured'})}
+        return {'statusCode': 500, 'headers': HEADERS, 'body': json.dumps({'error': 'Robokassa credentials not configured'}), 'isBase64Encoded': False}
 
     body_str = event.get('body', '{}')
     payload = json.loads(body_str)
@@ -66,9 +66,9 @@ def handler(event: dict, context) -> dict:
     fail_url = str(payload.get('fail_url', ''))
 
     if amount <= 0:
-        return {'statusCode': 400, 'headers': HEADERS, 'body': json.dumps({'error': 'Amount must be greater than 0'})}
+        return {'statusCode': 400, 'headers': HEADERS, 'body': json.dumps({'error': 'Amount must be greater than 0'}), 'isBase64Encoded': False}
     if not user_name or not user_email:
-        return {'statusCode': 400, 'headers': HEADERS, 'body': json.dumps({'error': 'user_name and user_email required'})}
+        return {'statusCode': 400, 'headers': HEADERS, 'body': json.dumps({'error': 'user_name and user_email required'}), 'isBase64Encoded': False}
 
     conn = get_db_connection()
     cur = conn.cursor()
@@ -140,5 +140,6 @@ def handler(event: dict, context) -> dict:
             'payment_url': payment_url,
             'order_id': order_id,
             'order_number': order_number
-        })
+        }),
+        'isBase64Encoded': False
     }
