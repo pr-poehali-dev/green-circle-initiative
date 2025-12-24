@@ -5,6 +5,8 @@ import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
 import PhotoUpload from '@/components/PhotoUpload';
 import PhotoGallery from '@/components/PhotoGallery';
+import { PaymentButton } from '@/components/extensions/robokassa/PaymentButton';
+import func2url from '../../backend/func2url.json';
 import { useState, useEffect } from 'react';
 
 const Index = () => {
@@ -50,13 +52,32 @@ const Index = () => {
               </Card>
             </div>
           )}
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-4 justify-center flex-wrap">
             <Link to="/catalog">
               <Button size="lg" className="rounded-full px-8">
                 Смотреть каталог
                 <Icon name="ArrowRight" size={18} className="ml-2" />
               </Button>
             </Link>
+            
+            <PaymentButton
+              apiUrl={func2url['robokassa-robokassa']}
+              amount={10}
+              userName="Тестовый пользователь"
+              userEmail="test@example.com"
+              userPhone="+79991234567"
+              cartItems={[
+                { id: "test-1", name: "Тестовый товар", price: 10, quantity: 1 }
+              ]}
+              buttonText="💳 Тест оплаты (10₽)"
+              className="rounded-full px-8"
+              onSuccess={(orderNumber) => {
+                alert(`✅ Заказ ${orderNumber} успешно создан!`);
+              }}
+              onError={(error) => {
+                alert(`❌ Ошибка: ${error.message}`);
+              }}
+            />
           </div>
         </div>
       </section>
