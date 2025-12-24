@@ -76,7 +76,6 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
           body: JSON.stringify({
             amount: payload.amount,
             user_name: payload.userName,
@@ -85,8 +84,6 @@ export function useRobokassa(options: UseRobokassaOptions): UseRobokassaReturn {
             user_address: payload.userAddress,
             order_comment: payload.orderComment,
             cart_items: payload.cartItems,
-            success_url: payload.successUrl,
-            fail_url: payload.failUrl,
           }),
         });
 
