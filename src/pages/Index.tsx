@@ -5,8 +5,6 @@ import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
 import PhotoUpload from '@/components/PhotoUpload';
 import PhotoGallery from '@/components/PhotoGallery';
-import { PaymentButton } from '@/components/extensions/robokassa/PaymentButton';
-import func2url from '../../backend/func2url.json';
 import { useState, useEffect } from 'react';
 
 const Index = () => {
@@ -59,25 +57,6 @@ const Index = () => {
                 <Icon name="ArrowRight" size={18} className="ml-2" />
               </Button>
             </Link>
-            
-            <PaymentButton
-              apiUrl={func2url['robokassa-robokassa-2']}
-              amount={100}
-              userName="Тестовый пользователь"
-              userEmail="test@example.com"
-              userPhone="+79991234567"
-              cartItems={[
-                { id: "test-1", name: "Тестовый товар", price: 100, quantity: 1 }
-              ]}
-              buttonText="💳 Тест оплаты (100₽)"
-              className="rounded-full px-8"
-              onSuccess={(orderNumber) => {
-                alert(`✅ Заказ ${orderNumber} успешно создан!`);
-              }}
-              onError={(error) => {
-                alert(`❌ Ошибка: ${error.message}`);
-              }}
-            />
           </div>
         </div>
       </section>
