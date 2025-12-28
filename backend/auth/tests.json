@@ -5,9 +5,8 @@
       "method": "POST",
       "path": "/?action=register",
       "body": {
-        "email": "newuser@test.com",
-        "password": "Test12345",
-        "name": "Test User"
+        "username": "newuser_${Date.now()}",
+        "password": "Test12345"
       },
       "expectedStatus": 201,
       "expectedBody": {

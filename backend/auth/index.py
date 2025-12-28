@@ -47,28 +47,25 @@ def escape(val):
     return f"'{s}'"
 
 
-def register_user(email: str, password: str, name: str = None):
+def register_user(username: str, password: str):
     """Register new user."""
     conn = get_db()
     cur = conn.cursor()
     
-    # Check if exists - use schema.table WITHOUT quotes
-    query = f"SELECT id FROM {SCHEMA}.users WHERE email = {escape(email)}"
+    query = f"SELECT id FROM {SCHEMA}.users WHERE username = {escape(username)}"
     cur.execute(query)
     
     if cur.fetchone():
         cur.close()
         conn.close()
-        return None, "Email уже используется"
+        return None, "Имя пользователя уже занято"
     
-    # Hash password
     pwd_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt(12)).decode()
     now = datetime.utcnow().isoformat()
     
-    # Insert user - use schema.table WITHOUT quotes
     query = f"""
-        INSERT INTO {SCHEMA}.users (email, password_hash, name, created_at, updated_at)
-        VALUES ({escape(email)}, {escape(pwd_hash)}, {escape(name)}, {escape(now)}, {escape(now)})
+        INSERT INTO {SCHEMA}.users (username, password_hash, created_at, updated_at)
+        VALUES ({escape(username)}, {escape(pwd_hash)}, {escape(now)}, {escape(now)})
         RETURNING id
     """
     cur.execute(query)
@@ -96,17 +93,16 @@ def handler(event: dict, context) -> dict:
         action = event.get('queryStringParameters', {}).get('action', '')
         
         if action == 'register':
-            email = body.get('email', '').strip().lower()
+            username = body.get('username', '').strip()
             password = body.get('password', '')
-            name = body.get('name', '').strip()
             
-            if not email or not password:
-                return response_json(400, {'error': 'Email и пароль обязательны'})
+            if not username or not password:
+                return response_json(400, {'error': 'Имя пользователя и пароль обязательны'})
             
             if len(password) < 8:
                 return response_json(400, {'error': 'Пароль должен быть минимум 8 символов'})
             
-            user_id, error = register_user(email, password, name)
+            user_id, error = register_user(username, password)
             
             if error:
                 return response_json(409, {'error': error})
