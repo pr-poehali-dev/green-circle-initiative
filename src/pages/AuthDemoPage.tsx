@@ -14,11 +14,11 @@ export default function AuthDemoPage() {
 
   const auth = useAuth({
     apiUrls: {
-      login: `${AUTH_BASE}/login`,
-      register: `${AUTH_BASE}/register`,
-      refresh: `${AUTH_BASE}/refresh`,
-      logout: `${AUTH_BASE}/logout`,
-      resetPassword: `${AUTH_BASE}/reset-password`,
+      login: `${AUTH_BASE}?action=login`,
+      register: `${AUTH_BASE}?action=register`,
+      refresh: `${AUTH_BASE}?action=refresh`,
+      logout: `${AUTH_BASE}?action=logout`,
+      resetPassword: `${AUTH_BASE}?action=reset-password`,
     },
   });
 
