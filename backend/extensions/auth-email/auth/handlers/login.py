@@ -3,7 +3,7 @@ import json
 import os
 from datetime import datetime, timedelta
 
-from utils.db import get_connection, escape, get_schema
+from utils.db import get_connection, escape, table
 from utils.password import verify_password
 from utils.jwt_utils import create_access_token, create_refresh_token, hash_token, ACCESS_TOKEN_EXPIRE_MINUTES
 from utils.cookies import make_refresh_cookie
@@ -14,11 +14,11 @@ MAX_LOGIN_ATTEMPTS = int(os.environ.get('MAX_LOGIN_ATTEMPTS', '5'))
 LOCKOUT_MINUTES = int(os.environ.get('LOCKOUT_MINUTES', '15'))
 
 
-def check_rate_limit(cur, email: str, S: str) -> tuple[bool, int | None]:
+def check_rate_limit(cur, email: str) -> tuple[bool, int | None]:
     """Check if user is rate limited. Returns (is_allowed, remaining_seconds)."""
     cur.execute(f"""
         SELECT failed_login_attempts, last_failed_login_at
-        FROM {S}users WHERE email = {escape(email)}
+        FROM {table('users')} WHERE email = {escape(email)}
     """)
 
     result = cur.fetchone()
@@ -36,11 +36,11 @@ def check_rate_limit(cur, email: str, S: str) -> tuple[bool, int | None]:
     return True, None
 
 
-def increment_failed_attempts(cur, conn, email: str, S: str):
+def increment_failed_attempts(cur, conn, email: str):
     """Increment failed login attempts counter."""
     now = datetime.utcnow().isoformat()
     cur.execute(f"""
-        UPDATE {S}users
+        UPDATE {table('users')}
         SET failed_login_attempts = COALESCE(failed_login_attempts, 0) + 1,
             last_failed_login_at = {escape(now)}
         WHERE email = {escape(email)}
@@ -48,11 +48,11 @@ def increment_failed_attempts(cur, conn, email: str, S: str):
     conn.commit()
 
 
-def reset_failed_attempts(cur, conn, user_id: int, S: str):
+def reset_failed_attempts(cur, conn, user_id: int):
     """Reset failed login attempts on successful login."""
     now = datetime.utcnow().isoformat()
     cur.execute(f"""
-        UPDATE {S}users
+        UPDATE {table('users')}
         SET failed_login_attempts = 0,
             last_failed_login_at = NULL,
             last_login_at = {escape(now)}
@@ -76,12 +76,11 @@ def handle(event: dict) -> dict:
     if not email or not password:
         return error(400, 'Email и пароль обязательны')
 
-    S = get_schema()
     conn = get_connection()
     cur = conn.cursor()
 
     # Check rate limit
-    is_allowed, remaining = check_rate_limit(cur, email, S)
+    is_allowed, remaining = check_rate_limit(cur, email)
     if not is_allowed:
         cur.close()
         conn.close()
@@ -90,7 +89,7 @@ def handle(event: dict) -> dict:
     # Find user
     cur.execute(f"""
         SELECT id, email, name, password_hash
-        FROM {S}users WHERE email = {escape(email)}
+        FROM {table('users')} WHERE email = {escape(email)}
     """)
 
     user = cur.fetchone()
@@ -104,13 +103,13 @@ def handle(event: dict) -> dict:
     user_id, user_email, user_name, stored_hash = user
 
     if not verify_password(password, stored_hash):
-        increment_failed_attempts(cur, conn, email, S)
+        increment_failed_attempts(cur, conn, email)
         cur.close()
         conn.close()
         return error(401, auth_error_msg)
 
     # Success
-    reset_failed_attempts(cur, conn, user_id, S)
+    reset_failed_attempts(cur, conn, user_id)
 
     access_token = create_access_token(user_id, user_email)
     refresh_token, refresh_expires = create_refresh_token(user_id)
@@ -121,7 +120,7 @@ def handle(event: dict) -> dict:
     expires_at = refresh_expires.isoformat()
 
     cur.execute(f"""
-        INSERT INTO {S}refresh_tokens (user_id, token_hash, expires_at, created_at)
+        INSERT INTO {table('refresh_tokens')} (user_id, token_hash, expires_at, created_at)
         VALUES ({escape(user_id)}, {escape(refresh_hash)}, {escape(expires_at)}, {escape(now)})
     """)
 

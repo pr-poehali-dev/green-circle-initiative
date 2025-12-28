@@ -2,7 +2,7 @@
 import json
 from datetime import datetime
 
-from utils.db import get_connection, escape, get_schema
+from utils.db import get_connection, escape, table
 from utils.password import hash_password, validate_password, validate_email
 from utils.http import response, error
 
@@ -24,11 +24,10 @@ def handle(event: dict) -> dict:
         if not is_valid:
             return error(400, error_msg)
 
-        S = get_schema()
         conn = get_connection()
         cur = conn.cursor()
 
-        check_query = f"SELECT id FROM {S}users WHERE email = {escape(email)}"
+        check_query = f"SELECT id FROM {table('users')} WHERE email = {escape(email)}"
         cur.execute(check_query)
         
         if cur.fetchone():
@@ -40,7 +39,7 @@ def handle(event: dict) -> dict:
         now = datetime.utcnow().isoformat()
 
         insert_query = f"""
-            INSERT INTO {S}users (email, password_hash, name, created_at, updated_at)
+            INSERT INTO {table('users')} (email, password_hash, name, created_at, updated_at)
             VALUES ({escape(email)}, {escape(password_hash)}, {escape(name or None)}, {escape(now)}, {escape(now)})
             RETURNING id
         """

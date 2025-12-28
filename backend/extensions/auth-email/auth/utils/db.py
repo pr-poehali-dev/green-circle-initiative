@@ -15,9 +15,9 @@ def get_connection():
     return psycopg2.connect(dsn)
 
 
-def get_schema() -> str:
-    """Get schema prefix for tables. Returns 'schema.'."""
-    return f"{SCHEMA}."
+def table(name: str) -> str:
+    """Get fully qualified table name with schema."""
+    return f'"{SCHEMA}"."{name}"'
 
 
 def escape(value: Any) -> str:
