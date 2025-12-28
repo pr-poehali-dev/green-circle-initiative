@@ -2,7 +2,7 @@
 import json
 from datetime import datetime
 
-from utils.db import get_connection, escape_string
+from utils.db import get_connection, escape_string, table
 from utils.password import hash_password, validate_password, validate_email
 from utils.http import response, error
 
@@ -26,8 +26,8 @@ def handle(event: dict) -> dict:
     conn = get_connection()
     cur = conn.cursor()
 
-    # Simple Query Protocol - search_path is set in get_connection()
-    check_query = f"SELECT id FROM users WHERE email = {escape_string(email)}"
+    # Simple Query Protocol with full table name
+    check_query = f"SELECT id FROM {table('users')} WHERE email = {escape_string(email)}"
     cur.execute(check_query)
     if cur.fetchone():
         cur.close()
@@ -37,9 +37,9 @@ def handle(event: dict) -> dict:
     password_hash = hash_password(password)
     now = datetime.utcnow()
 
-    # Simple Query Protocol
+    # Simple Query Protocol with full table name
     insert_query = f"""
-        INSERT INTO users (email, password_hash, name, created_at, updated_at)
+        INSERT INTO {table('users')} (email, password_hash, name, created_at, updated_at)
         VALUES ({escape_string(email)}, {escape_string(password_hash)}, {escape_string(name) if name else 'NULL'}, {escape_string(now)}, {escape_string(now)})
         RETURNING id
     """

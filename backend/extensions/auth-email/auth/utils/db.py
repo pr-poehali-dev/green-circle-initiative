@@ -14,12 +14,12 @@ def get_connection():
     dsn = os.environ.get('DATABASE_URL')
     if not dsn:
         raise ValueError('DATABASE_URL not configured')
-    conn = psycopg2.connect(dsn)
-    # Set search_path to use our schema by default
-    cur = conn.cursor()
-    cur.execute(f"SET search_path TO {DB_SCHEMA}, public")
-    cur.close()
-    return conn
+    return psycopg2.connect(dsn)
+
+
+def table(name: str) -> str:
+    """Return fully qualified table name with schema."""
+    return f"{DB_SCHEMA}.{name}"
 
 
 def escape_string(value):
