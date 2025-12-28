@@ -36,6 +36,7 @@ def handler(event: dict, context) -> dict:
     action = params.get('action', '')
 
     if not action or action not in ROUTES:
-        return error(404, f'Unknown action: {action}. Use ?action=login|register|refresh|logout|reset-password')
+        available = ', '.join(ROUTES.keys())
+        return error(404, f'Unknown action: {action}. Available: {available}')
 
     return ROUTES[action](event)
