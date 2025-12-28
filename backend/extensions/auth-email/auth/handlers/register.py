@@ -1,5 +1,6 @@
 """Registration handler."""
 import json
+import traceback
 from datetime import datetime
 
 from utils.db import get_connection, escape, table
@@ -53,4 +54,5 @@ def handle(event: dict) -> dict:
         return response(201, {'user_id': user_id, 'message': 'Регистрация успешна'})
     
     except Exception as e:
-        return error(500, f'Ошибка регистрации: {str(e)}')
+        tb = traceback.format_exc()
+        return error(500, f'Ошибка: {str(e)} | Traceback: {tb[:500]}')
