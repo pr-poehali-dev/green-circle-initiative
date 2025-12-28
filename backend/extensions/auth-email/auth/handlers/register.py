@@ -26,8 +26,8 @@ def handle(event: dict) -> dict:
     conn = get_connection()
     cur = conn.cursor()
 
-    # Simple Query Protocol - no parameters
-    check_query = f"SELECT id FROM users WHERE email = {escape_string(email)}"
+    # Simple Query Protocol - no parameters, use full table name with schema
+    check_query = f"SELECT id FROM t_p18279400_green_circle_initiat.users WHERE email = {escape_string(email)}"
     cur.execute(check_query)
     if cur.fetchone():
         cur.close()
@@ -37,9 +37,9 @@ def handle(event: dict) -> dict:
     password_hash = hash_password(password)
     now = datetime.utcnow()
 
-    # Simple Query Protocol - no parameters
+    # Simple Query Protocol - no parameters, use full table name with schema
     insert_query = f"""
-        INSERT INTO users (email, password_hash, name, created_at, updated_at)
+        INSERT INTO t_p18279400_green_circle_initiat.users (email, password_hash, name, created_at, updated_at)
         VALUES ({escape_string(email)}, {escape_string(password_hash)}, {escape_string(name) if name else 'NULL'}, {escape_string(now.isoformat())}, {escape_string(now.isoformat())})
         RETURNING id
     """
