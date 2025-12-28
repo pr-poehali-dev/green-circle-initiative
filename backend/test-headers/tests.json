@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "name": "Test GET request",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "test_cookie_set": true,
+        "method": "GET"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test POST request",
+      "method": "POST",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "test_cookie_set": true,
+        "method": "POST"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test OPTIONS request",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}
