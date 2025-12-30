@@ -26,8 +26,14 @@ ROUTES = {
 def handler(event: dict, context) -> dict:
     """Main router for auth endpoints."""
     method = event.get('httpMethod', 'GET').upper()
+    
+    # Debug CORS
+    print(f"[DEBUG] Method: {method}")
+    print(f"[DEBUG] Headers: {event.get('headers', {})}")
+    print(f"[DEBUG] Origin: {event.get('headers', {}).get('origin', 'NO_ORIGIN')}")
 
     if method == 'OPTIONS':
+        print("[DEBUG] Returning OPTIONS response")
         return options_response()
 
     # Extract action from query parameters
