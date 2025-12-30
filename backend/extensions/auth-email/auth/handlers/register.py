@@ -34,10 +34,12 @@ def handle(event: dict) -> dict:
     password_hash = hash_password(password)
     name_value = name if name else None
 
-    user_id = execute_returning(f"""
+    sql = f"""
         INSERT INTO {S}users (email, password_hash, name)
         VALUES ({escape(email)}, {escape(password_hash)}, {escape(name_value)})
         RETURNING id
-    """)
+    """
+    print(f"[DEBUG] SQL: {sql}")
+    user_id = execute_returning(sql)
 
     return response(201, {'user_id': user_id, 'message': 'Регистрация успешна'})
