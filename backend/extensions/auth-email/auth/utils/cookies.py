@@ -13,7 +13,7 @@ def get_cookie_domain() -> str:
 def make_refresh_cookie(token: str, expires: datetime) -> str:
     """Create HttpOnly cookie string for refresh token."""
     secure = os.environ.get('COOKIE_SECURE', 'true').lower() == 'true'
-    same_site = os.environ.get('COOKIE_SAMESITE', 'Strict')
+    same_site = os.environ.get('COOKIE_SAMESITE', 'None')  # Cross-site by default
     domain = get_cookie_domain()
 
     cookie_parts = [
@@ -35,7 +35,7 @@ def make_refresh_cookie(token: str, expires: datetime) -> str:
 def make_clear_cookie() -> str:
     """Create cookie string that clears refresh_token."""
     secure = os.environ.get('COOKIE_SECURE', 'true').lower() == 'true'
-    same_site = os.environ.get('COOKIE_SAMESITE', 'Strict')
+    same_site = os.environ.get('COOKIE_SAMESITE', 'None')  # Cross-site by default
     domain = get_cookie_domain()
 
     cookie_parts = [
