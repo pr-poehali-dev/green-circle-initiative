@@ -2,6 +2,5 @@
   "test-secret": "https://devfunctions.poehali.dev/53174961-368c-45e8-a144-9852b94c7679",
   "auth": "https://devfunctions.poehali.dev/15675003-4237-47cb-8ea0-a60825b62192",
   "test-auth": "https://devfunctions.poehali.dev/816377d5-a625-4342-a312-ab5edcc3b4c0",
-  "test-headers": "https://devfunctions.poehali.dev/b59a0592-22ec-4dd4-9a65-e46f7068853d",
-  "auth-email-auth": "https://devfunctions.poehali.dev/9e0725f2-35f0-4c53-9167-5a867f040afe"
+  "test-headers": "https://devfunctions.poehali.dev/b59a0592-22ec-4dd4-9a65-e46f7068853d"
 }
