@@ -11,6 +11,7 @@ import Compare from "./pages/Compare";
 import OrderSuccess from "./pages/OrderSuccess";
 import NotFound from "./pages/NotFound";
 import RegisterTest from "./pages/RegisterTest";
+import Auth from "./pages/Auth";
 import { CartProvider } from "./contexts/CartContext";
 import { CompareProvider } from "./contexts/CompareContext";
 
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="/compare" element={<Compare />} />
               <Route path="/success" element={<OrderSuccess />} />
               <Route path="/register-test" element={<RegisterTest />} />
+              <Route path="/auth" element={<Auth />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
