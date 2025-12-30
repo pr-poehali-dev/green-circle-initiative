@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/components/extensions/auth-email/useAuth';
-import LoginForm from '@/components/extensions/auth-email/LoginForm';
-import RegisterForm from '@/components/extensions/auth-email/RegisterForm';
+import { LoginForm } from '@/components/extensions/auth-email/LoginForm';
+import { RegisterForm } from '@/components/extensions/auth-email/RegisterForm';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import func2url from '@/config/func2url.json';
