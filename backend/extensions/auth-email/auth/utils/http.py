@@ -14,11 +14,13 @@ def make_headers(set_cookie: Optional[str] = None) -> dict:
     origin = get_cors_origin()
     headers = {
         'Access-Control-Allow-Origin': origin,
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Authorization, X-Cookie',
         'Content-Type': 'application/json'
     }
+    # Only set credentials if not wildcard origin
+    if origin != '*':
+        headers['Access-Control-Allow-Credentials'] = 'true'
     if set_cookie:
         # Use X-Set-Cookie - proxy will convert to Set-Cookie
         headers['X-Set-Cookie'] = set_cookie
