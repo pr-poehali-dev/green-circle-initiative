@@ -9,8 +9,8 @@ Routes (via ?action= query parameter):
   POST /auth?action=logout         - Logout and revoke tokens
   POST /auth?action=reset-password - Request/complete password reset
 """
-from handlers import register, login, logout, refresh, reset_password, health
-from utils.http import options_response, error, get_origin_from_event
+from .handlers import register, login, logout, refresh, reset_password, health
+from .utils.http import options_response, error, get_origin_from_event
 
 
 ROUTES = {
