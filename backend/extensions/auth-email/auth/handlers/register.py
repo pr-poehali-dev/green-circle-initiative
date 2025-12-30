@@ -1,5 +1,6 @@
 """Registration handler."""
 import json
+import traceback
 from datetime import datetime
 
 from utils.db import query_one, execute_returning, escape, get_schema
@@ -9,8 +10,11 @@ from utils.http import response, error
 
 def handle(event: dict) -> dict:
     """Register new user with email and password."""
-    body_str = event.get('body', '{}')
-    payload = json.loads(body_str)
+    try:
+        body_str = event.get('body', '{}')
+        payload = json.loads(body_str)
+    except Exception as e:
+        return error(500, f'Error parsing request: {str(e)}\n{traceback.format_exc()}')
 
     email = str(payload.get('email', '')).lower().strip()
     password = str(payload.get('password', ''))
@@ -23,21 +27,24 @@ def handle(event: dict) -> dict:
     if not is_valid:
         return error(400, error_msg)
 
-    S = get_schema()
+    try:
+        S = get_schema()
 
-    # Check if user exists
-    existing = query_one(f"SELECT id FROM {S}users WHERE email = {escape(email)}")
-    if existing:
-        return error(409, 'Пользователь с таким email уже существует')
+        # Check if user exists
+        existing = query_one(f"SELECT id FROM {S}users WHERE email = {escape(email)}")
+        if existing:
+            return error(409, 'Пользователь с таким email уже существует')
 
-    # Create user
-    password_hash = hash_password(password)
-    now = datetime.utcnow().isoformat()
+        # Create user
+        password_hash = hash_password(password)
+        now = datetime.utcnow().isoformat()
 
-    user_id = execute_returning(f"""
-        INSERT INTO {S}users (email, password_hash, name, created_at, updated_at)
-        VALUES ({escape(email)}, {escape(password_hash)}, {escape(name or None)}, {escape(now)}, {escape(now)})
-        RETURNING id
-    """)
+        user_id = execute_returning(f"""
+            INSERT INTO {S}users (email, password_hash, name, created_at, updated_at)
+            VALUES ({escape(email)}, {escape(password_hash)}, {escape(name or None)}, {escape(now)}, {escape(now)})
+            RETURNING id
+        """)
 
-    return response(201, {'user_id': user_id, 'message': 'Регистрация успешна'})
+        return response(201, {'user_id': user_id, 'message': 'Регистрация успешна'})
+    except Exception as e:
+        return error(500, f'Database error: {str(e)}\n{traceback.format_exc()}')
