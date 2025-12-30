@@ -1,6 +1,6 @@
-# Auth Email Extension (Secure)
+# Auth Email Extension
 
-Безопасная авторизация и регистрация по email + пароль с JWT токенами.
+Авторизация и регистрация по email + пароль с JWT токенами.
 
 **1 функция** вместо 5 — экономит лимит пользователя.
 
@@ -8,24 +8,30 @@
 
 - **bcrypt** для хеширования паролей (cost factor 12)
 - **JWT** access tokens (короткоживущие, 15 мин)
-- **HttpOnly cookie** для refresh token (защита от XSS)
+- **Refresh tokens** (30 дней) хранятся в localStorage
 - **Rate limiting** при входе (5 попыток, затем блокировка 15 мин)
 - **Токены сброса пароля** с коротким сроком жизни (1 час)
 - **Отзыв сессий** при смене пароля
 - **Защита от перебора email** (одинаковый ответ для существующих/несуществующих)
 
-### Работа с Yandex Cloud Functions
+### XSS и localStorage
 
-Yandex Cloud Functions фильтрует заголовки `Authorization` и `Cookie`.
-Прокси `functions.poehali.dev` выполняет маппинг:
+Refresh токены хранятся в `localStorage`. Это необходимо для работы расширения на кросс-доменных сайтах (браузеры блокируют third-party cookies).
 
-| Направление | Маппинг |
-|-------------|---------|
-| Запрос к функции | `Cookie` → `X-Cookie` |
-| Запрос к функции | `Authorization` → `X-Authorization` |
-| Ответ функции | `X-Set-Cookie` → `Set-Cookie` |
+**Риски:**
+- XSS-атаки могут украсть токены из localStorage
+- Вредоносные npm-пакеты в проекте могут получить доступ к токенам
 
-**Frontend работает как обычно** — использует `credentials: 'include'` и стандартный `Authorization` header.
+**Рекомендации:**
+1. Используйте строгий Content Security Policy (CSP)
+2. Проверяйте все пользовательские данные перед выводом
+3. Используйте надёжные npm-пакеты, регулярно обновляйте зависимости
+4. Не храните чувствительные данные в токенах
+5. Рассмотрите короткий срок жизни токенов для критичных приложений
+
+```
+Content-Security-Policy: default-src 'self'; script-src 'self'
+```
 
 ## Структура
 
@@ -34,17 +40,16 @@ backend/auth/
 ├── index.py              # Роутер
 ├── handlers/
 │   ├── register.py       # Регистрация
-│   ├── login.py          # Вход + JWT + Set-Cookie
+│   ├── login.py          # Вход + JWT
 │   ├── refresh.py        # Обновление access token
-│   ├── logout.py         # Выход + очистка cookie
-│   └── reset_password.py # Сброс пароля
-├── utils/
-│   ├── db.py             # Подключение к БД
-│   ├── jwt_utils.py      # JWT токены
-│   ├── password.py       # bcrypt, валидация
-│   ├── cookies.py        # HttpOnly cookies
-│   └── http.py           # CORS, responses
-└── requirements.txt
+│   ├── logout.py         # Выход
+│   ├── reset_password.py # Сброс пароля
+│   └── health.py         # Проверка схемы БД
+└── utils/
+    ├── db.py             # Подключение к БД
+    ├── jwt_utils.py      # JWT токены
+    ├── password.py       # bcrypt, валидация
+    └── http.py           # CORS, responses
 
 frontend/
 ├── useAuth.ts            # React хук с auto-refresh
@@ -93,15 +98,23 @@ CREATE INDEX idx_password_reset_tokens_hash ON password_reset_tokens(token_hash)
 
 ### 2. Переменные окружения
 
+**Обязательные:**
+
 | Переменная | Описание | Пример |
 |------------|----------|--------|
 | `DATABASE_URL` | PostgreSQL connection string | `postgresql://...` |
-| `MAIN_DB_SCHEMA` | **Обязательно!** Схема БД проекта | `t_p18279400_...` |
-| `JWT_SECRET` | **Обязательно!** Секретный ключ | `openssl rand -hex 32` |
-| `CORS_ORIGIN` | Домен фронтенда | `https://example.com` |
-| `COOKIE_DOMAIN` | Домен для cookie | `.example.com` |
-| `COOKIE_SECURE` | HTTPS only | `true` |
-| `COOKIE_SAMESITE` | SameSite policy | `Strict` |
+| `MAIN_DB_SCHEMA` | Схема БД проекта | `t_p18279400_...` |
+| `JWT_SECRET` | Секретный ключ для JWT | `openssl rand -hex 32` |
+
+**Опциональные:**
+
+| Переменная | Описание | По умолчанию |
+|------------|----------|--------------|
+| `CORS_ORIGIN` | Домен фронтенда | _(читается из Origin)_ |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | Время жизни access token | `15` |
+| `REFRESH_TOKEN_EXPIRE_DAYS` | Время жизни refresh token | `30` |
+| `MAX_LOGIN_ATTEMPTS` | Лимит попыток входа | `5` |
+| `LOCKOUT_MINUTES` | Время блокировки | `15` |
 
 ### 3. Frontend
 
@@ -199,18 +212,26 @@ POST /auth?action=reset-password  - Сброс пароля
 ### POST /auth?action=register
 
 ```json
+// Обязательные: email, password
+// Опциональные: name
 { "email": "user@example.com", "password": "SecurePass123", "name": "Иван" }
-// Response 201: { "user_id": 1, "message": "Регистрация успешна" }
+
+// Response 201:
+{ "user_id": 1, "message": "Регистрация успешна" }
 ```
 
 ### POST /auth?action=login
 
 ```json
 { "email": "user@example.com", "password": "SecurePass123" }
-// Response 200 + Set-Cookie: refresh_token=...; HttpOnly
+
+// Response 200:
 {
   "access_token": "eyJ...",
+  "refresh_token": "eyJ...",
+  "token_type": "Bearer",
   "expires_in": 900,
+  "refresh_expires_in": 2592000,
   "user": { "id": 1, "email": "...", "name": "..." }
 }
 ```
@@ -218,23 +239,38 @@ POST /auth?action=reset-password  - Сброс пароля
 ### POST /auth?action=refresh
 
 ```json
-// credentials: 'include' (cookie автоматически)
-// Response 200: { "access_token": "eyJ...", "expires_in": 900, "user": {...} }
+// Request:
+{ "refresh_token": "eyJ..." }
+
+// Response 200:
+{
+  "access_token": "eyJ...",
+  "token_type": "Bearer",
+  "expires_in": 900,
+  "user": { "id": 1, "email": "...", "name": "..." }
+}
 ```
 
 ### POST /auth?action=logout
 
 ```json
-// credentials: 'include'
-// Response 200 + Set-Cookie: refresh_token=; Expires=<past>
+// Request:
+{ "refresh_token": "eyJ..." }
+
+// Response 200:
 { "message": "Logged out successfully" }
 ```
 
 ### POST /auth?action=reset-password
 
 ```json
-// Step 1: { "email": "user@example.com" }
-// Step 2: { "token": "...", "new_password": "NewPass123" }
+// Step 1 - запрос на сброс:
+{ "email": "user@example.com" }
+// Response: { "message": "Если пользователь существует...", "reset_token": "...", "expires_in_minutes": 60 }
+
+// Step 2 - установка нового пароля:
+{ "token": "...", "new_password": "NewPass123" }
+// Response: { "message": "Пароль успешно изменён" }
 ```
 
 ## Требования к паролю
