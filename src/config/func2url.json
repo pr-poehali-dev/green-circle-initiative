@@ -2,5 +2,6 @@
   "test-headers": "https://devfunctions.poehali.dev/b59a0592-22ec-4dd4-9a65-e46f7068853d",
   "wata-webhook": "https://devfunctions.poehali.dev/80197cb8-50f8-4f0f-9e78-34f3cdaf67b8",
   "wata": "https://devfunctions.poehali.dev/4e03a3b5-a7b8-41cb-86e8-1c8d27f97e8b",
-  "auth": "https://devfunctions.poehali.dev/15675003-4237-47cb-8ea0-a60825b62192"
+  "auth": "https://devfunctions.poehali.dev/15675003-4237-47cb-8ea0-a60825b62192",
+  "auth-email-auth": "https://devfunctions.poehali.dev/93b9c94c-98a4-4c4d-a701-50e6a28fde93"
 }
