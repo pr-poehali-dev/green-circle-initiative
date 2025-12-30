@@ -33,10 +33,11 @@ def handle(event: dict) -> dict:
     # Create user
     password_hash = hash_password(password)
     now = datetime.utcnow().isoformat()
+    name_value = name if name else None
 
     user_id = execute_returning(f"""
         INSERT INTO {S}users (email, password_hash, name, created_at, updated_at)
-        VALUES ({escape(email)}, {escape(password_hash)}, {escape(name or None)}, {escape(now)}, {escape(now)})
+        VALUES ({escape(email)}, {escape(password_hash)}, {escape(name_value)}, {escape(now)}, {escape(now)})
         RETURNING id
     """)
 
