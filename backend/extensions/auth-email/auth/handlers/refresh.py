@@ -9,18 +9,32 @@ from utils.http import response, error
 
 
 def handle(event: dict) -> dict:
-    """Refresh access token using refresh token from HttpOnly cookie."""
+    """Refresh access token using refresh token from HttpOnly cookie or body."""
+    import json
+    
+    headers = event.get('headers', {})
+    origin = headers.get('origin') or headers.get('Origin')
+    
     jwt_secret = os.environ.get('JWT_SECRET')
     if not jwt_secret:
-        return error(500, 'JWT_SECRET not configured')
+        return error(500, 'JWT_SECRET not configured', origin)
 
+    # Try cookie first, then body (for cross-domain)
     refresh_token = get_refresh_token_from_cookie(event)
     if not refresh_token:
-        return error(401, 'Refresh token not found')
+        body_str = event.get('body', '{}')
+        try:
+            payload = json.loads(body_str)
+            refresh_token = payload.get('refresh_token')
+        except:
+            pass
+    
+    if not refresh_token:
+        return error(401, 'Refresh token not found', origin)
 
     payload = decode_refresh_token(refresh_token)
     if not payload:
-        return error(401, 'Invalid or expired refresh token')
+        return error(401, 'Invalid or expired refresh token', origin)
 
     user_id = int(payload.get('sub'))
     token_hash = hash_token(refresh_token)
