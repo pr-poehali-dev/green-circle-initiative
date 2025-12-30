@@ -26,15 +26,16 @@ ROUTES = {
 def handler(event: dict, context) -> dict:
     """Main router for auth endpoints."""
     method = event.get('httpMethod', 'GET').upper()
+    headers = event.get('headers', {})
+    origin = headers.get('origin') or headers.get('Origin')
     
     # Debug CORS
     print(f"[DEBUG] Method: {method}")
-    print(f"[DEBUG] Headers: {event.get('headers', {})}")
-    print(f"[DEBUG] Origin: {event.get('headers', {}).get('origin', 'NO_ORIGIN')}")
+    print(f"[DEBUG] Origin: {origin or 'NO_ORIGIN'}")
 
     if method == 'OPTIONS':
         print("[DEBUG] Returning OPTIONS response")
-        return options_response()
+        return options_response(origin)
 
     # Extract action from query parameters
     params = event.get('queryStringParameters') or {}
@@ -45,9 +46,9 @@ def handler(event: dict, context) -> dict:
         return ROUTES['health'](event)
 
     if method != 'POST':
-        return error(405, 'Method not allowed')
+        return error(405, 'Method not allowed', origin)
 
     if not action or action not in ROUTES:
-        return error(404, f'Unknown action: {action}. Use ?action=health|login|register|refresh|logout|reset-password')
+        return error(404, f'Unknown action: {action}. Use ?action=health|login|register|refresh|logout|reset-password', origin)
 
     return ROUTES[action](event)
