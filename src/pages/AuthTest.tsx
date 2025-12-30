@@ -3,9 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/components/extensions/auth-email/useAuth';
+import { useToast } from '@/hooks/use-toast';
 import func2url from '@/config/func2url.json';
 
 const AuthTest = () => {
@@ -110,7 +110,7 @@ const AuthTest = () => {
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle>Вы авторизованы</CardTitle>
-            <CardDescription>Тест системы авторизации auth-email</CardDescription>
+            <CardDescription>Тест системы auth-email</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
@@ -134,9 +134,9 @@ const AuthTest = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Тест Auth Email Extension</CardTitle>
+          <CardTitle>Тест Auth Email</CardTitle>
           <CardDescription>
-            Проверка JWT авторизации с HttpOnly cookies
+            Проверка JWT авторизации с localStorage
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -222,7 +222,7 @@ const AuthTest = () => {
               <div className="space-y-4">
                 <form onSubmit={handleRequestReset} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="reset-email">Email для сброса</Label>
+                    <Label htmlFor="reset-email">Email</Label>
                     <Input
                       id="reset-email"
                       type="email"
@@ -233,7 +233,7 @@ const AuthTest = () => {
                     />
                   </div>
                   <Button type="submit" className="w-full" disabled={auth.isLoading}>
-                    Получить токен
+                    Запросить сброс
                   </Button>
                 </form>
 
@@ -245,9 +245,8 @@ const AuthTest = () => {
                         id="reset-token"
                         type="text"
                         value={resetToken}
-                        onChange={(e) => setResetToken(e.target.value)}
-                        placeholder="Токен из email"
-                        required
+                        readOnly
+                        className="bg-gray-50"
                       />
                     </div>
                     <div className="space-y-2">
