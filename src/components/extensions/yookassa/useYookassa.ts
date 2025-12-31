@@ -55,7 +55,10 @@ interface UseYookassaReturn {
  * Open payment page (new tab on mobile, same tab on desktop)
  */
 export function openPaymentPage(url: string): void {
+  console.log("[YooKassa] Opening payment page:", url);
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  console.log("[YooKassa] Is mobile:", isMobile);
+  
   if (isMobile) {
     window.open(url, "_blank");
   } else {
@@ -123,13 +126,18 @@ export function useYookassa(options: UseYookassaOptions): UseYookassaReturn {
           cart_items: payload.cartItems || [],
         };
 
+        console.log("[YooKassa] Sending payment request:", body);
+
         const response = await fetch(apiUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
 
+        console.log("[YooKassa] Response status:", response.status);
+
         const data = await response.json();
+        console.log("[YooKassa] Response data:", data);
 
         if (!response.ok) {
           throw new Error(data.error || "Ошибка создания платежа");
@@ -137,6 +145,8 @@ export function useYookassa(options: UseYookassaOptions): UseYookassaReturn {
 
         setPaymentUrl(data.payment_url);
         setOrderNumber(data.order_number);
+        
+        console.log("[YooKassa] Payment URL:", data.payment_url);
 
         // Save pending order to localStorage
         if (typeof window !== "undefined") {
