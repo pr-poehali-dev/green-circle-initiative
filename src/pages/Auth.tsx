@@ -4,16 +4,20 @@ import { LoginForm } from "@/components/extensions/auth-email/LoginForm";
 import { RegisterForm } from "@/components/extensions/auth-email/RegisterForm";
 import { ResetPasswordForm } from "@/components/extensions/auth-email/ResetPasswordForm";
 import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Icon from "@/components/ui/icon";
 
 const AUTH_URL = "https://devfunctions.poehali.dev/3ed9fa41-ed22-4511-9479-3064101bc434";
 
-type ViewMode = "login" | "register" | "reset";
+type ViewMode = "login" | "register" | "reset" | "email-sent";
 
 export default function Auth() {
   const navigate = useNavigate();
   const [view, setView] = useState<ViewMode>("login");
+  const [registeredEmail, setRegisteredEmail] = useState<string>("");
 
-  const { login, register, requestPasswordReset, resetPassword, error, isLoading } = useAuth({
+  const { login, error, isLoading } = useAuth({
     apiUrls: {
       login: `${AUTH_URL}?action=login`,
       register: `${AUTH_URL}?action=register`,
@@ -23,8 +27,26 @@ export default function Auth() {
     },
   });
 
-  const handleSuccess = () => {
+  const handleLoginSuccess = () => {
     navigate("/");
+  };
+
+  const handleRegister = async (payload: { email: string; password: string; name?: string }) => {
+    const response = await fetch(`${AUTH_URL}?action=register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Ошибка регистрации");
+    }
+
+    setRegisteredEmail(payload.email);
+    setView("email-sent");
+    return true;
   };
 
   return (
@@ -32,7 +54,7 @@ export default function Auth() {
       {view === "login" && (
         <LoginForm
           onLogin={login}
-          onSuccess={handleSuccess}
+          onSuccess={handleLoginSuccess}
           onRegisterClick={() => setView("register")}
           onForgotPasswordClick={() => setView("reset")}
           error={error}
@@ -43,8 +65,7 @@ export default function Auth() {
 
       {view === "register" && (
         <RegisterForm
-          onRegister={register}
-          onSuccess={handleSuccess}
+          onRegister={handleRegister}
           onLoginClick={() => setView("login")}
           error={error}
           isLoading={isLoading}
@@ -52,10 +73,47 @@ export default function Auth() {
         />
       )}
 
+      {view === "email-sent" && (
+        <Card className="w-full max-w-md">
+          <CardHeader className="space-y-1 text-center">
+            <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <Icon name="Mail" size={24} className="text-primary" />
+            </div>
+            <CardTitle className="text-2xl">Проверьте почту</CardTitle>
+            <CardDescription>
+              Письмо с подтверждением отправлено на <strong>{registeredEmail}</strong>
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground text-center">
+              Перейдите по ссылке из письма для подтверждения email. После этого вы сможете войти в систему.
+            </p>
+            <Button onClick={() => setView("login")} className="w-full">
+              Вернуться ко входу
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+
       {view === "reset" && (
         <ResetPasswordForm
-          onRequestReset={requestPasswordReset}
-          onResetPassword={resetPassword}
+          onRequestReset={async (email: string) => {
+            const response = await fetch(`${AUTH_URL}?action=reset-password`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email }),
+            });
+            const data = await response.json();
+            return data;
+          }}
+          onResetPassword={async (token: string, newPassword: string) => {
+            const response = await fetch(`${AUTH_URL}?action=reset-password`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ token, new_password: newPassword }),
+            });
+            return response.ok;
+          }}
           onBackToLogin={() => setView("login")}
           error={error}
           isLoading={isLoading}
