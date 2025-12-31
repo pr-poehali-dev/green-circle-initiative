@@ -138,6 +138,8 @@ def create_yookassa_payment(
 
 def handler(event, context):
     """Handle payment creation request."""
+    print(f"[DEBUG] Received event: {json.dumps(event)}")
+    
     # CORS preflight
     if event.get('httpMethod') == 'OPTIONS':
         return {'statusCode': 200, 'headers': HEADERS, 'body': ''}
@@ -154,9 +156,13 @@ def handler(event, context):
     if event.get('isBase64Encoded'):
         body = base64.b64decode(body).decode('utf-8')
 
+    print(f"[DEBUG] Request body: {body}")
+
     try:
         data = json.loads(body)
-    except json.JSONDecodeError:
+        print(f"[DEBUG] Parsed data: {json.dumps(data)}")
+    except json.JSONDecodeError as e:
+        print(f"[ERROR] JSON decode error: {e}")
         return {
             'statusCode': 400,
             'headers': HEADERS,
@@ -206,7 +212,10 @@ def handler(event, context):
     shop_id = os.environ.get('YOOKASSA_SHOP_ID', '')
     secret_key = os.environ.get('YOOKASSA_SECRET_KEY', '')
 
+    print(f"[DEBUG] Credentials check - shop_id exists: {bool(shop_id)}, secret_key exists: {bool(secret_key)}")
+
     if not shop_id or not secret_key:
+        print("[ERROR] YooKassa credentials not configured")
         return {
             'statusCode': 500,
             'headers': HEADERS,
@@ -214,7 +223,18 @@ def handler(event, context):
         }
 
     S = get_schema()
-    conn = get_connection()
+    print(f"[DEBUG] Using schema: {S}")
+    
+    try:
+        conn = get_connection()
+        print("[DEBUG] Database connected")
+    except Exception as e:
+        print(f"[ERROR] Database connection failed: {e}")
+        return {
+            'statusCode': 500,
+            'headers': HEADERS,
+            'body': json.dumps({'error': f'Database connection failed: {str(e)}'})
+        }
 
     try:
         cur = conn.cursor()
@@ -222,8 +242,10 @@ def handler(event, context):
 
         # Generate order number
         order_number = f"YK-{datetime.now().strftime('%Y%m%d')}-{uuid.uuid4().hex[:8].upper()}"
+        print(f"[DEBUG] Generated order_number: {order_number}")
 
         # Create order in DB
+        print(f"[DEBUG] Inserting order: {order_number}, {user_name}, {user_email}, {amount}")
         cur.execute(f"""
             INSERT INTO {S}orders
             (order_number, user_name, user_email, user_phone, amount, status, created_at, updated_at)
@@ -254,6 +276,7 @@ def handler(event, context):
             "order_number": order_number
         }
 
+        print("[DEBUG] Creating YooKassa payment...")
         payment_response = create_yookassa_payment(
             shop_id=shop_id,
             secret_key=secret_key,
@@ -265,8 +288,12 @@ def handler(event, context):
             metadata=metadata
         )
 
+        print(f"[DEBUG] YooKassa response: {json.dumps(payment_response)}")
+
         payment_id = payment_response.get('id')
         confirmation_url = payment_response.get('confirmation', {}).get('confirmation_url', '')
+
+        print(f"[DEBUG] Payment created: {payment_id}, URL: {confirmation_url}")
 
         # Update order with payment info
         cur.execute(f"""
@@ -276,6 +303,7 @@ def handler(event, context):
         """, (payment_id, confirmation_url, now, order_id))
 
         conn.commit()
+        print("[DEBUG] Order updated and committed")
 
         return {
             'statusCode': 200,
@@ -291,6 +319,7 @@ def handler(event, context):
     except HTTPError as e:
         conn.rollback()
         error_body = e.read().decode() if e.fp else str(e)
+        print(f"[ERROR] YooKassa API error: {error_body}")
         return {
             'statusCode': 500,
             'headers': HEADERS,
@@ -298,10 +327,13 @@ def handler(event, context):
         }
     except Exception as e:
         conn.rollback()
+        print(f"[ERROR] Exception: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return {
             'statusCode': 500,
             'headers': HEADERS,
-            'body': json.dumps({'error': str(e)})
+            'body': json.dumps({'error': f'{type(e).__name__}: {str(e)}'})
         }
     finally:
         conn.close()
