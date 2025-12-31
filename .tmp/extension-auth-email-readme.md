@@ -116,93 +116,28 @@ POST ?action=reset-password→ { email } или { email, code, new_password }
 | `ResetPasswordForm.tsx` | Сброс пароля |
 | `UserProfile.tsx` | Профиль после входа |
 
-### Полный пример страницы /auth
-
 ```tsx
-import { useState } from "react";
-import { useAuth } from "@/components/extensions/auth-email/useAuth";
-import { LoginForm } from "@/components/extensions/auth-email/LoginForm";
-import { RegisterForm } from "@/components/extensions/auth-email/RegisterForm";
-import { ResetPasswordForm } from "@/components/extensions/auth-email/ResetPasswordForm";
-import { UserProfile } from "@/components/extensions/auth-email/UserProfile";
-
 const AUTH_URL = "https://functions.poehali.dev/xxx"; // ← из func2url.json
 
-type View = "login" | "register" | "reset";
+const auth = useAuth({
+  apiUrls: {
+    login: `${AUTH_URL}?action=login`,
+    register: `${AUTH_URL}?action=register`,
+    verifyEmail: `${AUTH_URL}?action=verify-email`,
+    refresh: `${AUTH_URL}?action=refresh`,
+    logout: `${AUTH_URL}?action=logout`,
+    resetPassword: `${AUTH_URL}?action=reset-password`,
+  },
+});
 
-export default function Auth() {
-  const [view, setView] = useState<View>("login");
-
-  const auth = useAuth({
-    apiUrls: {
-      login: `${AUTH_URL}?action=login`,
-      register: `${AUTH_URL}?action=register`,
-      verifyEmail: `${AUTH_URL}?action=verify-email`,
-      refresh: `${AUTH_URL}?action=refresh`,
-      logout: `${AUTH_URL}?action=logout`,
-      resetPassword: `${AUTH_URL}?action=reset-password`,
-    },
-  });
-
-  // Если пользователь авторизован → показать профиль
-  if (auth.isAuthenticated && auth.user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
-        <UserProfile
-          user={auth.user}
-          onLogout={auth.logout}
-          isLoading={auth.isLoading}
-          className="w-full max-w-md"
-        />
-      </div>
-    );
-  }
-
-  // Иначе → показать формы входа/регистрации/сброса
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
-      <div className="w-full max-w-md">
-        {view === "login" && (
-          <LoginForm
-            onLogin={auth.login}
-            onRegisterClick={() => setView("register")}
-            onForgotPasswordClick={() => setView("reset")}
-            error={auth.error}
-            isLoading={auth.isLoading}
-          />
-        )}
-
-        {view === "register" && (
-          <RegisterForm
-            onRegister={auth.register}
-            onVerifyEmail={auth.verifyEmail}
-            onLogin={auth.login}
-            onLoginClick={() => setView("login")}
-            error={auth.error}
-            isLoading={auth.isLoading}
-          />
-        )}
-
-        {view === "reset" && (
-          <ResetPasswordForm
-            onRequestReset={auth.requestPasswordReset}
-            onResetPassword={auth.resetPassword}
-            onSuccess={() => setView("login")}
-            onBackToLogin={() => setView("login")}
-            error={auth.error}
-            isLoading={auth.isLoading}
-          />
-        )}
-      </div>
-    </div>
-  );
+// Логика отображения:
+if (auth.isAuthenticated && auth.user) {
+  return <UserProfile user={auth.user} onLogout={auth.logout} />;
 }
+return <LoginForm onLogin={auth.login} /* ... */ />;
 ```
 
-**Логика:**
-1. Если `auth.isAuthenticated && auth.user` → показать `UserProfile`
-2. Иначе → показать формы входа/регистрации/сброса с переключением через `view`
-3. После успешного входа/регистрации автоматически отображается профиль
+**После успешного входа** показывай `UserProfile`, а не уведомление.
 
 ---
 

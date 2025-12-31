@@ -5,7 +5,7 @@ import { RegisterForm } from "@/components/extensions/auth-email/RegisterForm";
 import { ResetPasswordForm } from "@/components/extensions/auth-email/ResetPasswordForm";
 import { UserProfile } from "@/components/extensions/auth-email/UserProfile";
 
-const AUTH_URL = "https://devfunctions.poehali.dev/cb5cb89d-5304-4852-8d78-7cd1b68c820e";
+const AUTH_URL = "https://devfunctions.poehali.dev/1ac6eb8d-0ba7-4a9f-9e3f-8667088e0c80";
 
 type View = "login" | "register" | "reset";
 
