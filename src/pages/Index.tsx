@@ -67,6 +67,9 @@ const Index = () => {
               returnUrl={window.location.origin}
               buttonText="Тест оплаты 10₽"
               className="rounded-full px-8"
+              onError={(error) => {
+                alert(`Ошибка: ${error.message}`);
+              }}
             />
           </div>
         </div>
