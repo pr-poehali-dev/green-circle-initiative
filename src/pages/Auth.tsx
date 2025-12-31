@@ -3,6 +3,7 @@ import { useAuth } from "@/components/extensions/auth-email/useAuth";
 import { LoginForm } from "@/components/extensions/auth-email/LoginForm";
 import { RegisterForm } from "@/components/extensions/auth-email/RegisterForm";
 import { ResetPasswordForm } from "@/components/extensions/auth-email/ResetPasswordForm";
+import { UserProfile } from "@/components/extensions/auth-email/UserProfile";
 
 const AUTH_URL = "https://devfunctions.poehali.dev/cb5cb89d-5304-4852-8d78-7cd1b68c820e";
 
@@ -22,9 +23,18 @@ export default function Auth() {
     },
   });
 
-  const handleSuccess = () => {
-    alert("Вы успешно вошли!");
-  };
+  if (auth.isAuthenticated && auth.user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+        <UserProfile
+          user={auth.user}
+          onLogout={auth.logout}
+          isLoading={auth.isLoading}
+          className="w-full max-w-md"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
@@ -32,7 +42,6 @@ export default function Auth() {
         {view === "login" && (
           <LoginForm
             onLogin={auth.login}
-            onSuccess={handleSuccess}
             onRegisterClick={() => setView("register")}
             onForgotPasswordClick={() => setView("reset")}
             error={auth.error}
@@ -45,7 +54,6 @@ export default function Auth() {
             onRegister={auth.register}
             onVerifyEmail={auth.verifyEmail}
             onLogin={auth.login}
-            onSuccess={handleSuccess}
             onLoginClick={() => setView("login")}
             error={auth.error}
             isLoading={auth.isLoading}
