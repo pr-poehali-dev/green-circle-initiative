@@ -5,6 +5,7 @@ import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
 import PhotoUpload from '@/components/PhotoUpload';
 import PhotoGallery from '@/components/PhotoGallery';
+import { PaymentButton } from '@/components/extensions/yookassa/PaymentButton';
 import { useState, useEffect } from 'react';
 
 const Index = () => {
@@ -50,12 +51,27 @@ const Index = () => {
               </Card>
             </div>
           )}
-          <Link to="/catalog">
-            <Button size="lg" className="rounded-full px-8">
-              Смотреть каталог
-              <Icon name="ArrowRight" size={18} className="ml-2" />
-            </Button>
-          </Link>
+          <div className="flex gap-4 justify-center">
+            <Link to="/catalog">
+              <Button size="lg" className="rounded-full px-8">
+                Смотреть каталог
+                <Icon name="ArrowRight" size={18} className="ml-2" />
+              </Button>
+            </Link>
+            <PaymentButton
+              apiUrl="https://devfunctions.poehali.dev/2a8c3888-2749-4ba0-b42a-543c87eb9aa7"
+              amount={10}
+              userEmail="test@example.com"
+              userName="Тестовый пользователь"
+              description="Тестовый платеж"
+              returnUrl={window.location.origin}
+              buttonText="Тест оплаты 10₽"
+              className="rounded-full px-8"
+              onError={(error) => {
+                alert(`Ошибка: ${error.message}`);
+              }}
+            />
+          </div>
         </div>
       </section>
 
