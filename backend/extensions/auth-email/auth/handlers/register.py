@@ -40,7 +40,12 @@ def handle(event: dict, origin: str = '*') -> dict:
     now = datetime.utcnow().isoformat()
 
     # Check if email verification is enabled
-    require_verification = is_email_enabled() and os.environ.get('REQUIRE_EMAIL_VERIFICATION', '').lower() == 'true'
+    email_enabled = is_email_enabled()
+    require_env = os.environ.get('REQUIRE_EMAIL_VERIFICATION', '')
+    print(f"[REGISTER] email_enabled={email_enabled}, REQUIRE_EMAIL_VERIFICATION={require_env}")
+    print(f"[REGISTER] SMTP_USER={bool(os.environ.get('SMTP_USER'))}, SMTP_PASSWORD={bool(os.environ.get('SMTP_PASSWORD'))}")
+    require_verification = email_enabled and require_env.lower() == 'true'
+    print(f"[REGISTER] Final require_verification={require_verification}")
 
     user_id = execute_returning(f"""
         INSERT INTO {S}users (email, password_hash, name, email_verified, created_at, updated_at)
