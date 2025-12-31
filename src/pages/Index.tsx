@@ -5,9 +5,7 @@ import Icon from '@/components/ui/icon';
 import Header from '@/components/layout/Header';
 import PhotoUpload from '@/components/PhotoUpload';
 import PhotoGallery from '@/components/PhotoGallery';
-import { PaymentButton } from '@/components/extensions/wata/PaymentButton';
 import { useState, useEffect } from 'react';
-import { toast } from 'sonner';
 
 const Index = () => {
   const [spaceFact, setSpaceFact] = useState<string>('');
@@ -52,34 +50,12 @@ const Index = () => {
               </Card>
             </div>
           )}
-          <div className="flex gap-4 justify-center items-center">
-            <Link to="/catalog">
-              <Button size="lg" className="rounded-full px-8">
-                Смотреть каталог
-                <Icon name="ArrowRight" size={18} className="ml-2" />
-              </Button>
-            </Link>
-            <PaymentButton
-              apiUrl="https://devfunctions.poehali.dev/0eb557fb-8a09-4445-9a90-c50a25421f27"
-              amount={10}
-              userName="Тестовый покупатель"
-              userEmail="test@example.com"
-              userPhone="+79991234567"
-              cartItems={[
-                { id: 'test-1', name: 'Тестовый товар', price: 10, quantity: 1 }
-              ]}
-              successUrl={`${window.location.origin}/success`}
-              failUrl={`${window.location.origin}/`}
-              onSuccess={(orderNumber) => {
-                toast.success(`Заказ ${orderNumber} успешно оплачен!`);
-              }}
-              onError={(error) => {
-                toast.error(`Ошибка: ${error.message}`);
-              }}
-              buttonText="Тестовый платёж WATA 10₽"
-              className="rounded-full px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium transition-colors"
-            />
-          </div>
+          <Link to="/catalog">
+            <Button size="lg" className="rounded-full px-8">
+              Смотреть каталог
+              <Icon name="ArrowRight" size={18} className="ml-2" />
+            </Button>
+          </Link>
         </div>
       </section>
 
