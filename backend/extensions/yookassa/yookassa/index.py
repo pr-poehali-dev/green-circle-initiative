@@ -68,6 +68,8 @@ def create_yookassa_payment(
     amount: float,
     description: str,
     return_url: str,
+    user_email: str,
+    cart_items: list,
     metadata: dict = None
 ) -> dict:
     """Create payment via YooKassa API."""
@@ -86,8 +88,36 @@ def create_yookassa_payment(
             "type": "redirect",
             "return_url": return_url
         },
-        "description": description
+        "description": description,
+        "receipt": {
+            "customer": {
+                "email": user_email
+            },
+            "items": []
+        }
     }
+
+    if cart_items and len(cart_items) > 0:
+        for item in cart_items:
+            payload["receipt"]["items"].append({
+                "description": item.get('name', 'Товар'),
+                "quantity": str(item.get('quantity', 1)),
+                "amount": {
+                    "value": f"{item.get('price', 0):.2f}",
+                    "currency": "RUB"
+                },
+                "vat_code": 1
+            })
+    else:
+        payload["receipt"]["items"].append({
+            "description": description,
+            "quantity": "1",
+            "amount": {
+                "value": f"{amount:.2f}",
+                "currency": "RUB"
+            },
+            "vat_code": 1
+        })
 
     if metadata:
         payload["metadata"] = metadata
@@ -226,6 +256,8 @@ def handler(event, context):
             amount=amount,
             description=f"{description} ({order_number})",
             return_url=return_url,
+            user_email=user_email,
+            cart_items=cart_items,
             metadata=metadata
         )
 
