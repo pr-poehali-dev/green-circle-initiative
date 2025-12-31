@@ -26,6 +26,7 @@ export default function Auth() {
   const [verificationCode, setVerificationCode] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
+  const [registerError, setRegisterError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const { login, register, error, isLoading, requestPasswordReset, resetPassword } = useAuth({
@@ -76,6 +77,8 @@ export default function Auth() {
   };
 
   const handleCustomRegister = async (payload: { email: string; password: string; name?: string }) => {
+    setRegisterError(null);
+    
     try {
       const response = await fetch(`${AUTH_URL}?action=register`, {
         method: "POST",
@@ -86,6 +89,7 @@ export default function Auth() {
       const data = await response.json();
 
       if (!response.ok) {
+        setRegisterError(data.error || "Ошибка регистрации");
         return false;
       }
 
@@ -96,6 +100,7 @@ export default function Auth() {
 
       return await login({ email: payload.email, password: payload.password });
     } catch {
+      setRegisterError("Ошибка сети");
       return false;
     }
   };
@@ -119,7 +124,7 @@ export default function Auth() {
             onRegister={handleCustomRegister}
             onSuccess={() => {}}
             onLoginClick={() => setView("login")}
-            error={error}
+            error={registerError}
             isLoading={isLoading}
           />
         )}
