@@ -9,6 +9,7 @@ import Catalog from "./pages/Catalog";
 import Cart from "./pages/Cart";
 import Compare from "./pages/Compare";
 import OrderSuccess from "./pages/OrderSuccess";
+import Order from "./pages/Order";
 import NotFound from "./pages/NotFound";
 import RegisterTest from "./pages/RegisterTest";
 import Auth from "./pages/Auth";
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="/cart" element={<Cart />} />
               <Route path="/compare" element={<Compare />} />
               <Route path="/success" element={<OrderSuccess />} />
+              <Route path="/order/:orderNumber" element={<Order />} />
               <Route path="/register-test" element={<RegisterTest />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="*" element={<NotFound />} />

@@ -270,6 +270,19 @@ def handler(event, context):
                 now
             ))
 
+        # Build return URL with order number
+        # If return_url is base URL (no path), append /order/:orderNumber
+        # If return_url has path, use as is
+        final_return_url = return_url
+        if return_url and not return_url.rstrip('/').endswith(('/', '.html', '.php')):
+            # It's a base URL, add order path
+            final_return_url = f"{return_url.rstrip('/')}/order/{order_number}"
+        elif '?' not in return_url:
+            # Base URL without query, add order path
+            final_return_url = f"{return_url.rstrip('/')}/order/{order_number}"
+        
+        print(f"[DEBUG] Final return URL: {final_return_url}")
+
         # Create YooKassa payment
         metadata = {
             "order_id": str(order_id),
@@ -282,7 +295,7 @@ def handler(event, context):
             secret_key=secret_key,
             amount=amount,
             description=f"{description} ({order_number})",
-            return_url=return_url,
+            return_url=final_return_url,
             customer_email=user_email,
             cart_items=cart_items,
             metadata=metadata
