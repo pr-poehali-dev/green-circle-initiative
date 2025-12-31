@@ -40,6 +40,12 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
+            <Link to="/auth">
+              <Button variant="ghost" size="icon">
+                <Icon name="User" size={20} />
+              </Button>
+            </Link>
+
             <Link to="/compare">
               <Button variant="ghost" size="icon" className="relative">
                 <Icon name="Scale" size={20} />
