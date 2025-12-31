@@ -9,7 +9,7 @@
  *
  * Usage:
  * // AUTH_URL берётся из настроек расширения после деплоя
- * const AUTH_URL = "https://functions.poehali.dev/xxx";
+ * const AUTH_URL = "https://devfunctions.poehali.dev/13e2d550-91e1-4566-9783-25711375f868";
  * const auth = useAuth({
  *   apiUrls: {
  *     login: `${AUTH_URL}?action=login`,
@@ -74,7 +74,7 @@ interface UseAuthReturn {
   refreshToken: () => Promise<boolean>;
   requestPasswordReset: (email: string) => Promise<{ token?: string }>;
   resetPassword: (token: string, newPassword: string) => Promise<boolean>;
-  getAuthHeader: () => { Authorization: string } | {};
+  getAuthHeader: () => { Authorization: string } | Record<string, never>;
 }
 
 // ============================================================================
