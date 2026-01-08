@@ -71,13 +71,13 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-muted">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-white/10 bg-foreground/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Icon name="Gift" size={32} className="text-primary" />
-            <span className="text-2xl font-bold text-foreground">Apple Gift Card</span>
+            <span className="text-2xl font-bold text-white">Apple Gift Card</span>
           </div>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
             <Icon name="User" size={18} className="mr-2" />
             Вход
           </Button>
