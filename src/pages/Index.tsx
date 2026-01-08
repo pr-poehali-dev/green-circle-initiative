@@ -1,207 +1,219 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import Icon from "@/components/ui/icon";
-import { useCart } from "@/contexts/CartContext";
-import { toast } from "sonner";
-import { useState } from "react";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Icon from '@/components/ui/icon';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const giftCards = [
-  { id: 1, value: 1000, price: 1000, discount: 0 },
-  { id: 2, value: 2000, price: 2000, discount: 0 },
-  { id: 3, value: 3000, price: 3000, discount: 0 },
-  { id: 4, value: 5000, price: 4800, discount: 4 },
-  { id: 5, value: 10000, price: 9500, discount: 5 },
-  { id: 6, value: 15000, price: 14000, discount: 7 },
+  { amount: 500, price: 500, discount: 0 },
+  { amount: 1000, price: 1000, discount: 0 },
+  { amount: 1500, price: 1500, discount: 0 },
+  { amount: 2000, price: 1900, discount: 5 },
+  { amount: 3000, price: 2850, discount: 5 },
+  { amount: 5000, price: 4700, discount: 6 },
 ];
 
-const benefits = [
+const features: Array<{ icon: string; title: string; description: string }> = [
   {
-    icon: "Zap",
-    title: "Мгновенная доставка",
-    description: "Получите код в течение 1 минуты после оплаты"
+    icon: 'Zap',
+    title: 'Мгновенная доставка',
+    description: 'Получите карту сразу после оплаты на email'
   },
   {
-    icon: "Shield",
-    title: "100% гарантия",
-    description: "Все карты официальные и проверены"
+    icon: 'Shield',
+    title: 'Безопасно',
+    description: 'Официальные карты Apple, проверенные и гарантированные'
   },
   {
-    icon: "Wallet",
-    title: "Выгодные цены",
-    description: "Скидки до 7% при покупке от 5000₽"
+    icon: 'Percent',
+    title: 'Выгодные цены',
+    description: 'Скидки до 6% на крупные номиналы'
   },
   {
-    icon: "HeadphonesIcon",
-    title: "Поддержка 24/7",
-    description: "Всегда готовы помочь с любым вопросом"
+    icon: 'CreditCard',
+    title: 'Любой способ оплаты',
+    description: 'Банковские карты, электронные кошельки, СБП'
   }
 ];
 
-const faqItems = [
+const faqs = [
   {
-    question: "Как получить карту после оплаты?",
-    answer: "После успешной оплаты код карты придет на вашу электронную почту в течение 1 минуты. Также вы сможете скопировать код прямо на сайте."
+    question: 'Как получить карту после оплаты?',
+    answer: 'Сразу после успешной оплаты код карты придет на указанный вами email. Обычно это занимает не более 1-2 минут.'
   },
   {
-    question: "Можно ли использовать карту в любой стране?",
-    answer: "Да, Apple Gift Card можно использовать в любой стране, где доступен App Store, iTunes Store и другие сервисы Apple."
+    question: 'Где можно использовать Apple Gift Card?',
+    answer: 'Карты можно использовать в App Store, iTunes Store, Apple Music, iCloud, Apple Books и для покупки устройств Apple.'
   },
   {
-    question: "Есть ли срок действия у карты?",
-    answer: "Нет, Apple Gift Card не имеет срока действия. Вы можете использовать её в любое удобное время."
+    question: 'Есть ли срок действия у карт?',
+    answer: 'Нет, Apple Gift Card не имеют срока действия. Вы можете использовать их когда угодно.'
   },
   {
-    question: "Что делать, если код не работает?",
-    answer: "Свяжитесь с нашей поддержкой через чат или email. Мы заменим код или вернем деньги в течение 24 часов."
+    question: 'Можно ли вернуть карту?',
+    answer: 'После отправки кода возврат невозможен согласно правилам Apple. Пожалуйста, внимательно проверяйте данные перед покупкой.'
   },
   {
-    question: "Можно ли вернуть карту?",
-    answer: "После активации карты возврат невозможен. Если у карты есть проблемы, мы заменим её на новую."
+    question: 'Это официальные карты Apple?',
+    answer: 'Да, мы продаем только официальные Apple Gift Card, которые активируются в вашем Apple ID без проблем.'
   }
 ];
 
-const Index = () => {
-  const { addItem } = useCart();
+export default function Index() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
-  const handleAddToCart = (card: typeof giftCards[0]) => {
-    addItem({
-      id: card.id,
-      name: `Apple Gift Card ${card.value}₽`,
-      price: card.price,
-      quantity: 1,
-      image: ""
-    });
-    toast.success("Карта добавлена в корзину", {
-      description: `Apple Gift Card ${card.value}₽`
-    });
-    setSelectedCard(card.id);
-    setTimeout(() => setSelectedCard(null), 300);
-  };
-
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border/40 backdrop-blur-sm sticky top-0 z-50 bg-background/80">
+    <div className="min-h-screen bg-gradient-to-b from-white to-muted">
+      {/* Header */}
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Icon name="Apple" className="w-8 h-8" />
-            <span className="text-xl font-semibold">Gift Cards</span>
+            <Icon name="Gift" size={32} className="text-primary" />
+            <span className="text-2xl font-bold text-foreground">Apple Gift Card</span>
           </div>
-          <Button variant="outline" size="sm" className="gap-2">
-            <Icon name="ShoppingCart" className="w-4 h-4" />
-            Корзина
+          <Button variant="outline" size="sm">
+            <Icon name="User" size={18} className="mr-2" />
+            Вход
           </Button>
         </div>
       </header>
 
-      <section className="container mx-auto px-4 py-20 md:py-32">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <Badge variant="secondary" className="mb-4">
-            Официальный продавец
-          </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            Apple Gift Card
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Пополняйте баланс Apple ID и покупайте приложения, игры, музыку и подписки
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Button size="lg" className="gap-2 text-lg">
-              Выбрать карту
-              <Icon name="ArrowDown" className="w-5 h-5" />
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-16 md:py-24">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="animate-fade-in">
+            <Badge className="mb-4 bg-secondary/10 text-secondary hover:bg-secondary/20">
+              Официальный продавец
+            </Badge>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Покупайте Apple Gift Card онлайн
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8">
+              Мгновенная доставка на email. Скидки до 6%. Безопасно и просто.
+            </p>
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6"
+              onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Выбрать номинал
+              <Icon name="ArrowDown" size={20} className="ml-2" />
             </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-lg">
-              <Icon name="MessageCircle" className="w-5 h-5" />
-              Задать вопрос
-            </Button>
+          </div>
+          <div className="animate-scale-in">
+            <img 
+              src="https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/b58cb920-8e78-473a-8320-fde7261afc2d.jpg" 
+              alt="Apple Gift Card"
+              className="w-full rounded-2xl shadow-2xl"
+            />
           </div>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Выберите номинал</h2>
-          <p className="text-muted-foreground text-lg">
-            Скидки до 7% на карты от 5000₽
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {giftCards.map((card) => (
-            <Card 
-              key={card.id} 
-              className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer ${
-                selectedCard === card.id ? 'ring-2 ring-primary' : ''
-              }`}
-              onClick={() => handleAddToCart(card)}
-            >
-              {card.discount > 0 && (
-                <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
-                  -{card.discount}%
-                </Badge>
-              )}
-              <CardContent className="p-8 text-center space-y-4">
-                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
-                  <Icon name="Apple" className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Номинал</p>
-                  <p className="text-3xl font-bold">{card.value}₽</p>
-                </div>
-                <div className="pt-2">
-                  {card.discount > 0 ? (
-                    <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground line-through">{card.value}₽</p>
-                      <p className="text-2xl font-semibold text-primary">{card.price}₽</p>
-                    </div>
-                  ) : (
-                    <p className="text-2xl font-semibold">{card.price}₽</p>
-                  )}
-                </div>
-                <Button className="w-full gap-2" size="lg">
-                  <Icon name="ShoppingCart" className="w-4 h-4" />
-                  Купить
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="container mx-auto px-4 py-16 bg-muted/30">
-        <div className="max-w-6xl mx-auto">
+      {/* Features */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Почему выбирают нас
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="text-center space-y-4">
-                <div className="w-16 h-16 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center">
-                  <Icon name={benefit.icon} className="w-8 h-8 text-primary" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <Card 
+                key={index} 
+                className="p-6 text-center hover:shadow-lg transition-shadow animate-slide-up border-muted"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Icon name={feature.icon} size={32} className="text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold">{benefit.title}</h3>
-                <p className="text-muted-foreground">{benefit.description}</p>
-              </div>
+                <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm">{feature.description}</p>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto">
+      {/* Catalog */}
+      <section id="catalog" className="container mx-auto px-4 py-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          Выберите номинал карты
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {giftCards.map((card) => (
+            <Card 
+              key={card.amount}
+              className={`p-6 cursor-pointer transition-all hover:scale-105 hover:shadow-xl ${
+                selectedCard === card.amount ? 'ring-2 ring-primary shadow-xl' : ''
+              }`}
+              onClick={() => setSelectedCard(card.amount)}
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Номинал</p>
+                  <p className="text-3xl font-bold text-foreground">{card.amount} ₽</p>
+                </div>
+                {card.discount > 0 && (
+                  <Badge className="bg-secondary text-white">
+                    -{card.discount}%
+                  </Badge>
+                )}
+              </div>
+              <div className="mb-4">
+                <p className="text-sm text-muted-foreground mb-1">Цена</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold text-primary">{card.price} ₽</p>
+                  {card.discount > 0 && (
+                    <p className="text-sm text-muted-foreground line-through">{card.amount} ₽</p>
+                  )}
+                </div>
+              </div>
+              <Button 
+                className="w-full" 
+                variant={selectedCard === card.amount ? "default" : "outline"}
+              >
+                {selectedCard === card.amount ? (
+                  <>
+                    <Icon name="Check" size={18} className="mr-2" />
+                    Выбрано
+                  </>
+                ) : (
+                  'Купить'
+                )}
+              </Button>
+            </Card>
+          ))}
+        </div>
+        {selectedCard && (
+          <div className="mt-8 text-center animate-fade-in">
+            <Button size="lg" className="px-12 py-6 text-lg">
+              Перейти к оплате
+              <Icon name="ArrowRight" size={20} className="ml-2" />
+            </Button>
+          </div>
+        )}
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Частые вопросы
+            Часто задаваемые вопросы
           </h2>
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline">
-                  {item.question}
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger className="text-left text-lg font-medium">
+                  {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  {item.answer}
+                  {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
@@ -209,25 +221,46 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="border-t border-border/40 mt-16">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Icon name="Apple" className="w-6 h-6" />
-              <span className="font-semibold">Gift Cards</span>
+      {/* Footer */}
+      <footer className="bg-foreground text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Icon name="Gift" size={28} className="text-primary" />
+                <span className="text-xl font-bold">Apple Gift Card</span>
+              </div>
+              <p className="text-gray-400 text-sm">
+                Официальный продавец Apple Gift Card с мгновенной доставкой
+              </p>
             </div>
-            <p className="text-sm text-muted-foreground text-center">
-              © 2024 Apple Gift Cards. Все права защищены.
-            </p>
-            <div className="flex gap-4">
-              <Button variant="ghost" size="sm">Поддержка</Button>
-              <Button variant="ghost" size="sm">Контакты</Button>
+            <div>
+              <h3 className="font-semibold mb-4">Контакты</h3>
+              <div className="space-y-2 text-sm text-gray-400">
+                <p className="flex items-center gap-2">
+                  <Icon name="Mail" size={16} />
+                  support@example.com
+                </p>
+                <p className="flex items-center gap-2">
+                  <Icon name="Clock" size={16} />
+                  Поддержка 24/7
+                </p>
+              </div>
             </div>
+            <div>
+              <h3 className="font-semibold mb-4">Информация</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>Правила использования</li>
+                <li>Политика конфиденциальности</li>
+                <li>Способы оплаты</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+            <p>© 2024 Apple Gift Card Store. Все права защищены.</p>
           </div>
         </div>
       </footer>
     </div>
   );
-};
-
-export default Index;
+}
