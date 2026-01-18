@@ -1,45 +1,71 @@
 export function Footer() {
-  const footerLinks = {
-    "Возможности": ["Планирование", "Разработка", "Аналитика", "Запросы клиентов", "Orbit Asks", "Безопасность", "Мобильное приложение"],
-    "Продукт": ["Тарифы", "Методология", "Интеграции", "История изменений", "Документация", "Скачать", "Перейти на Orbit"],
-    "Компания": ["О нас", "Клиенты", "Карьера", "Новости", "README", "Качество", "Бренд"],
-    "Ресурсы": ["Разработчикам", "Статус", "Стартапам", "Сообщить об уязвимости", "DPA", "Конфиденциальность", "Условия"],
-    "Связаться": ["Контакты", "Сообщество", "X (Twitter)", "GitHub", "YouTube"],
-  }
-
   return (
-    <footer className="border-t border-zinc-800 py-16 px-6" style={{ backgroundColor: "#09090B" }}>
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
-          {/* Logo */}
-          <div className="col-span-2 md:col-span-1">
-            <svg width="20" height="20" viewBox="0 0 100 100" fill="none" className="text-white">
-              <path
-                d="M20 30 L50 10 L80 30 L80 70 L50 90 L20 70 Z"
-                fill="currentColor"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-              <path d="M50 10 L50 50 L20 30" fill="#09090B" />
-              <path d="M50 50 L80 70 L50 90" fill="#09090B" />
-            </svg>
+    <footer className="py-16 px-6 lg:px-12 border-t border-border">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-12 gap-12">
+          {/* Logo & Tagline */}
+          <div className="md:col-span-4">
+            <p className="font-serif text-2xl tracking-wide text-foreground mb-4">Wabi</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Японский минимализм в сочетании со скандинавским теплом.
+            </p>
           </div>
 
-          {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="text-white font-medium text-sm mb-4">{category}</h3>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-zinc-500 hover:text-zinc-300 transition-colors text-sm">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Navigation */}
+          <div className="md:col-span-2 md:col-start-7">
+            <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Навигация</p>
+            <nav className="flex flex-col gap-3">
+              <a href="#philosophy" className="text-sm text-foreground hover:text-sage transition-colors">
+                Философия
+              </a>
+              <a href="#services" className="text-sm text-foreground hover:text-sage transition-colors">
+                Услуги
+              </a>
+              <a href="#process" className="text-sm text-foreground hover:text-sage transition-colors">
+                Процесс
+              </a>
+              <a href="#contact" className="text-sm text-foreground hover:text-sage transition-colors">
+                Контакты
+              </a>
+            </nav>
+          </div>
+
+          {/* Social */}
+          <div className="md:col-span-2">
+            <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Соцсети</p>
+            <nav className="flex flex-col gap-3">
+              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
+                Instagram
+              </a>
+              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
+                Pinterest
+              </a>
+              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
+                Telegram
+              </a>
+            </nav>
+          </div>
+
+          {/* Legal */}
+          <div className="md:col-span-2">
+            <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">Документы</p>
+            <nav className="flex flex-col gap-3">
+              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
+                Политика
+              </a>
+              <a href="#" className="text-sm text-foreground hover:text-sage transition-colors">
+                Условия
+              </a>
+            </nav>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} Wabi Studio. Все права защищены.
+          </p>
+          <p className="text-xs text-muted-foreground">Создано с намерением</p>
         </div>
       </div>
     </footer>
