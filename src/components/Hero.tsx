@@ -49,7 +49,7 @@ export function Hero() {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500 rounded-full"
           >
             Начать проект
             <svg
@@ -63,7 +63,7 @@ export function Hero() {
           </a>
           <a
             href="#philosophy"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-500"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-500 rounded-full"
           >
             Наш подход
           </a>
