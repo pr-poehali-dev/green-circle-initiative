@@ -13,14 +13,25 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-sand/30 to-background" />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        {/* Overline */}
-        <p
-          className={`text-xs tracking-[0.3em] uppercase text-muted-foreground mb-8 transition-all duration-1000 delay-300 ${
+        {/* Social Proof Stats */}
+        <div
+          className={`flex flex-wrap justify-center gap-8 mb-12 transition-all duration-1000 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Студия дизайна интерьеров
-        </p>
+          <div className="text-center">
+            <p className="font-serif text-3xl text-sage">140+</p>
+            <p className="text-xs tracking-widest uppercase text-muted-foreground">довольных клиентов</p>
+          </div>
+          <div className="text-center">
+            <p className="font-serif text-3xl text-sage">12 лет</p>
+            <p className="text-xs tracking-widest uppercase text-muted-foreground">создаём интерьеры</p>
+          </div>
+          <div className="text-center">
+            <p className="font-serif text-3xl text-sage">8 наград</p>
+            <p className="text-xs tracking-widest uppercase text-muted-foreground">международных</p>
+          </div>
+        </div>
 
         {/* Main Headline */}
         <h1
@@ -28,16 +39,25 @@ export function Hero() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Пространства, которые живут
+          Интерьер, который увеличивает стоимость недвижимости на 30%
         </h1>
 
         {/* Subheadline */}
         <p
-          className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-12 transition-all duration-1000 delay-700 ${
+          className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8 transition-all duration-1000 delay-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Японский минимализм в сочетании со скандинавским теплом. Мы создаём интерьеры, где есть место и смыслу, и красоте.
+          Минималистичный дизайн в стиле japandi, который экономит ваше время, нервы и бюджет. Под ключ за 90 дней.
+        </p>
+        
+        {/* Trust indicators */}
+        <p
+          className={`text-sm text-muted-foreground max-w-xl mx-auto mb-12 transition-all duration-1000 delay-800 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          ✓ Договор с фиксированной ценой  ✓ Гарантия 3 года  ✓ Бесплатное проектирование при заказе реализации
         </p>
 
         {/* CTA */}
@@ -48,9 +68,9 @@ export function Hero() {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500 rounded-full"
+            className="group inline-flex items-center gap-3 px-8 py-5 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500 rounded-full shadow-lg hover:shadow-xl"
           >
-            Начать проект
+            Получить бесплатный проект
             <svg
               className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1"
               fill="none"
@@ -60,12 +80,9 @@ export function Hero() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
-          <a
-            href="#philosophy"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-500 rounded-full"
-          >
-            Наш подход
-          </a>
+          <p className="text-xs text-muted-foreground">
+            Всего 5 мест в феврале
+          </p>
         </div>
       </div>
 

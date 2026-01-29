@@ -51,16 +51,24 @@ export function Contact() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Готовы начать?
+              Бесплатный проект + смета
             </h2>
             <p
-              className={`text-muted-foreground leading-relaxed mb-12 max-w-md transition-all duration-1000 delay-300 ${
+              className={`text-muted-foreground leading-relaxed mb-8 max-w-md transition-all duration-1000 delay-300 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Каждое осмысленное пространство начинается с разговора. Расскажите о вашем видении,
-              и мы вместе найдём способ воплотить его в жизнь.
+              Осталось 5 мест в феврале. Заполните форму — получите 3D-визуализацию и точную смету бесплатно.
             </p>
+            <div
+              className={`bg-terracotta/10 border border-terracotta/30 p-4 rounded-lg mb-12 transition-all duration-1000 delay-350 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+            >
+              <p className="text-sm text-foreground">
+                🎁 <strong>Спецпредложение:</strong> При заказе реализации до 15 февраля — скидка 15% на все работы
+              </p>
+            </div>
 
             {/* Contact Info */}
             <div
@@ -132,9 +140,9 @@ export function Contact() {
               </div>
               <button
                 type="submit"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500"
+                className="group inline-flex items-center gap-3 px-8 py-5 bg-sage text-primary-foreground text-sm tracking-widest uppercase hover:bg-sage/90 transition-all duration-500 shadow-lg hover:shadow-xl w-full justify-center"
               >
-                Отправить
+                Получить проект бесплатно
                 <svg
                   className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1"
                   fill="none"
@@ -144,6 +152,9 @@ export function Contact() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </button>
+              <p className="text-xs text-center text-muted-foreground mt-4">
+                Ответим в течение 2 часов. Никакого спама.
+              </p>
             </form>
           </div>
         </div>
