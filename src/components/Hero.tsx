@@ -28,8 +28,7 @@ export function Hero() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Пространства,
-          <span className="block text-sage">которые дышат</span>
+          Пространства которые живут
         </h1>
 
         {/* Subheadline */}
