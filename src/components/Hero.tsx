@@ -16,29 +16,9 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - USP */}
           <div>
-            {/* Social Proof Stats */}
-            <div
-              className={`flex flex-wrap gap-6 mb-10 transition-all duration-1000 delay-300 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-            >
-              <div>
-                <p className="font-serif text-2xl text-sage">140+</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground">клиентов</p>
-              </div>
-              <div>
-                <p className="font-serif text-2xl text-sage">12 лет</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground">опыта</p>
-              </div>
-              <div>
-                <p className="font-serif text-2xl text-sage">8 наград</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground">международных</p>
-              </div>
-            </div>
-
             {/* Main Headline */}
             <h1
-              className={`font-serif text-4xl md:text-6xl lg:text-7xl font-light leading-[1.1] tracking-tight text-foreground mb-6 transition-all duration-1000 delay-500 ${
+              className={`font-serif text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] tracking-tight text-foreground mb-6 transition-all duration-1000 delay-300 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
@@ -47,48 +27,42 @@ export function Hero() {
 
             {/* Subheadline */}
             <p
-              className={`text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 transition-all duration-1000 delay-700 ${
+              className={`text-lg text-muted-foreground leading-relaxed mb-10 transition-all duration-1000 delay-500 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
               Минималистичный дизайн в стиле japandi, который экономит ваше время, нервы и бюджет. Под ключ за 90 дней.
             </p>
             
-            {/* Trust indicators */}
+            {/* Trust indicators - compact */}
             <div
-              className={`space-y-3 mb-10 transition-all duration-1000 delay-800 ${
+              className={`flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground mb-10 transition-all duration-1000 delay-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <p className="flex items-center gap-3 text-sm text-foreground">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-sage/20 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-sage" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </span>
+              <p className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-sage" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
                 Договор с фиксированной ценой
               </p>
-              <p className="flex items-center gap-3 text-sm text-foreground">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-sage/20 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-sage" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </span>
-                Гарантия 3 года на все работы
+              <p className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-sage" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                Гарантия 3 года
               </p>
-              <p className="flex items-center gap-3 text-sm text-foreground">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-sage/20 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-sage" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </span>
-                Бесплатное проектирование при заказе реализации
+              <p className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-sage" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                Бесплатное проектирование
               </p>
             </div>
 
             {/* CTA */}
             <div
-              className={`transition-all duration-1000 delay-1000 ${
+              className={`transition-all duration-1000 delay-900 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
