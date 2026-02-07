@@ -22,7 +22,7 @@ export function Hero() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Интерьер, который увеличивает стоимость недвижимости на 30%
+              Интерьер +30% к стоимости
             </h1>
 
             {/* Subheadline */}
