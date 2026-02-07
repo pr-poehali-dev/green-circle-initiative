@@ -31,7 +31,7 @@ export function Hero() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Дизайн в стиле japandi под ключ. Натуральные материалы, продуманная функциональность. Фиксированная цена и сроки. Гарантия 3 года.
+              Japandi-интерьеры под ключ за 90 дней. Фиксированная цена, гарантия 3 года.
             </p>
             
             {/* Trust indicators - compact */}
