@@ -17,6 +17,18 @@ const Stars = () => {
     []
   );
 
+  const shootingStars = useMemo(
+    () =>
+      Array.from({ length: 3 }, (_, i) => ({
+        id: i,
+        top: Math.random() * 40,
+        left: Math.random() * 60 + 10,
+        delay: Math.random() * 8 + i * 6,
+        duration: Math.random() * 1 + 0.8,
+      })),
+    []
+  );
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {stars.map((s) => (
@@ -32,6 +44,20 @@ const Stars = () => {
             animationDuration: `${s.duration}s`,
           }}
         />
+      ))}
+      {shootingStars.map((s) => (
+        <div
+          key={`shoot-${s.id}`}
+          className="absolute animate-shooting-star"
+          style={{
+            top: `${s.top}%`,
+            left: `${s.left}%`,
+            animationDelay: `${s.delay}s`,
+            animationDuration: `${s.duration}s`,
+          }}
+        >
+          <div className="w-[80px] h-[1px] bg-gradient-to-r from-white/80 to-transparent" />
+        </div>
       ))}
     </div>
   );
