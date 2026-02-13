@@ -139,3 +139,17 @@
 .animate-float-slow-reverse {
   animation: float-slow-reverse 25s ease-in-out infinite;
 }
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle ease-in-out infinite;
+}
