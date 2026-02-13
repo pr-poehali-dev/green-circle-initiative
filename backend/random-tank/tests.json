@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Get random tank combo",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "turret": "string",
+        "hull": "string",
+        "paint": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
