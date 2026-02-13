@@ -9,6 +9,12 @@ interface TankCombo {
   paint: string;
 }
 
+const TANK_IMAGES = [
+  "https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/94a16ad4-97d1-4419-9037-b62a002e62a5.jpg",
+  "https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/dee52d3f-f00d-4465-ba0f-248544be78b4.jpg",
+  "https://cdn.poehali.dev/projects/489d77e8-4b0d-49f7-bd2e-a9c1ad00ee9a/files/4610d727-5c59-4d28-928c-703c414d6963.jpg",
+];
+
 const ComboItem = ({
   emoji,
   label,
@@ -52,6 +58,7 @@ const Index = () => {
   const [loading, setLoading] = useState(false);
   const [showCard, setShowCard] = useState(false);
   const [comboKey, setComboKey] = useState(0);
+  const [tankImage, setTankImage] = useState("");
 
   const getRandomCombo = async () => {
     setLoading(true);
@@ -62,6 +69,7 @@ const Index = () => {
       setTimeout(() => {
         setCombo(data);
         setComboKey((k) => k + 1);
+        setTankImage(TANK_IMAGES[Math.floor(Math.random() * TANK_IMAGES.length)]);
         setShowCard(true);
       }, 150);
     } catch {
@@ -103,6 +111,14 @@ const Index = () => {
                 : "opacity-0 scale-95"
             }`}
           >
+            <div className="flex justify-center mb-2">
+              <img
+                src={tankImage}
+                alt="Танк"
+                className="w-48 h-48 object-cover rounded-xl border border-white/10"
+              />
+            </div>
+            <div className="h-px bg-white/5" />
             <ComboItem emoji="💣" label="Пушка" value={combo.turret} delay={200} />
             <div className="h-px bg-white/5" />
             <ComboItem emoji="🛡️" label="Корпус" value={combo.hull} delay={400} />
