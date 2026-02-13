@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import funcUrls from "../../backend/func2url.json";
@@ -9,16 +9,61 @@ interface TankCombo {
   paint: string;
 }
 
+const ComboItem = ({
+  emoji,
+  label,
+  value,
+  delay,
+}: {
+  emoji: string;
+  label: string;
+  value: string;
+  delay: number;
+}) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(false);
+    const timer = setTimeout(() => setVisible(true), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return (
+    <div
+      className={`flex items-center gap-4 text-left transition-all duration-500 ${
+        visible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-4"
+      }`}
+    >
+      <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-2xl border border-white/10">
+        {emoji}
+      </div>
+      <div>
+        <p className="text-white/50 text-sm">{label}</p>
+        <p className="text-white text-xl font-semibold">{value}</p>
+      </div>
+    </div>
+  );
+};
+
 const Index = () => {
   const [combo, setCombo] = useState<TankCombo | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showCard, setShowCard] = useState(false);
+  const [comboKey, setComboKey] = useState(0);
 
   const getRandomCombo = async () => {
     setLoading(true);
+    setShowCard(false);
     try {
       const res = await fetch(funcUrls["random-tank"]);
       const data = await res.json();
-      setCombo(data);
+      setTimeout(() => {
+        setCombo(data);
+        setComboKey((k) => k + 1);
+        setShowCard(true);
+      }, 150);
     } catch {
       console.error("Ошибка загрузки");
     } finally {
@@ -51,36 +96,19 @@ const Index = () => {
         </Button>
 
         {combo && (
-          <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 space-y-5 max-w-md mx-auto shadow-2xl">
-            <div className="flex items-center gap-4 text-left">
-              <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-2xl border border-white/10">
-                💣
-              </div>
-              <div>
-                <p className="text-white/50 text-sm">Пушка</p>
-                <p className="text-white text-xl font-semibold">{combo.turret}</p>
-              </div>
-            </div>
+          <div
+            key={comboKey}
+            className={`backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 space-y-5 max-w-md mx-auto shadow-2xl transition-all duration-500 ${
+              showCard
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-95"
+            }`}
+          >
+            <ComboItem emoji="💣" label="Пушка" value={combo.turret} delay={200} />
             <div className="h-px bg-white/10" />
-            <div className="flex items-center gap-4 text-left">
-              <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-2xl border border-white/10">
-                🛡️
-              </div>
-              <div>
-                <p className="text-white/50 text-sm">Корпус</p>
-                <p className="text-white text-xl font-semibold">{combo.hull}</p>
-              </div>
-            </div>
+            <ComboItem emoji="🛡️" label="Корпус" value={combo.hull} delay={400} />
             <div className="h-px bg-white/10" />
-            <div className="flex items-center gap-4 text-left">
-              <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-2xl border border-white/10">
-                🎨
-              </div>
-              <div>
-                <p className="text-white/50 text-sm">Краска</p>
-                <p className="text-white text-xl font-semibold">{combo.paint}</p>
-              </div>
-            </div>
+            <ComboItem emoji="🎨" label="Краска" value={combo.paint} delay={600} />
           </div>
         )}
       </div>
