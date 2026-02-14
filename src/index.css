@@ -157,10 +157,14 @@
 @keyframes shooting-star {
   0% {
     transform: translateX(0) translateY(0) rotate(-45deg);
+    opacity: 0;
+  }
+  5% {
     opacity: 1;
   }
-  70% {
-    opacity: 1;
+  15% {
+    transform: translateX(300px) translateY(300px) rotate(-45deg);
+    opacity: 0;
   }
   100% {
     transform: translateX(300px) translateY(300px) rotate(-45deg);
@@ -169,5 +173,5 @@
 }
 
 .animate-shooting-star {
-  animation: shooting-star linear infinite;
+  animation: shooting-star ease-out infinite;
 }

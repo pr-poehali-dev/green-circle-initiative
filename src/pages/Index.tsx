@@ -19,12 +19,12 @@ const Stars = () => {
 
   const shootingStars = useMemo(
     () =>
-      Array.from({ length: 3 }, (_, i) => ({
+      Array.from({ length: 4 }, (_, i) => ({
         id: i,
-        top: Math.random() * 40,
-        left: Math.random() * 60 + 10,
-        delay: Math.random() * 8 + i * 6,
-        duration: Math.random() * 1 + 0.8,
+        top: Math.random() * 30 + 5,
+        left: Math.random() * 50 + 5,
+        delay: Math.random() * 4 + i * 5,
+        duration: Math.random() * 2 + 6,
       })),
     []
   );
