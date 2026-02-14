@@ -56,7 +56,7 @@ const Stars = () => {
             animationDuration: `${s.duration}s`,
           }}
         >
-          <div className="w-[80px] h-[1px] bg-gradient-to-r from-white/80 to-transparent" />
+          <div className="w-[80px] h-[1px] bg-gradient-to-l from-white/80 to-transparent" />
         </div>
       ))}
     </div>
