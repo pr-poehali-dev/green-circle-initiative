@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import funcUrls from "../../backend/func2url.json";
@@ -146,6 +147,9 @@ const Index = () => {
       <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-white/5 blur-[120px] animate-float-slow-reverse" />
 
       <div className="relative z-10 text-center space-y-8 px-4">
+        <Link to="/test" className="absolute top-0 right-0 text-neutral-500 hover:text-neutral-100 text-sm underline">
+          Тест →
+        </Link>
         <h1 className="text-4xl md:text-5xl font-bold text-neutral-100 tracking-tight">
           Рандом комба
         </h1>
