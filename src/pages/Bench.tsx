@@ -9,7 +9,7 @@ const FUNCTIONS = [
   },
   {
     label: "Medium",
-    target: "3s",
+    target: "5s",
     url: "https://devfunctions.poehali.dev/8ad7a01c-b34a-4cf0-8dd4-19459efb7c6e",
   },
   {
